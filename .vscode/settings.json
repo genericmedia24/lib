@@ -1,0 +1,18 @@
+{
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+  },
+  "editor.tabSize": 2,
+  "eslint.format.enable": true,
+  "eslint.options": {
+    "overrideConfigFile": "eslint.config.mjs"
+  },
+  "eslint.useFlatConfig": true,
+  "files.insertFinalNewline": true,
+}
