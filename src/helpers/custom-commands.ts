@@ -15,7 +15,7 @@ export class CustomCommands {
     this.commands[name] = constructor
   }
 
-  public get(name: string): Constructor<Command, [unknown, Record<string, unknown>, HTMLElement]> | undefined {
+  public get(name: string): Constructor<Command, [HTMLElement | Window, HTMLElement | Window, Record<string, unknown>]> | undefined {
     return this.commands[name]
   }
 }

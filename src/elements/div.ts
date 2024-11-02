@@ -25,6 +25,7 @@ export class DivElement<StateValues = Record<string, unknown>> extends HTMLDivEl
     this.state?.unregister(this)
     this.escape.unregister(this.hidePopoverBound)
     this.commander.execute('disconnected')
+    this.commander.stop()
   }
 
   public override hidePopover(): void {

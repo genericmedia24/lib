@@ -1,17 +1,17 @@
 import { CustomCommands } from './custom-commands.js'
 
-export abstract class Command<TargetElement = unknown, Options = unknown, OriginElement = HTMLElement> {
+export abstract class Command<TargetElement = unknown, Options = unknown, OriginElement = unknown> {
   public static customCommands = CustomCommands.create()
 
-  public static create(command: string, self: HTMLElement): Command {
+  public static create(command: string, originElement: HTMLElement, invert = false): Command {
     const url = new URL(`http://${command}`)
 
     let commandName = url.username
-    let elementId: string | undefined = url.hostname
+    let targetId: string | undefined = url.hostname
 
     if (commandName === '') {
-      commandName = elementId
-      elementId = undefined
+      commandName = targetId
+      targetId = undefined
     }
 
     const Constructor = Command.customCommands.get(commandName)
@@ -20,18 +20,18 @@ export abstract class Command<TargetElement = unknown, Options = unknown, Origin
       throw new Error(`Command "${commandName}" is undefined`)
     }
 
-    let element: HTMLElement | undefined | Window = undefined
+    let targetElement: HTMLElement | undefined | Window = undefined
 
-    if (elementId === 'window') {
-      element = window
-    } else if (typeof elementId === 'string') {
-      element = document.getElementById(elementId) ?? undefined
+    if (targetId === 'window') {
+      targetElement = window
+    } else if (typeof targetId === 'string') {
+      targetElement = document.getElementById(targetId) ?? undefined
     } else {
-      element = self
+      targetElement = originElement
     }
 
-    if (element === undefined) {
-      throw new Error (`Element "${elementId ?? ''}" is undefined)`)
+    if (targetElement === undefined) {
+      throw new Error (`Target element "${targetId ?? ''}" is undefined)`)
     }
 
     const options: Record<string, unknown> = {}
@@ -50,7 +50,11 @@ export abstract class Command<TargetElement = unknown, Options = unknown, Origin
       }
     })
 
-    return new Constructor(element, options, self)
+    if (invert) {
+      return new Constructor(targetElement, originElement, options)
+    }
+
+    return new Constructor(originElement, targetElement, options)
   }
 
   public options: Options
@@ -59,7 +63,7 @@ export abstract class Command<TargetElement = unknown, Options = unknown, Origin
 
   public targetElement: TargetElement
 
-  public constructor(targetElement: TargetElement, options: Options, originElement: OriginElement) {
+  public constructor(originElement: OriginElement, targetElement: TargetElement, options: Options) {
     this.options = options
     this.originElement = originElement
     this.targetElement = targetElement

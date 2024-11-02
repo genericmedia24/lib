@@ -51,6 +51,7 @@ export class OutputElement<StateValues = Record<string, unknown>> extends HTMLOu
     this.state?.unregister(this)
     this.escape.unregister(this.hidePopoverBound)
     this.commander.execute('disconnected')
+    this.commander.stop()
   }
 
   public override hidePopover(): void {

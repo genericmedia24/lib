@@ -27,6 +27,7 @@ export class TextareaElement<StateValues = Record<string, unknown>> extends HTML
   public disconnectedCallback(): void {
     this.state?.unregister(this)
     this.commander.execute('disconnected')
+    this.commander.stop()
   }
 
   public stateChangedCallback(newValues: Partial<StateValues>, oldValues?: Partial<StateValues>): void {

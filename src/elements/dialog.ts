@@ -36,6 +36,7 @@ export class DialogElement<StateValues = Record<string, unknown>> extends HTMLDi
     this.state?.unregister(this)
     this.escape.unregister(this.closeBound)
     this.commander.execute('disconnected')
+    this.commander.stop()
   }
 
   public override show(): void {

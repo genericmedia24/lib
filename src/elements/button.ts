@@ -25,6 +25,7 @@ export class ButtonElement<StateValues = Record<string, unknown>> extends HTMLBu
   public disconnectedCallback(): void {
     this.state?.unregister(this)
     this.commander.execute('disconnected')
+    this.commander.stop()
   }
 
   public stateChangedCallback(newValues: Partial<StateValues>, oldValues?: Partial<StateValues>): void {

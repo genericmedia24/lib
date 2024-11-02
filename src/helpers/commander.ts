@@ -1,3 +1,4 @@
+import type { CommandableElement } from '../elements/commandable.js'
 import { Command } from './command.js'
 import { CustomError } from './custom-error.js'
 import { I18n } from './i18n.js'
@@ -17,18 +18,20 @@ export class Commander {
 
   public started = false
 
+  #commands: Record<string, Command[]> = {}
+
   public constructor(element: HTMLElement) {
     this.element = element
   }
 
-  public execute(event: string, data?: Record<string, unknown>): void {
+  public execute(event: string, options?: Record<string, unknown>): void {
     Promise
       .all(this.commands[event]?.map(async (command) => {
         try {
           await command.execute({
             event,
             ...(isObject(command.options) ? command.options : {}),
-            ...data,
+            ...options,
           })
         } catch (error: unknown) {
           this.handleError(error)
@@ -88,26 +91,91 @@ export class Commander {
     console.error({ ...customError }, customError)
   }
 
+  public register(event: string, command: Command): void {
+    this.commands[event] ??= []
+    this.commands[event].push(command)
+  }
+
   public start(): this {
     if (this.started) {
       return this
     }
 
-    Object
-      .entries(this.element.dataset)
-      .filter(([key]) => {
-        return key.startsWith('on')
-      })
-      .forEach(([key, value]) => {
-        this.commands[key.slice(2)] = value
-          ?.split(' ')
-          .map((command) => {
-            return Command.create(command, this.element)
-          }) ?? []
-      })
+    this.registerCommands('on')
+
+    setTimeout(() => {
+      this.registerCommands('of')
+    })
 
     this.started = true
 
     return this
+  }
+
+  public stop(): this {
+    if (!this.started) {
+      return this
+    }
+
+    this.unregisterCommands()
+    this.started = false
+
+    return this
+  }
+
+  public unregister(event: string, command: Command): void {
+    const index = this.commands[event]?.indexOf(command) ?? -1
+
+    if (index > -1) {
+      this.commands[event]?.splice(index, 1)
+    }
+  }
+
+  private registerCommands(prefix: 'of' | 'on'): void {
+    Object
+      .entries(this.element.dataset)
+      .filter(([key]) => {
+        return key.startsWith(prefix)
+      })
+      .forEach(([key, value]) => {
+        value
+          ?.split(' ')
+          .forEach((command) => {
+            const invert = prefix === 'of'
+            const event = key.slice(2)
+            const commandObject = Command.create(command, this.element, invert)
+            const { originElement } = commandObject
+
+            const isCommandableElement = isObject<CommandableElement>(originElement, (element) => {
+              return element.commander instanceof Commander
+            })
+
+            if (isCommandableElement) {
+              originElement.commander.register(event, commandObject)
+              this.#commands[event] ??= []
+              this.#commands[event].push(commandObject)
+            }
+          })
+      })
+  }
+
+  private unregisterCommands(): void {
+    Object
+      .entries(this.#commands)
+      .forEach(([event, commands]) => {
+        commands.forEach((command) => {
+          const { originElement } = command
+
+          const isCommandableElement = isObject<CommandableElement>(originElement, (element) => {
+            return element.commander instanceof Commander
+          })
+
+          if (isCommandableElement) {
+            originElement.commander.unregister(event, command)
+          }
+        })
+      })
+
+    this.#commands = {}
   }
 }
