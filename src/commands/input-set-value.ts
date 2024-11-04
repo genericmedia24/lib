@@ -8,11 +8,11 @@ export interface InputSetValueCommandOptions {
 }
 
 export class InputSetValueCommand extends Command<InputElement, InputSetValueCommandOptions> {
-  public execute(options: InputSetValueCommandOptions): void {
-    if (options.value !== undefined) {
-      this.targetElement.value = options.value
-    } else if (options['state-key'] !== undefined) {
-      const value = this.targetElement.state?.get(options['state-key'])
+  public execute(): void {
+    if (this.options.value !== undefined) {
+      this.targetElement.value = this.options.value
+    } else if (this.options['state-key'] !== undefined) {
+      const value = this.targetElement.state?.get(this.options['state-key'])
 
       if (isPrimitive(value)) {
         this.targetElement.value = value?.toString() ?? ''

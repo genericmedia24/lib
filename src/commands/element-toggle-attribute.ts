@@ -9,22 +9,22 @@ export interface ElementToggleAttributeCommandOptions {
 }
 
 export class ElementToggleAttributeCommand extends Command<Element, ElementToggleAttributeCommandOptions> {
-  public async execute(options: ElementToggleAttributeCommandOptions): Promise<void> {
+  public async execute(): Promise<void> {
     if (this.targetElement.state?.storage === 'idb') {
       await this.targetElement.state.loaded
     }
 
-    const attributeNames = Array.isArray(options['attribute-name'])
-      ? options['attribute-name']
-      : [options['attribute-name']]
+    const attributeNames = Array.isArray(this.options['attribute-name'])
+      ? this.options['attribute-name']
+      : [this.options['attribute-name']]
 
-    const stateKeys = Array.isArray(options['state-key'])
-      ? options['state-key']
-      : [options['state-key']]
+    const stateKeys = Array.isArray(this.options['state-key'])
+      ? this.options['state-key']
+      : [this.options['state-key']]
 
-    const stateValues = Array.isArray(options['state-value'])
-      ? options['state-value']
-      : [options['state-value']]
+    const stateValues = Array.isArray(this.options['state-value'])
+      ? this.options['state-value']
+      : [this.options['state-value']]
 
     const force = stateKeys.every((stateKey, index) => {
       const state = String(this.targetElement.state?.get(stateKey))

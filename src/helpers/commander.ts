@@ -5,8 +5,8 @@ import { I18n } from './i18n.js'
 import { isObject } from './is-object.js'
 
 export type Commands = Array<{
+  data: Record<string, unknown>
   event: string
-  options: Record<string, unknown>
 }>
 
 export class Commander {
@@ -24,15 +24,11 @@ export class Commander {
     this.element = element
   }
 
-  public execute(event: string, options?: Record<string, unknown>): void {
+  public execute(event: string, data?: Record<string, unknown>): void {
     Promise
       .all(this.commands[event]?.map(async (command) => {
         try {
-          await command.execute({
-            event,
-            ...(isObject(command.options) ? command.options : {}),
-            ...options,
-          })
+          await command.execute(data)
         } catch (error: unknown) {
           this.handleError(error)
         }
@@ -43,8 +39,8 @@ export class Commander {
   }
 
   public executeAll(commands: Commands): void {
-    commands.forEach(({ event, options }) => {
-      this.execute(event, options)
+    commands.forEach(({ data, event }) => {
+      this.execute(event, data)
     })
   }
 
@@ -97,28 +93,24 @@ export class Commander {
   }
 
   public start(): this {
-    if (this.started) {
-      return this
+    if (!this.started) {
+      this.started = true
+
+      this.registerCommands('on')
+
+      setTimeout(() => {
+        this.registerCommands('of')
+      })
     }
-
-    this.registerCommands('on')
-
-    setTimeout(() => {
-      this.registerCommands('of')
-    })
-
-    this.started = true
 
     return this
   }
 
   public stop(): this {
-    if (!this.started) {
-      return this
+    if (this.started) {
+      this.started = false
+      this.unregisterCommands()
     }
-
-    this.unregisterCommands()
-    this.started = false
 
     return this
   }

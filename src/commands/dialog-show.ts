@@ -5,9 +5,9 @@ export interface DialogShowCommandOptions {
   modal?: string
 }
 
-export class DialogShowCommand extends Command<DialogElement> {
-  public execute(options: DialogShowCommandOptions): void {
-    if (options.modal === undefined) {
+export class DialogShowCommand extends Command<DialogElement, DialogShowCommandOptions> {
+  public execute(): void {
+    if (this.options.modal === undefined) {
       this.targetElement.show()
     } else {
       this.targetElement.showModal()

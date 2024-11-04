@@ -1,27 +1,27 @@
 import type { UpdatableElement } from '../elements/updatable.js'
 import { Command } from '../helpers/command.js'
 
-export interface ElementUpdateCommandOptions extends Record<string, unknown> {
+export interface ElementUpdateCommandOptions {
   'immediate'?: string
   'when-visible'?: string
 }
 
-export class ElementUpdateCommand extends Command<UpdatableElement> {
-  public async execute(options?: ElementUpdateCommandOptions): Promise<void> {
+export class ElementUpdateCommand extends Command<UpdatableElement, ElementUpdateCommandOptions> {
+  public async execute(data?: Record<string, unknown>): Promise<void> {
     if (
-      options?.['when-visible'] !== undefined &&
+      this.options['when-visible'] !== undefined &&
       !this.targetElement.checkVisibility()
     ) {
       return
     }
 
-    if (options?.immediate === 'false') {
+    if (this.options.immediate === 'false') {
       await new Promise<void>((resolve, reject) => {
         window.requestAnimationFrame(() => {
           Promise
             .resolve()
             .then(async () => {
-              await this.targetElement.update(options)
+              await this.targetElement.update(data)
               resolve()
             })
             .catch((error: unknown) => {
@@ -30,7 +30,7 @@ export class ElementUpdateCommand extends Command<UpdatableElement> {
         })
       })
     } else {
-      await this.targetElement.update(options)
+      await this.targetElement.update(data)
     }
   }
 }

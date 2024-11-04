@@ -10,16 +10,16 @@ export interface InputSetStateCommandOptions {
 }
 
 export class InputSetStateCommand extends Command<StatefulElement, InputSetStateCommandOptions, InputElement | SelectElement | TextareaElement> {
-  public execute(options: InputSetStateCommandOptions): void {
+  public execute(): void {
     if (
-      options['check-validity'] === undefined ||
+      this.options['check-validity'] === undefined ||
       this.originElement.checkValidity()
     ) {
-      const stateKeys = options['state-key'] === undefined
+      const stateKeys = this.options['state-key'] === undefined
         ? [this.originElement.name]
-        : Array.isArray(options['state-key'])
-          ? options['state-key']
-          : [options['state-key']]
+        : Array.isArray(this.options['state-key'])
+          ? this.options['state-key']
+          : [this.options['state-key']]
 
       stateKeys.forEach((stateKey) => {
         if (this.originElement.value === '') {

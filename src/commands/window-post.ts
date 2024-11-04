@@ -1,13 +1,16 @@
 import { Command } from '../helpers/command.js'
 
-export interface WindowPostCommandOptions {
+export interface WindowPostCommandData {
   level?: string
   text?: string
   type?: string
 }
 
-export class WindowPostCommand extends Command<Window, WindowPostCommandOptions> {
-  public execute(options: WindowPostCommandOptions): void {
-    this.targetElement.postMessage(options)
+export class WindowPostCommand extends Command<Window, Record<string, unknown>> {
+  public execute(data?: WindowPostCommandData): void {
+    this.targetElement.postMessage({
+      ...this.options,
+      ...data,
+    })
   }
 }

@@ -7,16 +7,16 @@ export interface ElementToggleMarginCommandOptions {
 }
 
 export class ElementToggleMarginCommand extends Command<Element, ElementToggleMarginCommandOptions> {
-  public async execute(options: ElementToggleMarginCommandOptions): Promise<void> {
+  public async execute(): Promise<void> {
     if (this.targetElement.state?.storage === 'idb') {
       await this.targetElement.state.loaded
     }
 
-    const immediate = options.immediate === 'true'
+    const immediate = this.options.immediate === 'true'
 
-    const property = options.position === undefined
+    const property = this.options.position === undefined
       ? 'margin-inline-start'
-      : `margin-inline-${options.position}`
+      : `margin-inline-${this.options.position}`
 
     if (this.targetElement.hasAttribute('hidden')) {
       const { width } = this.targetElement.getBoundingClientRect()

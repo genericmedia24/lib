@@ -3,14 +3,14 @@ import { Command } from '../helpers/command.js'
 
 type InputErrors = Record<string, string>
 
-export interface FormSetErrorsCommandOptions {
+export interface FormSetErrorsCommandData {
   data: InputErrors
 }
 
 export class FormSetErrorsCommand extends Command<FormElement> {
-  public execute(options: FormSetErrorsCommandOptions): void {
+  public execute(data?: FormSetErrorsCommandData): void {
     Object
-      .entries(options.data)
+      .entries(data?.data ?? {})
       .forEach(([id, message]) => {
         const element = this.targetElement.querySelector(`label[for="${id}"] [data-error]`)
 

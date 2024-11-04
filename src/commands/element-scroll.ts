@@ -2,13 +2,16 @@ import type { Element } from '../elements/element.js'
 import type { ScrollbarElement } from '../elements/scrollbar.js'
 import { Command } from '../helpers/command.js'
 
+export interface ElementScrollCommandData {
+  event?: Interact.InteractEvent | MouseEvent
+}
+
 export interface ElementScrollCommandOptions {
   axis?: 'x' | 'y'
-  event?: Interact.InteractEvent | MouseEvent
   update?: string
 }
 
-export class ElementScrollCommand extends Command<Element, unknown, ScrollbarElement> {
+export class ElementScrollCommand extends Command<Element, ElementScrollCommandOptions, ScrollbarElement> {
   public initialValues = {
     scrollLeft: 0,
     scrollTop: 0,
@@ -17,11 +20,13 @@ export class ElementScrollCommand extends Command<Element, unknown, ScrollbarEle
 
   public popoverElements?: HTMLElement[]
 
-  public override execute(options: ElementScrollCommandOptions): void {
-    if (options.axis === 'y') {
-      this.updateY(options)
-    } else {
-      this.updateX(options)
+  public override execute(data?: ElementScrollCommandData): void {
+    if (data !== undefined) {
+      if (this.options.axis === 'y') {
+        this.updateY(data)
+      } else {
+        this.updateX(data)
+      }
     }
   }
 
@@ -43,34 +48,34 @@ export class ElementScrollCommand extends Command<Element, unknown, ScrollbarEle
     }
   }
 
-  protected updateX(options: ElementScrollCommandOptions): void {
-    if (options.update === undefined) {
+  protected updateX(data: ElementScrollCommandData): void {
+    if (this.options.update === undefined) {
       if (
-        options.event !== undefined &&
-        !(options.event instanceof MouseEvent)
+        data.event !== undefined &&
+        !(data.event instanceof MouseEvent)
       ) {
-        this.setInitialValues(options.event)
-        this.updateXScroll(options.event)
+        this.setInitialValues(data.event)
+        this.updateXScroll(data.event)
       }
     } else {
-      if (options.update.includes('dimension')) {
+      if (this.options.update.includes('dimension')) {
         this.updateXDimension()
       }
 
-      if (options.update.includes('popover')) {
+      if (this.options.update.includes('popover')) {
         this.hidePopoverElements()
       }
 
-      if (options.update.includes('position')) {
+      if (this.options.update.includes('position')) {
         this.updateXPosition()
       }
 
-      if (options.update.includes('thumb')) {
+      if (this.options.update.includes('thumb')) {
         if (
-          options.event instanceof MouseEvent &&
-          options.event.target !== this.originElement.thumbElement
+          data.event instanceof MouseEvent &&
+          data.event.target !== this.originElement.thumbElement
         ) {
-          this.updateXThumb(options.event)
+          this.updateXThumb(data.event)
         }
       }
     }
@@ -114,34 +119,34 @@ export class ElementScrollCommand extends Command<Element, unknown, ScrollbarEle
     this.targetElement.scrollLeft = (thumbPosition / thumbRange) * targetRange
   }
 
-  protected updateY(options: ElementScrollCommandOptions): void {
-    if (options.update === undefined) {
+  protected updateY(data: ElementScrollCommandData): void {
+    if (this.options.update === undefined) {
       if (
-        options.event !== undefined &&
-        !(options.event instanceof MouseEvent)
+        data.event !== undefined &&
+        !(data.event instanceof MouseEvent)
       ) {
-        this.setInitialValues(options.event)
-        this.updateYScroll(options.event)
+        this.setInitialValues(data.event)
+        this.updateYScroll(data.event)
       }
     } else {
-      if (options.update.includes('dimension')) {
+      if (this.options.update.includes('dimension')) {
         this.updateYDimension()
       }
 
-      if (options.update.includes('popover')) {
+      if (this.options.update.includes('popover')) {
         this.hidePopoverElements()
       }
 
-      if (options.update.includes('position')) {
+      if (this.options.update.includes('position')) {
         this.updateYPosition()
       }
 
-      if (options.update.includes('thumb')) {
+      if (this.options.update.includes('thumb')) {
         if (
-          options.event instanceof MouseEvent &&
-          options.event.target !== this.originElement.thumbElement
+          data.event instanceof MouseEvent &&
+          data.event.target !== this.originElement.thumbElement
         ) {
-          this.updateYThumb(options.event)
+          this.updateYThumb(data.event)
         }
       }
     }

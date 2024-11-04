@@ -8,22 +8,22 @@ export interface ElementToggleStateCommandOptions {
 }
 
 export class ElementToggleStateCommand extends Command<StatefulElement, ElementToggleStateCommandOptions> {
-  public async execute(options: ElementToggleStateCommandOptions): Promise<void> {
+  public async execute(): Promise<void> {
     if (this.targetElement.state?.storage === 'idb') {
       await this.targetElement.state.loaded
     }
 
-    const stateKeys = Array.isArray(options['state-key'])
-      ? options['state-key']
-      : [options['state-key']]
+    const stateKeys = Array.isArray(this.options['state-key'])
+      ? this.options['state-key']
+      : [this.options['state-key']]
 
-    const stateOff = Array.isArray(options['state-off'])
-      ? options['state-off']
-      : [options['state-off']]
+    const stateOff = Array.isArray(this.options['state-off'])
+      ? this.options['state-off']
+      : [this.options['state-off']]
 
-    const stateOn = Array.isArray(options['state-on'])
-      ? options['state-on']
-      : [options['state-on']]
+    const stateOn = Array.isArray(this.options['state-on'])
+      ? this.options['state-on']
+      : [this.options['state-on']]
 
     stateKeys.forEach((stateKey, index) => {
       const state = this.targetElement.state?.get(stateKey)

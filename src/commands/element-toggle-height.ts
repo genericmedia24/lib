@@ -6,8 +6,8 @@ export interface ElementToggleHeightCommandOptions {
 }
 
 export class ElementToggleHeightCommand extends Command<CommandableElement, ElementToggleHeightCommandOptions> {
-  public execute(options: ElementToggleHeightCommandOptions): void {
-    const immediate = options.immediate === 'true'
+  public execute(): void {
+    const immediate = this.options.immediate === 'true'
 
     if (this.targetElement.hasAttribute('hidden')) {
       if (immediate) {

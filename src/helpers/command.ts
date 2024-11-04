@@ -69,5 +69,5 @@ export abstract class Command<TargetElement = unknown, Options = unknown, Origin
     this.targetElement = targetElement
   }
 
-  public abstract execute(options: Options): Promise<void> | void
+  public abstract execute(data: unknown): Promise<void> | void
 }

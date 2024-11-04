@@ -2,10 +2,13 @@ import type { Element } from '../elements/element.js'
 import type { ResizerElement } from '../elements/resizer.js'
 import { Command } from '../helpers/command.js'
 
+export interface ElementResizeCommandData {
+  event: Interact.InteractEvent
+}
+
 export interface ElementResizeCommandOptions {
   auto?: string
   axis?: 'x' | 'y'
-  event: Interact.InteractEvent
 }
 
 export class ElementResizeCommand extends Command<Element, ElementResizeCommandOptions, ResizerElement> {
@@ -15,16 +18,18 @@ export class ElementResizeCommand extends Command<Element, ElementResizeCommandO
     width: 0,
   }
 
-  public override execute(options: ElementResizeCommandOptions): void {
-    if (this.originElement === this.targetElement) {
-      this.initialize()
-    } else {
-      this.setInitialValues(options.event)
-
-      if (options.axis === 'y') {
-        this.resizeY(options)
+  public override execute(data?: ElementResizeCommandData): void {
+    if (data !== undefined) {
+      if (this.originElement === this.targetElement) {
+        this.initialize()
       } else {
-        this.resizeX(options)
+        this.setInitialValues(data.event)
+
+        if (this.options.axis === 'y') {
+          this.resizeY(data)
+        } else {
+          this.resizeX(data)
+        }
       }
     }
   }
@@ -41,9 +46,9 @@ export class ElementResizeCommand extends Command<Element, ElementResizeCommandO
     }
   }
 
-  protected resizeX(options: ElementResizeCommandOptions): void {
-    if (options.auto === undefined) {
-      const distance = options.event.clientX - options.event.clientX0
+  protected resizeX(data: ElementResizeCommandData): void {
+    if (this.options.auto === undefined) {
+      const distance = data.event.clientX - data.event.clientX0
       const width = this.initialValues.width + distance
       this.targetElement.state?.set('width', width)
       this.targetElement.style.setProperty('width', `${width}px`)
@@ -53,9 +58,9 @@ export class ElementResizeCommand extends Command<Element, ElementResizeCommandO
     }
   }
 
-  protected resizeY(options: ElementResizeCommandOptions): void {
-    if (options.auto === undefined) {
-      const distance = options.event.clientY - options.event.clientY0
+  protected resizeY(data: ElementResizeCommandData): void {
+    if (this.options.auto === undefined) {
+      const distance = data.event.clientY - data.event.clientY0
       const height = this.initialValues.height + distance
       this.targetElement.state?.set('height', height)
       this.targetElement.style.setProperty('height', `${height}px`)

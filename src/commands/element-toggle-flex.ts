@@ -6,8 +6,8 @@ export interface ElementToggleFlexCommandOptions {
 }
 
 export class ElementToggleFlexCommand extends Command<CommandableElement, ElementToggleFlexCommandOptions> {
-  public execute(options: ElementToggleFlexCommandOptions): void {
-    const immediate = options.immediate === 'true'
+  public execute(): void {
+    const immediate = this.options.immediate === 'true'
 
     if (this.targetElement.hasAttribute('hidden')) {
       if (immediate) {

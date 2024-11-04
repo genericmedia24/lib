@@ -7,14 +7,14 @@ export interface ElementSetStateCommandOptions {
 }
 
 export class ElementSetStateCommand extends Command<StatefulElement, ElementSetStateCommandOptions> {
-  public execute(options: ElementSetStateCommandOptions): void {
-    const stateKeys = Array.isArray(options['state-key'])
-      ? options['state-key']
-      : [options['state-key']]
+  public execute(): void {
+    const stateKeys = Array.isArray(this.options['state-key'])
+      ? this.options['state-key']
+      : [this.options['state-key']]
 
-    const stateValues = Array.isArray(options['state-value'])
-      ? options['state-value']
-      : [options['state-value']]
+    const stateValues = Array.isArray(this.options['state-value'])
+      ? this.options['state-value']
+      : [this.options['state-value']]
 
     stateKeys.forEach((stateKey, index) => {
       if (stateValues[index] === undefined) {

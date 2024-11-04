@@ -5,11 +5,11 @@ export interface DialogToggleCommandOptions {
   modal?: string
 }
 
-export class DialogToggleCommand extends Command<DialogElement> {
-  public execute(options: DialogToggleCommandOptions): void {
+export class DialogToggleCommand extends Command<DialogElement, DialogToggleCommandOptions> {
+  public execute(): void {
     if (this.targetElement.open) {
       this.targetElement.close()
-    } else if (options.modal === undefined) {
+    } else if (this.options.modal === undefined) {
       this.targetElement.show()
     } else {
       this.targetElement.showModal()
