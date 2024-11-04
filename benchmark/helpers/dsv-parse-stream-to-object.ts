@@ -3,8 +3,8 @@
 import { createReadStream } from 'node:fs'
 import papaparse from 'papaparse'
 import { Bench } from 'tinybench'
-import { inferSchema, initParser, type Parser } from 'udsv'
-import { parseCsvStream } from '../../src/helpers/csv.js'
+import { inferSchema, initParser, type Parser, type stringRec } from 'udsv'
+import { parseDsvRowToObject, parseDsvStream } from '../../src/helpers/dsv.js'
 
 const [,,filename] = process.argv
 
@@ -16,7 +16,7 @@ const bench = new Bench()
 
 bench
   .add('papaparse', async () => {
-    await new Promise<unknown[]>((resolve) => {
+    await new Promise((resolve) => {
       const readableStream = createReadStream(filename)
       const rows: unknown[] = []
 
@@ -27,36 +27,34 @@ bench
         complete: () => {
           resolve(rows)
         },
+        header: true,
       })
     })
   })
   .add('udsv', async () => {
-    await new Promise<undefined | unknown[]>((resolve) => {
+    await new Promise((resolve) => {
       const readableStream = createReadStream(filename)
-
       let parser: null | Parser = null
-      let rows: undefined | unknown[] = undefined
 
       readableStream.on('data', (chunk) => {
         const strChunk = chunk.toString()
         parser ??= initParser(inferSchema(strChunk))
-        parser.chunk<string[]>(strChunk, parser.stringArrs)
+        parser.chunk<stringRec>(strChunk, parser.stringObjs)
       })
 
       readableStream.on('end', () => {
-        rows = parser?.end()
-        resolve(rows)
+        resolve(parser?.end())
       })
     })
   })
-  .add('parseCsvString', async () => {
-    await new Promise<undefined | unknown[]>((resolve) => {
+  .add('parseDsvString', async () => {
+    await new Promise((resolve) => {
       const readableStream = createReadStream(filename)
       const rows: unknown[] = []
 
-      parseCsvStream(readableStream, (row) => {
+      parseDsvStream(readableStream, parseDsvRowToObject((row) => {
         rows.push(row)
-      }, () => {
+      }), () => {
         resolve(rows)
       })
     })

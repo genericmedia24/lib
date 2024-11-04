@@ -1,21 +1,38 @@
+/**
+ * Inspired by https://github.com/leeoniya/uDSV, https://github.com/d3/d3-dsv
+ */
+
 import type { Readable } from 'node:stream'
 import type { Primitive } from 'type-fest'
 
-export interface CsvParseState {
-  columnIndex: number
-  row: string[]
+export interface DsvOptions {
+  delimiter: string
+  enclosing: string
+}
+
+export interface DsvParseState {
+  columnIndex?: number
+  row?: string[]
   rowTemplate?: string[]
   string: string
 }
 
 const decoder = new TextDecoder()
 
-export function formatCsvValue(value: Buffer | Date | Primitive | Uint8Array): string {
+export function formatDsvValue(value: Buffer | Date | Primitive | Uint8Array, options?: Partial<DsvOptions>): string {
   let result = ''
 
   if (typeof value === 'string') {
-    result = /[",\r\n]/u.test(value)
-      ? `"${value.replaceAll('"', '""')}"`
+    const delimiter = options?.delimiter ?? ','
+    const enclosing = options?.enclosing ?? '"'
+
+    result = (
+      value.includes(delimiter) ||
+      value.includes(enclosing) ||
+      value.includes('\n') ||
+      value.includes('\r')
+    )
+      ? `${enclosing}${value.replaceAll(enclosing, `${enclosing}${enclosing}`)}${enclosing}`
       : value
   } else if (
     value === null ||
@@ -35,47 +52,50 @@ export function formatCsvValue(value: Buffer | Date | Primitive | Uint8Array): s
   return result
 }
 
-export function formatCsvRow(row: Array<Date | Primitive | Uint8Array>): string {
+export function formatDsvRow(row: Array<Date | Primitive | Uint8Array>, options?: Partial<DsvOptions>): string {
   const result = new Array(row.length).fill('')
 
   for (let i = 0; i < row.length; i += 1) {
-    result[i] = formatCsvValue(row[i])
+    result[i] = formatDsvValue(row[i], options)
   }
 
-  return result.join(',')
+  return result.join(options?.delimiter ?? ',')
 }
 
-export function formatCsvRows(rows: Array<Array<Date | Primitive | Uint8Array>>): string {
+export function formatDsvRows(rows: Array<Array<Date | Primitive | Uint8Array>>, options?: Partial<DsvOptions>): string {
   const result = new Array(rows.length).fill('')
 
   for (let i = 0; i < rows.length; i += 1) {
-    result[i] = formatCsvRow(rows[i] ?? [])
+    result[i] = formatDsvRow(rows[i] ?? [], options)
   }
 
   return result.join('\n')
 }
 
-export function parseCsv(state: CsvParseState, rowCallback: (row: string[]) => void): void {
+export function parseDsv(state: DsvParseState, rowCallback: (row: string[]) => void, options: DsvOptions): void {
   const stringLength = state.string.length
 
   let start = 0
   let index = 0
 
-  if (state.string.includes('"')) {
+  if (state.string.includes(options.enclosing)) {
     let code: string | undefined = undefined
     let end = 0
     let value: string | undefined = undefined
     let valueStart = 0
 
+    state.columnIndex ??= 0
+    state.row ??= []
+
     while (index < stringLength) {
       code = state.string[index]
 
-      if (code === '"') {
+      if (code === options.enclosing) {
         value = ''
         valueStart = index
 
         while (true) {
-          index = state.string.indexOf('"', index + 1)
+          index = state.string.indexOf(options.enclosing, index + 1)
 
           if (index === -1) {
             index = stringLength
@@ -84,7 +104,7 @@ export function parseCsv(state: CsvParseState, rowCallback: (row: string[]) => v
 
           value += state.string.slice(valueStart + 1, index)
 
-          if (state.string[index + 1] === '"') {
+          if (state.string[index + 1] === options.enclosing) {
             valueStart = index
             index += 1
           } else {
@@ -98,7 +118,7 @@ export function parseCsv(state: CsvParseState, rowCallback: (row: string[]) => v
       }
 
       if (
-        code === ',' ||
+        code === options.delimiter ||
         code === '\n'
       ) {
         if (value === undefined) {
@@ -114,8 +134,9 @@ export function parseCsv(state: CsvParseState, rowCallback: (row: string[]) => v
 
         if (code === '\n') {
           rowCallback(state.row)
+
           state.rowTemplate ??= new Array(state.row.length).fill('')
-          state.row = state.rowTemplate.slice(0)
+          state.row = state.rowTemplate.slice()
           state.columnIndex = 0
         }
 
@@ -131,14 +152,16 @@ export function parseCsv(state: CsvParseState, rowCallback: (row: string[]) => v
     let columnDelimiterIndex = 0
     let rowDelimiterIndex = state.string.indexOf('\n')
 
+    state.columnIndex ??= 0
+
     state.rowTemplate ??= new Array(
       state.string
         .slice(0, rowDelimiterIndex)
-        .split(',')
+        .split(options.delimiter)
         .length,
     ).fill('')
 
-    state.row = state.rowTemplate.slice()
+    state.row ??= state.rowTemplate.slice()
 
     const rowLength = state.rowTemplate.length - 1
 
@@ -149,6 +172,7 @@ export function parseCsv(state: CsvParseState, rowCallback: (row: string[]) => v
           : state.string.slice(start, rowDelimiterIndex)
 
         rowCallback(state.row)
+
         state.columnIndex = 0
         state.row = state.rowTemplate.slice()
         start = rowDelimiterIndex + 1
@@ -158,7 +182,7 @@ export function parseCsv(state: CsvParseState, rowCallback: (row: string[]) => v
           break
         }
       } else {
-        columnDelimiterIndex = state.string.indexOf(',', start)
+        columnDelimiterIndex = state.string.indexOf(options.delimiter, start)
 
         if (
           columnDelimiterIndex === -1 ||
@@ -169,6 +193,7 @@ export function parseCsv(state: CsvParseState, rowCallback: (row: string[]) => v
             : state.string.slice(start, rowDelimiterIndex)
 
           rowCallback(state.row)
+
           state.columnIndex = 0
           state.row = state.rowTemplate.slice()
           start = rowDelimiterIndex + 1
@@ -193,30 +218,54 @@ export function parseCsv(state: CsvParseState, rowCallback: (row: string[]) => v
   }
 }
 
-export function parseCsvStream(stream: Readable, rowCallback: (row: string[]) => void, endCallback: (error?: unknown) => void): Readable {
-  const state: CsvParseState = {
+export function parseDsvRowToObject<ObjectType = Record<string, string>>(rowCallback: (object: ObjectType) => void): (row: string[]) => void {
+  let toObject: ((row: string[]) => ObjectType) | undefined = undefined
+
+  return (row): void => {
+    if (toObject === undefined) {
+      let objectBody = ''
+
+      for (let i = 0; i < row.length; i += 1) {
+        objectBody += `"${row[i] ?? ''}":row[${i}],`
+      }
+
+      // eslint-disable-next-line no-new-func, @typescript-eslint/no-implied-eval
+      toObject = new Function('row', `return {${objectBody}}`) as (row: string[]) => ObjectType
+    } else {
+      rowCallback(toObject(row))
+    }
+  }
+}
+
+export function parseDsvStream(stream: Readable, rowCallback: (row: string[]) => void, endCallback: (error?: unknown) => void, options?: Partial<DsvOptions>): Readable {
+  const parseDsvOptions: DsvOptions = {
+    delimiter: options?.delimiter ?? ',',
+    enclosing: options?.enclosing ?? '"',
+  }
+
+  const parseDsvState: DsvParseState = {
     columnIndex: 0,
     row: [],
     string: '',
   }
 
   stream.on('data', (chunk: Buffer) => {
-    state.string += decoder.decode(chunk)
+    parseDsvState.string += decoder.decode(chunk)
 
-    if (state.string.includes('\n')) {
-      parseCsv(state, rowCallback)
+    if (parseDsvState.string.includes('\n')) {
+      parseDsv(parseDsvState, rowCallback, parseDsvOptions)
     }
   })
 
   stream.on('error', endCallback)
 
   stream.on('end', () => {
-    if (state.string.length > 0) {
-      if (!state.string.endsWith('\n')) {
-        state.string = `${state.string}\n`
+    if (parseDsvState.string.length > 0) {
+      if (!parseDsvState.string.endsWith('\n')) {
+        parseDsvState.string = `${parseDsvState.string}\n`
       }
 
-      parseCsv(state, rowCallback)
+      parseDsv(parseDsvState, rowCallback, parseDsvOptions)
     }
 
     endCallback()
@@ -225,10 +274,13 @@ export function parseCsvStream(stream: Readable, rowCallback: (row: string[]) =>
   return stream
 }
 
-export function parseCsvString(string: string): string[][] {
-  const rows: string[][] = []
+export function parseDsvString(string: string, rowCallback: (row: string[]) => void, options?: Partial<DsvOptions>): void {
+  const parseDsvOptions: DsvOptions = {
+    delimiter: options?.delimiter ?? ',',
+    enclosing: options?.enclosing ?? '"',
+  }
 
-  const state = {
+  const parseDsvState: DsvParseState = {
     columnIndex: 0,
     row: [],
     string: string.endsWith('\n')
@@ -236,17 +288,18 @@ export function parseCsvString(string: string): string[][] {
       : `${string}\n`,
   }
 
-  parseCsv(state, (row) => {
-    rows.push(row)
-  })
-
-  return rows
+  parseDsv(parseDsvState, rowCallback, parseDsvOptions)
 }
 
-export function parseCsvWebStream(stream: ReadableStream, rowCallback: (row: string[]) => void, endCallback: (error?: unknown) => void): ReadableStreamDefaultReader {
+export function parseDsvWebStream(stream: ReadableStream, rowCallback: (row: string[]) => void, endCallback: (error?: unknown) => void, options?: Partial<DsvOptions>): ReadableStreamDefaultReader {
   const reader = stream.getReader()
 
-  const state: CsvParseState = {
+  const parseDsvOptions: DsvOptions = {
+    delimiter: options?.delimiter ?? ',',
+    enclosing: options?.enclosing ?? '"',
+  }
+
+  const parseDsvState: DsvParseState = {
     columnIndex: 0,
     row: [],
     string: '',
@@ -254,23 +307,23 @@ export function parseCsvWebStream(stream: ReadableStream, rowCallback: (row: str
 
   const handleRead = ({ done, value }: ReadableStreamReadResult<Uint8Array>): void => {
     if (value !== undefined) {
-      state.string += decoder.decode(value)
+      parseDsvState.string += decoder.decode(value)
     }
 
     if (done) {
-      if (state.string.length > 0) {
-        if (!state.string.endsWith('\n')) {
-          state.string = `${state.string}\n`
+      if (parseDsvState.string.length > 0) {
+        if (!parseDsvState.string.endsWith('\n')) {
+          parseDsvState.string = `${parseDsvState.string}\n`
         }
 
-        parseCsv(state, rowCallback)
+        parseDsv(parseDsvState, rowCallback, parseDsvOptions)
       }
 
       endCallback()
       return
     }
 
-    parseCsv(state, rowCallback)
+    parseDsv(parseDsvState, rowCallback, parseDsvOptions)
 
     reader
       .read()
