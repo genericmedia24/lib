@@ -1,6 +1,6 @@
 import isEqual from 'fast-deep-equal'
 import * as idb from 'idb-keyval'
-import type { StatefulElement } from '../elements/stateful.js'
+import type { StatefulElement } from './stateful.js'
 
 export interface StateOptions {
   name: string

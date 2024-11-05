@@ -1,5 +1,5 @@
-import type { CommandableElement } from './commandable.js'
-import type { StatefulElement } from './stateful.js'
+import type { CommandableElement } from '../helpers/commandable.js'
+import type { StatefulElement } from '../helpers/stateful.js'
 import { Commander } from '../helpers/commander.js'
 import { State } from '../helpers/state.js'
 

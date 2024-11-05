@@ -46,26 +46,34 @@
     "udsv": "^0.6.0"
   },
   "exports": {
-    ".": {
+    "browser": {
       "import": {
         "default": "./dist/index.mjs",
-        "types": "./types/index.d.ts"
+        "types": "./dist/index.d.ts"
       },
       "require": {
         "default": "./dist/index.js",
-        "types": "./types/index.d.ts"
+        "types": "./dist/index.d.ts"
+      }
+    },
+    "default": {
+      "import": {
+        "default": "./dist/default.mjs",
+        "types": "./dist/index.d.ts"
+      },
+      "require": {
+        "default": "./dist/default.js",
+        "types": "./dist/index.d.ts"
       }
     }
   },
   "files": [
     "./LICENSE",
     "./README.md",
-    "./dist",
-    "./types"
+    "./dist"
   ],
   "homepage": "https://github.com/genericmedia24/lib#readme",
   "license": "MIT",
-  "main": "./dist/index.js",
   "name": "@genericmedia/lib",
   "private": false,
   "publishConfig": {
@@ -80,6 +88,5 @@
     "test": "glob -c \"tsx --test \" \"./test/**/*.ts\""
   },
   "type": "module",
-  "types": "./types/index.d.ts",
   "version": "0.0.0"
 }

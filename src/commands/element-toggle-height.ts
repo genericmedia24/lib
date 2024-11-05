@@ -1,4 +1,4 @@
-import type { CommandableElement } from '../elements/commandable.js'
+import type { CommandableElement } from '../helpers/commandable.js'
 import { Command } from '../helpers/command.js'
 
 export interface ElementToggleHeightCommandOptions {

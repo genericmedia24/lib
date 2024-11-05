@@ -1,4 +1,4 @@
-import type { UpdatableElement } from '../elements/updatable.js'
+import type { UpdatableElement } from '../helpers/updatable.js'
 import { Command } from '../helpers/command.js'
 
 export interface ElementUpdateCommandOptions {

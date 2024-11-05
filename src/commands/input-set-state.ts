@@ -1,7 +1,7 @@
 import type { InputElement } from '../elements/input.js'
 import type { SelectElement } from '../elements/select.js'
-import type { StatefulElement } from '../elements/stateful.js'
 import type { TextareaElement } from '../elements/textarea.js'
+import type { StatefulElement } from '../helpers/stateful.js'
 import { Command } from '../helpers/command.js'
 
 export interface InputSetStateCommandOptions {

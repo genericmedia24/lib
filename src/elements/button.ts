@@ -1,4 +1,4 @@
-import type { StatefulElement } from './stateful.js'
+import type { StatefulElement } from '../helpers/stateful.js'
 import { Commander } from '../helpers/commander.js'
 import { State } from '../helpers/state.js'
 

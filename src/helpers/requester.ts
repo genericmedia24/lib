@@ -1,4 +1,4 @@
-import type { CommandableElement } from '../elements/commandable.js'
+import type { CommandableElement } from './commandable.js'
 import { Cookies } from './cookies.js'
 import { CustomError } from './custom-error.js'
 

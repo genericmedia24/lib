@@ -1,4 +1,4 @@
-import type { CommandableElement } from '../elements/commandable.js'
+import type { CommandableElement } from './commandable.js'
 import { Command } from './command.js'
 import { CustomError } from './custom-error.js'
 import { I18n } from './i18n.js'
