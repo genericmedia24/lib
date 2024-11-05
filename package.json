@@ -79,7 +79,10 @@
   "publishConfig": {
     "access": "public"
   },
-  "repository": "https://github.com/genericmedia24/lib.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/genericmedia24/lib.git"
+  },
   "scripts": {
     "build": "rollup --config --configPlugin typescript",
     "build:watch": "rollup --config --configPlugin typescript --watch",
