@@ -38,7 +38,7 @@ export class I18n {
   public timeZone: string
 
   public constructor(options?: I18nOptions) {
-    this.locale = options?.locale ?? 'en-US'
+    this.locale = options?.locale ?? 'en-GB'
     this.locales = options?.locales ?? {}
     this.timeZone = options?.timeZone ?? 'UTC'
   }
