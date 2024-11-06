@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "foxundermoon.shell-format",
+    "mtxr.sqltools",
+    "qufiwefefwoyn.inline-sql-syntax",
+    "rangav.vscode-thunder-client",
+    "redhat.vscode-yaml",
+    "runem.lit-plugin",
+    "stylelint.vscode-stylelint"
+  ]
+}
