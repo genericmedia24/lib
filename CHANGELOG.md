@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/genericmedia24/lib/compare/v1.0.0...v1.1.0) (2024-11-12)
+
+
+### Features
+
+* bump version ([b5df0e1](https://github.com/genericmedia24/lib/commit/b5df0e1cf883a1deff474486424b41fe0307868f))
+
 # 1.0.0 (2024-11-12)
 
 
