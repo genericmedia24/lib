@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/genericmedia24/lib/compare/v1.1.0...v1.2.0) (2024-11-13)
+
+
+### Features
+
+* add isArray to helpers ([46c4b6b](https://github.com/genericmedia24/lib/commit/46c4b6b64d25c6db988b09f32959708a520f08e1))
+
 # [1.1.0](https://github.com/genericmedia24/lib/compare/v1.0.0...v1.1.0) (2024-11-12)
 
 
