@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 import parse from 'csv-simple-parser'
 import { csvParseRows } from 'd3-dsv'
 import { readFileSync } from 'node:fs'
@@ -16,9 +14,6 @@ if (filename === undefined) {
 
 const bench = new Bench()
 const string = String(readFileSync(filename)).trim()
-
-// console.log(parseDsvString(data, dsvRowToObject).slice(-1))
-// console.log(initParser(inferSchema(data)).stringObjs(data).slice(-1))
 
 bench
   .add('d3-dsv', () => {

@@ -102,7 +102,10 @@ export default tslint.config(
       'no-await-in-loop': 'off',
       'no-bitwise': 'off',
       'no-console': ['error', {
-        allow: ['error'],
+        allow: [
+          'error',
+          'table',
+        ],
       }],
       'no-nested-ternary': 'off',
       'no-ternary': 'off',

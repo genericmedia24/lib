@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 import { createReadStream } from 'node:fs'
 import papaparse from 'papaparse'
 import { Bench } from 'tinybench'

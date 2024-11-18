@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 import parse from 'csv-simple-parser'
 import { csvParseRows } from 'd3-dsv'
 import { readFileSync } from 'node:fs'

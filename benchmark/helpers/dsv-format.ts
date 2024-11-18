@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 import { csvFormatRows } from 'd3-dsv'
 import { readFileSync } from 'fs'
 import papaparse from 'papaparse'
