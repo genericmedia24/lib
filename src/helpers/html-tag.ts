@@ -1,4 +1,5 @@
 import { encode } from 'html-entities'
+import { isObject } from './is-object.js'
 
 export interface RawHtml {
   raw: string
@@ -14,7 +15,7 @@ export function html(strings: string | TemplateStringsArray, ...values: unknown[
 
     if (Array.isArray(value)) {
       value = value.join('')
-    } else if (html.isRaw(value)) {
+    } else if (isObject<RawHtml>(value, ({ raw }) => raw !== undefined)) {
       value = value.raw
     } else {
       value = encode(String(value))
@@ -24,14 +25,6 @@ export function html(strings: string | TemplateStringsArray, ...values: unknown[
   }
 
   return (result + strings[i]).trim()
-}
-
-html.isRaw = (value: unknown): value is RawHtml => {
-  return (
-    value !== null &&
-    typeof value === 'object' &&
-    typeof (value as RawHtml).raw === 'string'
-  )
 }
 
 html.raw = (raw: string): RawHtml => {

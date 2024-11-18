@@ -1,5 +1,5 @@
+import Cookies from 'js-cookie'
 import type { CommandableElement } from './commandable.js'
-import { Cookies } from './cookies.js'
 import { CustomError } from './custom-error.js'
 
 export class Requester {
@@ -8,8 +8,6 @@ export class Requester {
   ]
 
   public abortController?: AbortController
-
-  public cookies = Cookies.create()
 
   public element?: CommandableElement
 
@@ -34,19 +32,21 @@ export class Requester {
       loadingTimeout = '1000',
     } = this.element?.dataset ?? {}
 
-    if (this.cookies.has('csrf-token')) {
+    const csrfToken = Cookies.get('csrf-token')
+
+    if (csrfToken !== undefined) {
       if (
         input instanceof Request &&
         input.method.toLowerCase() === 'post'
       ) {
-        input.headers.set('csrf-token', this.cookies.get('csrf-token') ?? '')
+        input.headers.set('csrf-token', csrfToken)
       } else if (
         init !== undefined &&
         init.method?.toLowerCase() === 'post'
       ) {
         init.headers = {
           ...init.headers,
-          'csrf-token': this.cookies.get('csrf-token') ?? '',
+          'csrf-token': csrfToken,
         }
       }
     }

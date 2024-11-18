@@ -1,7 +1,6 @@
 export * from './command.js'
 export type * from './commandable.js'
 export * from './commander.js'
-export * from './cookies.js'
 export * from './custom-commands.js'
 export * from './custom-error.js'
 export * from './define-custom-commands.js'

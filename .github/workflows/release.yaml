@@ -19,11 +19,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm clean-install --include=dev
-      - run: npm audit signatures
-      - run: npm run lint
-      - run: npm test
-      - run: npm run build
+      - uses: pnpm/action-setup@v4
+      - run: pnpm install --prod=false
+      - run: pnpm lint
+      - run: pnpm test
+      - run: pnpm build
       - env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
