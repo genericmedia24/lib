@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/genericmedia24/lib/compare/v1.2.0...v1.3.0) (2024-11-18)
+
+
+### Features
+
+* clean up helpers ([89e3a13](https://github.com/genericmedia24/lib/commit/89e3a1365813a1e87c5be452aa4720ba49a6a13d))
+
 # [1.2.0](https://github.com/genericmedia24/lib/compare/v1.1.0...v1.2.0) (2024-11-13)
 
 
