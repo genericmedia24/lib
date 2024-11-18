@@ -74,7 +74,6 @@
   "homepage": "https://github.com/genericmedia24/lib#readme",
   "license": "MIT",
   "name": "@genericmedia/lib",
-  "packageManager": "pnpm@9.13.0",
   "private": false,
   "publishConfig": {
     "access": "public"
