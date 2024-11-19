@@ -46,14 +46,9 @@
     "udsv": "^0.6.0"
   },
   "exports": {
-    "browser": {
-      "default": "./dist/index.mjs",
-      "types": "./dist/index.d.ts"
-    },
-    "default": {
-      "default": "./dist/default.mjs",
-      "types": "./dist/index.d.ts"
-    }
+    "browser": "./dist/index.mjs",
+    "default": "./dist/default.mjs",
+    "types": "./dist/index.d.ts"
   },
   "files": [
     "./LICENSE",
