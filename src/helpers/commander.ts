@@ -13,11 +13,7 @@ export type Commands = Array<{
 export class Commander {
   public commands: Record<string, Command[]> = {}
 
-  public customCommands = CustomCommandRegistry.create()
-
   public element: HTMLElement
-
-  public i18n = I18n.create()
 
   public started = false
 
@@ -77,14 +73,14 @@ export class Commander {
         ? event
         : undefined,
       text: customError.code === undefined
-        ? this.i18n.formatString('error', {
-          params: {
+        ? I18n
+          .create()
+          .formatString('error', {
             error: customError.message,
-          },
-        })
-        : this.i18n.formatString(customError.code, {
-          params: customError.data,
-        }),
+          })
+        : I18n
+          .create()
+          .formatString(customError.code, customError.data),
     })
 
     console.error({ ...customError }, customError)
@@ -138,7 +134,11 @@ export class Commander {
           .forEach((command) => {
             const invert = prefix === 'of'
             const event = key.slice(2)
-            const commandObject = this.customCommands.create(command, this.element, invert)
+
+            const commandObject = CustomCommandRegistry
+              .create()
+              .create(command, this.element, invert)
+
             const { originElement } = commandObject
 
             const isCommandableElement = isObject<CommandableElement>(originElement, (element) => {
