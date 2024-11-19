@@ -73,6 +73,7 @@ export default tslint.config(
       }],
       '@typescript-eslint/no-unnecessary-type-parameters': 'off',
       '@typescript-eslint/no-unsafe-function-type': 'off',
+      '@typescript-eslint/no-unsafe-type-assertion': 'off',
       '@typescript-eslint/no-unused-vars': ['error', {
         caughtErrors: 'none',
       }],

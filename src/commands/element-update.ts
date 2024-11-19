@@ -25,7 +25,7 @@ export class ElementUpdateCommand extends Command<UpdatableElement, ElementUpdat
               resolve()
             })
             .catch((error: unknown) => {
-              reject(error as Error)
+              reject(error)
             })
         })
       })
