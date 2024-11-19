@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/genericmedia24/lib/compare/v1.4.0...v1.5.0) (2024-11-19)
+
+
+### Features
+
+* remove some dependencies, fix exports ([c37e277](https://github.com/genericmedia24/lib/commit/c37e277f2b2e26edea84659ea3afb675964f0e27))
+
 # [1.4.0](https://github.com/genericmedia24/lib/compare/v1.3.0...v1.4.0) (2024-11-19)
 
 
