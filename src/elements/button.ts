@@ -1,8 +1,9 @@
+import type { CommandableElement } from '../default.js'
 import type { StatefulElement } from '../helpers/stateful.js'
 import { Commander } from '../helpers/commander.js'
 import { State } from '../helpers/state.js'
 
-export class ButtonElement<StateValues = Record<string, unknown>> extends HTMLButtonElement implements StatefulElement<StateValues> {
+export class ButtonElement<StateValues = Record<string, unknown>> extends HTMLButtonElement implements CommandableElement, StatefulElement<StateValues> {
   public commander = new Commander(this)
 
   public state?: State<StateValues>

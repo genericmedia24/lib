@@ -1,9 +1,10 @@
+import type { CommandableElement } from '../default.js'
 import type { StatefulElement } from '../helpers/stateful.js'
 import { Commander } from '..//helpers/commander.js'
 import { KeyBinding } from '../helpers/key-binding.js'
 import { State } from '../helpers/state.js'
 
-export class DivElement<StateValues = Record<string, unknown>> extends HTMLDivElement implements StatefulElement<StateValues> {
+export class DivElement<StateValues = Record<string, unknown>> extends HTMLDivElement implements CommandableElement, StatefulElement<StateValues> {
   public commander = new Commander(this)
 
   public escape = KeyBinding.create({

@@ -1,5 +1,6 @@
+import type { Command } from './command.js'
 import type { CommandableElement } from './commandable.js'
-import { Command } from './command.js'
+import { CustomCommandRegistry } from './custom-command-registry.js'
 import { CustomError } from './custom-error.js'
 import { I18n } from './i18n.js'
 import { isObject } from './is-object.js'
@@ -11,6 +12,8 @@ export type Commands = Array<{
 
 export class Commander {
   public commands: Record<string, Command[]> = {}
+
+  public customCommands = CustomCommandRegistry.create()
 
   public element: HTMLElement
 
@@ -135,7 +138,7 @@ export class Commander {
           .forEach((command) => {
             const invert = prefix === 'of'
             const event = key.slice(2)
-            const commandObject = Command.create(command, this.element, invert)
+            const commandObject = this.customCommands.create(command, this.element, invert)
             const { originElement } = commandObject
 
             const isCommandableElement = isObject<CommandableElement>(originElement, (element) => {

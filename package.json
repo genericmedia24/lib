@@ -45,26 +45,9 @@
     "udsv": "^0.6.0"
   },
   "exports": {
-    "browser": {
-      "import": {
-        "default": "./dist/index.mjs",
-        "types": "./dist/index.d.ts"
-      },
-      "require": {
-        "default": "./dist/index.js",
-        "types": "./dist/index.d.ts"
-      }
-    },
-    "default": {
-      "import": {
-        "default": "./dist/default.mjs",
-        "types": "./dist/index.d.ts"
-      },
-      "require": {
-        "default": "./dist/default.js",
-        "types": "./dist/index.d.ts"
-      }
-    }
+    "browser": "./dist/index.mjs",
+    "node": "./dist/default.mjs",
+    "default": "./dist/default.mjs"
   },
   "files": [
     "./LICENSE",
@@ -90,5 +73,6 @@
     "test": "glob -c \"tsx --test \" \"./test/**/*.ts\""
   },
   "type": "module",
+  "types": "./dist/index.d.ts",
   "version": "1.3.0"
 }

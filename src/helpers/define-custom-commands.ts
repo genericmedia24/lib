@@ -1,9 +1,9 @@
 import type { Constructor } from 'type-fest'
 import type { Command } from './command.js'
-import { CustomCommands } from './custom-commands.js'
+import { CustomCommandRegistry } from './custom-command-registry.js'
 
 export function defineCustomCommands(commands: Record<string, Constructor<Command>>): void {
-  const customCommands = CustomCommands.create()
+  const customCommandRegistry = CustomCommandRegistry.create()
 
   Object
     .values(commands)
@@ -13,6 +13,6 @@ export function defineCustomCommands(commands: Record<string, Constructor<Comman
         .replace(/(?<one>[a-z0–9])(?<two>[A-Z])/gu, '$1-$2')
         .toLowerCase()
 
-      customCommands.define(name, command)
+      customCommandRegistry.define(name, command)
     })
 }

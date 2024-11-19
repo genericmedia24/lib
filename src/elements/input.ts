@@ -1,9 +1,10 @@
 import throttle from 'throttleit'
+import type { CommandableElement } from '../default.js'
 import type { StatefulElement } from '../helpers/stateful.js'
 import { Commander } from '../helpers/commander.js'
 import { State } from '../helpers/state.js'
 
-export class InputElement<StateValues = Record<string, unknown>> extends HTMLInputElement implements StatefulElement<StateValues> {
+export class InputElement<StateValues = Record<string, unknown>> extends HTMLInputElement implements CommandableElement, StatefulElement<StateValues> {
   public commander = new Commander(this)
 
   public state?: State<StateValues>
