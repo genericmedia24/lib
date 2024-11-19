@@ -1,3 +1,10 @@
+## [1.5.3](https://github.com/genericmedia24/lib/compare/v1.5.2...v1.5.3) (2024-11-19)
+
+
+### Bug Fixes
+
+* remove terser ([c1cbe0b](https://github.com/genericmedia24/lib/commit/c1cbe0b6ce904cf0c4654c72e3e474197f1eecfa))
+
 ## [1.5.2](https://github.com/genericmedia24/lib/compare/v1.5.1...v1.5.2) (2024-11-19)
 
 
