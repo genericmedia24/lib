@@ -1,6 +1,6 @@
 {
   "author": "Koen van den Boogaart <koen@genericmedia.nl>",
-  "browser": "./dist/index.mjs",
+  "browser": "./dist/index.min.mjs",
   "bugs": "https://github.com/genericmedia24/lib/issues",
   "dependencies": {
     "debounce": "^2.2.0",
@@ -46,8 +46,8 @@
     "udsv": "^0.6.0"
   },
   "exports": {
-    "browser": "./dist/index.mjs",
-    "default": "./dist/default.mjs",
+    "browser": "./dist/index.min.mjs",
+    "default": "./dist/default.min.mjs",
     "types": "./dist/index.d.ts"
   },
   "files": [
@@ -57,7 +57,7 @@
   ],
   "homepage": "https://github.com/genericmedia24/lib#readme",
   "license": "MIT",
-  "main": "./dist/default.mjs",
+  "main": "./dist/default.min.mjs",
   "name": "@genericmedia/lib",
   "private": false,
   "publishConfig": {

@@ -15,7 +15,7 @@ const options: RollupOptions[] = [{
   },
   output: [{
     dir: '.',
-    entryFileNames: 'dist/default.mjs',
+    entryFileNames: 'dist/default.min.mjs',
     format: 'esm',
   }],
   plugins: [
@@ -39,7 +39,7 @@ const options: RollupOptions[] = [{
   },
   output: [{
     dir: '.',
-    entryFileNames: 'dist/index.mjs',
+    entryFileNames: 'dist/index.min.mjs',
     format: 'esm',
   }],
   plugins: [
