@@ -1,13 +1,9 @@
-import { MessageFormat, type MessageFormatOptions } from 'messageformat'
+import { sprintf } from 'sprintf-js'
 
 export interface I18nOptions {
   locale?: string
   locales?: Record<string, Record<string, string>>
   timeZone?: string
-}
-
-export interface I18nFormatStringOptions extends MessageFormatOptions {
-  params?: Record<string, unknown>
 }
 
 export class I18n {
@@ -38,11 +34,7 @@ export class I18n {
     return value.toLocaleString(this.locale, options)
   }
 
-  public formatString(value: string, options?: I18nFormatStringOptions): string {
-    return new MessageFormat(
-      this.locale,
-      this.locales[this.locale]?.[value] ?? value,
-      options,
-    ).format(options?.params)
+  public formatString(value: string, params?: Record<string, unknown>): string {
+    return sprintf(this.locales[this.locale]?.[value] ?? value, params)
   }
 }

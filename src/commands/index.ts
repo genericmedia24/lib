@@ -6,8 +6,6 @@ export * from './element-abort-request.js'
 export * from './element-clear-html.js'
 export * from './element-focus.js'
 export * from './element-remove.js'
-export * from './element-resize.js'
-export * from './element-scroll.js'
 export * from './element-set-state.js'
 export * from './element-toggle-attribute.js'
 export * from './element-toggle-flex.js'
@@ -35,8 +33,6 @@ import { ElementAbortRequestCommand } from './element-abort-request.js'
 import { ElementClearHtmlCommand } from './element-clear-html.js'
 import { ElementFocusCommand } from './element-focus.js'
 import { ElementRemoveCommand } from './element-remove.js'
-import { ElementResizeCommand } from './element-resize.js'
-import { ElementScrollCommand } from './element-scroll.js'
 import { ElementSetStateCommand } from './element-set-state.js'
 import { ElementToggleAttributeCommand } from './element-toggle-attribute.js'
 import { ElementToggleFlexCommand } from './element-toggle-flex.js'
@@ -65,8 +61,6 @@ export const commands = {
   ElementClearHtmlCommand,
   ElementFocusCommand,
   ElementRemoveCommand,
-  ElementResizeCommand,
-  ElementScrollCommand,
   ElementSetStateCommand,
   ElementToggleAttributeCommand,
   ElementToggleFlexCommand,

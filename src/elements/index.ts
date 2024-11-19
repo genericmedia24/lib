@@ -5,8 +5,6 @@ export * from './element.js'
 export * from './form.js'
 export * from './input.js'
 export * from './output.js'
-export * from './resizer.js'
-export * from './scrollbar.js'
 export * from './select.js'
 export * from './textarea.js'
 
@@ -16,8 +14,6 @@ import { DivElement } from './div.js'
 import { FormElement } from './form.js'
 import { InputElement } from './input.js'
 import { OutputElement } from './output.js'
-import { ResizerElement } from './resizer.js'
-import { ScrollbarElement } from './scrollbar.js'
 import { SelectElement } from './select.js'
 import { TextareaElement } from './textarea.js'
 
@@ -28,8 +24,6 @@ export const elements = {
   FormElement,
   InputElement,
   OutputElement,
-  ResizerElement,
-  ScrollbarElement,
   SelectElement,
   TextareaElement,
 }

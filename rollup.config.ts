@@ -1,7 +1,10 @@
 import type { LoggingFunction, RollupLog, RollupOptions } from 'rollup'
 import commonjs from '@rollup/plugin-commonjs'
 import nodeResolve from '@rollup/plugin-node-resolve'
+import terser from '@rollup/plugin-terser'
 import typescript from '@rollup/plugin-typescript'
+
+const watch = process.argv.includes('--watch')
 
 const options: RollupOptions[] = [{
   input: 'src/default.ts',
@@ -19,6 +22,13 @@ const options: RollupOptions[] = [{
     nodeResolve(),
     commonjs(),
     typescript(),
+    watch
+      ? null
+      : terser({
+        mangle: {
+          module: false,
+        },
+      }),
   ],
 }, {
   input: 'src/index.ts',
@@ -42,6 +52,13 @@ const options: RollupOptions[] = [{
         'src/**/*.ts',
       ],
     }),
+    watch
+      ? null
+      : terser({
+        mangle: {
+          module: false,
+        },
+      }),
   ],
 }]
 

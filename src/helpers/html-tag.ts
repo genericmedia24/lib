@@ -1,5 +1,5 @@
-import { encode } from 'html-entities'
 import { isObject } from './is-object.js'
+import { isPrimitive } from './is-primitive.js'
 
 export interface RawHtml {
   raw: string
@@ -17,8 +17,14 @@ export function html(strings: string | TemplateStringsArray, ...values: unknown[
       value = value.join('')
     } else if (isObject<RawHtml>(value, ({ raw }) => raw !== undefined)) {
       value = value.raw
+    } else if (isPrimitive(value)) {
+      value = value
+        ?.toString()
+        .replace(/[&<>'"]/gu, (substring) => {
+          return `&#${substring.charCodeAt(0)};`
+        }) ?? ''
     } else {
-      value = encode(String(value))
+      value = ''
     }
 
     result += `${strings[i] ?? ''}${value}`
