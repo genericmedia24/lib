@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/genericmedia24/lib/compare/v1.3.0...v1.4.0) (2024-11-19)
+
+
+### Features
+
+* rename custom command registry ([d19afef](https://github.com/genericmedia24/lib/commit/d19afefd952ee6b6ecc597ddc6963ab6c35fbc75))
+
 # [1.3.0](https://github.com/genericmedia24/lib/compare/v1.2.0...v1.3.0) (2024-11-18)
 
 
