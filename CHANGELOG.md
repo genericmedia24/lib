@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/genericmedia24/lib/compare/v1.5.0...v1.5.1) (2024-11-19)
+
+
+### Bug Fixes
+
+* fix package exports ([0dc30a0](https://github.com/genericmedia24/lib/commit/0dc30a06544fb412fb8cec621a29081f3c90ac20))
+
 # [1.5.0](https://github.com/genericmedia24/lib/compare/v1.4.0...v1.5.0) (2024-11-19)
 
 
