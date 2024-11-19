@@ -2,7 +2,7 @@ import { createReadStream } from 'node:fs'
 import papaparse from 'papaparse'
 import { Bench } from 'tinybench'
 import { inferSchema, initParser, type Parser, type stringRec } from 'udsv'
-import { parseDsvRowToObject, parseDsvStream } from '../../src/helpers/dsv.js'
+import { parseDsvRowToObject, parseDsvStream } from '../../src/default.js'
 
 const [,,filename] = process.argv
 
@@ -45,7 +45,7 @@ bench
       })
     })
   })
-  .add('parseDsvString', async () => {
+  .add('genericmedia', async () => {
     await new Promise((resolve) => {
       const readableStream = createReadStream(filename)
       const rows: unknown[] = []

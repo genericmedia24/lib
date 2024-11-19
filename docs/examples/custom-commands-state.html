@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>State | Custom Commands</title>
+  <script type="module">
+    // prettier-ignore
+    import {
+      Command,
+      CustomCommandRegistry,
+      defineCustomCommands,
+      defineCustomElements,
+      commands,
+      elements
+    } from 'https://cdn.jsdelivr.net/npm/@genericmedia/lib/+esm'
+
+    class DivSetGreetingCommand extends Command {
+      execute() {
+        const username = this.originElement.state.get('username') ?? ''
+        this.originElement.textContent = `${this.options.prefix} ${username}`
+      }
+    }
+
+    window.customCommands = CustomCommandRegistry.create()
+    window.customCommands.define('div-set-greeting', DivSetGreetingCommand)
+
+    defineCustomCommands(commands)
+    defineCustomElements(elements)
+  </script>
+</head>
+
+<body>
+  <div data-state="person" data-onconnected="div-set-greeting?prefix=hello" data-onusernamechanged="div-set-greeting?prefix=hello" is="gm-div"></div>
+  <input name="username" data-state="person" data-oninput="input-set-state" is="gm-input">
+</body>
+
+</html>

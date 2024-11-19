@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs'
 import papaparse from 'papaparse'
 import { Bench } from 'tinybench'
 import { inferSchema, initParser } from 'udsv'
-import { parseDsvString } from '../../src/helpers/dsv.js'
+import { parseDsvString } from '../../src/default.js'
 
 const [,,filename] = process.argv
 
@@ -13,13 +13,16 @@ if (filename === undefined) {
 }
 
 const bench = new Bench()
-const string = String(readFileSync(filename)).trim()
+
+const string = readFileSync(filename)
+  .toString()
+  .trim()
 
 bench
   .add('d3-dsv', () => {
     csvParseRows(string)
   })
-  .add('dsv-simple-parser', () => {
+  .add('csv-simple-parser', () => {
     parse(string)
   })
   .add('papaparse', () => {
@@ -30,7 +33,7 @@ bench
       header: () => [],
     })).stringArrs(string)
   })
-  .add('parseDsvString', () => {
+  .add('genericmedia', () => {
     const rows = []
 
     parseDsvString(string, (row) => {

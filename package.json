@@ -12,6 +12,7 @@
   },
   "description": "GenericMedia Library",
   "devDependencies": {
+    "@awmottaz/prettier-plugin-void-html": "^1.6.1",
     "@eslint/js": "^9.15.0",
     "@rollup/plugin-commonjs": "^28.0.1",
     "@rollup/plugin-node-resolve": "^15.3.0",
@@ -21,7 +22,7 @@
     "@stylistic/eslint-plugin": "^2.11.0",
     "@types/d3-dsv": "^3.0.7",
     "@types/js-cookie": "^3.0.6",
-    "@types/node": "^22.9.1",
+    "@types/node": "^22.9.3",
     "@types/papaparse": "^5.3.15",
     "@types/picomatch": "^3.0.1",
     "@types/sprintf-js": "^1.1.4",
@@ -30,22 +31,35 @@
     "cz-conventional-changelog": "^3.3.0",
     "d3-dsv": "^3.0.1",
     "eslint": "9.15.0",
-    "eslint-plugin-perfectionist": "^4.0.2",
+    "eslint-plugin-perfectionist": "^4.0.3",
     "glob": "^11.0.0",
     "papaparse": "^5.4.1",
-    "rollup": "^4.27.3",
+    "prettier": "^3.3.3",
+    "prettier-plugin-embed": "^0.4.15",
+    "prettier-plugin-multiline-arrays": "^3.0.6",
+    "prettier-plugin-organize-attributes": "^1.0.0",
+    "prettier-plugin-sql": "^0.18.1",
+    "rollup": "^4.27.4",
     "semantic-release": "^24.2.0",
     "tinybench": "^3.0.6",
     "tslib": "^2.8.1",
     "tsx": "^4.19.2",
-    "type-fest": "^4.27.0",
-    "typescript": "^5.6.3",
+    "type-fest": "^4.28.0",
+    "typedoc": "^0.26.11",
+    "typedoc-github-theme": "^0.1.2",
+    "typescript": "^5.7.2",
     "typescript-eslint": "^8.15.0",
     "udsv": "^0.6.0"
   },
   "exports": {
-    "browser": "./dist/index.mjs",
-    "default": "./dist/default.mjs",
+    "browser": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "default": {
+      "import": "./dist/default.mjs",
+      "require": "./dist/default.js"
+    },
     "types": "./dist/index.d.ts"
   },
   "files": [

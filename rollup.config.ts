@@ -14,6 +14,10 @@ const options: RollupOptions[] = [{
     dir: '.',
     entryFileNames: 'dist/default.mjs',
     format: 'esm',
+  }, {
+    dir: '.',
+    entryFileNames: 'dist/default.js',
+    format: 'cjs',
   }],
   plugins: [
     nodeResolve(),
@@ -31,6 +35,11 @@ const options: RollupOptions[] = [{
     dir: '.',
     entryFileNames: 'dist/index.mjs',
     format: 'esm',
+  }, {
+    dir: '.',
+    entryFileNames: 'dist/index.js',
+    format: 'umd',
+    name: 'gm',
   }],
   plugins: [
     nodeResolve(),

@@ -1,0 +1,36 @@
+body h1,
+body h2,
+body h3,
+body h4,
+body h5,
+body h6 {
+  margin: 1rem 0;
+  padding: 0;
+}
+
+body pre {
+  line-height: 1.75em;
+}
+
+body .tsd-breadcrumb {
+  display: none;
+}
+
+body .tsd-member .tsd-anchor+h3 {
+  margin-bottom: 0.5rem;
+}
+
+body .tsd-page-title h1:first-child {
+  display: none;
+}
+
+body .tsd-panel>h1,
+body .tsd-panel>h2,
+body .tsd-panel>h3 {
+  margin: 1rem 0;
+  padding: 0;
+}
+
+body .tsd-typography {
+  line-height: 1.75em;
+}

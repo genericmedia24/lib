@@ -3,14 +3,53 @@ import * as idb from 'idb-keyval'
 import type { StatefulElement } from './stateful.js'
 
 export interface StateOptions {
+  /**
+   * The name of the state.
+   */
   name: string
+
+  /**
+   * The name of the storage provider of the state.
+   */
   storage?: State['storage']
+
+  /**
+   * The initial values of the state. These values will be overridden when the {@link State.load} method is called.
+   */
   values?: Record<string, unknown>
 }
 
+/**
+ * State.
+ *
+ * @example
+ * ```javascript
+ * const state = new State({
+ *   name: 'test'
+ * })
+ *
+ * state.set('some-key', 'some-value')
+ *
+ * console.log(state.get('some-key') === 'some-value') // true
+ *
+ * state.delete('some-key')
+ *
+ * console.log(state.get('some-key') === undefined) // true
+ * ```
+ */
 export class State<StateValues = Record<string, unknown>> {
+  /**
+   * The singleton states.
+   */
   private static readonly instances = new Map<string, State>()
 
+  /**
+   * Creates a singleton state. For every name there is one state.
+   *
+   * Calls {@link load} once, after creating the state.
+   *
+   * @param options the options
+   */
   public static create<StateValues = Record<string, unknown>>(options: StateOptions): State<StateValues> {
     let state = State.instances.get(options.name) as State<StateValues> | undefined
 
@@ -23,6 +62,26 @@ export class State<StateValues = Record<string, unknown>> {
     return state
   }
 
+  /**
+   * Sets up a state.
+   *
+   * Uses the dataset of the element to determine the options.
+   *
+   * @example
+   * ```html
+   * <div id="div" is="gm-div" data-state="test" data-state-storage="idb" data-state-values="some-key=some-value&other-key=other-value"></div>
+   * ```
+   *
+   * ```javascript
+   * const state = State.setup(document.getElementById('div'))
+   *
+   * console.log(state.name === 'test') // true
+   * console.log(state.storage === 'idb') // true
+   * console.log(state.values.get('other-key') === 'other-value') // true
+   * ```
+   *
+   * @param element the element
+   */
   public static setup<StateValues = Record<string, unknown>>(element: StatefulElement<StateValues>): State<StateValues> | undefined {
     if (element.dataset.state !== undefined) {
       return State.create<StateValues>({
@@ -35,26 +94,63 @@ export class State<StateValues = Record<string, unknown>> {
     return undefined
   }
 
+  /**
+   * The elements that have been registered.
+   */
   public elements = new Set<StatefulElement<StateValues>>()
 
+  /**
+   * Whether the values have been loaded from the storage provider.
+   */
   public loaded?: Promise<void>
 
+  /**
+   * The name of the state.
+   */
   public name: string
 
+  /**
+   * The name of the storage provider of the state.
+   */
   public storage: 'idb' | 'local' | 'none' = 'local'
 
+  /**
+   * The values of the state.
+   */
   public values: Map<string, unknown>
 
+  /**
+   * Creates a storage key based on the name of the state.
+   */
   public get storageKey(): string {
     return `state-${this.name}`
   }
 
+  /**
+   * Creates a state.
+   *
+   * @param options the options
+   */
   private constructor(options: StateOptions) {
     this.name = options.name
     this.storage = options.storage ?? 'local'
     this.values = new Map(Object.entries(options.values ?? {}))
   }
 
+  /**
+   * Clears the values, both of the state and in the storage provider.
+   *
+   * @example
+   * ```javascript
+   * state.set('some-key', 'some-value')
+   *
+   * console.log(state.get('some-key') === 'some-value') // true
+   *
+   * state.clear()
+   *
+   * console.log(state.get('some-key') === undefined) // true
+   * ```
+   */
   public clear(): this {
     this.values.clear()
 
@@ -69,6 +165,26 @@ export class State<StateValues = Record<string, unknown>> {
     return this
   }
 
+  /**
+   * Deletes the value of the given key.
+   *
+   * Calls `stateChangedCallback` of all the registered elements. Saves the values to the storage provider.
+   *
+   * The newValues object passed to the callback contains the key of the deleted value with the value set to `undefined`. The oldValues contains the same key, but with the value before it was deleted.
+   *
+   * @example
+   * ```javascript
+   * state.set('some-key', 'some-value')
+   *
+   * console.log(state.get('some-key') === 'some-value') // true
+   *
+   * state.delete('some-key')
+   *
+   * console.log(state.get('some-key') === undefined) // true
+   * ```
+   *
+   * @param key the key
+   */
   public delete<Key extends keyof StateValues & string>(key: Key): boolean {
     if (!this.values.has(key)) {
       return false
@@ -92,6 +208,26 @@ export class State<StateValues = Record<string, unknown>> {
     return result
   }
 
+  /**
+   * Deletes the values of the given keys.
+   *
+   * Calls `stateChangedCallback` of all the registered elements. Saves the values to the storage provider.
+   *
+   * The newValues object passed to the callback contains the keys of the deleted values with the values set to `undefined`. The oldValues object contains the same keys, but with the values before they were deleted.
+   *
+   * @example
+   * ```javascript
+   * state.set('some-key', 'some-value')
+   *
+   * console.log(state.get('some-key') === 'some-value') // true
+   *
+   * state.deleteAll(['some-key'])
+   *
+   * console.log(state.get('some-key') === undefined) // true
+   * ```
+   *
+   * @param keys the keys
+   */
   public deleteAll(keys?: Array<keyof StateValues & string>): this {
     let newValues = {}
     let oldValues = {}
@@ -126,18 +262,59 @@ export class State<StateValues = Record<string, unknown>> {
     return this
   }
 
+  /**
+   * Gets the value of a key.
+   *
+   * @example
+   * ```javascript
+   * state.set('some-key', 'some-value')
+   *
+   * console.log(state.get('some-key') === 'some-value') // true
+   * ```
+   *
+   * @param key the key
+   */
   public get<Key extends keyof StateValues & string>(key: Key): StateValues[Key] | undefined {
     return this.values.get(key) as StateValues[Key]
   }
 
+  /**
+   * Gets all the values.
+   *
+   * @example
+   * ```javascript
+   * state.set('some-key', 'some-value')
+   *
+   * const value = state.getAll()
+   *
+   * console.log(values['some-key'] === 'some-value') // true
+   * ```
+   */
   public getAll(): Partial<StateValues> {
     return Object.fromEntries(this.values.entries()) as Partial<StateValues>
   }
 
+  /**
+   * Checks whether the state holds a value with the given key.
+   *
+   * @example
+   * ```javascript
+   * state.set('some-key', 'some-value')
+   *
+   * console.log(state.has('some-key')) // true
+   * ```
+   *
+   * @param key the key
+   */
   public has<Key extends keyof StateValues & string>(key: Key): boolean {
     return this.values.has(key)
   }
 
+  /**
+   * Loads the values from the storage provider.
+   *
+   * If the storage provider is set to `idb`, the {@link loaded} property will be resolved after the values have been loaded.
+   */
   public load(): this {
     if (this.loaded === undefined) {
       if (this.storage === 'idb') {
@@ -169,10 +346,18 @@ export class State<StateValues = Record<string, unknown>> {
     return this
   }
 
+  /**
+   * Registers an element to be notified when the state has changed.
+   *
+   * @param element the element
+   */
   public register(element: StatefulElement<StateValues>): void {
     this.elements.add(element)
   }
 
+  /**
+   * Saves the values to the storage provider.
+   */
   public save(): this {
     if (this.storage === 'idb') {
       idb
@@ -185,6 +370,26 @@ export class State<StateValues = Record<string, unknown>> {
     return this
   }
 
+  /**
+   * Set the value for the given key.
+   *
+   * Calls `stateChangedCallback` of all the registered elements. Saves the values to the storage provider.
+   *
+   * The newValues object passed to the callback contains the key and the new value. The oldValues object contains the same key, but with the value before it was set.
+   *
+   * If the key already exists and has the same value as the new value nothing is done.
+   *
+   * @example
+   * ```javascript
+   * state.set('some-key', 'some-value')
+   *
+   * console.log(state.get('some-key') === 'some-value') // true
+   * ```
+   *
+   *
+   * @param key the key
+   * @param value the value
+   */
   public set<Key extends keyof StateValues & string>(key: Key, value: StateValues[Key]): this {
     const oldValue = this.values.get(key)
 
@@ -210,6 +415,26 @@ export class State<StateValues = Record<string, unknown>> {
     return this
   }
 
+  /**
+   * Set the value for the given key.
+   *
+   * Calls `stateChangedCallback` of all the registered elements. Saves the values to the storage provider.
+   *
+   * The newValues object passed to the callback contains the keys and the new values. The oldValues object contains the same keys, but with the values before they were set.
+   *
+   * If a key already exists and has the same value as the new value it is not added to the newValues and oldValues object.
+   *
+   * @example
+   * ```javascript
+   * state.setAll({
+   *   'some-key': 'some-value',
+   * })
+   *
+   * console.log(state.get('some-key') === 'some-value') // true
+   * ```
+   *
+   * @param values the values
+   */
   public setAll(values: Partial<StateValues>): this {
     let newValues = {}
     let oldValues = {}
@@ -244,6 +469,22 @@ export class State<StateValues = Record<string, unknown>> {
     return this
   }
 
+  /**
+   * Set the value for the given key only if it is not yet set.
+   *
+   * ```javascript
+   * state.setnx('some-key', 'some-value')
+   *
+   * console.log(state.get('some-key') === 'some-value') // true
+   *
+   * state.setnx('some-key', 'other-value')
+   *
+   * console.log(state.get('some-key') === 'some-value') // true
+   * ```
+   *
+   * @param key the key
+   * @param value the value
+   */
   public setnx<Key extends keyof StateValues & string>(key: Key, value: StateValues[Key]): this {
     if (!this.has(key)) {
       this.set(key, value)
@@ -252,11 +493,21 @@ export class State<StateValues = Record<string, unknown>> {
     return this
   }
 
+  /**
+   * Unloads the state.
+   *
+   * Clears only the values of the state, not in the storage provider.
+   */
   public unload(): void {
     this.loaded = undefined
     this.values.clear()
   }
 
+  /**
+   * Unregisters an element.
+   *
+   * @param element the element
+   */
   public unregister(element: StatefulElement<StateValues>): void {
     this.elements.delete(element)
   }

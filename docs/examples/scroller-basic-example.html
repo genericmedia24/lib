@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Basic Example | Scroller</title>
+  <script type="module">
+    import { Scroller } from 'https://cdn.jsdelivr.net/npm/@genericmedia/lib/+esm'
+
+    const scroller = new Scroller(document.querySelector('.table'))
+
+    scroller.start()
+
+    const numColumns = 100
+    const numRows = 100000
+
+    const string = crypto.randomUUID()
+
+    scroller.addHeadRow(new Array(numColumns).fill('').map(() => {
+      return string.slice(0, Math.round(Math.random() * 32))
+    }))
+
+    for (let i = 0; i < numRows; i += 1) {
+      scroller.addBodyRow(new Array(numColumns).fill('').map(() => {
+        return string.slice(0, Math.round(Math.random() * 32))
+      }))
+    }
+
+    scroller.update()
+  </script>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    .table {
+      width: 100vw;
+      height: 100vh;
+      overflow: auto;
+
+      &>.body {
+        width: fit-content;
+
+        &>div {
+          display: grid;
+
+          &>div {
+            display: contents;
+
+            &>div {
+              display: flex;
+              align-items: center;
+              height: 2rem;
+              padding-inline: 0.5rem;
+              overflow: hidden;
+              white-space: nowrap;
+              border-block-end: 1px solid #eee;
+              border-inline-end: 1px solid #eee;
+            }
+
+            &:hover {
+              &>div {
+                cursor: pointer;
+                background-color: #eee;
+              }
+            }
+          }
+        }
+      }
+
+      &>.head {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        display: grid;
+
+        &>div {
+          display: contents;
+
+          &>div {
+            position: relative;
+            display: flex;
+            gap: 0.25rem;
+            align-items: center;
+            height: 2rem;
+            padding-inline: 0.5rem;
+            overflow: hidden;
+            text-transform: uppercase;
+            white-space: nowrap;
+            background-color: #eee;
+            border-block-end: 1px solid #eee;
+            border-inline-end: 1px solid #eee;
+          }
+        }
+      }
+
+      &.maximized,
+      &.overflow-x {
+        &>.body {
+          &>div {
+            &>div {
+              &>div {
+                &:last-child {
+                  border-inline-end: none;
+                }
+              }
+            }
+          }
+        }
+
+        &>.head {
+          &>div {
+            &>div {
+              &:last-child {
+                border-inline-end: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="table">
+    <div class="head"></div>
+    <div class="body"></div>
+  </div>
+</body>
+
+</html>

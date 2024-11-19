@@ -1,10 +1,8 @@
 import type { FormElement } from '../elements/form.js'
 import { Command } from '../helpers/command.js'
 
-type InputErrors = Record<string, string>
-
 export interface FormSetErrorsCommandData {
-  data: InputErrors
+  data: Record<string, string>
 }
 
 export class FormSetErrorsCommand extends Command<FormElement> {

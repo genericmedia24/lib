@@ -5,24 +5,87 @@ import { CustomError } from './custom-error.js'
 import { I18n } from './i18n.js'
 import { isObject } from './is-object.js'
 
-export type Commands = Array<{
+export interface CommandExecution {
+  /**
+   * The data that should be passed to the commands.
+   */
   data: Record<string, unknown>
-  event: string
-}>
 
+  /**
+   * The name of the event for which commands should be executed.
+   */
+  event: string
+}
+
+/**
+ * Executes commands on behalf of an element.
+ *
+ * @example
+ * ```javascript
+ * class ButtonElement extends HTMLButtonElement {
+ *   commander = new Commander(this)
+ *
+ *   constructor() {
+ *     super()
+ *     this.addEventListener('click', this.handleClick.bind(this))
+ *   }
+ *
+ *   handleClick(event) {
+ *     this.commander.execute('click', {
+ *       event,
+ *     })
+ *   }
+ * }
+ * ```
+ */
 export class Commander {
+  /**
+   * All commands that have been defined on the element with `data-on*`.
+   */
   public commands: Record<string, Command[]> = {}
 
+  /**
+   * The parent element of the commander.
+   */
   public element: HTMLElement
 
+  /**
+   * Whether the commander has been started.
+   */
   public started = false
 
+  /**
+   * All commands that have been defined on the element with both `data-on*` and `data-of*`.
+   */
   #commands: Record<string, Command[]> = {}
 
+  /**
+   * Creates a new commander.
+   *
+   * @param element The parent element of the commander
+   */
   public constructor(element: HTMLElement) {
     this.element = element
   }
 
+  /**
+   * Executes commands for an event.
+   *
+   * @example
+   * ```javascript
+   * class ButtonElement extends HTMLButtonElement {
+   *   handleClick(event) {
+   *     this.commander.execute('click', {
+   *       event,
+   *     })
+   *   }
+   * }
+   * ```
+   *
+   * @param event the name of the event for which commands should be executed
+   * @param data the data that should be passed to the commands
+   *
+   */
   public execute(event: string, data?: Record<string, unknown>): void {
     Promise
       .all(this.commands[event]?.map(async (command) => {
@@ -37,12 +100,55 @@ export class Commander {
       })
   }
 
-  public executeAll(commands: Commands): void {
+  /**
+   * Executes commands for multiple events.
+   *
+   * @example
+   * ```javascript
+   * class ButtonElement extends HTMLButtonElement {
+   *   someMethod() {
+   *     this.commander.executeAll([
+   *       {
+   *         data: {
+   *           key: 'some-value'
+   *         },
+   *         event: 'some-event',
+   *       },
+   *       {
+   *         data: {
+   *           key: 'another-value'
+   *         },
+   *         event: 'another-event',
+   *       },
+   *     ])
+   *   }
+   * }
+   * ```
+   *
+   * @param commands the array of commands
+   */
+  public executeAll(commands: CommandExecution[]): void {
     commands.forEach(({ data, event }) => {
       this.execute(event, data)
     })
   }
 
+  /**
+   * Executes commands for state events.
+   *
+   * @param newValues the new state values
+   * @param oldValues the old state values
+   *
+   * @example
+   * ```javascript
+   * class ButtonElement extends HTMLButtonElement {
+   *   stateChangedCallback(newValues, oldValues) {
+   *     this.commander.executeState(newValues, oldValues)
+   *   }
+   * }
+   * ```
+   *
+   */
   public executeState(newValues: Record<string, unknown>, oldValues?: Record<string, unknown>): void {
     this.execute('statechanged', {
       newValues,
@@ -63,6 +169,35 @@ export class Commander {
       })
   }
 
+  /**
+   * Handles an error on behalf of an element.
+   *
+   * If the error has an "event" property, that value will be used to determine which command should be executed.
+   *
+   * @example
+   * The following setup will execute a "set-error-message" command on an element with ID "error-message" when an error occurred in "some-element" and was handled by its commander.
+   *
+   *
+   * ```html
+   * <some-element data-onerror="set-error-message@error-message"></some-element>
+   * ```
+   *
+   * ```javascript
+   * class SomeElement extends Element {
+   *   someMethod() {
+   *     try {
+   *       // do something that throws an error
+   *     } catch (error) {
+   *       this.commander.handleError(CustomError.from(error, {
+   *         event: 'error'
+   *       }))
+   *     }
+   *   }
+   * }
+   * ```
+   *
+   * @param error the error
+   */
   public handleError(error: unknown): void {
     const customError = CustomError.from(error)
     const event = customError.event ?? 'error'
@@ -86,11 +221,20 @@ export class Commander {
     console.error({ ...customError }, customError)
   }
 
+  /**
+   * Registers a command for an event. Used by the commander to register commands with itself or with commanders of other elements in the case of an inverted command.
+   *
+   * @param event the event
+   * @param command the command
+   */
   public register(event: string, command: Command): void {
     this.commands[event] ??= []
     this.commands[event].push(command)
   }
 
+  /**
+   * Starts the commander. Registers all commands defined on the element with attributes starting with `data-on` or `data-of`.
+   */
   public start(): this {
     if (!this.started) {
       this.started = true
@@ -105,6 +249,9 @@ export class Commander {
     return this
   }
 
+  /**
+   * Stops the commander. Unregisters all commands.
+   */
   public stop(): this {
     if (this.started) {
       this.started = false
@@ -114,6 +261,12 @@ export class Commander {
     return this
   }
 
+  /**
+   * Unregisters a command for an event. Used by the commander to unregister commands from itself or from the commander of another element in the case of an inverted command.
+   *
+   * @param event the event
+   * @param command the command
+   */
   public unregister(event: string, command: Command): void {
     const index = this.commands[event]?.indexOf(command) ?? -1
 
@@ -122,7 +275,14 @@ export class Commander {
     }
   }
 
+  /**
+   * Registers all commands.
+   *
+   * @param prefix the prefix of the data attribute
+   */
   private registerCommands(prefix: 'of' | 'on'): void {
+    const registry = CustomCommandRegistry.create()
+
     Object
       .entries(this.element.dataset)
       .filter(([key]) => {
@@ -133,12 +293,7 @@ export class Commander {
           ?.split(' ')
           .forEach((command) => {
             const invert = prefix === 'of'
-            const event = key.slice(2)
-
-            const commandObject = CustomCommandRegistry
-              .create()
-              .create(command, this.element, invert)
-
+            const commandObject = registry.create(command, this.element, invert)
             const { originElement } = commandObject
 
             const isCommandableElement = isObject<CommandableElement>(originElement, (element) => {
@@ -146,6 +301,7 @@ export class Commander {
             })
 
             if (isCommandableElement) {
+              const event = key.slice(2)
               originElement.commander.register(event, commandObject)
               this.#commands[event] ??= []
               this.#commands[event].push(commandObject)
@@ -154,6 +310,9 @@ export class Commander {
       })
   }
 
+  /**
+   * Unregisters all commands.
+   */
   private unregisterCommands(): void {
     Object
       .entries(this.#commands)

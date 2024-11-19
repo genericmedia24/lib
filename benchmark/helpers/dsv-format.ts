@@ -2,7 +2,7 @@ import { csvFormatRows } from 'd3-dsv'
 import { readFileSync } from 'fs'
 import papaparse from 'papaparse'
 import { Bench } from 'tinybench'
-import { formatDsvRows, parseDsvString } from '../../src/helpers/dsv.js'
+import { formatDsvRows, parseDsvString } from '../../src/default.js'
 
 const [,,filename] = process.argv
 
@@ -13,7 +13,11 @@ if (filename === undefined) {
 const bench = new Bench()
 const rows: string[][] = []
 
-parseDsvString(String(readFileSync(filename)).trim(), (row) => {
+const string = readFileSync(filename)
+  .toString()
+  .trim()
+
+parseDsvString(string, (row) => {
   rows.push(row)
 })
 
@@ -24,7 +28,7 @@ bench
   .add('papaparse', () => {
     papaparse.unparse(rows)
   })
-  .add('formatDsv', () => {
+  .add('genericmedia', () => {
     formatDsvRows(rows)
   })
 

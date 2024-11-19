@@ -1,5 +1,5 @@
 import type { FormElement } from '../elements/form.js'
-import type { Commands } from '../helpers/commander.js'
+import type { CommandExecution } from '../helpers/commander.js'
 import { Command } from '../helpers/command.js'
 
 export interface FormRespondCommandData {
@@ -11,7 +11,7 @@ export class FormRespondCommand extends Command<FormElement> {
     const contentType = data?.response.headers.get('content-type')
 
     if (contentType?.startsWith('application/json') === true) {
-      const commands = await data?.response.json() as Commands
+      const commands = await data?.response.json() as CommandExecution[]
       this.targetElement.commander.executeAll(commands)
     }
   }
