@@ -6,9 +6,9 @@ export function defineCustomCommands(commands: Record<string, Constructor<Comman
   const customCommandRegistry = CustomCommandRegistry.create()
 
   Object
-    .values(commands)
-    .forEach((command) => {
-      const name = command.name
+    .entries(commands)
+    .forEach(([fullName, command]) => {
+      const name = fullName
         .replace('Command', '')
         .replace(/(?<one>[a-z0–9])(?<two>[A-Z])/gu, '$1-$2')
         .toLowerCase()
