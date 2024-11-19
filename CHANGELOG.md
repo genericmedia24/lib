@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/genericmedia24/lib/compare/v1.5.1...v1.5.2) (2024-11-19)
+
+
+### Bug Fixes
+
+* provide minified files ([bd9cf66](https://github.com/genericmedia24/lib/commit/bd9cf66a83076200dcd19778df067e8701a05d4d))
+
 ## [1.5.1](https://github.com/genericmedia24/lib/compare/v1.5.0...v1.5.1) (2024-11-19)
 
 
