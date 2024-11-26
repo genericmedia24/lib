@@ -1,6 +1,6 @@
 import { makeRe } from 'picomatch'
 import type { Element } from '../elements/element.js'
-import { Command } from '../helpers/command.js'
+import { Command } from '../commander/command.js'
 
 export interface ElementToggleAttributeCommandOptions {
   'attribute-name': string | string[]

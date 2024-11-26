@@ -1,6 +1,6 @@
 import type { InputElement } from '../elements/input.js'
-import { Command } from '../helpers/command.js'
-import { isPrimitive } from '../helpers/is-primitive.js'
+import { Command } from '../commander/command.js'
+import { isPrimitive } from '../util/is-primitive.js'
 
 export interface InputSetValueCommandOptions {
   'state-key'?: string

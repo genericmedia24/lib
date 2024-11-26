@@ -1,5 +1,5 @@
 import type { FormElement } from '../elements/form.js'
-import { Command } from '../helpers/command.js'
+import { Command } from '../commander/command.js'
 
 export interface FormSetErrorsCommandData {
   data: Record<string, string>

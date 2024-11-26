@@ -1,5 +1,5 @@
-import type { CommandableElement } from '../helpers/commandable.js'
-import { Command } from '../helpers/command.js'
+import type { CommandableElement } from '../commander/commandable-element.js'
+import { Command } from '../commander/command.js'
 
 export interface ElementToggleFlexCommandOptions {
   immediate?: string

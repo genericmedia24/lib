@@ -1,5 +1,5 @@
 import type { SelectElement } from '../elements/select.js'
-import { Command } from '../helpers/command.js'
+import { Command } from '../commander/command.js'
 
 export class SelectToggleCommand extends Command<SelectElement> {
   public execute(): void {

@@ -1,4 +1,4 @@
-import { Command } from '../helpers/command.js'
+import { Command } from '../commander/command.js'
 
 export class PopoverShowCommand extends Command<HTMLElement, unknown, HTMLButtonElement> {
   protected handleToggleBound = this.handleToggle.bind(this)

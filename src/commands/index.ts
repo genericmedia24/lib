@@ -1,4 +1,5 @@
 export * from './button-submit.js'
+export * from './define.js'
 export * from './dialog-close.js'
 export * from './dialog-show.js'
 export * from './dialog-toggle.js'

@@ -23,7 +23,7 @@ This library contains a scroller that combines the strong points of both package
 
 ### Basic Example
 
-See [a live example](../examples/scroller-basic-example.html) of the code below.
+See [a live example](../examples/scroller.html) of the code below.
 
 ```html
 <!doctype html>
@@ -165,8 +165,6 @@ See [a live example](../examples/scroller-basic-example.html) of the code below.
 
 It is possible to filter the body rows by calling `filter`.
 
-See [a live example](../examples/scroller-filter.html) of the code below.
-
 ```javascript
 const scroller = new Scroller(document.querySelector('.table'))
 
@@ -186,8 +184,6 @@ console.log(scroller.bodyRows.length === 1) // true
 ### Resize
 
 It is possible to resize a column by calling `resizeColumn`.
-
-See [a live example](../examples/scroller-resize.html) of the code below.
 
 ```javascript
 const scroller = new Scroller(document.querySelector('.table'))

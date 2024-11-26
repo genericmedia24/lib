@@ -97,7 +97,7 @@ console.log(string === 'a\tb\tc\n1\t2\t3\n') // true
 
 ## Benchmarks
 
-Never take the outcome of a benchmark too literally, just seriously. [uDSV](https://github.com/leeoniya/uDSV/) is sometimes faster than genericmedia, but the rest is never faster than both.
+Never take the outcome of a benchmark literally, just seriously. [uDSV](https://github.com/leeoniya/uDSV/) is sometimes faster than genericmedia, but the rest is never faster than both.
 
 [Tinybench](https://github.com/tinylibs/tinybench) was used to run the benchmark.
 
@@ -106,7 +106,7 @@ The CSV files were generated with https://github.com/leeoniya/uDSV/blob/main/ben
 ### Parse
 
 ```javascript
-npx tsx benchmark/helpers/dsv-parse-string-to-array.ts benchmark/helpers/dsv-unquoted.csv
+npx tsx benchmark/dsv/parse-string-to-array.ts benchmark/dsv/unquoted.csv
 ```
 
 | Task name         | Latency average (ns) | Latency median (ns)     | Throughput average (ops/s) | Throughput median (ops/s) | Samples |
@@ -118,7 +118,7 @@ npx tsx benchmark/helpers/dsv-parse-string-to-array.ts benchmark/helpers/dsv-unq
 | genericmedia      | 7557958.06 ± 3.04%   | 7325752.00              | 134 ± 1.58%                | 137                       | 133     |
 
 ```javascript
-npx tsx benchmark/helpers/dsv-parse-stream-to-array.ts benchmark/helpers/dsv-quoted.csv
+npx tsx benchmark/dsv/parse-stream-to-array.ts benchmark/helpers/quoted.csv
 ```
 
 | Task name    | Latency average (ns) | Latency median (ns)    | Throughput average (ops/s) | Throughput median (ops/s) | Samples |
@@ -130,7 +130,7 @@ npx tsx benchmark/helpers/dsv-parse-stream-to-array.ts benchmark/helpers/dsv-quo
 ### Format
 
 ```javascript
-npx tsx benchmark/helpers/dsv-format.ts benchmark/helpers/dsv-quoted.csv
+npx tsx benchmark/dsv/format.ts benchmark/dsv/quoted.csv
 ```
 
 | Task name    | Latency average (ns) | Latency median (ns)    | Throughput average (ops/s) | Throughput median (ops/s) | Samples |

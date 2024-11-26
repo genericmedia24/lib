@@ -1,6 +1,6 @@
+import type { CommandExecution } from '../commander/commander.js'
 import type { FormElement } from '../elements/form.js'
-import type { CommandExecution } from '../helpers/commander.js'
-import { Command } from '../helpers/command.js'
+import { Command } from '../commander/command.js'
 
 export interface FormRespondCommandData {
   response: Response

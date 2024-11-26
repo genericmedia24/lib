@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Commander</title>
+  <script type="module">
+    // prettier-ignore
+    import {
+      Command,
+      CommandRegistry,
+      defineElements,
+      elements
+    } from 'https://cdn.jsdelivr.net/npm/@genericmedia/lib/+esm'
+
+    class ElementSetBackgroundCommand extends Command {
+      execute() {
+        this.targetElement.style.backgroundColor = this.options.color
+      }
+    }
+
+    window.customCommands = CommandRegistry.create()
+    window.customCommands.define('element-set-background', ElementSetBackgroundCommand)
+
+    defineElements(elements)
+  </script>
+</head>
+
+<body>
+  <div id="message">hello world</div>
+  <button data-onclick="element-set-background@message?color=royalblue" is="gm-button">
+    set background
+  </button>
+</body>
+
+</html>

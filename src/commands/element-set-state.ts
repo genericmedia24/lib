@@ -1,5 +1,5 @@
-import type { StatefulElement } from '../helpers/stateful.js'
-import { Command } from '../helpers/command.js'
+import type { StatefulElement } from '../state/stateful-element.js'
+import { Command } from '../commander/command.js'
 
 export interface ElementSetStateCommandOptions {
   'state-key': string | string[]

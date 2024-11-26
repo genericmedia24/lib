@@ -1,4 +1,4 @@
-import { Command } from '../helpers/command.js'
+import { Command } from '../commander/command.js'
 
 export class WindowBackCommand extends Command<Window> {
   public execute(): void {

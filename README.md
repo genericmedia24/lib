@@ -3,49 +3,67 @@
 [![Build Status](https://github.com/genericmedia24/lib/actions/workflows/release.yaml/badge.svg)](https://github.com/genericmedia24/lib/actions/workflows/release.yaml)
 [![Published on npm](https://img.shields.io/npm/v/%40genericmedia%2Flib)](https://www.npmjs.com/genericmedia24/lib)
 
+A library for building data-intensive web applications.
+
+- [commander](https://genericmedia24.github.io/lib/documents/commander.html) - Declarative reactivity.
+- [commands](https://genericmedia24.github.io/lib/modules/commands.html) - A collection of custom commands.
+- [dsv](https://genericmedia24.github.io/lib/documents/dsv.html) - Easy & fast CSV/TSV parsing and formatting.
+- [elements](https://genericmedia24.github.io/lib/modules/elements.html) - Custom elements using commander and state.
+- [requester](https://genericmedia24.github.io/lib/modules/requester.html) - Easy & reactive URL fetching.
+- [scroller](https://genericmedia24.github.io/lib/documents/scroller.html) - Smooth scrolling through tabular data.
+- [state](https://genericmedia24.github.io/lib/documents/state.html) - State management.
+- [util](https://genericmedia24.github.io/lib/modules/util.html) - Utility functions.
+
+The full documentation can be found on [genericmedia24.github.io/lib](https://genericmedia24.github.io/lib).
+
 ## Installation
 
 ```shell
-npm install @genericmedia/lib
+npm add @genericmedia/lib
+```
+
+```shell
+pnpm add @genericmedia/lib
+```
+
+```shell
+yarn add @genericmedia/lib
 ```
 
 ## Usage
 
-### Browser
-
-```html
-<!-- ESM -->
-<script type="module">
-  import gm from 'https://cdn.jsdelivr.net/npm/@genericmedia/lib/+esm'
-</script>
-
-<!-- UMD, "gm" is globally available -->
-<script src="https://cdn.jsdelivr.net/npm/@genericmedia/lib"></script>
+```javascript
+// ESM local import
+import { parseDsvStream } from '@genericmedia/lib'
 ```
 
-### Other
+```javascript
+// ESM remote import
+import { parseDsvStream } from 'https://cdn.jsdelivr.net/npm/@genericmedia/lib/+esm'
+```
 
 ```javascript
-// ESM
-import gm from '@genericmedia/lib'
-
-// CJS
+// UMD local require
 const gm = require('@genericmedia/lib')
 ```
 
-## Documentation
+```html
+<!-- UMD remote script, "gm" is globally available -->
+<script src="https://cdn.jsdelivr.net/npm/@genericmedia/lib"></script>
+```
 
-The documentation can be found on [genericmedia24.github.io/lib](https://genericmedia24.github.io/lib).
+It is also possible to use subpaths.
 
-It contains four guides:
+```javascript
+// ESM local import
+import { parseDsvStream } from '@genericmedia/lib/dsv'
+```
 
-1. [Custom Commands](./docs/guides/custom-commands.md) - declarative, stateful reactivity.
-2. [DSV](./docs/guides/dsv.md) - fast and easy CSV and TSV parsing and formatting.
-3. [Scroller](./docs/guides/scroller.md) - smooth scrolling through large tables.
-4. [Util](./docs/guides/util.md) - some utility functions.
+```html
+<!-- UMD remote script, "gm" is globally available -->
+<script src="https://cdn.jsdelivr.net/npm/@genericmedia/lib/dist/dsv.min.js"></script>
+```
 
-The rest of the documentations contains auto-generated API descriptions.
+## License
 
-## Contribution
-
-Please file an [issue](https://github.com/genericmedia24/lib/issues/new) or create a [pull request](https://github.com/genericmedia24/lib/compare) if you find a bug or have a suggestion for improvement.
+This library is released under the [MIT License](LICENSE).

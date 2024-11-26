@@ -1,8 +1,8 @@
 import type { InputElement } from '../elements/input.js'
 import type { SelectElement } from '../elements/select.js'
 import type { TextareaElement } from '../elements/textarea.js'
-import type { StatefulElement } from '../helpers/stateful.js'
-import { Command } from '../helpers/command.js'
+import type { StatefulElement } from '../state/stateful-element.js'
+import { Command } from '../commander/command.js'
 
 export interface InputSetStateCommandOptions {
   'check-validity'?: string

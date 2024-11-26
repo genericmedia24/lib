@@ -1,13 +1,13 @@
-import type { CommandableElement } from '../default.js'
-import type { StatefulElement } from '../helpers/stateful.js'
-import { Commander } from '..//helpers/commander.js'
-import { KeyBinding } from '../helpers/key-binding.js'
-import { State } from '../helpers/state.js'
+import type { CommandableElement } from '../commander/commandable-element.js'
+import type { StatefulElement } from '../state/stateful-element.js'
+import { Commander } from '../commander/commander.js'
+import { State } from '../state/state.js'
+import { KeyBinding } from '../util/key-binding.js'
 
 export class DivElement<StateValues = Record<string, unknown>> extends HTMLDivElement implements CommandableElement, StatefulElement<StateValues> {
   public commander = new Commander(this)
 
-  public escape = KeyBinding.create({
+  public escapeBinding = KeyBinding.create({
     key: 'escape',
   })
 
@@ -24,19 +24,19 @@ export class DivElement<StateValues = Record<string, unknown>> extends HTMLDivEl
 
   public disconnectedCallback(): void {
     this.state?.unregister(this)
-    this.escape.unregister(this.hidePopoverBound)
+    this.escapeBinding.unregister(this.hidePopoverBound)
     this.commander.execute('disconnected')
     this.commander.stop()
   }
 
   public override hidePopover(): void {
     super.hidePopover()
-    this.escape.unregister(this.hidePopoverBound)
+    this.escapeBinding.unregister(this.hidePopoverBound)
   }
 
   public override showPopover(): void {
     super.showPopover()
-    this.escape.register(this.hidePopoverBound)
+    this.escapeBinding.register(this.hidePopoverBound)
   }
 
   public stateChangedCallback(newValues: Partial<StateValues>, oldValues?: Partial<StateValues>): void {

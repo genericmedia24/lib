@@ -1,13 +1,13 @@
-import type { CommandableElement } from '../default.js'
-import type { StatefulElement } from '../helpers/stateful.js'
-import { Commander } from '../helpers/commander.js'
-import { KeyBinding } from '../helpers/key-binding.js'
-import { State } from '../helpers/state.js'
+import type { CommandableElement } from '../commander/commandable-element.js'
+import type { StatefulElement } from '../state/stateful-element.js'
+import { Commander } from '../commander/commander.js'
+import { State } from '../state/state.js'
+import { KeyBinding } from '../util/key-binding.js'
 
 export class DialogElement<StateValues = Record<string, unknown>> extends HTMLDialogElement implements CommandableElement, StatefulElement<StateValues> {
   public commander = new Commander(this)
 
-  public escape = KeyBinding.create({
+  public escapeBinding = KeyBinding.create({
     key: 'escape',
   })
 
@@ -35,7 +35,7 @@ export class DialogElement<StateValues = Record<string, unknown>> extends HTMLDi
   public disconnectedCallback(): void {
     this.toggleAttribute('data-disconnected', true)
     this.state?.unregister(this)
-    this.escape.unregister(this.closeBound)
+    this.escapeBinding.unregister(this.closeBound)
     this.commander.execute('disconnected')
     this.commander.stop()
   }
@@ -44,14 +44,14 @@ export class DialogElement<StateValues = Record<string, unknown>> extends HTMLDi
     super.show()
     this.updateZIndex()
     this.resetOutputs()
-    this.escape.register(this.closeBound)
+    this.escapeBinding.register(this.closeBound)
     this.commander.execute('show')
   }
 
   public override showModal(): void {
     super.showModal()
     this.resetOutputs()
-    this.escape.register(this.closeBound)
+    this.escapeBinding.register(this.closeBound)
     this.commander.execute('show')
   }
 
@@ -91,12 +91,12 @@ export class DialogElement<StateValues = Record<string, unknown>> extends HTMLDi
 
     this.updateZIndex()
     this.resetOutputs()
-    this.escape.unregister(this.closeBound)
+    this.escapeBinding.unregister(this.closeBound)
   }
 
   protected handleFocus(): void {
-    this.escape.unregister(this.closeBound)
-    this.escape.register(this.closeBound)
+    this.escapeBinding.unregister(this.closeBound)
+    this.escapeBinding.register(this.closeBound)
     this.updateZIndex()
   }
 

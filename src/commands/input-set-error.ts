@@ -1,5 +1,5 @@
 import type { InputElement } from '../elements/input.js'
-import { Command } from '../helpers/command.js'
+import { Command } from '../commander/command.js'
 
 export class InputSetErrorCommand extends Command<InputElement> {
   public execute(): void {

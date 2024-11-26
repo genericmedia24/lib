@@ -1,4 +1,5 @@
 export * from './button.js'
+export * from './define.js'
 export * from './dialog.js'
 export * from './div.js'
 export * from './element.js'

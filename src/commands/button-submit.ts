@@ -1,5 +1,5 @@
 import type { ButtonElement } from '../elements/button.js'
-import { Command } from '../helpers/command.js'
+import { Command } from '../commander/command.js'
 
 export class ButtonSubmitCommand extends Command<ButtonElement> {
   public execute(): void {

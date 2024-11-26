@@ -20,6 +20,10 @@ body .tsd-member .tsd-anchor+h3 {
   margin-bottom: 0.5rem;
 }
 
+body .tsd-page-navigation ul {
+  padding: 0;
+}
+
 body .tsd-page-title h1:first-child {
   display: none;
 }
