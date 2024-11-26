@@ -1,10 +1,10 @@
 # DSV
 
-There are quite a few RFC 4180 compliant libraries that can parse and/or format CSV files. Some are fast and some are not, some can parse and others cannot, some can handle streams and some cannot, some are easy to call and others are not.
+There are quite a few RFC 4180 compliant libraries that can parse and/or format delimiter-separated (DSV) data. Some are fast and some are not, some can parse and others cannot, some can handle streams and some cannot, some are easy to call and others are not.
 
-This library contains functions to parse and format CSV strings and streams very easily and very fast.
+This library contains functions to parse and format DSV strings and streams very easily and very fast.
 
-There are no type parsers, because it is better to parse a value JIT when it has to be used in a computation or when it has to be rendered, instead of parsing all values all the time.
+There are no type parsers, because it is more efficient to parse a value JIT when it has to be used in a computation or when it has to be rendered, instead of parsing all values all the time. Besides, type guessing is hard.
 
 ## Parse
 

@@ -12,9 +12,14 @@ export default {
     './src/state/index.ts',
     './src/util/index.ts',
   ],
+  headings: {
+    readme: false,
+  },
+  markdownLinkExternal: false,
   out: './docs/site',
   plugin: [
     'typedoc-github-theme',
+    'typedoc-plugin-github-widget',
   ],
   projectDocuments: [
     './docs/guides/commander.md',

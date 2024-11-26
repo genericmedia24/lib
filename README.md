@@ -14,8 +14,6 @@ A library for building data-intensive web applications.
 - [state](https://genericmedia24.github.io/lib/documents/state.html) - State management.
 - [util](https://genericmedia24.github.io/lib/modules/util.html) - Utility functions.
 
-The full documentation can be found on [genericmedia24.github.io/lib](https://genericmedia24.github.io/lib).
-
 ## Installation
 
 ```shell
@@ -49,10 +47,10 @@ const gm = require('@genericmedia/lib')
 
 ```html
 <!-- UMD remote script, "gm" is globally available -->
-<script src="https://cdn.jsdelivr.net/npm/@genericmedia/lib"></script>
+<script src="https://cdn.jsdelivr.net/npm/@genericmedia/lib/dist/index.min.js"></script>
 ```
 
-It is also possible to use subpaths.
+It is also possible to use subpaths for commander, commands, dsv, elements, requester, scroller, state and util.
 
 ```javascript
 // ESM local import

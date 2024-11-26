@@ -24,10 +24,6 @@ body .tsd-page-navigation ul {
   padding: 0;
 }
 
-body .tsd-page-title h1:first-child {
-  display: none;
-}
-
 body .tsd-panel>h1,
 body .tsd-panel>h2,
 body .tsd-panel>h3 {
