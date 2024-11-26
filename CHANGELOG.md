@@ -1,3 +1,15 @@
+# [1.6.0-beta.1](https://github.com/genericmedia24/lib/compare/v1.5.3...v1.6.0-beta.1) (2024-11-26)
+
+
+### Bug Fixes
+
+* simplify commander interface ([898affe](https://github.com/genericmedia24/lib/commit/898affe1448c509a9df0746b3453b9cd9e5400bd))
+
+
+### Features
+
+* restructure src ([fb16577](https://github.com/genericmedia24/lib/commit/fb165771a5e12b59be68533ff221886554bce347))
+
 ## [1.5.3](https://github.com/genericmedia24/lib/compare/v1.5.2...v1.5.3) (2024-11-19)
 
 
