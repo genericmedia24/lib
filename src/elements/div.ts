@@ -40,22 +40,6 @@ export class DivElement<StateValues = Record<string, unknown>> extends HTMLDivEl
   }
 
   public stateChangedCallback(newValues: Partial<StateValues>, oldValues?: Partial<StateValues>): void {
-    this.commander.execute('statechanged', {
-      newValues,
-      oldValues,
-    })
-
-    Object
-      .entries(newValues)
-      .forEach(([key, value]) => {
-        this.commander.execute(`${key.toLowerCase()}changed`, {
-          newValues: {
-            [key]: value,
-          },
-          oldValues: {
-            [key]: (oldValues as Record<string, unknown> | undefined)?.[key],
-          },
-        })
-      })
+    this.commander.executeState(newValues, oldValues)
   }
 }
