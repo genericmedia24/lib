@@ -1,20 +1,26 @@
 import type { FormElement } from '../elements/form.js'
+import type { CustomError } from '../util/custom-error.js'
 import { Command } from '../commander/command.js'
+import { isObject } from '../util/is-object.js'
 
 export interface FormSetErrorsCommandData {
-  data: Record<string, string>
+  error: CustomError
 }
 
 export class FormSetErrorsCommand extends Command<FormElement> {
   public execute(data?: FormSetErrorsCommandData): void {
-    Object
-      .entries(data?.data ?? {})
-      .forEach(([id, message]) => {
-        const element = this.targetElement.querySelector(`label[for="${id}"] [data-error]`)
+    const errorData = data?.error.data
 
-        if (element instanceof HTMLElement) {
-          element.textContent = message
-        }
-      })
+    if (isObject<Record<string, string>>(errorData)) {
+      Object
+        .entries(errorData)
+        .forEach(([id, message]) => {
+          const element = this.targetElement.querySelector(`label[for="${id}"] [data-error]`)
+
+          if (element instanceof HTMLElement) {
+            element.textContent = message
+          }
+        })
+    }
   }
 }

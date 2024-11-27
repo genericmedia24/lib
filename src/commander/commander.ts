@@ -1,7 +1,6 @@
 import type { Command } from './command.js'
 import type { CommandableElement } from './commandable-element.js'
 import { CustomError } from '../util/custom-error.js'
-import { I18n } from '../util/i18n.js'
 import { isObject } from '../util/is-object.js'
 import { CommandRegistry } from './command-registry.js'
 
@@ -194,6 +193,8 @@ export class Commander {
    *
    * ```javascript
    * class SomeElement extends Element {
+   *   commander = new Commander(this)
+   *
    *   someMethod() {
    *     try {
    *       // do something that throws an error
@@ -213,19 +214,7 @@ export class Commander {
     const event = customError.event ?? 'error'
 
     this.execute(event, {
-      data: customError.data,
-      level: ['error', 'info', 'ok', 'warning'].includes(event)
-        ? event
-        : undefined,
-      text: customError.code === undefined
-        ? I18n
-          .create()
-          .formatString('error', {
-            error: customError.message,
-          })
-        : I18n
-          .create()
-          .formatString(customError.code, customError.data),
+      error: customError,
     })
 
     console.error({ ...customError }, customError)

@@ -23,8 +23,6 @@ export * from './output-hide.js'
 export * from './popover-hide.js'
 export * from './popover-show.js'
 export * from './select-toggle.js'
-export * from './window-back.js'
-export * from './window-post.js'
 
 import { ButtonSubmitCommand } from './button-submit.js'
 import { DialogCloseCommand } from './dialog-close.js'
@@ -50,8 +48,6 @@ import { OutputHideCommand } from './output-hide.js'
 import { PopoverHideCommand } from './popover-hide.js'
 import { PopoverShowCommand } from './popover-show.js'
 import { SelectToggleCommand } from './select-toggle.js'
-import { WindowBackCommand } from './window-back.js'
-import { WindowPostCommand } from './window-post.js'
 
 export const commands = {
   ButtonSubmitCommand,
@@ -78,6 +74,4 @@ export const commands = {
   PopoverHideCommand,
   PopoverShowCommand,
   SelectToggleCommand,
-  WindowBackCommand,
-  WindowPostCommand,
 }
