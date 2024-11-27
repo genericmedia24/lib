@@ -13,7 +13,11 @@ import { CommandRegistry } from '../commander/command-registry.js'
  *
  * @example
  * ```javascript
- * class GetSomethingCommand extends Command {}
+ * class GetSomethingCommand extends Command {
+ *   execute() {
+ *     // do something
+ *   }
+ * }
  *
  * defineCommands({
  *   GetSomethingCommand

@@ -143,11 +143,9 @@ export class State<StateValues = Record<string, unknown>> {
    * @example
    * ```javascript
    * state.set('some-key', 'some-value')
-   *
    * console.log(state.get('some-key') === 'some-value') // true
    *
    * state.clear()
-   *
    * console.log(state.get('some-key') === undefined) // true
    * ```
    */
@@ -175,11 +173,9 @@ export class State<StateValues = Record<string, unknown>> {
    * @example
    * ```javascript
    * state.set('some-key', 'some-value')
-   *
    * console.log(state.get('some-key') === 'some-value') // true
    *
    * state.delete('some-key')
-   *
    * console.log(state.get('some-key') === undefined) // true
    * ```
    *
@@ -218,11 +214,9 @@ export class State<StateValues = Record<string, unknown>> {
    * @example
    * ```javascript
    * state.set('some-key', 'some-value')
-   *
    * console.log(state.get('some-key') === 'some-value') // true
    *
    * state.deleteAll(['some-key'])
-   *
    * console.log(state.get('some-key') === undefined) // true
    * ```
    *
@@ -268,7 +262,6 @@ export class State<StateValues = Record<string, unknown>> {
    * @example
    * ```javascript
    * state.set('some-key', 'some-value')
-   *
    * console.log(state.get('some-key') === 'some-value') // true
    * ```
    *
@@ -300,7 +293,6 @@ export class State<StateValues = Record<string, unknown>> {
    * @example
    * ```javascript
    * state.set('some-key', 'some-value')
-   *
    * console.log(state.has('some-key')) // true
    * ```
    *
@@ -382,7 +374,6 @@ export class State<StateValues = Record<string, unknown>> {
    * @example
    * ```javascript
    * state.set('some-key', 'some-value')
-   *
    * console.log(state.get('some-key') === 'some-value') // true
    * ```
    *

@@ -239,5 +239,3 @@ In `connectedCallback` the element should set up the state once and register its
 In `disconnectedCallback` the element should unregister itself from the state and stop the commander.
 
 In general it is advised to move all behavioural code from custom elements to custom commands and use custom elements exclusively for structural purposes and event delegation.
-
-### Discussion for WHATWG

@@ -166,8 +166,11 @@ See [a live example](../examples/scroller.html) of the code below.
 It is possible to filter the body rows by calling `filter`.
 
 ```javascript
+import { Scroller } from 'https://cdn.jsdelivr.net/npm/@genericmedia/lib/+esm'
+
 const scroller = new Scroller(document.querySelector('.table'))
 
+scroller.start()
 scroller.addBodyRow(['sun'])
 scroller.addBodyRow(['moon'])
 scroller.addBodyRow(['stars'])
@@ -186,6 +189,8 @@ console.log(scroller.bodyRows.length === 1) // true
 It is possible to resize a column by calling `resizeColumn`.
 
 ```javascript
+import { Scroller } from 'https://cdn.jsdelivr.net/npm/@genericmedia/lib/+esm'
+
 const scroller = new Scroller(document.querySelector('.table'))
 
 scroller.start()

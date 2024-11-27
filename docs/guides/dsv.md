@@ -11,6 +11,8 @@ There are no type parsers, because it is more efficient to parse a value JIT whe
 ### Parse string
 
 ```javascript
+import { parseDsvString } from '@genericmedia/lib'
+
 const string = `a,b,c\n1,2,3\n`
 
 parseDsvString(string, (row) => {
@@ -21,7 +23,10 @@ parseDsvString(string, (row) => {
 ### Parse stream
 
 ```javascript
-const stream = fs.createReadStream('some-file.csv')
+import { parseDsvStream } from '@genericmedia/lib'
+import { createReadStream } from 'node:fs'
+
+const stream = createReadStream('some-file.csv')
 
 // prettier-ignore
 parseDsvStream(stream, (row) => {
@@ -34,6 +39,8 @@ parseDsvStream(stream, (row) => {
 ### Parse web stream
 
 ```javascript
+import { parseDsvWebStream } from '@genericmedia/lib'
+
 const response = fetch('some-file.csv')
 
 // prettier-ignore
@@ -47,6 +54,12 @@ parseDsvWebStream(response.body, (row) => {
 ### Parse to object
 
 ```javascript
+// prettier-ignore
+import {
+  parseDsvRowToObject,
+  parseDsvString
+} from '@genericmedia/lib'
+
 const string = `a,b,c\n1,2,3\n`
 
 // prettier-ignore
@@ -58,6 +71,8 @@ parseDsvString(string, parseDsvRowToObject((object) => {
 ### Parse with options
 
 ```javascript
+import { parseDsvString } from '@genericmedia/lib'
+
 const string = `a\tb\tc\n1\t2\t3\n`
 
 // prettier-ignore
@@ -73,6 +88,8 @@ parseDsvString(string, (row) => {
 ### Format rows
 
 ```javascript
+import { formatDsvRows } from '@genericmedia/lib'
+
 const string = formatDsvRows([
   ['a', 'b', 'c'],
   [1, 2, 3],
@@ -84,6 +101,8 @@ console.log(string === 'a,b,c\n1,2,3\n') // true
 ### Format with options
 
 ```javascript
+import { formatDsvRows } from '@genericmedia/lib'
+
 // prettier-ignore
 const string = formatDsvRows([
   ['a', 'b', 'c'],
