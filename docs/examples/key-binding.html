@@ -1,40 +1,41 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Key Binding</title>
+    <script type="module">
+      // prettier-ignore
+      import {
+        KeyBinding,
+        html
+      } from 'https://cdn.jsdelivr.net/npm/@genericmedia/lib/+esm'
 
-<head>
-  <meta charset="utf-8">
-  <title>Key Binding</title>
-  <script type="module">
-    // prettier-ignore
-    import { KeyBinding, html } from 'https://cdn.jsdelivr.net/npm/@genericmedia/lib/+esm'
+      const keyBinding = KeyBinding.create({
+        key: 'escape',
+      })
 
-    const keyBinding = KeyBinding.create({
-      key: 'escape'
-    })
+      const dialog1 = document.getElementById('dialog-1')
+      const dialog2 = document.getElementById('dialog-2')
 
-    const dialog1 = document.getElementById('dialog-1')
-    const dialog2 = document.getElementById('dialog-2')
+      function close1() {
+        dialog1.close()
+        keyBinding.unregister(close1)
+      }
 
-    function close1() {
-      dialog1.close()
-      keyBinding.unregister(close1)
-    }
+      function close2() {
+        dialog2.close()
+        keyBinding.unregister(close2)
+      }
 
-    function close2() {
-      dialog2.close()
-      keyBinding.unregister(close2)
-    }
+      dialog1.show()
+      keyBinding.register(close1)
+      dialog2.show()
+      keyBinding.register(close2)
+    </script>
+  </head>
 
-    dialog1.show()
-    keyBinding.register(close1)
-    dialog2.show()
-    keyBinding.register(close2)
-  </script>
-</head>
-
-<body>
-  <dialog id="dialog-1">Dialog 1</dialog>
-  <dialog id="dialog-2">Dialog 2</dialog>
-</body>
-
+  <body>
+    <dialog id="dialog-1">Dialog 1</dialog>
+    <dialog id="dialog-2">Dialog 2</dialog>
+  </body>
 </html>
