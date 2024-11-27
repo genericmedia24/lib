@@ -12,15 +12,12 @@ export default {
     './src/state/index.ts',
     './src/util/index.ts',
   ],
+  favicon: './docs/theme/logo.ico',
   headings: {
     readme: false,
   },
   markdownLinkExternal: false,
   out: './docs/site',
-  plugin: [
-    'typedoc-github-theme',
-    'typedoc-plugin-github-widget',
-  ],
   projectDocuments: [
     './docs/guides/commander.md',
     './docs/guides/dsv.md',
@@ -28,5 +25,4 @@ export default {
     './docs/guides/state.md',
   ],
   searchInDocuments: true,
-  theme: 'typedoc-github-theme',
 }
