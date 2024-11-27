@@ -1,6 +1,6 @@
 {
   "author": "Koen van den Boogaart <koen@genericmedia.nl>",
-  "browser": "./dist/index.js",
+  "browser": "./dist/browser.js",
   "bugs": "https://github.com/genericmedia24/lib/issues",
   "dependencies": {
     "debounce": "^2.2.0",
@@ -55,8 +55,16 @@
   },
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
+      "browser": {
+        "import": "./dist/browser.mjs",
+        "require": "./dist/browser.js",
+        "types": "./dist/browser.d.ts"
+      },
+      "node": {
+        "import": "./dist/node.mjs",
+        "require": "./dist/node.js",
+        "types": "./dist/node.d.ts"
+      },
       "types": "./dist/index.d.ts"
     },
     "./commander": {
@@ -123,6 +131,7 @@
     "i18n"
   ],
   "license": "MIT",
+  "main": "./dist/node.js",
   "name": "@genericmedia/lib",
   "private": false,
   "publishConfig": {
@@ -139,6 +148,5 @@
     "lint": "tsc && eslint \"./{benchmark,src,test}/**/*.ts\" \"./*.{mjs,ts}\"",
     "test": "glob -c \"tsx --test \" \"./test/**/*.ts\""
   },
-  "type": "module",
   "version": "1.6.0-beta.1"
 }

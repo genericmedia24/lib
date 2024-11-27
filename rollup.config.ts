@@ -5,46 +5,50 @@ import typescript from '@rollup/plugin-typescript'
 
 const specs = [
   {
-    input: 'src',
-    output: 'dist/index',
+    input: 'src/browser.ts',
+    output: 'dist/browser',
   },
   {
-    input: 'src/commander',
+    input: 'src/node.ts',
+    output: 'dist/node',
+  },
+  {
+    input: 'src/commander/index.ts',
     output: 'dist/commander',
   },
   {
-    input: 'src/commands',
+    input: 'src/commands/index.ts',
     output: 'dist/commands',
   },
   {
-    input: 'src/dsv',
+    input: 'src/dsv/index.ts',
     output: 'dist/dsv',
   },
   {
-    input: 'src/elements',
+    input: 'src/elements/index.ts',
     output: 'dist/elements',
   },
   {
-    input: 'src/requester',
+    input: 'src/requester/index.ts',
     output: 'dist/requester',
   },
   {
-    input: 'src/scroller',
+    input: 'src/scroller/index.ts',
     output: 'dist/scroller',
   },
   {
-    input: 'src/state',
+    input: 'src/state/index.ts',
     output: 'dist/state',
   },
   {
-    input: 'src/util',
+    input: 'src/util/index.ts',
     output: 'dist/util',
   },
 ]
 
 const options: RollupOptions[] = specs.map((spec) => {
   return {
-    input: `${spec.input}/index.ts`,
+    input: spec.input,
     onwarn: (warning: RollupLog, rollupWarn: LoggingFunction): void => {
       if (warning.code !== 'CIRCULAR_DEPENDENCY') {
         rollupWarn(warning)
