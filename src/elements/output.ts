@@ -40,7 +40,7 @@ export class OutputElement<StateValues = Record<string, unknown>> extends HTMLOu
       timeout !== undefined &&
       timeout !== '-1'
     ) {
-      setTimeout(this.hidePopover.bind(this), Number(timeout))
+      window.setTimeout(this.hidePopover.bind(this), Number(timeout))
     }
 
     if (this.popover !== 'manual') {

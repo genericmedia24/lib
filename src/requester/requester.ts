@@ -66,6 +66,11 @@ export class Requester {
   public element?: HTMLElement
 
   /**
+   * The ID of the loading timeout.
+   */
+  public loadingTimeoutId?: number
+
+  /**
    * The current request.
    */
   public request?: Request
@@ -84,11 +89,13 @@ export class Requester {
    *
    * Throws an error if a request is already being made.
    *
-   * Adds a `csrf-token` header to the reqeust if a cookie with the same name exists.
+   * Adds the signal of {@link abortController} to the request.
    *
-   * Adds an `AbortSignal` to the request. If `data-fetch-timeout` is set on {@link element} with a value of -1 no `AbortSignal` is added, otherwise the value is taken as the duration of the timeout (default to 10000 ms). When no {@link element} is set, the `signal` property from {@link init} is used.
+   * Also adds a timeout signal to the request. The duration of the timeout can be changed with the attribute `data-fetch-timeout` on {@link element} (defaults to 10000 ms). If set to -1 no timeout signal is added. If the requester is instantiated without {@link element} the signal from {@link init} is used, if set.
    *
-   * Toggles a `data-loading` attribute on {@link element} after 1000 ms. This duration can be changed with the attribute `data-loading-timeout` on {@link element}. Also dispatches a custom event named `command`, which can be handled by a {@link commander!Commander}.
+   * Adds a `csrf-token` header to a POST request if a cookie with the same name exists.
+   *
+   * Toggles a `data-loading` attribute on {@link element}. Also dispatches a custom event named `command`, which can be handled by a {@link commander!Commander}. Does so after a timeout. The duration of the timeout can be changed with the attribute `data-loading-timeout` on {@link element} (defaults to 1000 ms). No-op if the requester is instantiated without {@link element}.
    *
    * Returns the response if its status < 400. Otherwise tries to parse the response body into a {@link CustomError}. Two cases are handled:
    *
@@ -108,40 +115,16 @@ export class Requester {
 
     this.abortController = new AbortController()
 
-    const csrfToken = Cookies.get('csrf-token')
-
-    if (csrfToken !== undefined) {
-      if (
-        input instanceof Request &&
-        input.method.toLowerCase() === 'post'
-      ) {
-        input.headers.set('csrf-token', csrfToken)
-      } else if (
-        init !== undefined &&
-        init.method?.toLowerCase() === 'post'
-      ) {
-        init.headers = {
-          ...init.headers,
-          'csrf-token': csrfToken,
-        }
-      }
-    }
-
-    const {
-      fetchTimeout = '10000',
-      loadingTimeout = '1000',
-    } = this.element?.dataset ?? {}
-
     const signals = [
       this.abortController.signal,
     ]
 
-    if (init?.signal !== undefined) {
-      if (init.signal !== null) {
-        signals.push(init.signal)
+    if (this.element !== undefined) {
+      if (this.element.dataset.fetchTimeout !== '-1') {
+        signals.push(AbortSignal.timeout(Number(this.element.dataset.fetchTimeout ?? 10000)))
       }
-    } else if (fetchTimeout !== '-1') {
-      signals.push(AbortSignal.timeout(Number(fetchTimeout)))
+    } else if (init?.signal instanceof AbortSignal) {
+      signals.push(init.signal)
     }
 
     this.request = new Request(input, {
@@ -149,15 +132,25 @@ export class Requester {
       signal: AbortSignal.any(signals),
     })
 
-    const loadingTimer = setTimeout(() => {
-      this.element?.toggleAttribute('data-loading', true)
+    if (this.request.method.toLowerCase() === 'post') {
+      const csrfToken = Cookies.get('csrf-token')
 
-      this.element?.dispatchEvent(new CustomEvent('command', {
-        detail: {
-          event: 'loading',
-        },
-      }))
-    }, Number(loadingTimeout))
+      if (csrfToken !== undefined) {
+        this.request.headers.set('csrf-token', csrfToken)
+      }
+    }
+
+    if (this.element !== undefined) {
+      this.loadingTimeoutId = window.setTimeout(() => {
+        this.element?.toggleAttribute('data-loading', true)
+
+        this.element?.dispatchEvent(new CustomEvent('command', {
+          detail: {
+            event: 'loading',
+          },
+        }))
+      }, Number(this.element.dataset.loadingTimeout ?? 1000))
+    }
 
     try {
       const response = await fetch(this.request)
@@ -189,9 +182,10 @@ export class Requester {
       this.handleError(error)
       return undefined
     } finally {
-      clearTimeout(loadingTimer)
+      clearTimeout(this.loadingTimeoutId)
       this.element?.toggleAttribute('data-loading', false)
       this.abortController = undefined
+      this.loadingTimeoutId = undefined
       this.request = undefined
     }
   }

@@ -1,14 +1,10 @@
 import type { CommandableElement } from '../commander/commandable-element.js'
-import type { RequestableElement } from '../requester/requestable-element.js'
 import type { StatefulElement } from '../state/stateful-element.js'
 import { Commander } from '../commander/commander.js'
-import { Requester } from '../requester/requester.js'
 import { State } from '../state/state.js'
 
-export class FormElement<StateValues = Record<string, unknown>> extends HTMLFormElement implements CommandableElement, RequestableElement, StatefulElement<StateValues> {
+export class FormElement<StateValues = Record<string, unknown>> extends HTMLFormElement implements CommandableElement, StatefulElement<StateValues> {
   public commander = new Commander(this)
-
-  public requester = new Requester(this)
 
   public state?: State<StateValues>
 
@@ -37,60 +33,8 @@ export class FormElement<StateValues = Record<string, unknown>> extends HTMLForm
   }
 
   protected handleSubmit(event: SubmitEvent): void {
-    event.preventDefault()
-
-    let {
-      action,
-      enctype,
-      method,
-    } = this
-
-    if (event.submitter instanceof HTMLButtonElement) {
-      if (event.submitter.hasAttribute('formaction')) {
-        action = event.submitter.formAction
-      }
-
-      if (event.submitter.hasAttribute('formenctype')) {
-        action = event.submitter.formEnctype
-      }
-
-      if (event.submitter.hasAttribute('formmethod')) {
-        method = event.submitter.formMethod
-      }
-    }
-
-    if (enctype.length === 0) {
-      enctype = 'application/x-www-form-urlencoded'
-    }
-
-    if (method.length === 0) {
-      method = 'get'
-    }
-
-    const body = enctype === 'multipart/form-data'
-      ? new FormData(this)
-      : new URLSearchParams(Object.fromEntries(new FormData(this)) as Record<string, string>)
-
-    if (action.length === 0) {
-      this.commander.execute('submit', {
-        body,
-      })
-    } else {
-      this.requester
-        .fetch(action, {
-          body,
-          method,
-        })
-        .then((response) => {
-          if (response !== undefined) {
-            this.commander.execute('response', {
-              response,
-            })
-          }
-        })
-        .catch((error: unknown) => {
-          this.commander.handleError(error)
-        })
-    }
+    this.commander.execute('submit', {
+      event,
+    })
   }
 }

@@ -16,6 +16,7 @@ export * from './element-toggle-state.js'
 export * from './element-update.js'
 export * from './form-respond.js'
 export * from './form-set-errors.js'
+export * from './form-submit.js'
 export * from './input-set-error.js'
 export * from './input-set-state.js'
 export * from './input-set-value.js'
@@ -41,6 +42,7 @@ import { ElementToggleStateCommand } from './element-toggle-state.js'
 import { ElementUpdateCommand } from './element-update.js'
 import { FormRespondCommand } from './form-respond.js'
 import { FormSetErrorsCommand } from './form-set-errors.js'
+import { FormSubmitCommand } from './form-submit.js'
 import { InputSetErrorCommand } from './input-set-error.js'
 import { InputSetStateCommand } from './input-set-state.js'
 import { InputSetValueCommand } from './input-set-value.js'
@@ -67,6 +69,7 @@ export const commands = {
   ElementUpdateCommand,
   FormRespondCommand,
   FormSetErrorsCommand,
+  FormSubmitCommand,
   InputSetErrorCommand,
   InputSetStateCommand,
   InputSetValueCommand,

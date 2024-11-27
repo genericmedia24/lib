@@ -245,7 +245,7 @@ export class Commander {
       this.element.addEventListener('command', this.handleCommandBound)
       this.registerCommands('on')
 
-      setTimeout(() => {
+      window.setTimeout(() => {
         this.registerCommands('of')
       })
     }

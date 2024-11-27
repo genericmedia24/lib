@@ -21,7 +21,11 @@ export class ElementUpdateCommand extends Command<UpdatableElement, ElementUpdat
           Promise
             .resolve()
             .then(async () => {
-              await this.targetElement.update(data)
+              await this.targetElement.update({
+                ...this.options,
+                ...data,
+              })
+
               resolve()
             })
             .catch((error: unknown) => {
@@ -30,7 +34,10 @@ export class ElementUpdateCommand extends Command<UpdatableElement, ElementUpdat
         })
       })
     } else {
-      await this.targetElement.update(data)
+      await this.targetElement.update({
+        ...this.options,
+        ...data,
+      })
     }
   }
 }
