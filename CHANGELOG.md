@@ -1,3 +1,10 @@
+# [1.6.0-beta.2](https://github.com/genericmedia24/lib/compare/v1.6.0-beta.1...v1.6.0-beta.2) (2024-11-27)
+
+
+### Bug Fixes
+
+* fix exports ([86d5255](https://github.com/genericmedia24/lib/commit/86d52553e00d6cc439f3cf1605f113a0568dc513))
+
 # [1.6.0-beta.1](https://github.com/genericmedia24/lib/compare/v1.5.3...v1.6.0-beta.1) (2024-11-26)
 
 
