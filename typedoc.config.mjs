@@ -17,6 +17,9 @@ export default {
     readme: false,
   },
   markdownLinkExternal: false,
+  navigationLinks: {
+    GitHub: 'https://github.com/genericmedia24/lib',
+  },
   out: './docs/site',
   projectDocuments: [
     './docs/guides/commander.md',
