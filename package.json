@@ -146,5 +146,5 @@
     "lint": "tsc && eslint \"./{benchmark,src,test}/**/*.ts\" \"./*.{mjs,ts}\"",
     "test": "glob -c \"tsx --test \" \"./test/**/*.ts\""
   },
-  "version": "1.6.0-beta.2"
+  "version": "1.6.0-beta.3"
 }

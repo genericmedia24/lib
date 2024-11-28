@@ -1,3 +1,16 @@
+# [1.6.0-beta.3](https://github.com/genericmedia24/lib/compare/v1.6.0-beta.2...v1.6.0-beta.3) (2024-11-28)
+
+
+### Bug Fixes
+
+* fix stateChangedCallback of DivElement ([7c71b7b](https://github.com/genericmedia24/lib/commit/7c71b7bbdd54eb3fec3505ed86117a21395ca9aa))
+
+
+### Features
+
+* move form behaviour to command ([f23c5a5](https://github.com/genericmedia24/lib/commit/f23c5a5cbd51b3179a1c1c05843a745b400777ad))
+* simplify error handler in commander ([16c723d](https://github.com/genericmedia24/lib/commit/16c723d84ed643584ac986e5bbeaac9da3e10447))
+
 # [1.6.0-beta.2](https://github.com/genericmedia24/lib/compare/v1.6.0-beta.1...v1.6.0-beta.2) (2024-11-27)
 
 
