@@ -1,5 +1,17 @@
 import { Command } from '../commander/command.js'
 
+/**
+ * Shows a popover.
+ *
+ * Calls {@link targetElement}.[showPopover](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/showPopover).
+ *
+ * Listens for `click` events on [window](https://developer.mozilla.org/en-US/docs/Web/API/Window/window) and closes the element when the user clicks on anything but the element itself.
+ *
+ * @example
+ * See [a live example](../../examples/commands.html#popover-show) of the code below.
+ *
+ * {@includeCode ../../docs/examples/commands/popover-show.html}
+ */
 export class PopoverShowCommand extends Command<HTMLElement, unknown, HTMLButtonElement> {
   protected handleToggleBound = this.handleToggle.bind(this)
 

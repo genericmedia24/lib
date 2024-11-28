@@ -2,6 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta
+      name="viewport"
+      content="width=device-width"
+    >
     <title>State</title>
     <script type="module">
       // prettier-ignore
@@ -16,13 +20,13 @@
 
       class DivSetGreetingCommand extends Command {
         execute() {
-          const username = this.originElement.state.get('username') ?? ''
+          const username = this.originElement.state.get("username") ?? ""
           this.originElement.textContent = `${this.options.prefix} ${username}`
         }
       }
 
       window.customCommands = CommandRegistry.create()
-      window.customCommands.define('div-set-greeting', DivSetGreetingCommand)
+      window.customCommands.define("div-set-greeting", DivSetGreetingCommand)
 
       defineCommands(commands)
       defineElements(elements)
@@ -30,17 +34,17 @@
   </head>
 
   <body>
-    <div
-      data-state="person"
-      data-onconnected="div-set-greeting?prefix=hello"
-      data-onusernamechanged="div-set-greeting?prefix=hello"
-      is="gm-div"
-    ></div>
     <input
       name="username"
       data-state="person"
       data-oninput="input-set-state"
       is="gm-input"
     >
+    <div
+      data-state="person"
+      data-onconnected="div-set-greeting?prefix=hello"
+      data-onusernamechanged="div-set-greeting?prefix=hello"
+      is="gm-div"
+    ></div>
   </body>
 </html>

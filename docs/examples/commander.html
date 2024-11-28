@@ -2,6 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta
+      name="viewport"
+      content="width=device-width"
+    >
     <title>Commander</title>
     <script type="module">
       // prettier-ignore
@@ -19,7 +23,7 @@
       }
 
       window.customCommands = CommandRegistry.create()
-      window.customCommands.define('element-set-background', ElementSetBackgroundCommand)
+      window.customCommands.define("element-set-background", ElementSetBackgroundCommand)
 
       defineElements(elements)
     </script>

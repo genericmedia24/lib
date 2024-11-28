@@ -7,7 +7,7 @@ A library for building data-intensive web applications.
 
 - [commander](https://genericmedia24.github.io/lib/documents/commander.html) - Declarative reactivity.
 - [commands](https://genericmedia24.github.io/lib/modules/commands.html) - A collection of custom commands.
-- [dsv](https://genericmedia24.github.io/lib/documents/dsv.html) - Easy & fast CSV/TSV parsing and formatting.
+- [dsv](https://genericmedia24.github.io/lib/documents/dsv.html) - Easy & fast DSV parsing and formatting.
 - [elements](https://genericmedia24.github.io/lib/modules/elements.html) - Custom elements using commander and state.
 - [requester](https://genericmedia24.github.io/lib/modules/requester.html) - Easy & reactive URL fetching.
 - [scroller](https://genericmedia24.github.io/lib/documents/scroller.html) - Smooth scrolling through tabular data.

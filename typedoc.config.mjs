@@ -16,6 +16,9 @@ export default {
   headings: {
     readme: false,
   },
+  jsDocCompatibility: {
+    exampleTag: false,
+  },
   markdownLinkExternal: false,
   navigationLinks: {
     GitHub: 'https://github.com/genericmedia24/lib',

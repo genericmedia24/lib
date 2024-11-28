@@ -54,7 +54,7 @@ See [a live example](../examples/commander.html) of the code below.
     <title>Commander</title>
     <script type="module">
       // prettier-ignore
-      import { 
+      import {
         Command,
         CommandRegistry,
         defineElements,
@@ -114,7 +114,7 @@ class ElementSetBackgroundCommand extends Command {
 
 A command should implement an `execute` method. The command has several properties, two of which are shown in the example: `targetElement` and `options`, which are defined by the URI in the attribute.
 
-The command is invoked by a `Commander`. The commander is a property of all the custom elements defined in the library. For more information See the elaboration below.
+The command is invoked by a {@link commander!Commander | Commander}. The commander is a property of all the custom elements defined in the library. For more information see the elaboration below.
 
 The type of the custom element is defined by the `is` attribute of the button:
 
@@ -196,7 +196,7 @@ Note the change of the name of the attribute: `data-ofclick` instead of `data-on
 
 ### Custom Elements
 
-When implementing a custom element the coupling with custom commmands and a state can be achieved by instantiating a `Commander` and a `State`. The custom button element included in the library looks partly like this:
+When implementing a custom element the coupling with custom commmands and a state can be achieved by instantiating a {@link commander!Commander | Commander} and a {@link state!State | State}. The custom button element included in the library looks partly like this:
 
 ```javascript
 class ButtonElement extends HTMLButtonElement {

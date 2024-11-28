@@ -2,7 +2,7 @@
 
 ## Problem description
 
-To scroll through a large amount of tabular data in a browser, for example 100000 rows x 100 columns, built-in browser technology does not suffice. All the data has to be rendered at once to be able to scroll through it. Browsers cannot handle the scrolling smoothly.
+To scroll through a large amount of tabular data in a browser, for example 100000 rows x 100 columns, built-in browser technology does not suffice. All the data has to be rendered at once to be able to scroll through it, but then browsers cannot handle the scrolling smoothly.
 
 Many scroller libraries are available that solve this problem, but most have too many options and solve all kinds of other problems too. The criteria for a good scrolling library are:
 
@@ -19,7 +19,7 @@ Many scroller libraries are available that solve this problem, but most have too
 
 ## New solution
 
-This library contains a scroller that combines the strong points of both packages to achieve smooth & simple, native & vanilla scrolling.
+This library contains a {@link scroller!Scroller | Scroller} that combines the strong points of both packages to achieve smooth & simple, native & vanilla scrolling.
 
 ### Basic Example
 

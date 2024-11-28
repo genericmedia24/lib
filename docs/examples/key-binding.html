@@ -2,6 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta
+      name="viewport"
+      content="width=device-width"
+    >
     <title>Key Binding</title>
     <script type="module">
       // prettier-ignore
@@ -11,11 +15,11 @@
       } from 'https://cdn.jsdelivr.net/npm/@genericmedia/lib/+esm'
 
       const keyBinding = KeyBinding.create({
-        key: 'escape',
+        key: "escape",
       })
 
-      const dialog1 = document.getElementById('dialog-1')
-      const dialog2 = document.getElementById('dialog-2')
+      const dialog1 = document.getElementById("dialog-1")
+      const dialog2 = document.getElementById("dialog-2")
 
       function close1() {
         dialog1.close()

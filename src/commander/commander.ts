@@ -236,7 +236,9 @@ export class Commander {
   /**
    * Starts the commander.
    *
-   * Adds a listener for `command` events to the element. Registers all commands defined on the element with attributes starting with `data-on` or `data-of`.
+   * Adds a listener for `command` events to the element.
+   *
+   * Registers all commands defined on the element with attributes starting with `data-on` or `data-of`.
    */
   public start(): this {
     if (!this.started) {

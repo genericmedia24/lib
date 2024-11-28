@@ -2,9 +2,28 @@ import type { CommandableElement } from '../commander/commandable-element.js'
 import { Command } from '../commander/command.js'
 
 export interface ElementToggleHeightCommandOptions {
+  /**
+   * Whether to toggle the height immediately.
+   */
   immediate?: string
 }
 
+/**
+ * Toggles the CSS `height` property of an element.
+ *
+ * Ensures that the transition is performed correctly so that the element will not flash when the document is loaded.
+ *
+ * If {@link ElementToggleMarginCommandOptions.immediate | options.immediate} is defined no transition will be performed.
+ *
+ * Uses the `hidden` attribute to determine whether the element should be hidden or shown.
+ *
+ * Executes a `hidden` command after the element is hidden and a `visible` command before it is shown.
+ *
+ * @example
+ * See [a live example](../../examples/commands.html#element-toggle-height) of the code below.
+ *
+ * {@includeCode ../../docs/examples/commands/element-toggle-height.html}
+ */
 export class ElementToggleHeightCommand extends Command<CommandableElement, ElementToggleHeightCommandOptions> {
   public execute(): void {
     const immediate = this.options.immediate === 'true'

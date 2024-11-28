@@ -1,0 +1,18 @@
+<style>
+  [data-error] {
+    color: red;
+  }
+</style>
+<label for="input">
+  Input
+  <span data-error></span>
+</label>
+<br>
+<input
+  id="input"
+  data-onblur="input-set-error"
+  is="gm-input"
+  required
+>
+<br>
+First focus, then blur the input.

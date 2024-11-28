@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta
+      name="viewport"
+      content="width=device-width"
+    >
+    <title>Elements</title>
+    <script type="module">
+      // prettier-ignore
+      import {
+        defineCommands,
+        defineElements,
+        commands,
+        elements,
+        html
+      } from 'http://localhost:3000/dist/browser.mjs'
+
+      defineCommands(commands)
+      defineElements(elements)
+
+      const file = window.location.hash.slice(1)
+
+      if (file.length > 0) {
+        const response = await fetch(`elements/${file}.html`)
+        const text = await response.text()
+
+        const name = file
+          .replace(/^./, (v) => v.toUpperCase())
+          .replace(/-(.)/g, (v) => v.toUpperCase())
+          .replace(/-/g, "")
+
+        const scriptStartIndex = text.indexOf("<script>")
+        const scriptEndIndex = text.indexOf("<\/script>")
+
+        const header = document.body.appendChild(document.createElement("h1"))
+        header.innerHTML = `${name}Element`
+
+        const div = document.body.appendChild(document.createElement("div"))
+        div.innerHTML = text.slice(scriptEndIndex > -1 ? scriptEndIndex + 9 : 0)
+
+        const code = document.body.appendChild(document.createElement("pre"))
+        code.textContent = text
+
+        if (scriptStartIndex > -1) {
+          const script = document.body.appendChild(document.createElement("script"))
+          script.innerHTML = text.slice(scriptStartIndex + 8, scriptEndIndex)
+        }
+      }
+    </script>
+    <style>
+      body {
+        display: flex;
+        flex-flow: row wrap;
+        font-family: system-ui;
+        gap: 1rem;
+      }
+
+      h1 {
+        margin-block: 0;
+        width: 100%;
+      }
+
+      h1 + div,
+      pre {
+        border: 2px solid #ccc;
+        flex: 1;
+        margin: 0;
+        padding: 1rem;
+      }
+
+      h1 + div {
+        line-height: 1.75em;
+      }
+
+      @media (width < 48rem) {
+        body {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body></body>
+</html>

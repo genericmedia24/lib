@@ -8,6 +8,18 @@ export interface ElementToggleAttributeCommandOptions {
   'state-value': string | string[]
 }
 
+/**
+ * Toggles the attribute of an element.
+ *
+ * Iterates over options{@link ElementToggleAttributeCommandOptions['state-key']} and checks if the corresponding value of the state matches options{@link ElementToggleAttributeCommandOptions['state-value']}. The matching pattern is interpreted as a glob (see [picomatch](https://github.com/micromatch/picomatch)). If there is a match there corresponding attribute is set.
+ *
+ * Multiple attributes, keys and values can be provided. They are processed in their respective order of appearance.
+ *
+ * @example
+ * See [a live example](../../examples/commands.html#element-toggle-attribute) of the code below.
+ *
+ * {@includeCode ../../docs/examples/commands/element-toggle-attribute.html}
+ */
 export class ElementToggleAttributeCommand extends Command<Element, ElementToggleAttributeCommandOptions> {
   public async execute(): Promise<void> {
     if (this.targetElement.state?.storage === 'idb') {

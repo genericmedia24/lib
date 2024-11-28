@@ -2,6 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta
+      name="viewport"
+      content="width=device-width"
+    >
     <title>Requester</title>
     <script type="module">
       // prettier-ignore
@@ -13,9 +17,9 @@
 
       defineCustomElements(elements)
 
-      const element = document.body.querySelector('div')
+      const element = document.body.querySelector("div")
       const requester = new Requester(element)
-      const result = await requester.fetchJson('https://cdn.jsdelivr.net/npm/@genericmedia/lib/package.json')
+      const result = await requester.fetchJson("https://cdn.jsdelivr.net/npm/@genericmedia/lib/package.json")
 
       element.setHTMLUnsafe(result.version)
     </script>

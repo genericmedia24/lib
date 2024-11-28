@@ -30,7 +30,7 @@ export interface KeyBindingOptions {
  *
  * If the key combination is pressed, the callback is called that was added last.
  *
- * Can be used to close `popover`s and `dialog`s in the correct order when the Escape key is pressed.
+ * Can be used to close `<popover>`s and `<dialog>`s in the correct order when the Escape key is pressed.
  *
  * See [a live example](../../docs/examples/key-binding.html) of the code below.
  *
@@ -186,7 +186,7 @@ export class KeyBinding {
   }
 
   /**
-   * Starts listening for `keydown` events on `window`.
+   * Starts listening for `keydown` events on [window](https://developer.mozilla.org/en-US/docs/Web/API/Window/window).
    */
   public start(): this {
     window.addEventListener('keydown', this.handleKeydown.bind(this))
@@ -194,7 +194,7 @@ export class KeyBinding {
   }
 
   /**
-   * Stops listening for `keydown` events on `window`.
+   * Stops listening for `keydown` events on [window](https://developer.mozilla.org/en-US/docs/Web/API/Window/window).
    */
   public stop(): this {
     window.removeEventListener('keydown', this.handleKeydown.bind(this))
