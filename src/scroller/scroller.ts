@@ -104,7 +104,7 @@ export class Scroller {
   public columnWidths: number[] = []
 
   /**
-   * The dimensions of the {@link element}.
+   * The dimensions of {@link element}.
    */
   public domRect?: DOMRect
 
@@ -171,7 +171,7 @@ export class Scroller {
   protected handleScrollBound = this.handleScroll.bind(this)
 
   /**
-   * The {@link columnWidths} as a space separated string of CSS pixel values, for example "50px 50px 50px".
+   * {@link columnWidths} as a space separated string of CSS pixel values, for example "50px 50px 50px".
    */
   public get gridTemplateColumns(): string {
     return this.columnWidths
@@ -184,9 +184,9 @@ export class Scroller {
   /**
    * Creates a scroller.
    *
-   * The {@link bodyElement} is determined as lastElementChild of {@link element}.
+   * {@link bodyElement} is determined as lastElementChild of {@link element}.
    *
-   * The {@link headElement} is determined as firstElementChild of {@link element}.
+   * {@link headElement} is determined as firstElementChild of {@link element}.
    *
    * If lastElementChild and firstElementChild are equal, {@link headElement} is undefined.
    *
@@ -268,7 +268,7 @@ export class Scroller {
   /**
    * Filters {@link bodyRows}.
    *
-   * Applies the properties of the {@link options} object to individual cells and filters the rows accordingly.
+   * Applies the properties of {@link options} object to individual cells and filters the rows accordingly.
    *
    * Sets a copy of the original {@link bodyRows} on {@link bodyRowsCopy}. Clears the copy if the input is undefined.
    *

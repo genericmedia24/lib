@@ -1,0 +1,20 @@
+<script>
+  // prettier-ignore
+  window.customElements.define('gm-updatable', class extends HTMLDivElement {
+    update() {
+      this.textContent = 'text'
+    }
+  }, {
+    extends: 'div',
+  })
+</script>
+<button
+  data-onclick="element-update@updatable"
+  is="gm-button"
+>
+  update
+</button>
+<div
+  id="updatable"
+  is="gm-updatable"
+></div>

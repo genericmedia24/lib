@@ -3,9 +3,26 @@ import { Requester } from '../browser.js'
 import { Command } from '../commander/command.js'
 
 export interface FormSubmitCommandData {
+  /**
+   * The submit event.
+   */
   event: SubmitEvent
 }
 
+/**
+ * Submits a `<form>`.
+ *
+ * Uses {@link Requester} to fetch the resource.
+ *
+ * Reads the attributes of {@link FormSubmitCommandData.event | data.event}.[submitter](https://developer.mozilla.org/en-US/docs/Web/API/SubmitEvent/submitter) if available as a `<button>`.
+ *
+ * Executes a `response` command if a response is received.
+ *
+ * @example
+ * See [a live example](../../examples/commands.html#form-submit) of the code below.
+ *
+ * {@includeCode ../../docs/examples/commands/form-submit.html}
+ */
 export class FormSubmitCommand extends Command<FormElement> {
   public requester = new Requester(this.targetElement)
 
@@ -42,9 +59,15 @@ export class FormSubmitCommand extends Command<FormElement> {
       method = 'get'
     }
 
-    const body = enctype === 'multipart/form-data'
-      ? new FormData(this.targetElement)
-      : new URLSearchParams(Object.fromEntries(new FormData(this.targetElement)) as Record<string, string>)
+    let body: FormData | null | URLSearchParams = null
+
+    if (method === 'get') {
+      action += `?${new URLSearchParams(Object.fromEntries(new FormData(this.targetElement)) as Record<string, string>).toString()}`
+    } else {
+      body = enctype === 'multipart/form-data'
+        ? body
+        : new URLSearchParams(Object.fromEntries(new FormData(this.targetElement)) as Record<string, string>)
+    }
 
     this.requester
       .fetch(action, {

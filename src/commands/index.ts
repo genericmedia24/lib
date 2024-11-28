@@ -8,6 +8,7 @@ export * from './element-clear-html.js'
 export * from './element-focus.js'
 export * from './element-remove.js'
 export * from './element-set-state.js'
+export * from './element-set-text-content.js'
 export * from './element-toggle-attribute.js'
 export * from './element-toggle-flex.js'
 export * from './element-toggle-height.js'
@@ -20,7 +21,6 @@ export * from './form-submit.js'
 export * from './input-set-error.js'
 export * from './input-set-state.js'
 export * from './input-set-value.js'
-export * from './output-hide.js'
 export * from './popover-hide.js'
 export * from './popover-show.js'
 export * from './select-toggle.js'
@@ -34,6 +34,7 @@ import { ElementClearHtmlCommand } from './element-clear-html.js'
 import { ElementFocusCommand } from './element-focus.js'
 import { ElementRemoveCommand } from './element-remove.js'
 import { ElementSetStateCommand } from './element-set-state.js'
+import { ElementSetTextContentCommand } from './element-set-text-content.js'
 import { ElementToggleAttributeCommand } from './element-toggle-attribute.js'
 import { ElementToggleFlexCommand } from './element-toggle-flex.js'
 import { ElementToggleHeightCommand } from './element-toggle-height.js'
@@ -46,7 +47,6 @@ import { FormSubmitCommand } from './form-submit.js'
 import { InputSetErrorCommand } from './input-set-error.js'
 import { InputSetStateCommand } from './input-set-state.js'
 import { InputSetValueCommand } from './input-set-value.js'
-import { OutputHideCommand } from './output-hide.js'
 import { PopoverHideCommand } from './popover-hide.js'
 import { PopoverShowCommand } from './popover-show.js'
 import { SelectToggleCommand } from './select-toggle.js'
@@ -61,6 +61,7 @@ export const commands = {
   ElementFocusCommand,
   ElementRemoveCommand,
   ElementSetStateCommand,
+  ElementSetTextContentCommand,
   ElementToggleAttributeCommand,
   ElementToggleFlexCommand,
   ElementToggleHeightCommand,
@@ -73,7 +74,6 @@ export const commands = {
   InputSetErrorCommand,
   InputSetStateCommand,
   InputSetValueCommand,
-  OutputHideCommand,
   PopoverHideCommand,
   PopoverShowCommand,
   SelectToggleCommand,

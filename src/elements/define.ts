@@ -5,11 +5,13 @@ import type { Constructor } from 'type-fest'
  *
  * Constructs the external name by which the custom element can be used as tag or in attributes in the following way:
  *
- * 1. The postfix `Element` is removed from the class name.
- * 2. The remaining string is transformed from pascal case to kebab case.
+ * 1. The postfix "Element" is removed from the class name.
+ * 2. If the custom element is an extension of a native element, the remaining string is transformed to lower case. Otherwise it is transformed from pascal case to kebab case.
  * 3. The prefix is added.
  *
- * If an element exists with the same name plus `HTML` as prefix, the custom element will be defined as an extension of the existing element. For example, if DialogElement is passed as a custom element, HTMLDialogElement will be found and DialogElement will be defined as extending HTMLDialogElement.
+ * To determine whether a custom element is an extension of a native element the context is checked for the existence of a native element with the same name plus "HTML" as prefix.
+ *
+ * For example, if DialogElement is passed as a custom element, HTMLDialogElement will be found and DialogElement will be defined as extending HTMLDialogElement.
  *
  * @example
  * ```javascript
@@ -31,10 +33,14 @@ export function defineElements(elements: Record<string, Constructor<HTMLElement>
   Object
     .entries(elements)
     .forEach(([fullName, element]) => {
-      const name = fullName
-        .replace('Element', '')
-        .replace(/(?<one>[a-z0–9])(?<two>[A-Z])/gu, '$1-$2')
-        .toLowerCase()
+      const name = Object.hasOwn(context, `HTML${fullName}`)
+        ? fullName
+          .replace('Element', '')
+          .toLowerCase()
+        : fullName
+          .replace('Element', '')
+          .replace(/(?<one>[a-z0–9])(?<two>[A-Z])/gu, '$1-$2')
+          .toLowerCase()
 
       registry.define(`${prefix}${name}`, element, {
         extends: Object.hasOwn(context, `HTML${fullName}`)

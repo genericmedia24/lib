@@ -1,6 +1,6 @@
 # State
 
-Large application benefit from centralised state management. All the custom elements defined in the library have a state.
+Large application benefit from centralised state management. All the custom elements defined in the library have a {@link state!State | State}.
 
 See [a live example](../examples/state.html) of the code below.
 
@@ -12,7 +12,7 @@ See [a live example](../examples/state.html) of the code below.
     <title>State</title>
     <script type="module">
       // prettier-ignore
-      import { 
+      import {
         Command,
         CommandRegistry,
         defineCommands,
@@ -37,18 +37,18 @@ See [a live example](../examples/state.html) of the code below.
   </head>
 
   <body>
-    <div
-      data-state="person"
-      data-onconnected="div-set-greeting?prefix=hello"
-      data-onusernamechanged="div-set-greeting?prefix=hello"
-      is="gm-div"
-    ></div>
     <input
       name="username"
       data-state="person"
       data-oninput="input-set-state"
       is="gm-input"
     >
+    <div
+      data-state="person"
+      data-onconnected="div-set-greeting?prefix=hello"
+      data-onusernamechanged="div-set-greeting?prefix=hello"
+      is="gm-div"
+    ></div>
   </body>
 </html>
 ```
@@ -66,8 +66,6 @@ The state is changed by the input by calling a custom command named `input-set-s
 ```html
 data-oninput="input-set-state"
 ```
-
-This command is included in the library, together with a lot of other useful standard commands.
 
 Note that in this case no ID of a target element is given, which means that the `originElement` and the `targetElement` of the command will be the same.
 

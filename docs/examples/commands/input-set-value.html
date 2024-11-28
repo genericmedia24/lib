@@ -1,0 +1,23 @@
+<button
+  data-state="example"
+  data-state-storage="none"
+  data-onclick="element-set-state?state-key=key-1&state-value=value-1&state-key=key-2&state-value=value-2"
+  is="gm-button"
+>
+  set
+</button>
+<input
+  name="key-1"
+  data-state="example"
+  data-state-storage="none"
+  data-onstatechanged="input-set-value?state-key=key-1"
+  data-onconnected="input-set-value?value=abc"
+  is="gm-input"
+>
+<input
+  name="key-2"
+  data-state="example"
+  data-state-storage="none"
+  data-onstatechanged="input-set-value?state-key=key-2"
+  is="gm-input"
+>

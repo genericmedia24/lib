@@ -91,16 +91,16 @@ export class Requester {
    *
    * Adds the signal of {@link abortController} to the request.
    *
-   * Also adds a timeout signal to the request. The duration of the timeout can be changed with the attribute `data-fetch-timeout` on {@link element} (defaults to 10000 ms). If set to -1 no timeout signal is added. If the requester is instantiated without {@link element} the signal from {@link init} is used, if set.
+   * Also adds a timeout signal to the request. The duration of the timeout can be changed with the `data-fetch-timeout` attribute on {@link element} (defaults to 10000 ms). If set to -1 no timeout signal is added. If the requester is instantiated without {@link element} the signal from {@link init} is used, if set.
    *
    * Adds a `csrf-token` header to a POST request if a cookie with the same name exists.
    *
-   * Toggles a `data-loading` attribute on {@link element}. Also dispatches a custom event named `command`, which can be handled by a {@link commander!Commander}. Does so after a timeout. The duration of the timeout can be changed with the attribute `data-loading-timeout` on {@link element} (defaults to 1000 ms). No-op if the requester is instantiated without {@link element}.
+   * Toggles a `data-loading` attribute on {@link element}. Also dispatches a custom event named `command`, which can be handled by a {@link commander!Commander | Commander}. Does so after a timeout. The duration of the timeout can be changed with the `data-loading-timeout` attribute on {@link element} (defaults to 1000 ms). No-op if the requester is instantiated without {@link element}.
    *
    * Returns the response if its status < 400. Otherwise tries to parse the response body into a {@link CustomError}. Two cases are handled:
    *
    * 1. If the content-type of the response is `application/json` it is assumed that it contains a symmetric specification of a {@link CustomError}.
-   * 2. Otherwise the text of the response is parsed using {@link errorMatchers}. The `code` of the {@link CustomError} is set to `error_${response.status}` and the `status` to `response.status`.
+   * 2. Otherwise the text of the response is parsed using {@link errorMatchers}. The {@link CustomError.code} is set to `error_${response.status}` and the {@link CustomError.status} to `response.status`.
    *
    * @param input the input
    * @param init the init
@@ -257,7 +257,7 @@ export class Requester {
   }
 
   /**
-   * Handles an error. Returns undefined if {@link error} is an `AbortError`, otherwise throws the error.
+   * Handles an error. Returns `undefined` if {@link error} is an `AbortError`, otherwise throws the error.
    *
    * @param error the error
    */

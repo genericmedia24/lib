@@ -7,7 +7,7 @@ import { CommandRegistry } from '../commander/command-registry.js'
  *
  * Constructs the external name by which the custom command can be used in attributes in the following way:
  *
- * 1. The postfix `Command` is removed from the class name.
+ * 1. The postfix "Command" is removed from the class name.
  * 2. The remaining string is transformed from pascal case to kebab case.
  * 3. The prefix is added.
  *

@@ -1,0 +1,41 @@
+<style>
+  [hidden] {
+    display: block;
+  }
+
+  div.container {
+    border: 1px solid;
+    height: 100px;
+    overflow: hidden;
+    width: 250px;
+  }
+
+  div[data-state="example"] {
+    background-color: royalblue;
+    color: white;
+    height: 100%;
+    transition-duration: 250ms;
+    width: 75px;
+  }
+</style>
+<button
+  data-state="example"
+  data-state-storage="none"
+  data-onclick="element-toggle-state?state-key=open&state-on=true"
+  is="gm-button"
+>
+  toggle
+</button>
+<div class="container">
+  <div
+    data-state="example"
+    data-state-storage="none"
+    data-onconnected="element-toggle-attribute?attribute-name=hidden&state-key=open&state-value=!true element-toggle-margin?immediate=true"
+    data-onhidden="element-clear-html"
+    data-onopenchanged="element-toggle-attribute?attribute-name=hidden&state-key=open&state-value=!true element-toggle-margin"
+    data-onvisible="element-set-text-content?text-content=margin"
+    is="gm-div"
+    style="display: none"
+    hidden
+  ></div>
+</div>
