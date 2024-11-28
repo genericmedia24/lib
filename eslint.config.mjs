@@ -89,6 +89,10 @@ export default tslint.config(
         allowRegExp: false,
       }],
       '@typescript-eslint/return-await': ['error', 'always'],
+      '@typescript-eslint/switch-exhaustiveness-check': 'off',
+      '@typescript-eslint/unbound-method': ['error', {
+        ignoreStatic: true,
+      }],
       'arrow-body-style': 'off',
       'camelcase': 'off',
       'capitalized-comments': 'off',
