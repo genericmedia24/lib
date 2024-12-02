@@ -38,7 +38,7 @@ export abstract class Command<TargetElement = unknown, Options = unknown, Origin
    * @param targetElement the element on which the command should be executed
    * @param options the options that inform the behaviour of the command
    */
-  public constructor(originElement: OriginElement, targetElement: TargetElement, options: Options) {
+  public constructor(originElement: OriginElement, targetElement: TargetElement, options: Options = {} as Options) {
     this.options = options
     this.originElement = originElement
     this.targetElement = targetElement

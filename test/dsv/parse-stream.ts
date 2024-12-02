@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-floating-promises */
-
 import { Readable } from 'node:stream'
 import { describe, it, type TestContext } from 'node:test'
 import type { ParseDsvOptions } from '../../src/dsv/parse-options.js'
@@ -250,7 +248,7 @@ describe('parseDsvStream', () => {
     })
   })
 
-  it('should callback with an error', async (test) => {
+  it('should callback with error', async (test) => {
     await testParseDsvStreamError(test, new Error('Parse error'))
   })
 })

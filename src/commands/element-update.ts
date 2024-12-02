@@ -1,7 +1,7 @@
 import type { UpdatableElement } from '../commander/updatable-element.js'
 import { Command } from '../commander/command.js'
 
-export interface ElementUpdateCommandOptions {
+export interface ElementUpdateCommandOptions extends Record<string, unknown> {
   'immediate'?: string
   'when-visible'?: string
 }

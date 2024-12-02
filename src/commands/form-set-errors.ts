@@ -1,4 +1,3 @@
-import type { FormElement } from '../elements/form.js'
 import type { CustomError } from '../util/custom-error.js'
 import { Command } from '../commander/command.js'
 import { isObject } from '../util/is-object.js'
@@ -31,7 +30,7 @@ export interface FormSetErrorsCommandData {
  * }
  * ```
  */
-export class FormSetErrorsCommand extends Command<FormElement> {
+export class FormSetErrorsCommand extends Command<HTMLFormElement> {
   public execute(data?: FormSetErrorsCommandData): void {
     const errorData = data?.error.data
 

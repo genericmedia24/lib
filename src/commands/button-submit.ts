@@ -1,4 +1,3 @@
-import type { ButtonElement } from '../elements/button.js'
 import { Command } from '../commander/command.js'
 
 /**
@@ -15,7 +14,7 @@ import { Command } from '../commander/command.js'
  *
  * {@includeCode ../../docs/examples/commands/button-submit.html}
  */
-export class ButtonSubmitCommand extends Command<ButtonElement> {
+export class ButtonSubmitCommand extends Command<HTMLButtonElement> {
   public execute(): void {
     if (this.targetElement.form !== null) {
       this.targetElement.type = 'submit'

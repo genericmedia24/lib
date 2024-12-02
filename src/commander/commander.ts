@@ -80,6 +80,8 @@ export class Commander {
   /**
    * Executes commands for an event.
    *
+   * Handles the errors of individual commands, so it is guaranteed that all commands are executed even if one throws an error.
+   *
    * @example
    * ```javascript
    * class ButtonElement extends HTMLButtonElement {
@@ -96,17 +98,13 @@ export class Commander {
    *
    */
   public execute(event: string, data?: Record<string, unknown>): void {
-    Promise
-      .all(this.commands[event]?.map(async (command) => {
-        try {
-          await command.execute(data)
-        } catch (error: unknown) {
-          this.handleError(error)
-        }
-      }) ?? [])
-      .catch((error: unknown) => {
+    void Promise.all(this.commands[event]?.map(async (command) => {
+      try {
+        await command.execute(data)
+      } catch (error: unknown) {
         this.handleError(error)
-      })
+      }
+    }) ?? [])
   }
 
   /**

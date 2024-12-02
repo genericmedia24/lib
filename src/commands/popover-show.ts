@@ -12,7 +12,7 @@ import { Command } from '../commander/command.js'
  *
  * {@includeCode ../../docs/examples/commands/popover-show.html}
  */
-export class PopoverShowCommand extends Command<HTMLElement, unknown, HTMLButtonElement> {
+export class PopoverShowCommand extends Command<HTMLElement> {
   protected handleToggleBound = this.handleToggle.bind(this)
 
   protected handleWindowClickBound = this.handleWindowClick.bind(this)

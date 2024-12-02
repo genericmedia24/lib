@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-floating-promises */
-
 import { describe, it } from 'node:test'
 import { parseDsvString } from '../../src/dsv/parse-string.js'
 

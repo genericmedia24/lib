@@ -1,4 +1,5 @@
 dist
 docs/site
+lcov.info
 node_modules
 todo

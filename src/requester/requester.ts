@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie'
 import { CustomError } from '../util/custom-error.js'
+import { isNil } from '../util/is-nil.js'
 
 /**
  * Fetches a resource.
@@ -56,6 +57,11 @@ export class Requester {
   ]
 
   /**
+   * The amount of milliseconds before a request on an element is timed out.
+   */
+  public static fetchTimeout = 10000
+
+  /**
    * The controller to abort a request.
    */
   public abortController?: AbortController
@@ -91,7 +97,7 @@ export class Requester {
    *
    * Adds the signal of {@link abortController} to the request.
    *
-   * Also adds a timeout signal to the request. The duration of the timeout can be changed with the `data-fetch-timeout` attribute on {@link element} (defaults to 10000 ms). If set to -1 no timeout signal is added. If the requester is instantiated without {@link element} the signal from {@link init} is used, if set.
+   * Also adds a timeout signal to the request. The duration of the timeout can be changed with the `data-fetch-timeout` attribute on {@link element} (defaults to {@link fetchTimeout}). If set to -1 no timeout signal is added. If the requester is instantiated without {@link element} the signal from {@link init} is used, if set.
    *
    * Adds a `csrf-token` header to a POST request if a cookie with the same name exists.
    *
@@ -121,7 +127,8 @@ export class Requester {
 
     if (this.element !== undefined) {
       if (this.element.dataset.fetchTimeout !== '-1') {
-        signals.push(AbortSignal.timeout(Number(this.element.dataset.fetchTimeout ?? 10000)))
+        const signal = AbortSignal.timeout(Number(this.element.dataset.fetchTimeout ?? Requester.fetchTimeout))
+        signals.push(signal)
       }
     } else if (init?.signal instanceof AbortSignal) {
       signals.push(init.signal)
@@ -144,7 +151,7 @@ export class Requester {
       this.loadingTimeoutId = window.setTimeout(() => {
         this.element?.toggleAttribute('data-loading', true)
 
-        this.element?.dispatchEvent(new CustomEvent('command', {
+        this.element?.dispatchEvent(new window.CustomEvent('command', {
           detail: {
             event: 'loading',
           },
@@ -172,7 +179,7 @@ export class Requester {
         })?.exec(text)
 
         throw new CustomError(match?.groups?.error ?? 'An error occurred', {
-          code: match === null
+          code: isNil(match)
             ? `error_${response.status}`
             : undefined,
           status: response.status,

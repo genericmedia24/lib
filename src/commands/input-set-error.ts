@@ -1,4 +1,3 @@
-import type { InputElement } from '../elements/input.js'
 import { Command } from '../commander/command.js'
 
 /**
@@ -13,7 +12,7 @@ import { Command } from '../commander/command.js'
  *
  * {@includeCode ../../docs/examples/commands/input-set-error.html}
  */
-export class InputSetErrorCommand extends Command<InputElement> {
+export class InputSetErrorCommand extends Command<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement> {
   public execute(): void {
     const errorElement = document.querySelector(`label[for="${this.targetElement.id}"] [data-error]`)
 

@@ -16,7 +16,7 @@ export interface ElementToggleStateCommandOptions {
  *
  * Otherwise the state value is set to ElementToggleStateCommandOptions['state-off']. If ElementToggleStateCommandOptions['state-off'] is not defined, the state value will be deleted.
  *
- * Multiple keys, on and off values can be provided. They are processed in their respective order of appearance.
+ * Multiple keys, on and off values can be provided. They are paired in the order of their specification.
  *
  * @example
  * See [a live example](../../examples/commands.html#element-toggle-state) of the code below.
@@ -45,7 +45,7 @@ export class ElementToggleStateCommand extends Command<StatefulElement, ElementT
       const state = this.targetElement.state?.get(stateKey)
 
       if (state === stateOn[index]) {
-        if (stateOff[index] === undefined) {
+        if (stateOff[index] === '') {
           this.targetElement.state?.delete(stateKey)
         } else {
           this.targetElement.state?.set(stateKey, stateOff[index])

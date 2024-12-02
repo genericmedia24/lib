@@ -76,10 +76,11 @@ export class CommandRegistry {
       targetElement = document.getElementById(targetId) ?? undefined
     } else {
       targetElement = originElement
+      targetId = ''
     }
 
     if (targetElement === undefined) {
-      throw new Error (`Target element "${targetId ?? ''}" is undefined)`)
+      throw new Error (`Target element "${targetId}" is undefined)`)
     }
 
     const options: Record<string, unknown> = {}

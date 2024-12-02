@@ -1,3 +1,5 @@
+import type { SetRequired } from 'type-fest'
+
 export interface KeyBindingOptions {
   /**
    * Whether the alt-key should be pressed.
@@ -13,11 +15,6 @@ export interface KeyBindingOptions {
    * Which key should be pressed.
    */
   key: string
-
-  /**
-   * Whether the meta-key should be pressed.
-   */
-  metaKey?: boolean
 
   /**
    * Whether the shift-key should be pressed.
@@ -108,13 +105,10 @@ export class KeyBinding {
    *
    * @param options the options
    */
-  public static toString(options: KeyBindingOptions): string {
+  public static toString(options: SetRequired<Partial<KeyBindingOptions>, 'key'>): string {
     let key = ''
 
-    if (
-      options.ctrlKey === true ||
-      options.metaKey === true
-    ) {
+    if (options.ctrlKey === true) {
       key += 'ctrl+'
     }
 
@@ -150,14 +144,14 @@ export class KeyBinding {
   public key: string
 
   /**
-   * Whether the meta-key should be pressed.
-   */
-  public metaKey: boolean
-
-  /**
    * Whether the shift-key should be pressed.
    */
   public shiftKey: boolean
+
+  /**
+   * The bound keydown handler.
+   */
+  protected handleKeydownBound = this.handleKeydown.bind(this)
 
   /**
    * Creates a key binding.
@@ -168,7 +162,6 @@ export class KeyBinding {
     this.altKey = options.altKey ?? false
     this.ctrlKey = options.ctrlKey ?? false
     this.key = options.key
-    this.metaKey = options.metaKey ?? false
     this.shiftKey = options.shiftKey ?? false
   }
 
@@ -189,7 +182,7 @@ export class KeyBinding {
    * Starts listening for `keydown` events on [window](https://developer.mozilla.org/en-US/docs/Web/API/Window/window).
    */
   public start(): this {
-    window.addEventListener('keydown', this.handleKeydown.bind(this))
+    window.addEventListener('keydown', this.handleKeydownBound)
     return this
   }
 
@@ -197,7 +190,7 @@ export class KeyBinding {
    * Stops listening for `keydown` events on [window](https://developer.mozilla.org/en-US/docs/Web/API/Window/window).
    */
   public stop(): this {
-    window.removeEventListener('keydown', this.handleKeydown.bind(this))
+    window.removeEventListener('keydown', this.handleKeydownBound)
     return this
   }
 
@@ -222,10 +215,11 @@ export class KeyBinding {
   protected handleKeydown(event: KeyboardEvent): void {
     if (
       event.altKey === this.altKey &&
-      event.ctrlKey === this.ctrlKey &&
       event.key.toLowerCase() === this.key &&
-      event.metaKey === this.metaKey &&
-      event.shiftKey === this.shiftKey
+      event.shiftKey === this.shiftKey && (
+        event.ctrlKey === this.ctrlKey ||
+        event.metaKey === this.ctrlKey
+      )
     ) {
       this.callbacks[this.callbacks.length - 1]?.()
     }

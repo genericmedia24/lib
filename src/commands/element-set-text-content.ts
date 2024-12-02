@@ -1,5 +1,6 @@
 import type { Element } from '../elements/element.js'
 import { Command } from '../commander/command.js'
+import { isNil } from '../util/is-nil.js'
 import { isPrimitive } from '../util/is-primitive.js'
 
 export interface ElementSetTextContentCommandData {
@@ -44,8 +45,11 @@ export class ElementSetTextContentCommand extends Command<Element, ElementSetTex
     } else if (this.options['state-key'] !== undefined) {
       const value = this.targetElement.state?.get(this.options['state-key'])
 
-      if (isPrimitive(value)) {
-        this.targetElement.textContent = value?.toString() ?? ''
+      if (
+        isPrimitive(value) &&
+        !isNil(value)
+      ) {
+        this.targetElement.textContent = value.toString()
       }
     }
   }

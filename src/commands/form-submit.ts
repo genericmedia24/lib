@@ -1,6 +1,6 @@
 import type { FormElement } from '../elements/form.js'
-import { Requester } from '../browser.js'
 import { Command } from '../commander/command.js'
+import { Requester } from '../requester/requester.js'
 
 export interface FormSubmitCommandData {
   /**
@@ -37,36 +37,18 @@ export class FormSubmitCommand extends Command<FormElement> {
       method,
     } = this.targetElement
 
-    if (event.submitter instanceof HTMLButtonElement) {
-      if (event.submitter.hasAttribute('formaction')) {
-        action = event.submitter.formAction
-      }
-
-      if (event.submitter.hasAttribute('formenctype')) {
-        action = event.submitter.formEnctype
-      }
-
-      if (event.submitter.hasAttribute('formmethod')) {
-        method = event.submitter.formMethod
-      }
-    }
-
-    if (enctype.length === 0) {
-      enctype = 'application/x-www-form-urlencoded'
-    }
-
-    if (method.length === 0) {
-      method = 'get'
-    }
+    action = event.submitter?.getAttribute('formaction') ?? action
+    enctype = event.submitter?.getAttribute('formenctype') ?? enctype
+    method = event.submitter?.getAttribute('formmethod') ?? method
 
     let body: FormData | null | URLSearchParams = null
 
     if (method === 'get') {
-      action += `?${new URLSearchParams(Object.fromEntries(new FormData(this.targetElement)) as Record<string, string>).toString()}`
+      action += `?${new window.URLSearchParams(Object.fromEntries(new window.FormData(this.targetElement)) as Record<string, string>).toString()}`
     } else {
       body = enctype === 'multipart/form-data'
-        ? body
-        : new URLSearchParams(Object.fromEntries(new FormData(this.targetElement)) as Record<string, string>)
+        ? new window.FormData(this.targetElement)
+        : new window.URLSearchParams(Object.fromEntries(new window.FormData(this.targetElement)) as Record<string, string>)
     }
 
     this.requester

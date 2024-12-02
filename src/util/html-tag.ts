@@ -1,4 +1,5 @@
 import { isArray } from './is-array.js'
+import { isNil } from './is-nil.js'
 import { isObject } from './is-object.js'
 import { isPrimitive } from './is-primitive.js'
 
@@ -12,12 +13,14 @@ export interface RawHtml {
 /**
  * HTML template tag.
  *
- * Four cases are handled:
+ * Four types of values are handled:
  *
  * 1. The value of a raw object is used as-is.
  * 2. An array is joined with an empty string.
  * 3. A primitive is stringified with `toString`, entities (&<>'") are encoded.
  * 4. Other values are replaced with an empty string.
+ *
+ * Trims the final result.
  *
  * @example
  * ```javascript
@@ -43,8 +46,11 @@ export function html(strings: string | TemplateStringsArray, ...values: unknown[
     } else if (isArray(value)) {
       value = value.join('')
     } else {
-      if (isPrimitive(value)) {
-        value = value?.toString() ?? ''
+      if (
+        isPrimitive(value) &&
+        !isNil(value)
+      ) {
+        value = value.toString()
       } else {
         value = ''
       }

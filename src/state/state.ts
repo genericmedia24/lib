@@ -41,7 +41,7 @@ export class State<StateValues = Record<string, unknown>> {
   /**
    * The singleton states.
    */
-  private static readonly instances = new Map<string, State>()
+  public static readonly instances = new Map<string, State>()
 
   /**
    * Creates a singleton state. For every name there is one state.
@@ -131,7 +131,7 @@ export class State<StateValues = Record<string, unknown>> {
    *
    * @param options the options
    */
-  private constructor(options: StateOptions) {
+  public constructor(options: StateOptions) {
     this.name = options.name
     this.storage = options.storage ?? 'local'
     this.values = new Map(Object.entries(options.values ?? {}))
