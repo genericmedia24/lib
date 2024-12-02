@@ -1,5 +1,5 @@
 /**
- * Checks whether a value is an object.
+ * Checks whether a value is an object, as in: not null and not an array.
  *
  * The custom check function can be used to refine the type guard.
  *

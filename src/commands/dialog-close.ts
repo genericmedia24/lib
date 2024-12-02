@@ -1,4 +1,3 @@
-import type { DialogElement } from '../elements/dialog.js'
 import { Command } from '../commander/command.js'
 
 /**
@@ -11,7 +10,7 @@ import { Command } from '../commander/command.js'
  *
  * {@includeCode ../../docs/examples/commands/dialog-close.html}
  */
-export class DialogCloseCommand extends Command<DialogElement> {
+export class DialogCloseCommand extends Command<HTMLDialogElement> {
   public execute(): void {
     this.targetElement.close()
   }

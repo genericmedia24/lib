@@ -28,9 +28,10 @@ import { CommandRegistry } from '../commander/command-registry.js'
  *
  * @param commands the object with custom commands
  * @param prefix the prefix to add to the external name of the custom commands
- * @param registry the registry to add the custom commands to
  */
-export function defineCommands(commands: Record<string, Constructor<Command>>, prefix = '', registry = CommandRegistry.create()): void {
+export function defineCommands(commands: Record<string, Constructor<Command>>, prefix = ''): void {
+  const registry = CommandRegistry.create()
+
   Object
     .entries(commands)
     .forEach(([fullName, command]) => {

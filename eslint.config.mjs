@@ -161,6 +161,14 @@ export default tslint.config(
   },
   {
     files: [
+      'test/**/*.ts',
+    ],
+    rules: {
+      '@typescript-eslint/no-floating-promises': 'off',
+    },
+  },
+  {
+    files: [
       '*.mjs',
     ],
     ...tslint.configs.disableTypeChecked,

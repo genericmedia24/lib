@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-floating-promises */
-
 import { describe, it } from 'node:test'
 import { formatDsvRows } from '../../src/dsv/format-rows.js'
 

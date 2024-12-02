@@ -1,16 +1,19 @@
 import { isArray } from './is-array.js'
+import { isNil } from './is-nil.js'
 import { isPrimitive } from './is-primitive.js'
 
 /**
  * SQL template tag.
  *
- * Three cases are handled:
+ * Three types of values are handled:
  *
  * 1. A primitive is stringified with `toString`.
- * 2. An array is joined with a space.
+ * 2. An array is joined with a comma.
  * 3. Other values are replaced with an empty string.
  *
  * Parameters are not escaped, so this tag should only be used for syntax highlighting.
+ *
+ * Trims the final result.
  *
  * @example
  *
@@ -32,10 +35,13 @@ export function sql(strings: string | TemplateStringsArray, ...values: unknown[]
   for (; i < values.length; i += 1) {
     value = values[i]
 
-    if (isPrimitive(value)) {
-      value = value?.toString() ?? ''
+    if (
+      isPrimitive(value) &&
+      !isNil(value)
+    ) {
+      value = value.toString()
     } else if (isArray(value)) {
-      value = value.join(' ')
+      value = value.join(',')
     } else {
       value = ''
     }

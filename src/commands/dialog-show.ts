@@ -1,4 +1,3 @@
-import type { DialogElement } from '../elements/dialog.js'
 import { Command } from '../commander/command.js'
 
 export interface DialogShowCommandOptions {
@@ -20,7 +19,7 @@ export interface DialogShowCommandOptions {
  *
  * {@includeCode ../../docs/examples/commands/dialog-show.html}
  */
-export class DialogShowCommand extends Command<DialogElement, DialogShowCommandOptions> {
+export class DialogShowCommand extends Command<HTMLDialogElement, DialogShowCommandOptions> {
   public execute(): void {
     if (this.options.modal === undefined) {
       this.targetElement.show()

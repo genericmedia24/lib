@@ -2,14 +2,14 @@ import { sprintf } from 'sprintf-js'
 
 export interface I18nOptions {
   /**
+   * The locale dictionary. The key is the locale, for example `'nl-NL'`, and the value is an object with strings of which the key is the string code and the value the actual string.
+   */
+  dictionary?: Record<string, Record<string, string>>
+
+  /**
    * The locale, for example `'nl-NL'`.
    */
   locale?: string
-
-  /**
-   * The locale definitions. The key is the locale, for example `'nl-NL'`, and the value is an object with strings of which the key is the string code and the value the actual string.
-   */
-  locales?: Record<string, Record<string, string>>
 
   /**
    * The timezone identifier, for example `'Europe/Amsterdam'`.
@@ -23,12 +23,12 @@ export interface I18nOptions {
  * @example
  * ```javascript
  * const i18n = new I18n({
- *   locale: 'nl-NL',
- *   locales: {
+ *   dictionary: {
  *     'nl-NL': {
  *       message: 'Hallo %(name)s',
  *     },
  *   },
+ *   locale: 'nl-NL',
  *   timeZone: 'Europe/Amsterdam',
  * })
  *
@@ -68,14 +68,14 @@ export class I18n {
   }
 
   /**
+   * The locale definitions. The key is the locale, for example `'nl-NL'`, and the value is an object with strings of which the key is the string code and the value the actual string.
+   */
+  public dictionary: Record<string, Record<string, string>>
+
+  /**
    * The locale, for example `'nl-NL'`.
    */
   public locale: string
-
-  /**
-   * The locale definitions. The key is the locale, for example `'nl-NL'`, and the value is an object with strings of which the key is the string code and the value the actual string.
-   */
-  public locales: Record<string, Record<string, string>>
 
   /**
    * The timezone identifier, for example `'Europe/Amsterdam'`.
@@ -88,9 +88,9 @@ export class I18n {
    * @param options the options
    */
   public constructor(options?: I18nOptions) {
+    this.dictionary = options?.dictionary ?? {}
     this.locale = options?.locale ?? 'nl-NL'
-    this.locales = options?.locales ?? {}
-    this.timeZone = options?.timeZone ?? 'UTC'
+    this.timeZone = options?.timeZone ?? 'Europe/Amsterdam'
   }
 
   /**
@@ -134,7 +134,7 @@ export class I18n {
   /**
    * Formats a string according to the defined locale.
    *
-   * Looks up the value in the locale definition, using the value as a code. If the code is not found, the value is used as-is.
+   * Looks up the value in the dictionary, using the value as a code. If the code is not found, the value is used as-is.
    *
    * Uses [sprintf](https://www.npmjs.com/package/sprintf-js#named-arguments) to interpolate parameters defined in the string.
    *
@@ -150,7 +150,7 @@ export class I18n {
    * @param value the value
    * @param parameters the parameters defined in the string
    */
-  public formatString(value: string, parameters?: Record<string, unknown>): string {
-    return sprintf(this.locales[this.locale]?.[value] ?? value, parameters)
+  public formatString(value: string, parameters: Record<string, unknown> = {}): string {
+    return sprintf(this.dictionary[this.locale]?.[value] ?? value, parameters)
   }
 }

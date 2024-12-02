@@ -1,5 +1,6 @@
 import type { InputElement } from '../elements/input.js'
 import { Command } from '../commander/command.js'
+import { isNil } from '../util/is-nil.js'
 import { isPrimitive } from '../util/is-primitive.js'
 
 export interface InputSetValueCommandData {
@@ -44,8 +45,11 @@ export class InputSetValueCommand extends Command<InputElement, InputSetValueCom
     } else if (this.options['state-key'] !== undefined) {
       const value = this.targetElement.state?.get(this.options['state-key'])
 
-      if (isPrimitive(value)) {
-        this.targetElement.value = value?.toString() ?? ''
+      if (
+        isPrimitive(value) &&
+        !isNil(value)
+      ) {
+        this.targetElement.value = value.toString()
       }
     }
   }

@@ -10,7 +10,7 @@ export interface ElementSetStateCommandOptions {
   /**
    * The value(s) of the state.
    */
-  'state-value': string | string[]
+  'state-value'?: string | string[]
 }
 
 /**
@@ -18,7 +18,7 @@ export interface ElementSetStateCommandOptions {
  *
  * If options{@link ElementSetStateCommandOptions['state-value']} is not defined the state value will be deleted.
  *
- * Multiple keys and values can be provided. They are processed in their respective order of appearance.
+ * Multiple keys and values can be provided. They are paired in the order of their specification.
  *
  * @example
  * See [a live example](../../examples/commands.html#element-set-state) of the code below.
@@ -36,7 +36,7 @@ export class ElementSetStateCommand extends Command<StatefulElement, ElementSetS
       : [this.options['state-value']]
 
     stateKeys.forEach((stateKey, index) => {
-      if (stateValues[index] === undefined) {
+      if (stateValues[index] === '') {
         this.targetElement.state?.delete(stateKey)
       } else {
         this.targetElement.state?.set(stateKey, stateValues[index])

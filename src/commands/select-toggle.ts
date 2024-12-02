@@ -1,4 +1,3 @@
-import type { SelectElement } from '../elements/select.js'
 import { Command } from '../commander/command.js'
 
 /**
@@ -13,7 +12,7 @@ import { Command } from '../commander/command.js'
  *
  * {@includeCode ../../docs/examples/commands/select-toggle.html}
  */
-export class SelectToggleCommand extends Command<SelectElement> {
+export class SelectToggleCommand extends Command<HTMLSelectElement> {
   public execute(): void {
     document
       .querySelectorAll<HTMLElement>(`[data-select-toggle=${this.targetElement.id}]`)

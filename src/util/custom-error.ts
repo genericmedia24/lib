@@ -1,3 +1,4 @@
+import { isNil } from './is-nil.js'
 import { isPrimitive } from './is-primitive.js'
 
 export interface CustomErrorOptions extends ErrorOptions {
@@ -85,8 +86,11 @@ export class CustomError extends Error {
         cause: error,
         ...options,
       })
-    } else if (isPrimitive(error)) {
-      return new CustomError(error?.toString() ?? 'An error occurred', options)
+    } else if (
+      isPrimitive(error) &&
+      !isNil(error)
+    ) {
+      return new CustomError(error.toString(), options)
     }
 
     return new CustomError('An error occurred', options)

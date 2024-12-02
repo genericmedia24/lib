@@ -1,4 +1,3 @@
-import type { DialogElement } from '../elements/dialog.js'
 import { Command } from '../commander/command.js'
 
 export interface DialogToggleCommandOptions {
@@ -22,7 +21,7 @@ export interface DialogToggleCommandOptions {
  *
  * {@includeCode ../../docs/examples/commands/dialog-toggle.html}
  */
-export class DialogToggleCommand extends Command<DialogElement, DialogToggleCommandOptions> {
+export class DialogToggleCommand extends Command<HTMLDialogElement, DialogToggleCommandOptions> {
   public execute(): void {
     if (this.targetElement.open) {
       this.targetElement.close()
