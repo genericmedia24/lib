@@ -19,9 +19,13 @@ describe('InputSetErrorCommand', () => {
       labelElement !== null
     ) {
       const command = new InputSetErrorCommand(inputElement, inputElement)
+
       command.execute()
 
-      test.assert.equal(labelElement.firstElementChild?.textContent, inputElement.validationMessage.toString())
+      test.assert.equal(
+        labelElement.firstElementChild?.textContent,
+        inputElement.validationMessage.toString(),
+      )
     }
   })
 })

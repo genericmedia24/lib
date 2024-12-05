@@ -127,8 +127,7 @@ export class Requester {
 
     if (this.element !== undefined) {
       if (this.element.dataset.fetchTimeout !== '-1') {
-        const signal = AbortSignal.timeout(Number(this.element.dataset.fetchTimeout ?? Requester.fetchTimeout))
-        signals.push(signal)
+        signals.push(AbortSignal.timeout(Number(this.element.dataset.fetchTimeout ?? Requester.fetchTimeout)))
       }
     } else if (init?.signal instanceof AbortSignal) {
       signals.push(init.signal)
@@ -186,8 +185,7 @@ export class Requester {
         })
       }
     } catch (error: unknown) {
-      this.handleError(error)
-      return undefined
+      return this.handleError(error)
     } finally {
       clearTimeout(this.loadingTimeoutId)
       this.element?.toggleAttribute('data-loading', false)
@@ -264,16 +262,16 @@ export class Requester {
   }
 
   /**
-   * Handles an error. Returns `undefined` if {@link error} is an `AbortError`, otherwise throws the error.
+   * Handles an error. Returns `undefined` if `error`` is an `AbortError`, otherwise throws the error.
    *
    * @param error the error
    */
-  protected handleError(error: unknown): void {
+  protected handleError(error: unknown): undefined {
     if (
       error instanceof Error &&
       error.name === 'AbortError'
     ) {
-      return
+      return undefined
     }
 
     throw error

@@ -6,28 +6,25 @@ import { DivElement, elements } from '../../src/elements/index.js'
 describe('DivElement', () => {
   HTMLDivElement.prototype.hidePopover = (): void => {}
   HTMLDivElement.prototype.showPopover = (): void => {}
-
   defineElements(elements)
 
   it('should setup state', (test) => {
     const divElement = new DivElement()
+
     divElement.dataset.state = 'test'
     divElement.connectedCallback()
-
     test.assert.equal(divElement.state?.name, 'test')
     test.assert.equal(divElement.state?.elements.has(divElement), true)
-
     divElement.disconnectedCallback()
   })
 
   it('should teardown state', (test) => {
     const divElement = new DivElement()
-    divElement.dataset.state = 'test'
 
+    divElement.dataset.state = 'test'
     divElement.connectedCallback()
     test.assert.equal(divElement.state?.name, 'test')
     test.assert.equal(divElement.state?.elements.has(divElement), true)
-
     divElement.disconnectedCallback()
     test.assert.equal(divElement.state?.elements.has(divElement), false)
   })
@@ -37,11 +34,9 @@ describe('DivElement', () => {
     const commanderExecute = test.mock.method(divElement.commander, 'execute')
 
     divElement.connectedCallback()
-
     test.assert.equal(divElement.commander.started, true)
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'connected')
-
     divElement.disconnectedCallback()
   })
 
@@ -50,7 +45,6 @@ describe('DivElement', () => {
     const commanderExecute = test.mock.method(divElement.commander, 'execute')
 
     divElement.disconnectedCallback()
-
     test.assert.equal(divElement.commander.started, false)
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'disconnected')
@@ -82,7 +76,6 @@ describe('DivElement', () => {
 
     divElement.showPopover()
     test.assert.equal(divElement.escapeBinding.callbacks.length, 1)
-
     divElement.hidePopover()
   })
 
@@ -91,7 +84,6 @@ describe('DivElement', () => {
 
     divElement.showPopover()
     test.assert.equal(divElement.escapeBinding.callbacks.length, 1)
-
     divElement.hidePopover()
     test.assert.equal(divElement.escapeBinding.callbacks.length, 0)
   })

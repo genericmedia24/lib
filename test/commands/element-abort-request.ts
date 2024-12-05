@@ -11,11 +11,12 @@ describe('ElementAbortRequest', () => {
     public requester = new Requester(this)
   }
 
+  const agent = new MockAgent()
+
   defineElements({
     CustomElement,
   })
 
-  const agent = new MockAgent()
   setGlobalDispatcher(agent)
 
   it('should abort request', (test) => {
@@ -36,7 +37,6 @@ describe('ElementAbortRequest', () => {
 
       customElement.requester.fetch('https://example.com')
       command.execute()
-
       test.assert.equal(customElement.requester.abortController?.signal.aborted, true)
     }
   })

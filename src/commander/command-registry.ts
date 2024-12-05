@@ -28,7 +28,10 @@ export class CommandRegistry {
    * Creates a singleton command registry.
    */
   public static create(): CommandRegistry {
-    CommandRegistry.instance ??= new CommandRegistry()
+    if (CommandRegistry.instance === undefined) {
+      CommandRegistry.instance = new CommandRegistry()
+    }
+
     return CommandRegistry.instance
   }
 
@@ -53,7 +56,6 @@ export class CommandRegistry {
    */
   public create(command: string, originElement: HTMLElement, invert = false): Command {
     const url = new URL(`http://${command}`)
-
     let commandName = url.username
     let targetId: string | undefined = url.hostname
 

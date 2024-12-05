@@ -9,9 +9,9 @@ import { Requester } from '../../src/requester/requester.js'
 import { CustomError } from '../../src/util/custom-error.js'
 
 describe('Requester', () => {
-  defineElements(elements)
-
   const agent = new MockAgent()
+
+  defineElements(elements)
   setGlobalDispatcher(agent)
 
   it('should set CSRF token header on POST request', (test) => {
@@ -47,6 +47,7 @@ describe('Requester', () => {
       .delay(300)
 
     const element = new DivElement()
+
     element.dataset.loadingTimeout = '100'
 
     const requester = new Requester(element)
@@ -57,7 +58,6 @@ describe('Requester', () => {
     }, 200)
 
     await request
-
     test.assert.equal(element.hasAttribute('data-loading'), false)
   })
 
@@ -72,6 +72,7 @@ describe('Requester', () => {
       .delay(300)
 
     const element = new DivElement()
+
     element.dataset.loadingTimeout = '100'
 
     const requester = new Requester(element)
@@ -83,7 +84,6 @@ describe('Requester', () => {
     })
 
     await request
-
     test.assert.equal(dispatchEvent.mock.callCount(), 1)
   })
 
@@ -99,6 +99,7 @@ describe('Requester', () => {
 
     await test.assert.rejects(async () => {
       const requester = new Requester()
+
       requester.fetch('https://example.com/test')
       await requester.fetch('https://example.com/test')
     }, {
@@ -139,9 +140,9 @@ describe('Requester', () => {
 
     await test.assert.rejects(async () => {
       const element = new DivElement()
-      element.dataset.fetchTimeout = '100'
-
       const requester = new Requester(element)
+
+      element.dataset.fetchTimeout = '100'
       await requester.fetch('https://example.com/test')
     }, {
       message: /aborted/u,
@@ -159,12 +160,13 @@ describe('Requester', () => {
       .delay(300)
 
     const defaultFetchTimeout = Requester.fetchTimeout
+
     Requester.fetchTimeout = 200
 
     await test.assert.rejects(async () => {
       const element = new DivElement()
-
       const requester = new Requester(element)
+
       await requester.fetch('https://example.com/test')
     }, {
       message: /aborted/u,
@@ -309,7 +311,6 @@ describe('Requester', () => {
 
     const requester = new Requester()
     const body = await requester.fetchBlob('https://example.com/test')
-
     const actual = await body?.arrayBuffer()
     const expected = text.buffer
 
@@ -351,8 +352,7 @@ describe('Requester', () => {
       .reply(200)
 
     await test.assert.rejects(async () => {
-      const requester = new Requester()
-      await requester.fetchJson('https://example.com/test.json')
+      await new Requester().fetchJson('https://example.com/test.json')
     }, {
       message: /unexpected/u,
     })
@@ -411,8 +411,7 @@ describe('Requester', () => {
       .reply(200)
 
     await test.assert.rejects(async () => {
-      const requester = new Requester()
-      await requester.fetchText('https://example.com/test.txt')
+      await new Requester().fetchText('https://example.com/test.txt')
     }, {
       message: /unexpected/u,
     })

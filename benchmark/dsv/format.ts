@@ -34,5 +34,4 @@ bench
   })
 
 await bench.run()
-
 console.table(bench.table())

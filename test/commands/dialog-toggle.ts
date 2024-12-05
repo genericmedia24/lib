@@ -25,8 +25,8 @@ describe('DialogToggleCommand', () => {
       test.assert.equal(dialogElement.open, false)
 
       const command = new DialogToggleCommand(dialogElement, dialogElement)
-      command.execute()
 
+      command.execute()
       test.assert.equal(dialogElement.open, true)
     }
   })
@@ -47,7 +47,6 @@ describe('DialogToggleCommand', () => {
       })
 
       command.execute()
-
       test.assert.equal(dialogElement.open, true)
       test.assert.equal(dialogElementOpenModal.mock.callCount(), 1)
     }
@@ -62,8 +61,8 @@ describe('DialogToggleCommand', () => {
       test.assert.equal(dialogElement.open, true)
 
       const command = new DialogToggleCommand(dialogElement, dialogElement)
-      command.execute()
 
+      command.execute()
       test.assert.equal(dialogElement.open, false)
     }
   })

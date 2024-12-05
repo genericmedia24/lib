@@ -21,16 +21,12 @@ describe('SelectToggleCommand', () => {
 
       test.assert.equal(divElements.item(0).hasAttribute('hidden'), true)
       test.assert.equal(divElements.item(1).hasAttribute('hidden'), true)
-
       selectElement.value = 'option-1'
       command.execute()
-
       test.assert.equal(divElements.item(0).hasAttribute('hidden'), false)
       test.assert.equal(divElements.item(1).hasAttribute('hidden'), true)
-
       selectElement.value = 'option-2'
       command.execute()
-
       test.assert.equal(divElements.item(0).hasAttribute('hidden'), true)
       test.assert.equal(divElements.item(1).hasAttribute('hidden'), false)
     }
@@ -58,16 +54,12 @@ describe('SelectToggleCommand', () => {
 
       test.assert.equal(inputElements.item(0).hasAttribute('disabled'), true)
       test.assert.equal(inputElements.item(1).hasAttribute('disabled'), true)
-
       selectElement.value = 'option-1'
       command.execute()
-
       test.assert.equal(inputElements.item(0).hasAttribute('disabled'), false)
       test.assert.equal(inputElements.item(1).hasAttribute('disabled'), true)
-
       selectElement.value = 'option-2'
       command.execute()
-
       test.assert.equal(inputElements.item(0).hasAttribute('disabled'), true)
       test.assert.equal(inputElements.item(1).hasAttribute('disabled'), false)
     }

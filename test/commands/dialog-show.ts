@@ -20,8 +20,8 @@ describe('DialogShowCommand', () => {
       test.assert.equal(dialogElement.open, false)
 
       const command = new DialogShowCommand(dialogElement, dialogElement)
-      command.execute()
 
+      command.execute()
       test.assert.equal(dialogElement.open, true)
     }
   })
@@ -42,7 +42,6 @@ describe('DialogShowCommand', () => {
       })
 
       command.execute()
-
       test.assert.equal(dialogElement.open, true)
       test.assert.equal(dialogElementOpenModal.mock.callCount(), 1)
     }

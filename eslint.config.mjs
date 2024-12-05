@@ -52,17 +52,104 @@ export default tslint.config(
           '?': 'before',
         },
       }],
+      '@stylistic/padding-line-between-statements': ['error', {
+        blankLine: 'always',
+        next: 'block-like',
+        prev: '*',
+      },
+      {
+        blankLine: 'always',
+        next: '*',
+        prev: 'block-like',
+      },
+      {
+        blankLine: 'always',
+        next: '*',
+        prev: [
+          'const',
+          'expression',
+          'let',
+        ],
+      },
+      {
+        blankLine: 'never',
+        next: [
+          'const',
+          'let',
+        ],
+        prev: 'const',
+      },
+      {
+        blankLine: 'never',
+        next: [
+          'const',
+          'let',
+        ],
+        prev: 'let',
+      },
+      {
+        blankLine: 'never',
+        next: 'expression',
+        prev: 'expression',
+      },
+      {
+        blankLine: 'never',
+        next: [
+          'break',
+          'throw',
+        ],
+        prev: [
+          'const',
+          'expression',
+          'let',
+        ],
+      },
+      {
+        blankLine: 'always',
+        next: 'import',
+        prev: '*',
+      },
+      {
+        blankLine: 'always',
+        next: '*',
+        prev: 'import',
+      },
+      {
+        blankLine: 'never',
+        next: 'import',
+        prev: 'import',
+      },
+      {
+        blankLine: 'always',
+        next: [
+          'multiline-const',
+          'multiline-expression',
+          'multiline-let',
+        ],
+        prev: '*',
+      },
+      {
+        blankLine: 'always',
+        next: '*',
+        prev: [
+          'multiline-const',
+          'multiline-expression',
+          'multiline-let',
+        ],
+      }],
       '@stylistic/quotes': ['error', 'single'],
       '@typescript-eslint/array-type': ['error', {
         default: 'array-simple',
       }],
       '@typescript-eslint/class-methods-use-this': 'off',
+      '@typescript-eslint/consistent-return': 'off',
       '@typescript-eslint/consistent-type-imports': ['error', {
         fixStyle: 'inline-type-imports',
       }],
       '@typescript-eslint/max-params': 'off',
       '@typescript-eslint/member-ordering': 'off',
       '@typescript-eslint/naming-convention': 'off',
+      '@typescript-eslint/no-confusing-void-expression': 'off',
       '@typescript-eslint/no-empty-function': 'off',
       '@typescript-eslint/no-extraneous-class': ['error', {
         allowStaticOnly: true,
@@ -127,10 +214,22 @@ export default tslint.config(
           'index-signature',
           'static-property',
           'static-method',
-          ['property', 'accessor-property'],
-          ['protected-property', 'protected-accessor-property'],
-          ['private-property', 'private-accessor-property'],
-          ['get-method', 'set-method'],
+          [
+            'property',
+            'accessor-property',
+          ],
+          [
+            'protected-property',
+            'protected-accessor-property',
+          ],
+          [
+            'private-property',
+            'private-accessor-property',
+          ],
+          [
+            'get-method',
+            'set-method',
+          ],
           'constructor',
           'method',
           'protected-method',

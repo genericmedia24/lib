@@ -53,6 +53,7 @@ describe('State', () => {
 
   it('should instantiate with default element attributes', (test) => {
     const divElement = new DivElement()
+
     divElement.dataset.state = 'test'
 
     const state = State.setup(divElement)
@@ -90,7 +91,6 @@ describe('State', () => {
 
     window.localStorage.setItem(state.storageKey, '[["key","value"]]')
     state.load()
-
     test.assert.equal(state.get('key'), 'value')
   })
 
@@ -103,7 +103,6 @@ describe('State', () => {
 
     window.localStorage.setItem(state.storageKey, 'malformed')
     state.load()
-
     test.assert.equal(state.has('key'), false)
     test.assert.equal(consoleError.mock.callCount(), 1)
   })
@@ -116,7 +115,6 @@ describe('State', () => {
 
     await idb.set(state.storageKey, '[["key","value"]]')
     state.load()
-
     await state.loaded
     test.assert.equal(state.get('key'), 'value')
   })
@@ -131,7 +129,6 @@ describe('State', () => {
 
     await idb.set(state.storageKey, 'malformed')
     state.load()
-
     await state.loaded
     test.assert.equal(state.has('key'), false)
     test.assert.equal(consoleError.mock.callCount(), 1)
@@ -146,10 +143,8 @@ describe('State', () => {
     })
 
     test.assert.equal(state.get('key'), 'value')
-
     window.localStorage.setItem(state.storageKey, '[]')
     state.load()
-
     test.assert.equal(state.has('key'), false)
   })
 
@@ -160,9 +155,7 @@ describe('State', () => {
 
     state.set('key', 'value')
     test.assert.equal(state.get('key'), 'value')
-
     state.unload()
-
     test.assert.equal(state.loaded, undefined)
     test.assert.equal(state.has('key'), false)
     test.assert.notEqual(localStorage.getItem(state.storageKey), null)
@@ -188,7 +181,6 @@ describe('State', () => {
 
     state.register(divElement)
     test.assert.equal(state.elements.size, 1)
-
     state.unregister(divElement)
     test.assert.equal(state.elements.size, 0)
   })
@@ -202,7 +194,6 @@ describe('State', () => {
     state.set('key', 'value')
     test.assert.equal(state.get('key'), 'value')
     test.assert.equal(localStorage.getItem(state.storageKey), '[["key","value"]]')
-
     state.clear()
     test.assert.equal(state.has('key'), false)
     test.assert.equal(localStorage.getItem(state.storageKey), null)
@@ -217,7 +208,6 @@ describe('State', () => {
     state.set('key', 'value')
     test.assert.equal(state.get('key'), 'value')
     test.assert.equal(await idb.get(state.storageKey), '[["key","value"]]')
-
     state.clear()
     test.assert.equal(state.has('key'), false)
     test.assert.equal(await idb.get(state.storageKey), null)
@@ -254,12 +244,9 @@ describe('State', () => {
 
     state.set('key-1', 'value-1')
     state.set('key-2', 'value-2')
-
     test.assert.equal(state.get('key-1'), 'value-1')
     test.assert.equal(state.get('key-2'), 'value-2')
-
     state.deleteAll()
-
     test.assert.equal(state.has('key-1'), false)
     test.assert.equal(state.has('key-2'), false)
   })
@@ -271,12 +258,9 @@ describe('State', () => {
 
     state.set('key-1', 'value-1')
     state.set('key-2', 'value-2')
-
     test.assert.equal(state.get('key-1'), 'value-1')
     test.assert.equal(state.get('key-2'), 'value-2')
-
     state.deleteAll(['key-1'])
-
     test.assert.equal(state.has('key-1'), false)
     test.assert.equal(state.get('key-2'), 'value-2')
   })
@@ -288,12 +272,9 @@ describe('State', () => {
 
     state.set('key-1', 'value-1')
     state.set('key-2', 'value-2')
-
     test.assert.equal(state.get('key-1'), 'value-1')
     test.assert.equal(state.get('key-2'), 'value-2')
-
     state.deleteAll(['key-1', 'key-3'])
-
     test.assert.equal(state.has('key-1'), false)
     test.assert.equal(state.get('key-2'), 'value-2')
   })
@@ -318,7 +299,6 @@ describe('State', () => {
     }
 
     state.setAll(values)
-
     test.assert.notEqual(state.getAll(), values)
     test.assert.deepEqual(state.getAll(), values)
   })
@@ -339,7 +319,6 @@ describe('State', () => {
 
     state.set('key', 'value')
     test.assert.equal(state.get('key'), 'value')
-
     state.set('key', 'value')
     test.assert.equal(state.get('key'), 'value')
   })
@@ -351,7 +330,6 @@ describe('State', () => {
 
     state.setnx('key', 'value')
     test.assert.equal(state.get('key'), 'value')
-
     state.setnx('key', 'value-2')
     test.assert.equal(state.get('key'), 'value')
   })
@@ -406,7 +384,6 @@ describe('State', () => {
 
     state.register(divElement)
     state.delete('key')
-
     test.assert.equal(callback.mock.callCount(), 1)
   })
 
@@ -434,7 +411,6 @@ describe('State', () => {
 
     state.register(divElement)
     state.deleteAll()
-
     test.assert.equal(callback.mock.callCount(), 1)
   })
 
@@ -457,7 +433,6 @@ describe('State', () => {
 
     state.register(divElement)
     state.set('key', 'value')
-
     test.assert.equal(callback.mock.callCount(), 1)
   })
 

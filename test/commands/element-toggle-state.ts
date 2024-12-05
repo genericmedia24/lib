@@ -20,6 +20,7 @@ describe('ElementToggleStateCommand', () => {
 
   it('should set state', (test) => {
     const divElement = new DivElement()
+
     divElement.dataset.state = 'test'
     divElement.connectedCallback()
 
@@ -31,15 +32,14 @@ describe('ElementToggleStateCommand', () => {
 
     command.execute()
     test.assert.equal(divElement.state?.get('key'), 'value-on')
-
     command.execute()
     test.assert.equal(divElement.state?.get('key'), 'value-off')
-
     divElement.disconnectedCallback()
   })
 
   it('should set multiple states', (test) => {
     const divElement = new DivElement()
+
     divElement.dataset.state = 'test'
     divElement.connectedCallback()
 
@@ -61,16 +61,15 @@ describe('ElementToggleStateCommand', () => {
     command.execute()
     test.assert.equal(divElement.state?.get('key-1'), 'value-on-1')
     test.assert.equal(divElement.state?.get('key-2'), 'value-on-2')
-
     command.execute()
     test.assert.equal(divElement.state?.get('key-1'), 'value-off-1')
     test.assert.equal(divElement.state?.get('key-2'), 'value-off-2')
-
     divElement.disconnectedCallback()
   })
 
   it('should delete state', (test) => {
     const divElement = new DivElement()
+
     divElement.dataset.state = 'test'
     divElement.connectedCallback()
 
@@ -82,15 +81,14 @@ describe('ElementToggleStateCommand', () => {
 
     command.execute()
     test.assert.equal(divElement.state?.get('key'), 'value-on')
-
     command.execute()
     test.assert.equal(divElement.state?.has('key'), false)
-
     divElement.disconnectedCallback()
   })
 
   it('should delete multiple states', (test) => {
     const divElement = new DivElement()
+
     divElement.dataset.state = 'test'
     divElement.connectedCallback()
 
@@ -112,22 +110,19 @@ describe('ElementToggleStateCommand', () => {
     command.execute()
     test.assert.equal(divElement.state?.get('key-1'), 'value-on-1')
     test.assert.equal(divElement.state?.get('key-2'), 'value-on-2')
-
     command.execute()
     test.assert.equal(divElement.state?.has('key-1'), false)
     test.assert.equal(divElement.state?.get('key-2'), 'value-off-2')
-
     divElement.disconnectedCallback()
   })
 
   it('should wait for state to be loaded', async (test) => {
     const divElement = new DivElement()
+
     divElement.dataset.state = 'test'
     divElement.dataset.stateStorage = 'idb'
-
     await idb.set('state-test', '[["key","value-on"]]')
     divElement.connectedCallback()
-
     await divElement.state?.loaded
     test.assert.equal(divElement.state?.get('key'), 'value-on')
 
@@ -138,9 +133,7 @@ describe('ElementToggleStateCommand', () => {
     })
 
     await command.execute()
-
     test.assert.equal(divElement.state?.get('key'), 'value-off')
-
     divElement.disconnectedCallback()
   })
 })

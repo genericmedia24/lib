@@ -15,12 +15,12 @@ describe('FormSubmitCommand', () => {
         <input name="query" value="test">
       </form>
     `
+
     const formElement = document.querySelector<FormElement>('form')
 
     if (formElement !== null) {
       const command = new FormSubmitCommand(formElement, formElement)
       const commanderExecute = test.mock.method(formElement.commander, 'execute')
-
       const event = new SubmitEvent('submit')
       const response = new Response()
 
@@ -61,6 +61,7 @@ describe('FormSubmitCommand', () => {
         <button formaction="https://example.com/test" formenctype="multipart/form-data" formmethod="post"></button>
       </form>
     `
+
     const buttonElement = document.querySelector<FormElement>('button')
     const formElement = document.querySelector<FormElement>('form')
 
@@ -119,6 +120,7 @@ describe('FormSubmitCommand', () => {
         <input name="query" value="test">
       </form>
     `
+
     const formElement = document.querySelector<FormElement>('form')
 
     if (formElement !== null) {
@@ -171,6 +173,7 @@ describe('FormSubmitCommand', () => {
         <input name="query" value="test">
       </form>
     `
+
     const formElement = document.querySelector<FormElement>('form')
 
     if (formElement !== null) {

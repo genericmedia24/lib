@@ -183,6 +183,7 @@ export class KeyBinding {
    */
   public start(): this {
     window.addEventListener('keydown', this.handleKeydownBound)
+
     return this
   }
 
@@ -191,6 +192,7 @@ export class KeyBinding {
    */
   public stop(): this {
     window.removeEventListener('keydown', this.handleKeydownBound)
+
     return this
   }
 

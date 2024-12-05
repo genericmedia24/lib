@@ -35,14 +35,13 @@ describe('ElementSetTextContentCommand', () => {
     })
 
     command.execute()
-
     test.assert.equal(divElement.textContent, 'text-content')
   })
 
   it('should set text content from state', (test) => {
     const divElement = new DivElement()
-    divElement.dataset.state = 'test'
 
+    divElement.dataset.state = 'test'
     divElement.connectedCallback()
     divElement.state?.set('text-key', 'text-content')
 
@@ -51,7 +50,6 @@ describe('ElementSetTextContentCommand', () => {
     })
 
     command.execute()
-
     test.assert.equal(divElement.textContent, 'text-content')
   })
 })

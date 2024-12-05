@@ -201,6 +201,7 @@ export class State<StateValues = Record<string, unknown>> {
     })
 
     this.save()
+
     return result
   }
 
@@ -225,7 +226,6 @@ export class State<StateValues = Record<string, unknown>> {
   public deleteAll(keys?: Array<keyof StateValues & string>): this {
     let newValues = {}
     let oldValues = {}
-
     const allKeys = keys ?? Array.from(this.values.keys())
 
     allKeys.forEach((key) => {
@@ -252,8 +252,7 @@ export class State<StateValues = Record<string, unknown>> {
       element.stateChangedCallback(newValues, oldValues)
     })
 
-    this.save()
-    return this
+    return this.save()
   }
 
   /**
@@ -402,8 +401,7 @@ export class State<StateValues = Record<string, unknown>> {
       element.stateChangedCallback(newValues, oldValues)
     })
 
-    this.save()
-    return this
+    return this.save()
   }
 
   /**
@@ -456,8 +454,7 @@ export class State<StateValues = Record<string, unknown>> {
       element.stateChangedCallback(newValues, oldValues)
     })
 
-    this.save()
-    return this
+    return this.save()
   }
 
   /**

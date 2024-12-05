@@ -18,7 +18,6 @@ import type { ParseDsvState } from './parse-state.js'
  */
 export function parseDsv(state: ParseDsvState, rowCallback: (row: string[]) => void, options: ParseDsvOptions): void {
   const stringLength = state.string.length
-
   let start = 0
   let index = 0
 
@@ -78,7 +77,6 @@ export function parseDsv(state: ParseDsvState, rowCallback: (row: string[]) => v
 
         if (code === '\n') {
           rowCallback(state.row)
-
           state.rowTemplate ??= new Array(state.row.length).fill('')
           state.row = state.rowTemplate.slice()
           state.columnIndex = 0
@@ -116,7 +114,6 @@ export function parseDsv(state: ParseDsvState, rowCallback: (row: string[]) => v
           : state.string.slice(start, rowDelimiterIndex)
 
         rowCallback(state.row)
-
         state.columnIndex = 0
         state.row = state.rowTemplate.slice()
         start = rowDelimiterIndex + 1
@@ -137,7 +134,6 @@ export function parseDsv(state: ParseDsvState, rowCallback: (row: string[]) => v
             : state.string.slice(start, rowDelimiterIndex)
 
           rowCallback(state.row)
-
           state.columnIndex = 0
           state.row = state.rowTemplate.slice()
           start = rowDelimiterIndex + 1

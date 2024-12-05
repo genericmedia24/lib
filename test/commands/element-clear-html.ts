@@ -12,8 +12,8 @@ describe('ElementClearHtmlCommand', () => {
       test.assert.equal(divElement.innerHTML, 'test')
 
       const command = new ElementClearHtmlCommand(divElement, divElement)
-      command.execute()
 
+      command.execute()
       test.assert.equal(divElement.innerHTML, '')
     }
   })

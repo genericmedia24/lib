@@ -12,8 +12,8 @@ describe('ElementFocusCommand', () => {
       test.assert.notEqual(document.activeElement, inputElement)
 
       const command = new ElementFocusCommand(inputElement, inputElement)
-      command.execute()
 
+      command.execute()
       test.assert.equal(document.activeElement, inputElement)
     }
   })

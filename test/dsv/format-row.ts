@@ -24,11 +24,13 @@ describe('formatDsvRow', () => {
 
   it('should format Date', (test) => {
     const date = new Date()
+
     test.assert.deepEqual(formatDsvRow([date]), date.toISOString())
   })
 
   it('should format Uint8Array', (test) => {
     const array = new TextEncoder().encode('abc')
+
     test.assert.deepEqual(formatDsvRow([array]), 'abc')
   })
 
