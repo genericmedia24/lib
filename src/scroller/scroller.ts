@@ -143,12 +143,16 @@ export class Scroller {
   /**
    * The callback function to render a body cell.
    */
-  public renderBodyCell?: (value: string, rowIndex: number, columnIndex: number) => string
+  public renderBodyCell = (value: string, rowIndex: number, columnIndex: number): string => {
+    return `<div style="grid-area: ${rowIndex + 1}/${columnIndex + 1}">${value}</div>`
+  }
 
   /**
    * The callback function to render a head cell.
    */
-  public renderHeadCell?: (value: string, rowIndex: number, columnIndex: number) => string
+  public renderHeadCell = (value: string, rowIndex: number, columnIndex: number): string => {
+    return `<div style="grid-area: ${rowIndex + 1}/${columnIndex + 1}">${value}</div>`
+  }
 
   /**
    * The resize observer to recalculate the dimensions of the rows and columns when the element is resized.
@@ -195,8 +199,8 @@ export class Scroller {
    */
   public constructor(element: HTMLElement, options?: ScrollerOptions) {
     this.element = element
-    this.renderBodyCell = options?.renderBodyCell
-    this.renderHeadCell = options?.renderHeadCell
+    this.renderBodyCell = options?.renderBodyCell ?? this.renderBodyCell
+    this.renderHeadCell = options?.renderHeadCell ?? this.renderHeadCell
 
     this.bodyElement = this.element.lastElementChild instanceof HTMLElement
       ? this.element.lastElementChild
@@ -305,8 +309,8 @@ export class Scroller {
 
         for (let rowIndex = 0; rowIndex < this.bodyRowsCopy.length; rowIndex += 1) {
           for (let columnIndex = 0; columnIndex < this.numColumns; columnIndex += 1) {
-            if (regExp.test(this.bodyRowsCopy[rowIndex]?.[columnIndex] ?? '')) {
-              bodyRows.push(this.bodyRowsCopy[rowIndex] ?? [])
+            if (regExp.test(this.bodyRowsCopy[rowIndex]?.[columnIndex])) {
+              bodyRows.push(this.bodyRowsCopy[rowIndex])
               break
             }
           }
@@ -314,8 +318,8 @@ export class Scroller {
       } else if (options.matchCase === true) {
         for (let rowIndex = 0; rowIndex < this.bodyRowsCopy.length; rowIndex += 1) {
           for (let columnIndex = 0; columnIndex < this.numColumns; columnIndex += 1) {
-            if (this.bodyRowsCopy[rowIndex]?.[columnIndex]?.includes(options.input) === true) {
-              bodyRows.push(this.bodyRowsCopy[rowIndex] ?? [])
+            if (this.bodyRowsCopy[rowIndex]?.[columnIndex]?.includes(options.input)) {
+              bodyRows.push(this.bodyRowsCopy[rowIndex])
               break
             }
           }
@@ -325,8 +329,8 @@ export class Scroller {
 
         for (let rowIndex = 0; rowIndex < this.bodyRowsCopy.length; rowIndex += 1) {
           for (let columnIndex = 0; columnIndex < this.numColumns; columnIndex += 1) {
-            if (this.bodyRowsCopy[rowIndex]?.[columnIndex]?.toLowerCase().includes(input) === true) {
-              bodyRows.push(this.bodyRowsCopy[rowIndex] ?? [])
+            if (this.bodyRowsCopy[rowIndex]?.[columnIndex]?.toLowerCase().includes(input)) {
+              bodyRows.push(this.bodyRowsCopy[rowIndex])
               break
             }
           }
@@ -492,7 +496,7 @@ export class Scroller {
       tmpHeadElement.style.setProperty('grid-template-columns', `repeat(${this.numColumns}, max-content)`)
 
       for (let columnIndex = 0; columnIndex < this.numColumns; columnIndex += 1) {
-        columnWidths[columnIndex] = this.calculateColumnWidthInElement(tmpHeadElement, columnIndex, columnWidths[columnIndex] ?? 0)
+        columnWidths[columnIndex] = this.calculateColumnWidthInElement(tmpHeadElement, columnIndex, columnWidths[columnIndex])
       }
 
       tmpHeadElement.remove()
@@ -509,7 +513,7 @@ export class Scroller {
       tmpBodyBlock.style.setProperty('grid-template-columns', `repeat(${this.numColumns}, max-content)`)
 
       for (let columnIndex = 0; columnIndex < this.numColumns; columnIndex += 1) {
-        columnWidths[columnIndex] = this.calculateColumnWidthInElement(tmpBodyBlock, columnIndex, columnWidths[columnIndex] ?? 0)
+        columnWidths[columnIndex] = this.calculateColumnWidthInElement(tmpBodyBlock, columnIndex, columnWidths[columnIndex])
       }
 
       tmpBodyBlock.remove()
@@ -538,11 +542,11 @@ export class Scroller {
    * Calculates {@link numBodyRowsMax}.
    */
   protected calculateNumBodyRowsMax(): number {
-    const maxTop = this.findMaxHeight(1_000_000)
-    const maxValues = Math.floor(maxTop / this.rowHeight)
-    const divisor = 10 ** (maxValues.toString().length - 1)
+    const maxHeight = this.findMaxHeight(1_000_000)
+    const maxRows = Math.floor(maxHeight / this.rowHeight)
+    const divisor = 10 ** (maxRows.toString().length - 1)
 
-    return Math.floor(maxValues / divisor) * divisor
+    return Math.floor(maxRows / divisor) * divisor
   }
 
   /**
@@ -623,8 +627,10 @@ export class Scroller {
    */
   protected handleResize(entries: ResizeObserverEntry[]): void {
     if (
-      this.domRect?.height !== entries[0]?.contentRect.height ||
-      this.domRect?.width !== entries[0]?.contentRect.width
+      this.domRect !== undefined && (
+        this.domRect.height !== entries[0]?.contentRect.height ||
+        this.domRect.width !== entries[0]?.contentRect.width
+      )
     ) {
       this.numBodyRowsVisible = this.calculateNumBodyRowsVisible()
       this.columnWidths = []
@@ -674,7 +680,7 @@ export class Scroller {
       let columnRight = 0
 
       for (let columnIndex = 0; columnIndex < this.numColumns; columnIndex += 1) {
-        columnRight = columnLeft + (this.columnWidths[columnIndex] ?? 0)
+        columnRight = columnLeft + (this.columnWidths[columnIndex])
 
         if ((columnRight - scrollLeft) < 0) {
           columnIndexStart += 1
@@ -701,7 +707,7 @@ export class Scroller {
       html += `<div data-index="${rowIndex}">`
 
       for (let columnIndex = columnIndexStart; columnIndex < maxCols; columnIndex += 1) {
-        html += this.renderBodyCell?.(this.bodyRows[rowIndex]?.[columnIndex] ?? '', rowIndexInBlock, columnIndex) ?? `<div style="grid-area: ${rowIndexInBlock + 1}/${columnIndex + 1}">${this.bodyRows[rowIndex]?.[columnIndex] ?? ''}</div>`
+        html += this.renderBodyCell(this.bodyRows[rowIndex]?.[columnIndex], rowIndexInBlock, columnIndex)
       }
 
       html += '</div>'
@@ -717,7 +723,7 @@ export class Scroller {
     }
 
     for (blockIndex = 0; blockIndex < blocks.length; blockIndex += 1) {
-      (this.bodyBlocks[blockIndex] as HTMLElement).innerHTML = blocks[blockIndex] ?? ''
+      (this.bodyBlocks[blockIndex]).innerHTML = blocks[blockIndex]
     }
   }
 
@@ -743,7 +749,7 @@ export class Scroller {
         html += `<div data-index="${rowIndex}">`
 
         for (let columnIndex = 0; columnIndex < this.numColumns; columnIndex += 1) {
-          html += this.renderHeadCell?.(this.headRows[rowIndex]?.[columnIndex] ?? '', rowIndex, columnIndex) ?? `<div style="grid-area: ${rowIndex + 1}/${columnIndex + 1}">${this.headRows[rowIndex]?.[columnIndex] ?? ''}</div>`
+          html += this.renderHeadCell(this.headRows[rowIndex]?.[columnIndex], rowIndex, columnIndex)
         }
 
         html += '</div>'

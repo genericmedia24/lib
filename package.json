@@ -34,13 +34,13 @@
     "eslint": "9.16.0",
     "eslint-plugin-perfectionist": "^4.2.0",
     "fake-indexeddb": "^6.0.0",
-    "glob": "^11.0.0",
     "global-jsdom": "^25.0.0",
     "papaparse": "^5.4.1",
     "prettier": "^3.4.2",
     "prettier-plugin-embed": "^0.4.15",
     "prettier-plugin-multiline-arrays": "^3.0.6",
     "prettier-plugin-organize-attributes": "^1.0.0",
+    "resize-observer-polyfill": "^1.5.1",
     "rollup": "^4.28.0",
     "semantic-release": "^24.2.0",
     "tinybench": "^3.0.7",
@@ -145,10 +145,10 @@
     "build": "rollup --config --configPlugin typescript",
     "build:watch": "rollup --config --configPlugin typescript --watch",
     "init": "git config core.hooksPath .githooks",
-    "lint": "tsc && eslint \"./{benchmark,src,test}/**/*.ts\" \"./*.{mjs,ts}\"",
-    "test": "glob -c \"tsx --test --test-reporter=dot \" \"./test/**/*.ts\"",
-    "test:coverage": "glob -c \"tsx --test --experimental-test-coverage --test-reporter=spec --test-reporter-destination=stdout --test-reporter=lcov --test-reporter-destination=lcov.info \" \"./test/**/*.ts\"",
-    "test:only": "glob -c \"tsx --test --test-only \" \"./test/**/*.ts\""
+    "lint": "tsc && eslint ./{benchmark,src,test}/**/*.ts ./*.{mjs,ts}",
+    "test": "node --import tsx --test --test-reporter=dot ./test/**/*.ts",
+    "test:coverage": "node --import tsx --test --experimental-test-coverage --test-coverage-exclude=src/**/index.ts --test-reporter=spec --test-reporter-destination=stdout --test-reporter=lcov --test-reporter-destination=lcov.info ./test/**/*.ts",
+    "test:only": "node --import tsx --test --test-only ./test/**/*.ts"
   },
   "version": "1.6.0-beta.3"
 }

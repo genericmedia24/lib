@@ -49,7 +49,7 @@ export class Commander {
   /**
    * All commands that have been defined on the element with `data-on*`.
    */
-  public commands: Record<string, Command[]> = {}
+  public commands: Record<string, Command[] | undefined> = {}
 
   /**
    * The parent element of the commander.

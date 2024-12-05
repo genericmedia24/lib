@@ -26,7 +26,7 @@ export function formatDsvRows(rows: Array<Array<Date | Primitive | Uint8Array>>,
   const result = new Array(rows.length).fill('')
 
   for (let i = 0; i < rows.length; i += 1) {
-    result[i] = formatDsvRow(rows[i] ?? [], options)
+    result[i] = formatDsvRow(rows[i], options)
   }
 
   return `${result.join('\n')}\n`

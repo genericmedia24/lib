@@ -46,19 +46,19 @@ describe('Requester', () => {
       .reply(200)
       .delay(300)
 
-    const element = new DivElement()
+    const divElement = new DivElement()
 
-    element.dataset.loadingTimeout = '100'
+    divElement.dataset.loadingTimeout = '100'
 
-    const requester = new Requester(element)
+    const requester = new Requester(divElement)
     const request = requester.fetch('https://example.com/test')
 
     setTimeout(() => {
-      test.assert.equal(element.hasAttribute('data-loading'), true)
+      test.assert.equal(divElement.hasAttribute('data-loading'), true)
     }, 200)
 
     await request
-    test.assert.equal(element.hasAttribute('data-loading'), false)
+    test.assert.equal(divElement.hasAttribute('data-loading'), false)
   })
 
   it('should dispatch command event on element', async (test) => {
@@ -71,14 +71,14 @@ describe('Requester', () => {
       .reply(200)
       .delay(300)
 
-    const element = new DivElement()
+    const divElement = new DivElement()
 
-    element.dataset.loadingTimeout = '100'
+    divElement.dataset.loadingTimeout = '100'
 
-    const requester = new Requester(element)
+    const requester = new Requester(divElement)
     const request = requester.fetch('https://example.com/test')
 
-    const dispatchEvent = test.mock.method(element, 'dispatchEvent', (event: CustomEvent<{ event: string }>) => {
+    const dispatchEvent = test.mock.method(divElement, 'dispatchEvent', (event: CustomEvent<{ event: string }>) => {
       test.assert.equal(event.type, 'command')
       test.assert.equal(event.detail.event, 'loading')
     })
@@ -139,10 +139,10 @@ describe('Requester', () => {
       .delay(200)
 
     await test.assert.rejects(async () => {
-      const element = new DivElement()
-      const requester = new Requester(element)
+      const divElement = new DivElement()
+      const requester = new Requester(divElement)
 
-      element.dataset.fetchTimeout = '100'
+      divElement.dataset.fetchTimeout = '100'
       await requester.fetch('https://example.com/test')
     }, {
       message: /aborted/u,
@@ -164,8 +164,8 @@ describe('Requester', () => {
     Requester.fetchTimeout = 200
 
     await test.assert.rejects(async () => {
-      const element = new DivElement()
-      const requester = new Requester(element)
+      const divElement = new DivElement()
+      const requester = new Requester(divElement)
 
       await requester.fetch('https://example.com/test')
     }, {

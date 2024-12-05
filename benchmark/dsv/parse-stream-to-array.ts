@@ -6,7 +6,7 @@ import { parseDsvStream } from '../../src/dsv/parse-stream.js'
 
 const [,,filename] = process.argv
 
-if (filename === undefined) {
+if (typeof filename === 'undefined') {
   throw new Error('Filename is undefined')
 }
 
