@@ -131,7 +131,7 @@ export class KeyBinding {
   /**
    * The callbacks.
    */
-  public callbacks: Function[] = []
+  public callbacks: Array<() => void> = []
 
   /**
    * Whether the ctrl-key should be pressed.
@@ -172,7 +172,7 @@ export class KeyBinding {
    *
    * @param callback the callback
    */
-  public register(callback: Function): void {
+  public register(callback: () => void): void {
     if (!this.callbacks.includes(callback)) {
       this.callbacks.push(callback)
     }
@@ -201,7 +201,7 @@ export class KeyBinding {
    *
    * @param callback the callback
    */
-  public unregister(callback: Function): void {
+  public unregister(callback: () => void): void {
     const index = this.callbacks.indexOf(callback)
 
     if (index > -1) {

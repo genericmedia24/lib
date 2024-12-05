@@ -7,7 +7,7 @@ import { parseDsvString } from '../../src/dsv/parse-string.js'
 
 const [,,filename] = process.argv
 
-if (filename === undefined) {
+if (typeof filename === 'undefined') {
   throw new Error('Filename is undefined')
 }
 

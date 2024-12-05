@@ -41,7 +41,7 @@ export class ElementToggleAttributeCommand extends Command<Element, ElementToggl
     const force = stateKeys.every((stateKey, index) => {
       const state = String(this.targetElement.state?.get(stateKey))
 
-      return stateValues[index] === undefined
+      return typeof stateValues[index] === 'undefined'
         ? false
         : makeRe(stateValues[index]).test(state)
     })

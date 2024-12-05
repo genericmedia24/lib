@@ -24,7 +24,7 @@ export function parseDsvRowToObject<ObjectType = Record<string, string>>(rowCall
       let objectBody = ''
 
       for (let i = 0; i < row.length; i += 1) {
-        objectBody += `"${row[i] ?? ''}":row[${i}],`
+        objectBody += `"${row[i]}":row[${i}],`
       }
 
       // eslint-disable-next-line no-new-func, @typescript-eslint/no-implied-eval

@@ -87,7 +87,7 @@ export class State<StateValues = Record<string, unknown>> {
       return State.create<StateValues>({
         name: element.dataset.state,
         storage: element.dataset.stateStorage as State['storage'],
-        values: Object.fromEntries(new URLSearchParams(element.dataset.stateValues)),
+        values: Object.fromEntries(new window.URLSearchParams(element.dataset.stateValues)),
       })
     }
 

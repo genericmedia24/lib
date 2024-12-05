@@ -73,7 +73,7 @@ export class I18n {
   /**
    * The locale definitions. The key is the locale, for example `'nl-NL'`, and the value is an object with strings of which the key is the string code and the value the actual string.
    */
-  public dictionary: Record<string, Record<string, string>>
+  public dictionary: Record<string, Record<string, string> | undefined>
 
   /**
    * The locale, for example `'nl-NL'`.

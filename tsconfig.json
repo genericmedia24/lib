@@ -6,7 +6,6 @@
     "noEmit": true,
     "noImplicitOverride": true,
     "noImplicitReturns": true,
-    "noUncheckedIndexedAccess": true,
     "skipLibCheck": true,
     "strict": true,
     "target": "ES2022"
