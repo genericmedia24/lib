@@ -6,6 +6,7 @@ import { elements, OutputElement } from '../../src/elements/index.js'
 describe('OutputElement', () => {
   HTMLOutputElement.prototype.hidePopover = function hidePopover(): void {
     const event = new window.Event('toggle')
+
     // @ts-expect-error TransitionEvent is undefined
     event.newState = 'closed'
     this.dispatchEvent(event)
@@ -13,6 +14,7 @@ describe('OutputElement', () => {
 
   HTMLOutputElement.prototype.showPopover = function showPopover(): void {
     const event = new window.Event('toggle')
+
     // @ts-expect-error TransitionEvent is undefined
     event.newState = 'open'
     this.dispatchEvent(event)
@@ -26,10 +28,8 @@ describe('OutputElement', () => {
     outputElement.dataset.state = 'test'
     outputElement.popover = 'manual'
     outputElement.connectedCallback()
-
     test.assert.equal(outputElement.state?.name, 'test')
     test.assert.equal(outputElement.state?.elements.has(outputElement), true)
-
     outputElement.disconnectedCallback()
   })
 
@@ -39,12 +39,9 @@ describe('OutputElement', () => {
     outputElement.dataset.state = 'test'
     outputElement.popover = 'manual'
     outputElement.connectedCallback()
-
     test.assert.equal(outputElement.state?.name, 'test')
     test.assert.equal(outputElement.state?.elements.has(outputElement), true)
-
     outputElement.disconnectedCallback()
-
     test.assert.equal(outputElement.state?.elements.has(outputElement), false)
   })
 
@@ -54,11 +51,9 @@ describe('OutputElement', () => {
 
     outputElement.popover = 'manual'
     outputElement.connectedCallback()
-
     test.assert.equal(outputElement.commander.started, true)
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'connected')
-
     outputElement.disconnectedCallback()
   })
 
@@ -67,7 +62,6 @@ describe('OutputElement', () => {
     const commanderExecute = test.mock.method(outputElement.commander, 'execute')
 
     outputElement.disconnectedCallback()
-
     test.assert.equal(outputElement.commander.started, false)
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'disconnected')
@@ -112,21 +106,19 @@ describe('OutputElement', () => {
 
   it('should register escape callback on showPopover', (test) => {
     const outputElement = new OutputElement()
-    outputElement.popover = 'manual'
 
+    outputElement.popover = 'manual'
     outputElement.showPopover()
     test.assert.equal(outputElement.escapeBinding.callbacks.length, 1)
-
     outputElement.hidePopover()
   })
 
   it('should unregister escape callback on hidePopover', (test) => {
     const outputElement = new OutputElement()
-    outputElement.popover = 'manual'
 
+    outputElement.popover = 'manual'
     outputElement.showPopover()
     test.assert.equal(outputElement.escapeBinding.callbacks.length, 1)
-
     outputElement.hidePopover()
     test.assert.equal(outputElement.escapeBinding.callbacks.length, 0)
   })
@@ -137,7 +129,6 @@ describe('OutputElement', () => {
 
     outputElement.popover = 'manual'
     outputElement.showPopover()
-
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'open')
   })
@@ -149,7 +140,6 @@ describe('OutputElement', () => {
     outputElement.popover = 'manual'
     outputElement.style.setProperty('display', 'none')
     outputElement.hidePopover()
-
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'closed')
   })
@@ -157,27 +147,27 @@ describe('OutputElement', () => {
   it('should execute closed command on transitionend', (test) => {
     const outputElement = new OutputElement()
     const commanderExecute = test.mock.method(outputElement.commander, 'execute')
-
     const event = new window.Event('transitionend')
+
     // @ts-expect-error TransitionEvent is undefined
     event.propertyName = 'display'
-
     outputElement.popover = 'manual'
     outputElement.style.setProperty('display', 'none')
     outputElement.dispatchEvent(event)
-
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'closed')
   })
 
   it('should reset outputs', (test) => {
     const outputElement1 = new OutputElement()
+
     outputElement1.dataset.timeout = '100'
     outputElement1.popover = 'manual'
     outputElement1.style.setProperty('--output-bottom', '32px')
     outputElement1.style.setProperty('--output-gap', '8px')
 
     const outputElement2 = new OutputElement()
+
     outputElement2.dataset.timeout = '100'
     outputElement2.popover = 'manual'
     outputElement2.style.setProperty('--output-bottom', '32px')
@@ -187,19 +177,10 @@ describe('OutputElement', () => {
     const outputElement2StyleSetProperty = test.mock.method(outputElement2.style, 'setProperty')
 
     document.body.appendChild(outputElement1)
-    const event = new window.Event('toggle')
-
-    // @ts-expect-error TransitionEvent is undefined
-    event.newState = 'open'
-    outputElement1.dispatchEvent(event)
-
+    outputElement1.showPopover()
     document.body.appendChild(outputElement2)
-    outputElement2.dispatchEvent(event)
-
-    // @ts-expect-error TransitionEvent is undefined
-    event.newState = 'close'
-    outputElement1.dispatchEvent(event)
-
+    outputElement2.showPopover()
+    outputElement1.hidePopover()
     test.assert.equal(outputElement1StyleSetProperty.mock.callCount(), 2)
     test.assert.equal(outputElement2StyleSetProperty.mock.callCount(), 2)
 

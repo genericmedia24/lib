@@ -38,7 +38,6 @@ describe('Commander', () => {
     if (buttonElement !== null) {
       buttonElement.commander = new Commander(buttonElement)
       buttonElement.commander.start()
-
       test.assert.equal(buttonElement.commander.started, true)
       test.assert.equal(buttonElement.commander.commands.click?.at(0) instanceof ClickCommand, true)
     }
@@ -55,12 +54,9 @@ describe('Commander', () => {
     if (buttonElement !== null) {
       buttonElement.commander = new Commander(buttonElement)
       buttonElement.commander.start()
-
       test.assert.equal(buttonElement.commander.started, true)
       test.assert.equal(buttonElement.commander.commands.click?.at(0) instanceof ClickCommand, true)
-
       buttonElement.commander.stop()
-
       test.assert.equal(buttonElement.commander.started, false)
       test.assert.equal(buttonElement.commander.commands.click?.at(0) instanceof ClickCommand, false)
     }
@@ -113,9 +109,7 @@ describe('Commander', () => {
 
       test.assert.equal(divElement.commander.started, true)
       test.assert.equal(buttonElement.commander.commands.click?.at(0) instanceof ClickCommand, true)
-
       divElement.commander.stop()
-
       test.assert.equal(divElement.commander.started, false)
       test.assert.equal(divElement.commander.commands.click?.at(0) instanceof ClickCommand, false)
     }
@@ -139,7 +133,6 @@ describe('Commander', () => {
         const clickCommandExecute = test.mock.method(clickCommand, 'execute')
 
         buttonElement.commander.execute('click')
-
         test.assert.equal(clickCommandExecute.mock.callCount(), 1)
       }
     }
@@ -330,7 +323,6 @@ describe('Commander', () => {
         const errorCommandExecute = test.mock.method(errorCommand, 'execute')
 
         buttonElement.commander.execute('click')
-
         test.assert.equal(consoleError.mock.callCount(), 1)
         test.assert.equal(clickCommandExecute.mock.callCount(), 1)
         test.assert.equal(errorCommandExecute.mock.callCount(), 1)

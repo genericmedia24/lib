@@ -56,7 +56,6 @@ describe('KeyBinding', () => {
     }))
 
     keybinding.stop()
-
     test.assert.equal(callback.mock.callCount(), 1)
   })
 
@@ -81,7 +80,6 @@ describe('KeyBinding', () => {
     }))
 
     keybinding.stop()
-
     test.assert.equal(callback.mock.callCount(), 1)
   })
 

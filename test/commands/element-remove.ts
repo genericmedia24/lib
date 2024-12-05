@@ -12,8 +12,8 @@ describe('ElementRemoveCommand', () => {
       test.assert.equal(divElement.parentElement, document.body)
 
       const command = new ElementRemoveCommand(divElement, divElement)
-      command.execute()
 
+      command.execute()
       test.assert.equal(divElement.parentElement, null)
     }
   })

@@ -19,28 +19,25 @@ describe('DialogElement', () => {
 
   HTMLOutputElement.prototype.hidePopover = (): void => {}
   HTMLOutputElement.prototype.showPopover = (): void => {}
-
   defineElements(elements)
 
   it('should setup state', (test) => {
     const dialogElement = new DialogElement()
+
     dialogElement.dataset.state = 'test'
     dialogElement.connectedCallback()
-
     test.assert.equal(dialogElement.state?.name, 'test')
     test.assert.equal(dialogElement.state?.elements.has(dialogElement), true)
-
     dialogElement.disconnectedCallback()
   })
 
   it('should teardown state', (test) => {
     const dialogElement = new DialogElement()
-    dialogElement.dataset.state = 'test'
 
+    dialogElement.dataset.state = 'test'
     dialogElement.connectedCallback()
     test.assert.equal(dialogElement.state?.name, 'test')
     test.assert.equal(dialogElement.state?.elements.has(dialogElement), true)
-
     dialogElement.disconnectedCallback()
     test.assert.equal(dialogElement.state?.elements.has(dialogElement), false)
   })
@@ -50,11 +47,9 @@ describe('DialogElement', () => {
     const commanderExecute = test.mock.method(dialogElement.commander, 'execute')
 
     dialogElement.connectedCallback()
-
     test.assert.equal(dialogElement.commander.started, true)
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'connected')
-
     dialogElement.disconnectedCallback()
   })
 
@@ -63,7 +58,6 @@ describe('DialogElement', () => {
     const commanderExecute = test.mock.method(dialogElement.commander, 'execute')
 
     dialogElement.disconnectedCallback()
-
     test.assert.equal(dialogElement.commander.started, false)
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'disconnected')
@@ -103,13 +97,13 @@ describe('DialogElement', () => {
 
   it('should update z-index on show', (test) => {
     const dialogElement1 = document.body.appendChild(new DialogElement())
+
     dialogElement1.show()
 
     const dialogElement2 = document.body.appendChild(new DialogElement())
+
     dialogElement2.show()
-
     test.assert.equal(dialogElement2.style.getPropertyValue('z-index'), '5')
-
     dialogElement1.remove()
     dialogElement2.remove()
   })
@@ -120,18 +114,17 @@ describe('DialogElement', () => {
     test.assert.equal(outputElement.parentElement, document.body)
 
     const dialogElement = document.body.appendChild(new DialogElement())
+
     dialogElement.show()
-
     test.assert.equal(outputElement.parentElement, dialogElement)
-
     dialogElement.remove()
     outputElement.remove()
   })
 
   it('should register escape callback on show', (test) => {
     const dialogElement = new DialogElement()
-    dialogElement.show()
 
+    dialogElement.show()
     test.assert.equal(dialogElement.escapeBinding.callbacks.length, 1)
     dialogElement.close()
   })
@@ -141,10 +134,8 @@ describe('DialogElement', () => {
     const commanderExecute = test.mock.method(dialogElement.commander, 'execute')
 
     dialogElement.show()
-
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'show')
-
     dialogElement.close()
   })
 
@@ -154,18 +145,17 @@ describe('DialogElement', () => {
     test.assert.equal(outputElement.parentElement, document.body)
 
     const dialogElement = document.body.appendChild(new DialogElement())
+
     dialogElement.showModal()
-
     test.assert.equal(outputElement.parentElement, dialogElement)
-
     dialogElement.remove()
     outputElement.remove()
   })
 
   it('should register escape callback on showModal', (test) => {
     const dialogElement = new DialogElement()
-    dialogElement.showModal()
 
+    dialogElement.showModal()
     test.assert.equal(dialogElement.escapeBinding.callbacks.length, 1)
     dialogElement.close()
   })
@@ -175,10 +165,8 @@ describe('DialogElement', () => {
     const commanderExecute = test.mock.method(dialogElement.commander, 'execute')
 
     dialogElement.showModal()
-
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'show')
-
     dialogElement.close()
   })
 
@@ -187,7 +175,6 @@ describe('DialogElement', () => {
 
     dialogElement.show()
     test.assert.equal(dialogElement.style.getPropertyValue('z-index'), '4')
-
     dialogElement.close()
     test.assert.equal(dialogElement.style.getPropertyValue('z-index'), '')
   })
@@ -198,13 +185,11 @@ describe('DialogElement', () => {
     test.assert.equal(outputElement.parentElement, document.body)
 
     const dialogElement = document.body.appendChild(new DialogElement())
-    dialogElement.show()
 
+    dialogElement.show()
     test.assert.equal(outputElement.parentElement, dialogElement)
     dialogElement.close()
-
     test.assert.equal(outputElement.parentElement, document.body)
-
     dialogElement.remove()
     outputElement.remove()
   })
@@ -214,7 +199,6 @@ describe('DialogElement', () => {
 
     dialogElement.show()
     test.assert.equal(dialogElement.escapeBinding.callbacks.length, 1)
-
     dialogElement.close()
     test.assert.equal(dialogElement.escapeBinding.callbacks.length, 0)
   })
@@ -222,32 +206,29 @@ describe('DialogElement', () => {
   it('should reregister escape callback on focus', (test) => {
     const dialogElement = new DialogElement()
     const event = new window.FocusEvent('focus')
-
     const keyBindingRegister = test.mock.method(dialogElement.escapeBinding, 'register')
     const keyBindingUnregister = test.mock.method(dialogElement.escapeBinding, 'unregister')
 
     dialogElement.dispatchEvent(event)
-
     test.assert.equal(keyBindingRegister.mock.callCount(), 1)
     test.assert.equal(keyBindingUnregister.mock.callCount(), 1)
   })
 
   it('should update z-index on focus', (test) => {
     const dialogElement1 = document.body.appendChild(new DialogElement())
-    dialogElement1.show()
 
+    dialogElement1.show()
     test.assert.equal(dialogElement1.style.getPropertyValue('z-index'), '4')
 
     const dialogElement2 = document.body.appendChild(new DialogElement())
-    dialogElement2.show()
 
+    dialogElement2.show()
     test.assert.equal(dialogElement2.style.getPropertyValue('z-index'), '5')
 
     const event = new window.FocusEvent('focus')
 
     dialogElement1.dispatchEvent(event)
     test.assert.equal(dialogElement1.style.getPropertyValue('z-index'), '6')
-
     dialogElement1.remove()
     dialogElement2.remove()
   })
@@ -259,9 +240,7 @@ describe('DialogElement', () => {
 
     // @ts-expect-error TransitionEvent is undefined
     event.propertyName = 'display'
-
     dialogElement.dispatchEvent(event)
-
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'close')
   })

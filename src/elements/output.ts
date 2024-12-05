@@ -174,6 +174,7 @@ export class OutputElement<StateValues = Record<string, unknown>> extends HTMLOu
   protected resetOutputs(event: ToggleEvent): void {
     let bottom: number | undefined = undefined
     let gap: number | undefined = undefined
+    let style: CSSStyleDeclaration | undefined = undefined
 
     Array
       .from(document.querySelectorAll('output'))
@@ -189,7 +190,7 @@ export class OutputElement<StateValues = Record<string, unknown>> extends HTMLOu
           bottom === undefined ||
           gap === undefined
         ) {
-          const style = window.getComputedStyle(element)
+          style = window.getComputedStyle(element)
           gap = parseInt(style.getPropertyValue('--output-gap'), 10)
           bottom = parseInt(style.getPropertyValue('--output-bottom'), 10)
         }

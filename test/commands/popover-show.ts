@@ -5,6 +5,7 @@ import { PopoverShowCommand } from '../../src/commands/popover-show.js'
 describe('PopoverShowCommand', () => {
   HTMLDivElement.prototype.hidePopover = function hidePopover(): void {
     const event = new window.Event('toggle')
+
     // @ts-expect-error TransitionEvent is undefined
     event.newState = 'closed'
     this.dispatchEvent(event)
@@ -12,6 +13,7 @@ describe('PopoverShowCommand', () => {
 
   HTMLDivElement.prototype.showPopover = function showPopover(): void {
     const event = new window.Event('toggle')
+
     // @ts-expect-error TransitionEvent is undefined
     event.newState = 'open'
     this.dispatchEvent(event)
@@ -25,10 +27,9 @@ describe('PopoverShowCommand', () => {
     if (divElement !== null) {
       // jsdom does not support popovers, so a mock is needed
       const divElementShowPopover = test.mock.method(divElement, 'showPopover')
-
       const command = new PopoverShowCommand(divElement, divElement)
-      command.execute()
 
+      command.execute()
       test.assert.equal(divElementShowPopover.mock.callCount(), 1)
     }
   })
@@ -42,10 +43,9 @@ describe('PopoverShowCommand', () => {
       // jsdom does not support popovers, so a mock is needed
       const divElementHidePopover = test.mock.method(divElement, 'hidePopover')
       const divElementShowPopover = test.mock.method(divElement, 'showPopover')
-
       const command = new PopoverShowCommand(divElement, divElement)
-      command.execute()
 
+      command.execute()
       test.assert.equal(divElementShowPopover.mock.callCount(), 1)
 
       await new Promise((resolve) => {
@@ -53,7 +53,6 @@ describe('PopoverShowCommand', () => {
       })
 
       document.body.click()
-
       test.assert.equal(divElementHidePopover.mock.callCount(), 1)
     }
   })
@@ -67,10 +66,9 @@ describe('PopoverShowCommand', () => {
       // jsdom does not support popovers, so a mock is needed
       const divElementHidePopover = test.mock.method(divElement, 'hidePopover')
       const divElementShowPopover = test.mock.method(divElement, 'showPopover')
-
       const command = new PopoverShowCommand(divElement, divElement)
-      command.execute()
 
+      command.execute()
       test.assert.equal(divElementShowPopover.mock.callCount(), 1)
 
       await new Promise((resolve) => {
@@ -78,7 +76,6 @@ describe('PopoverShowCommand', () => {
       })
 
       divElement.click()
-
       test.assert.equal(divElementHidePopover.mock.callCount(), 0)
     }
   })

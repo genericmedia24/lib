@@ -14,10 +14,9 @@ describe('PopoverHideCommand', () => {
     if (divElement !== null) {
       // jsdom does not support popovers, so a mock is needed
       const divElementHidePopover = test.mock.method(divElement, 'hidePopover')
-
       const command = new PopoverHideCommand(divElement, divElement)
-      command.execute()
 
+      command.execute()
       test.assert.equal(divElementHidePopover.mock.callCount(), 1)
     }
   })

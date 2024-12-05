@@ -195,7 +195,6 @@ export class Scroller {
    */
   public constructor(element: HTMLElement, options?: ScrollerOptions) {
     this.element = element
-
     this.renderBodyCell = options?.renderBodyCell
     this.renderHeadCell = options?.renderHeadCell
 
@@ -297,6 +296,7 @@ export class Scroller {
       this.bodyRowsCopy = undefined
     } else {
       this.bodyRowsCopy ??= this.bodyRows
+
       const bodyRows: string[][] = []
 
       if (options.regExp === true) {
@@ -388,8 +388,8 @@ export class Scroller {
 
     this.resizeObserver.observe(this.element)
     this.element.addEventListener('scroll', this.handleScrollBound)
-
     this.handleResize([])
+
     return this
   }
 
@@ -431,9 +431,7 @@ export class Scroller {
 
       tmpHeadElement.style.setProperty('position', 'absolute')
       tmpHeadElement.style.setProperty('grid-template-columns', `repeat(${this.numColumns}, max-content)`)
-
       columnWidth = this.calculateColumnWidthInElement(tmpHeadElement, columnIndex, columnWidth)
-
       tmpHeadElement.remove()
     }
 
@@ -446,9 +444,7 @@ export class Scroller {
 
       tmpBodyBlock.style.setProperty('position', 'absolute')
       tmpBodyBlock.style.setProperty('grid-template-columns', `repeat(${this.numColumns}, max-content)`)
-
       columnWidth = this.calculateColumnWidthInElement(tmpBodyBlock, columnIndex, columnWidth)
-
       tmpBodyBlock.remove()
     }
 
@@ -545,6 +541,7 @@ export class Scroller {
     const maxTop = this.findMaxHeight(1_000_000)
     const maxValues = Math.floor(maxTop / this.rowHeight)
     const divisor = 10 ** (maxValues.toString().length - 1)
+
     return Math.floor(maxValues / divisor) * divisor
   }
 
@@ -571,9 +568,11 @@ export class Scroller {
       .concat(lastBlockSize === 0 ? [] : [lastBlockSize])
       .map((bodyBlockSize: number) => {
         const block = this.bodyElement.appendChild(document.createElement('div'))
+
         block.style.setProperty('height', `${bodyBlockSize * this.rowHeight}px`)
         block.style.setProperty('grid-template-columns', `repeat(${this.numColumns}, max-content)`)
         block.style.setProperty('grid-template-rows', `repeat(${bodyBlockSize}, ${this.rowHeight}px)`)
+
         return block
       })
   }
@@ -601,9 +600,11 @@ export class Scroller {
    */
   protected findMaxHeight(expected: number): number {
     const element = this.element.appendChild(document.createElement('div'))
+
     element.style.height = `${expected}px`
 
     const actual = element.getBoundingClientRect().height
+
     element.remove()
 
     if (actual < expected) {
@@ -691,14 +692,12 @@ export class Scroller {
     let html = ''
     let rowIndex = Math.floor(scrollTop / this.rowHeight)
     let rowIndexInBlock = 0
-
     const blocks = new Array(this.bodyBlocks.length).fill('') as string[]
     const maxRows = Math.min(this.bodyRows.length, rowIndex + this.numBodyRowsVisible)
 
     for (; rowIndex < maxRows; rowIndex += 1) {
       blockIndex = Math.floor(rowIndex / this.bodyBlockSize)
       rowIndexInBlock = rowIndex % this.bodyBlockSize
-
       html += `<div data-index="${rowIndex}">`
 
       for (let columnIndex = columnIndexStart; columnIndex < maxCols; columnIndex += 1) {

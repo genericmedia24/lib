@@ -8,23 +8,21 @@ describe('TextAreaElement', () => {
 
   it('should setup state', (test) => {
     const textAreaElement = new TextAreaElement()
+
     textAreaElement.dataset.state = 'test'
     textAreaElement.connectedCallback()
-
     test.assert.equal(textAreaElement.state?.name, 'test')
     test.assert.equal(textAreaElement.state?.elements.has(textAreaElement), true)
-
     textAreaElement.disconnectedCallback()
   })
 
   it('should teardown state', (test) => {
     const textAreaElement = new TextAreaElement()
-    textAreaElement.dataset.state = 'test'
 
+    textAreaElement.dataset.state = 'test'
     textAreaElement.connectedCallback()
     test.assert.equal(textAreaElement.state?.name, 'test')
     test.assert.equal(textAreaElement.state?.elements.has(textAreaElement), true)
-
     textAreaElement.disconnectedCallback()
     test.assert.equal(textAreaElement.state?.elements.has(textAreaElement), false)
   })
@@ -34,11 +32,9 @@ describe('TextAreaElement', () => {
     const commanderExecute = test.mock.method(textAreaElement.commander, 'execute')
 
     textAreaElement.connectedCallback()
-
     test.assert.equal(textAreaElement.commander.started, true)
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'connected')
-
     textAreaElement.disconnectedCallback()
   })
 
@@ -47,7 +43,6 @@ describe('TextAreaElement', () => {
     const commanderExecute = test.mock.method(textAreaElement.commander, 'execute')
 
     textAreaElement.disconnectedCallback()
-
     test.assert.equal(textAreaElement.commander.started, false)
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'disconnected')
@@ -59,7 +54,6 @@ describe('TextAreaElement', () => {
     const event = new window.FocusEvent('blur')
 
     textAreaElement.dispatchEvent(event)
-
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'blur')
 
@@ -74,7 +68,6 @@ describe('TextAreaElement', () => {
     const event = new window.FocusEvent('focus')
 
     textAreaElement.dispatchEvent(event)
-
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'focus')
 
@@ -89,7 +82,6 @@ describe('TextAreaElement', () => {
     const event = new window.Event('input')
 
     textAreaElement.dispatchEvent(event)
-
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'input')
 
@@ -107,7 +99,6 @@ describe('TextAreaElement', () => {
     })
 
     textAreaElement.dispatchEvent(event)
-
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'enter')
 
@@ -126,7 +117,6 @@ describe('TextAreaElement', () => {
     })
 
     textAreaElement.dispatchEvent(event)
-
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'ctrlenter')
 
@@ -145,7 +135,6 @@ describe('TextAreaElement', () => {
     })
 
     textAreaElement.dispatchEvent(event)
-
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'ctrlenter')
 
@@ -160,7 +149,6 @@ describe('TextAreaElement', () => {
     const event = new window.Event('paste')
 
     textAreaElement.dispatchEvent(event)
-
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'paste')
 

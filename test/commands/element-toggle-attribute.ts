@@ -21,6 +21,7 @@ describe('ElementToggleAttributeCommand', () => {
 
   it('should toggle attribute with matching state', (test) => {
     const divElement = new DivElement()
+
     divElement.dataset.state = 'test'
     divElement.connectedCallback()
 
@@ -31,15 +32,14 @@ describe('ElementToggleAttributeCommand', () => {
     })
 
     test.assert.equal(divElement.hasAttribute('hidden'), false)
-
     divElement.state?.set('count', '0')
     command.execute()
-
     test.assert.equal(divElement.hasAttribute('hidden'), true)
   })
 
   it('should toggle attribute with multiple matching states', (test) => {
     const divElement = new DivElement()
+
     divElement.dataset.state = 'test'
     divElement.connectedCallback()
 
@@ -56,16 +56,15 @@ describe('ElementToggleAttributeCommand', () => {
     })
 
     test.assert.equal(divElement.hasAttribute('hidden'), false)
-
     divElement.state?.set('count', '0')
     divElement.state?.set('avg', '0')
     command.execute()
-
     test.assert.equal(divElement.hasAttribute('hidden'), true)
   })
 
   it('should not toggle attribute with one or more non-matching states', (test) => {
     const divElement = new DivElement()
+
     divElement.dataset.state = 'test'
     divElement.connectedCallback()
 
@@ -82,16 +81,15 @@ describe('ElementToggleAttributeCommand', () => {
     })
 
     test.assert.equal(divElement.hasAttribute('hidden'), false)
-
     divElement.state?.set('count', '0')
     divElement.state?.set('avg', '0')
     command.execute()
-
     test.assert.equal(divElement.hasAttribute('hidden'), false)
   })
 
   it('should not toggle attribute with one or more undefined states', (test) => {
     const divElement = new DivElement()
+
     divElement.dataset.state = 'test'
     divElement.connectedCallback()
 
@@ -107,16 +105,15 @@ describe('ElementToggleAttributeCommand', () => {
     })
 
     test.assert.equal(divElement.hasAttribute('hidden'), false)
-
     divElement.state?.set('count', '0')
     divElement.state?.set('avg', '0')
     command.execute()
-
     test.assert.equal(divElement.hasAttribute('hidden'), false)
   })
 
   it('should toggle multiple attributes', (test) => {
     const divElement = new DivElement()
+
     divElement.dataset.state = 'test'
     divElement.connectedCallback()
 
@@ -131,21 +128,18 @@ describe('ElementToggleAttributeCommand', () => {
 
     test.assert.equal(divElement.hasAttribute('aria-hidden'), false)
     test.assert.equal(divElement.hasAttribute('hidden'), false)
-
     command.execute()
-
     test.assert.equal(divElement.hasAttribute('aria-hidden'), true)
     test.assert.equal(divElement.hasAttribute('hidden'), true)
   })
 
   it('should wait for state to be loaded', async (test) => {
     const divElement = new DivElement()
+
     divElement.dataset.state = 'test'
     divElement.dataset.stateStorage = 'idb'
-
     await idb.set('state-test', '[["count",0]]')
     divElement.connectedCallback()
-
     await divElement.state?.loaded
     test.assert.equal(divElement.state?.get('count'), 0)
 
@@ -156,9 +150,7 @@ describe('ElementToggleAttributeCommand', () => {
     })
 
     test.assert.equal(divElement.hasAttribute('hidden'), false)
-
     await command.execute()
-
     test.assert.equal(divElement.hasAttribute('hidden'), true)
   })
 })

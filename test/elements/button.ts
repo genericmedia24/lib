@@ -9,23 +9,21 @@ describe('ButtonElement', () => {
 
   it('should setup state', (test) => {
     const buttonElement = new ButtonElement()
+
     buttonElement.dataset.state = 'test'
     buttonElement.connectedCallback()
-
     test.assert.equal(buttonElement.state?.name, 'test')
     test.assert.equal(buttonElement.state?.elements.has(buttonElement), true)
-
     buttonElement.disconnectedCallback()
   })
 
   it('should teardown state', (test) => {
     const buttonElement = new ButtonElement()
-    buttonElement.dataset.state = 'test'
 
+    buttonElement.dataset.state = 'test'
     buttonElement.connectedCallback()
     test.assert.equal(buttonElement.state?.name, 'test')
     test.assert.equal(buttonElement.state?.elements.has(buttonElement), true)
-
     buttonElement.disconnectedCallback()
     test.assert.equal(buttonElement.state?.elements.has(buttonElement), false)
   })
@@ -35,11 +33,9 @@ describe('ButtonElement', () => {
     const commanderExecute = test.mock.method(buttonElement.commander, 'execute')
 
     buttonElement.connectedCallback()
-
     test.assert.equal(buttonElement.commander.started, true)
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'connected')
-
     buttonElement.disconnectedCallback()
   })
 
@@ -48,7 +44,6 @@ describe('ButtonElement', () => {
     const commanderExecute = test.mock.method(buttonElement.commander, 'execute')
 
     buttonElement.disconnectedCallback()
-
     test.assert.equal(buttonElement.commander.started, false)
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'disconnected')
@@ -60,7 +55,6 @@ describe('ButtonElement', () => {
     const event = new window.MouseEvent('auxclick')
 
     buttonElement.dispatchEvent(event)
-
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'auxclick')
 
@@ -75,7 +69,6 @@ describe('ButtonElement', () => {
     const event = new window.MouseEvent('click')
 
     buttonElement.dispatchEvent(event)
-
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'click')
 
@@ -90,7 +83,6 @@ describe('ButtonElement', () => {
     const event = new window.MouseEvent('contextmenu')
 
     buttonElement.dispatchEvent(event)
-
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'contextmenu')
 
@@ -105,7 +97,6 @@ describe('ButtonElement', () => {
     const event = new window.MouseEvent('dblclick')
 
     buttonElement.dispatchEvent(event)
-
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'dblclick')
 

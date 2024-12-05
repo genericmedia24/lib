@@ -8,23 +8,21 @@ describe('FormElement', () => {
 
   it('should setup state', (test) => {
     const formElement = new FormElement()
+
     formElement.dataset.state = 'test'
     formElement.connectedCallback()
-
     test.assert.equal(formElement.state?.name, 'test')
     test.assert.equal(formElement.state?.elements.has(formElement), true)
-
     formElement.disconnectedCallback()
   })
 
   it('should teardown state', (test) => {
     const formElement = new FormElement()
-    formElement.dataset.state = 'test'
 
+    formElement.dataset.state = 'test'
     formElement.connectedCallback()
     test.assert.equal(formElement.state?.name, 'test')
     test.assert.equal(formElement.state?.elements.has(formElement), true)
-
     formElement.disconnectedCallback()
     test.assert.equal(formElement.state?.elements.has(formElement), false)
   })
@@ -34,11 +32,9 @@ describe('FormElement', () => {
     const commanderExecute = test.mock.method(formElement.commander, 'execute')
 
     formElement.connectedCallback()
-
     test.assert.equal(formElement.commander.started, true)
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'connected')
-
     formElement.disconnectedCallback()
   })
 
@@ -47,7 +43,6 @@ describe('FormElement', () => {
     const commanderExecute = test.mock.method(formElement.commander, 'execute')
 
     formElement.disconnectedCallback()
-
     test.assert.equal(formElement.commander.started, false)
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'disconnected')
@@ -59,7 +54,6 @@ describe('FormElement', () => {
     const event = new window.SubmitEvent('submit')
 
     formElement.dispatchEvent(event)
-
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'submit')
 

@@ -17,8 +17,8 @@ describe('DialogCloseCommand', () => {
       test.assert.equal(dialogElement.open, true)
 
       const command = new DialogCloseCommand(dialogElement, dialogElement)
-      command.execute()
 
+      command.execute()
       test.assert.equal(dialogElement.open, false)
     }
   })

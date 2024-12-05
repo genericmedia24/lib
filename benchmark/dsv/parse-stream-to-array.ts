@@ -35,6 +35,7 @@ bench
 
       readableStream.on('data', (chunk) => {
         const strChunk = chunk.toString()
+
         parser ??= initParser(inferSchema(strChunk))
         parser.chunk<string[]>(strChunk, parser.stringArrs)
       })
@@ -58,5 +59,4 @@ bench
   })
 
 await bench.run()
-
 console.table(bench.table())

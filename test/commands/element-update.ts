@@ -21,11 +21,9 @@ describe('ElementUpdateCommand', () => {
   it('should update immediately', (test) => {
     const element = new CustomElement()
     const command = new ElementUpdateCommand(element, element)
-
     const elementUpdate = test.mock.method(element, 'update')
 
     command.execute()
-
     test.assert.equal(elementUpdate.mock.callCount(), 1)
   })
 
@@ -53,7 +51,6 @@ describe('ElementUpdateCommand', () => {
     const elementUpdate = test.mock.method(element, 'update')
 
     command.execute()
-
     test.assert.equal(elementUpdate.mock.callCount(), 0)
 
     await new Promise((resolve) => {
@@ -92,7 +89,6 @@ describe('ElementUpdateCommand', () => {
     })
 
     command.execute()
-
     test.assert.equal(elementUpdate.mock.callCount(), 0)
   })
 

@@ -8,23 +8,21 @@ describe('SelectElement', () => {
 
   it('should setup state', (test) => {
     const selectElement = new SelectElement()
+
     selectElement.dataset.state = 'test'
     selectElement.connectedCallback()
-
     test.assert.equal(selectElement.state?.name, 'test')
     test.assert.equal(selectElement.state?.elements.has(selectElement), true)
-
     selectElement.disconnectedCallback()
   })
 
   it('should teardown state', (test) => {
     const selectElement = new SelectElement()
-    selectElement.dataset.state = 'test'
 
+    selectElement.dataset.state = 'test'
     selectElement.connectedCallback()
     test.assert.equal(selectElement.state?.name, 'test')
     test.assert.equal(selectElement.state?.elements.has(selectElement), true)
-
     selectElement.disconnectedCallback()
     test.assert.equal(selectElement.state?.elements.has(selectElement), false)
   })
@@ -34,11 +32,9 @@ describe('SelectElement', () => {
     const commanderExecute = test.mock.method(selectElement.commander, 'execute')
 
     selectElement.connectedCallback()
-
     test.assert.equal(selectElement.commander.started, true)
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'connected')
-
     selectElement.disconnectedCallback()
   })
 
@@ -47,7 +43,6 @@ describe('SelectElement', () => {
     const commanderExecute = test.mock.method(selectElement.commander, 'execute')
 
     selectElement.disconnectedCallback()
-
     test.assert.equal(selectElement.commander.started, false)
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'disconnected')
@@ -59,7 +54,6 @@ describe('SelectElement', () => {
     const event = new window.FocusEvent('blur')
 
     selectElement.dispatchEvent(event)
-
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'blur')
 
@@ -74,7 +68,6 @@ describe('SelectElement', () => {
     const event = new window.Event('change')
 
     selectElement.dispatchEvent(event)
-
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'change')
 
@@ -89,7 +82,6 @@ describe('SelectElement', () => {
     const event = new window.FocusEvent('focus')
 
     selectElement.dispatchEvent(event)
-
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'focus')
 
@@ -104,7 +96,6 @@ describe('SelectElement', () => {
     const event = new window.Event('input')
 
     selectElement.dispatchEvent(event)
-
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'input')
 
@@ -122,7 +113,6 @@ describe('SelectElement', () => {
     })
 
     selectElement.dispatchEvent(event)
-
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'enter')
 
@@ -141,7 +131,6 @@ describe('SelectElement', () => {
     })
 
     selectElement.dispatchEvent(event)
-
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'ctrlenter')
 
@@ -160,7 +149,6 @@ describe('SelectElement', () => {
     })
 
     selectElement.dispatchEvent(event)
-
     test.assert.equal(commanderExecute.mock.callCount(), 1)
     test.assert.equal(commanderExecute.mock.calls.at(0)?.arguments.at(0), 'ctrlenter')
 

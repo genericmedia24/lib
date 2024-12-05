@@ -63,7 +63,10 @@ export class I18n {
    * @param options the options
    */
   public static create(options?: I18nOptions): I18n {
-    I18n.instance ??= new I18n(options)
+    if (I18n.instance === undefined) {
+      I18n.instance = new I18n(options)
+    }
+
     return I18n.instance
   }
 

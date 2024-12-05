@@ -54,6 +54,7 @@ export function parseDsvWebStream(stream: ReadableStream, rowCallback: (row: str
       }
 
       endCallback()
+
       return
     }
 

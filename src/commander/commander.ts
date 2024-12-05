@@ -241,7 +241,6 @@ export class Commander {
   public start(): this {
     if (!this.started) {
       this.started = true
-
       this.element.addEventListener('command', this.handleCommandBound)
       this.registerCommands('on')
 
@@ -320,6 +319,7 @@ export class Commander {
 
             if (isCommandableElement) {
               const event = key.slice(2)
+
               originElement.commander.register(event, commandObject)
               this.#commands[event] ??= []
               this.#commands[event].push(commandObject)
