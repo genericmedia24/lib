@@ -1,4 +1,4 @@
-import type { CommandableElement } from '../commander/commandable-element.js'
+import type { Element } from '../elements/element.js'
 import { Command } from '../commander/command.js'
 
 export interface ElementToggleHeightCommandOptions {
@@ -24,8 +24,12 @@ export interface ElementToggleHeightCommandOptions {
  *
  * {@includeCode ../../docs/examples/commands/element-toggle-height.html}
  */
-export class ElementToggleHeightCommand extends Command<CommandableElement, ElementToggleHeightCommandOptions> {
-  public execute(): void {
+export class ElementToggleHeightCommand extends Command<Element, ElementToggleHeightCommandOptions> {
+  public async execute(): Promise<void> {
+    if (this.targetElement.state?.storage === 'idb') {
+      await this.targetElement.state.loaded
+    }
+
     const immediate = this.options.immediate === 'true'
 
     if (this.targetElement.hasAttribute('hidden')) {
@@ -38,14 +42,14 @@ export class ElementToggleHeightCommand extends Command<CommandableElement, Elem
         this.targetElement.style.setProperty('height', `${this.targetElement.scrollHeight}px`)
 
         const end = (): void => {
-          this.targetElement.ontransitioncancel = null
-          this.targetElement.ontransitionend = null
+          this.targetElement.removeEventListener('transitioncancel', end)
+          this.targetElement.removeEventListener('transitionend', end)
           this.targetElement.style.setProperty('display', 'none')
           this.targetElement.commander.execute('hidden')
         }
 
-        this.targetElement.ontransitioncancel = end
-        this.targetElement.ontransitionend = end
+        this.targetElement.addEventListener('transitioncancel', end)
+        this.targetElement.addEventListener('transitionend', end)
 
         window.setTimeout(() => {
           this.targetElement.style.removeProperty('transition-property')
@@ -63,13 +67,13 @@ export class ElementToggleHeightCommand extends Command<CommandableElement, Elem
         this.targetElement.style.setProperty('height', '0px')
 
         const end = (): void => {
-          this.targetElement.ontransitioncancel = null
-          this.targetElement.ontransitionend = null
+          this.targetElement.removeEventListener('transitioncancel', end)
+          this.targetElement.removeEventListener('transitionend', end)
           this.targetElement.style.removeProperty('height')
         }
 
-        this.targetElement.ontransitioncancel = end
-        this.targetElement.ontransitionend = end
+        this.targetElement.addEventListener('transitioncancel', end)
+        this.targetElement.addEventListener('transitionend', end)
 
         window.setTimeout(() => {
           this.targetElement.style.removeProperty('transition-property')

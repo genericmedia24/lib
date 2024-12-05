@@ -10,7 +10,7 @@ export interface ElementToggleMarginCommandOptions {
   /**
    * The position of the element. Can be `start` or `end`, defaults to `start`.
    */
-  position?: string
+  position?: 'end' | 'start'
 }
 
 /**
@@ -57,14 +57,14 @@ export class ElementToggleMarginCommand extends Command<Element, ElementToggleMa
         this.targetElement.style.setProperty(property, '0px')
 
         const end = (): void => {
-          this.targetElement.ontransitioncancel = null
-          this.targetElement.ontransitionend = null
+          this.targetElement.removeEventListener('transitioncancel', end)
+          this.targetElement.removeEventListener('transitionend', end)
           this.targetElement.style.setProperty('display', 'none')
           this.targetElement.commander.execute('hidden')
         }
 
-        this.targetElement.ontransitioncancel = end
-        this.targetElement.ontransitionend = end
+        this.targetElement.addEventListener('transitioncancel', end)
+        this.targetElement.addEventListener('transitionend', end)
 
         window.setTimeout(() => {
           this.targetElement.style.removeProperty('transition-property')
@@ -86,13 +86,13 @@ export class ElementToggleMarginCommand extends Command<Element, ElementToggleMa
         this.targetElement.style.setProperty(property, `-${width}px`)
 
         const end = (): void => {
-          this.targetElement.ontransitioncancel = null
-          this.targetElement.ontransitionend = null
+          this.targetElement.removeEventListener('transitioncancel', end)
+          this.targetElement.removeEventListener('transitionend', end)
           this.targetElement.style.removeProperty(property)
         }
 
-        this.targetElement.ontransitioncancel = end
-        this.targetElement.ontransitionend = end
+        this.targetElement.addEventListener('transitioncancel', end)
+        this.targetElement.addEventListener('transitionend', end)
 
         window.setTimeout(() => {
           this.targetElement.style.removeProperty('transition-property')

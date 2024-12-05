@@ -7,10 +7,6 @@ import { Element } from '../../src/elements/element.js'
 
 describe('ElementUpdateCommand', () => {
   class CustomElement extends Element implements UpdatableElement {
-    public override checkVisibility(): boolean {
-      return true
-    }
-
     public update(): void {}
   }
 
@@ -80,9 +76,9 @@ describe('ElementUpdateCommand', () => {
     const element = new CustomElement()
     const elementUpdate = test.mock.method(element, 'update')
 
-    test.mock.method(element, 'checkVisibility', () => {
+    element.checkVisibility = (): boolean => {
       return false
-    })
+    }
 
     const command = new ElementUpdateCommand(element, element, {
       'when-visible': 'true',
