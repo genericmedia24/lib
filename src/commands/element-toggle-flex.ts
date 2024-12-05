@@ -1,4 +1,4 @@
-import type { CommandableElement } from '../commander/commandable-element.js'
+import type { Element } from '../elements/element.js'
 import { Command } from '../commander/command.js'
 
 export interface ElementToggleFlexCommandOptions {
@@ -24,8 +24,12 @@ export interface ElementToggleFlexCommandOptions {
  *
  * {@includeCode ../../docs/examples/commands/element-toggle-flex.html}
  */
-export class ElementToggleFlexCommand extends Command<CommandableElement, ElementToggleFlexCommandOptions> {
-  public execute(): void {
+export class ElementToggleFlexCommand extends Command<Element, ElementToggleFlexCommandOptions> {
+  public async execute(): Promise<void> {
+    if (this.targetElement.state?.storage === 'idb') {
+      await this.targetElement.state.loaded
+    }
+
     const immediate = this.options.immediate === 'true'
 
     if (this.targetElement.hasAttribute('hidden')) {
@@ -38,14 +42,14 @@ export class ElementToggleFlexCommand extends Command<CommandableElement, Elemen
         this.targetElement.style.setProperty('flex', '1')
 
         const end = (): void => {
-          this.targetElement.ontransitioncancel = null
-          this.targetElement.ontransitionend = null
+          this.targetElement.removeEventListener('transitioncancel', end)
+          this.targetElement.removeEventListener('transitionend', end)
           this.targetElement.style.setProperty('display', 'none')
           this.targetElement.commander.execute('hidden')
         }
 
-        this.targetElement.ontransitioncancel = end
-        this.targetElement.ontransitionend = end
+        this.targetElement.addEventListener('transitioncancel', end)
+        this.targetElement.addEventListener('transitionend', end)
 
         window.setTimeout(() => {
           this.targetElement.style.removeProperty('transition-property')
@@ -63,13 +67,13 @@ export class ElementToggleFlexCommand extends Command<CommandableElement, Elemen
         this.targetElement.style.setProperty('flex', '0')
 
         const end = (): void => {
-          this.targetElement.ontransitioncancel = null
-          this.targetElement.ontransitionend = null
+          this.targetElement.removeEventListener('transitioncancel', end)
+          this.targetElement.removeEventListener('transitionend', end)
           this.targetElement.style.removeProperty('flex')
         }
 
-        this.targetElement.ontransitioncancel = end
-        this.targetElement.ontransitionend = end
+        this.targetElement.addEventListener('transitioncancel', end)
+        this.targetElement.addEventListener('transitionend', end)
 
         window.setTimeout(() => {
           this.targetElement.style.removeProperty('transition-property')

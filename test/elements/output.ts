@@ -7,7 +7,7 @@ describe('OutputElement', () => {
   HTMLOutputElement.prototype.hidePopover = function hidePopover(): void {
     const event = new window.Event('toggle')
 
-    // @ts-expect-error TransitionEvent is undefined
+    // @ts-expect-error ToggleEvent is undefined
     event.newState = 'closed'
     this.dispatchEvent(event)
   }
@@ -15,7 +15,7 @@ describe('OutputElement', () => {
   HTMLOutputElement.prototype.showPopover = function showPopover(): void {
     const event = new window.Event('toggle')
 
-    // @ts-expect-error TransitionEvent is undefined
+    // @ts-expect-error ToggleEvent is undefined
     event.newState = 'open'
     this.dispatchEvent(event)
   }
