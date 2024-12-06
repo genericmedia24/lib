@@ -29,8 +29,6 @@ export interface KeyBindingOptions {
  *
  * Can be used to close `<popover>`s and `<dialog>`s in the correct order when the Escape key is pressed.
  *
- * See [a live example](../../docs/examples/key-binding.html) of the code below.
- *
  * @example
  * ```html
  * <body>
@@ -73,7 +71,7 @@ export class KeyBinding {
   /**
    * Creates a singleton key binding. For every key combination there is one key binding.
    *
-   * Calls {@link start} once, after creating the key binding.
+   * Calls `start` once, after creating the key binding.
    *
    * @param options the options
    */
@@ -179,7 +177,7 @@ export class KeyBinding {
   }
 
   /**
-   * Starts listening for `keydown` events on [window](https://developer.mozilla.org/en-US/docs/Web/API/Window/window).
+   * Starts listening for `keydown` events on `window`.
    */
   public start(): this {
     window.addEventListener('keydown', this.handleKeydownBound)
@@ -188,7 +186,7 @@ export class KeyBinding {
   }
 
   /**
-   * Stops listening for `keydown` events on [window](https://developer.mozilla.org/en-US/docs/Web/API/Window/window).
+   * Stops listening for `keydown` events on `window`.
    */
   public stop(): this {
     window.removeEventListener('keydown', this.handleKeydownBound)

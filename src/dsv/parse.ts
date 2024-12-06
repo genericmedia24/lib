@@ -10,8 +10,6 @@ import type { ParseDsvState } from './parse-state.js'
 /**
  * Parses a DSV string incrementally.
  *
- * See [the guide](../../docs/guides/dsv.md) for more information.
- *
  * @param state the state
  * @param rowCallback the callback function
  * @param options the options

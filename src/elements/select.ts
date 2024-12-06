@@ -7,7 +7,7 @@ import { State } from '../state/state.js'
 /**
  * A custom select element.
  *
- * Delegates five events to {@link commander}.
+ * Delegates five events to `commander`.
  *
  * * `blur`
  * * `change`
@@ -16,9 +16,25 @@ import { State } from '../state/state.js'
  * * `keydown` (only as `enter` and `ctrlenter`)
  *
  * @example
- * See [a live example](../../examples/elements.html#select) of the code below.
- *
- * {@includeCode ../../docs/examples/elements/select.html}
+ * ```html
+ * <select
+ *   name="key-1"
+ *   data-state="example"
+ *   data-state-storage="none"
+ *   data-oninput="input-set-state"
+ *   is="gm-select"
+ * >
+ *   <option></option>
+ *   <option>value-1</option>
+ *   <option>value-2</option>
+ * </select>
+ * <div
+ *   data-state="example"
+ *   data-state-storage="none"
+ *   data-onstatechanged="element-set-text-content?state-key=key-1"
+ *   is="gm-div"
+ * ></div>
+ * ```
  */
 export class SelectElement<StateValues = Record<string, unknown>> extends HTMLSelectElement implements CommandableElement, StatefulElement<StateValues> {
   /**
@@ -44,9 +60,9 @@ export class SelectElement<StateValues = Record<string, unknown>> extends HTMLSe
   }
 
   /**
-   * Sets up {@link state} and starts {@link commander}.
+   * Sets up `state` and starts `commander`.
    *
-   * Registers itself with {@link state} and executes a `connected` command.
+   * Registers itself with `state` and executes a `connected` command.
    */
   public connectedCallback(): void {
     this.state ??= State.setup(this)
@@ -56,9 +72,9 @@ export class SelectElement<StateValues = Record<string, unknown>> extends HTMLSe
   }
 
   /**
-   * Unregisters itself from {@link state}.
+   * Unregisters itself from `state`.
    *
-   * Executes a `disconnected` commands and stops {@link commander}.
+   * Executes a `disconnected` commands and stops `commander`.
    */
   public disconnectedCallback(): void {
     this.state?.unregister(this)
@@ -67,7 +83,7 @@ export class SelectElement<StateValues = Record<string, unknown>> extends HTMLSe
   }
 
   /**
-   * Calls {@link Commander.executeState}.
+   * Calls `commander.executeState`.
    *
    * @param newValues the new values
    * @param oldValues the old values

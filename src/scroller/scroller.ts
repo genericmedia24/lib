@@ -60,8 +60,6 @@ export interface ScrollerFilterOptions {
 /**
  * Scrolls through a large amount of tabular data smoothly.
  *
- * See [the guide](../../docs/guides/scroller.md) for more information.
- *
  *  @example
  * ```javascript
  * const scroller = new Scroller(document.querySelector('.table'))
@@ -74,7 +72,7 @@ export interface ScrollerFilterOptions {
  */
 export class Scroller {
   /**
-   * All the blocks inside {@link bodyElement}.
+   * All the blocks inside `bodyElement`.
    */
   public bodyBlocks: HTMLElement[] = []
 
@@ -94,7 +92,7 @@ export class Scroller {
   public bodyRows: string[][] = []
 
   /**
-   * A temporary copy of {@link bodyRows}, used when filtering rows.
+   * A temporary copy of `bodyRows`, used when filtering rows.
    */
   public bodyRowsCopy?: string[][]
 
@@ -104,7 +102,7 @@ export class Scroller {
   public columnWidths: number[] = []
 
   /**
-   * The dimensions of {@link element}.
+   * The dimensions of `element`.
    */
   public domRect?: DOMRect
 
@@ -175,7 +173,7 @@ export class Scroller {
   protected handleScrollBound = this.handleScroll.bind(this)
 
   /**
-   * {@link columnWidths} as a space separated string of CSS pixel values, for example "50px 50px 50px".
+   * `columnWidths` as a space separated string of CSS pixel values, for example "50px 50px 50px".
    */
   public get gridTemplateColumns(): string {
     return this.columnWidths
@@ -188,11 +186,11 @@ export class Scroller {
   /**
    * Creates a scroller.
    *
-   * {@link bodyElement} is determined as lastElementChild of {@link element}.
+   * `bodyElement` is determined as lastElementChild of `element`.
    *
-   * {@link headElement} is determined as firstElementChild of {@link element}.
+   * `headElement` is determined as firstElementChild of `element`.
    *
-   * If lastElementChild and firstElementChild are equal, {@link headElement} is undefined.
+   * If lastElementChild and firstElementChild are equal, `headElement` is undefined.
    *
    * @param element the element
    * @param options the options
@@ -217,9 +215,9 @@ export class Scroller {
   }
 
   /**
-   * Adds a row to {@link bodyRows}.
+   * Adds a row to `bodyRows`.
    *
-   * Determines {@link numColumns} based on the length of the row.
+   * Determines `numColumns` based on the length of the row.
    *
    * @param row the row
    */
@@ -229,9 +227,9 @@ export class Scroller {
   }
 
   /**
-   * Adds a row to {@link headRows}.
+   * Adds a row to `headRows`.
    *
-   * Determines {@link numColumns} based on the length of the row.
+   * Determines `numColumns` based on the length of the row.
    *
    * @param row the row
    */
@@ -243,7 +241,7 @@ export class Scroller {
   /**
    * Clears the scroller.
    *
-   * Sets {@link bodyRows}, {@link columnWidths} and {@link headRows} to empty arrays and {@link bodyRowsCopy} to undefined.
+   * Sets `bodyRows`, `columnWidths` and `headRows` to empty arrays and `bodyRowsCopy` to undefined.
    *
    * @example
    * ```javascript
@@ -269,11 +267,11 @@ export class Scroller {
   }
 
   /**
-   * Filters {@link bodyRows}.
+   * Filters `bodyRows`.
    *
-   * Applies the properties of {@link options} object to individual cells and filters the rows accordingly.
+   * Applies the properties of `options` object to individual cells and filters the rows accordingly.
    *
-   * Sets a copy of the original {@link bodyRows} on {@link bodyRowsCopy}. Clears the copy if the input is undefined.
+   * Sets a copy of the original `bodyRows` on `bodyRowsCopy`. Clears the copy if the input is undefined.
    *
    * @example
    * ```javascript
@@ -373,9 +371,9 @@ export class Scroller {
   /**
    * Start the scroller.
    *
-   * Calculates {@link rowHeight}, {@link numBodyRowsMax} and {@link numBodyRowsVisible}.
+   * Calculates `rowHeight`, `numBodyRowsMax` and `numBodyRowsVisible`.
    *
-   * Starts {@link resizeObserver} and starts listening for scroll events.
+   * Starts `resizeObserver` and starts listening for scroll events.
    */
   public start(): this {
     this.rowHeight = this.rowHeight === 0
@@ -400,7 +398,7 @@ export class Scroller {
   /**
    * Stops the scroller.
    *
-   * Stops {@link resizeObserver} and stops listening for scroll events.
+   * Stops `resizeObserver` and stops listening for scroll events.
    */
   public stop(): this {
     this.resizeObserver.unobserve(this.element)
@@ -410,7 +408,7 @@ export class Scroller {
   }
 
   /**
-   * Updates the styles of {@link element}, {@link bodyElement} and {@link headElement}.
+   * Updates the styles of `element`, `bodyElement` and `headElement`.
    */
   public update(): void {
     this.createBodyBlocks()
@@ -480,7 +478,7 @@ export class Scroller {
   }
 
   /**
-   * Calculates all column widths. Sets {@link columnWidths} directly.
+   * Calculates all column widths. Sets `columnWidths` directly.
    */
   protected calculateColumnWidths(): void {
     if (this.columnWidths.length > 0) {
@@ -539,7 +537,7 @@ export class Scroller {
   }
 
   /**
-   * Calculates {@link numBodyRowsMax}.
+   * Calculates `numBodyRowsMax`.
    */
   protected calculateNumBodyRowsMax(): number {
     const maxHeight = this.findMaxHeight(1_000_000)
@@ -550,7 +548,7 @@ export class Scroller {
   }
 
   /**
-   * Calculates {@link numBodyRowsVisible}.
+   * Calculates `numBodyRowsVisible`.
    */
   protected calculateNumBodyRowsVisible(): number {
     return Math.ceil(this.element.offsetHeight / this.rowHeight)
@@ -559,7 +557,7 @@ export class Scroller {
   /**
    * Creates the body blocks necessary to hold the rows.
    *
-   * Clears {@link bodyElement} and then appends the blocks to it.
+   * Clears `bodyElement` and then appends the blocks to it.
    */
   protected createBodyBlocks(): void {
     const numBlocks = Math.floor(this.bodyRows.length / this.bodyBlockSize)
@@ -582,7 +580,7 @@ export class Scroller {
   }
 
   /**
-   * Determines {@link rowHeight}.
+   * Determines `rowHeight`.
    */
   protected deterimineRowHeight(): number {
     const cell = this.bodyElement
@@ -619,9 +617,9 @@ export class Scroller {
   }
 
   /**
-   * Handles the resizing of {@link element}.
+   * Handles the resizing of `element`.
    *
-   * Recalculates {@link numBodyRowsVisible} and {@link domRect}. Calls {@link update}.
+   * Recalculates `numBodyRowsVisible` and `domRect`. Calls `update`.
    *
    * @param entries the resize entries
    */
@@ -648,7 +646,7 @@ export class Scroller {
   }
 
   /**
-   * Updates the styles of {@link bodyBlocks}.
+   * Updates the styles of `bodyBlocks`.
    */
   protected updateBodyBlocksStyle(): void {
     const { gridTemplateColumns } = this
@@ -659,9 +657,9 @@ export class Scroller {
   }
 
   /**
-   * Updates the innerHTML of {@link bodyElement}.
+   * Updates the innerHTML of `bodyElement`.
    *
-   * Renders the cells of all {@link bodyRows} and adds them to {@link bodyElement}.
+   * Renders the cells of all `bodyRows` and adds them to `bodyElement`.
    */
   protected updateBodyElementInnerHtml(): void {
     let columnIndexStart = 0
@@ -728,7 +726,7 @@ export class Scroller {
   }
 
   /**
-   * Updates the style of {@link element}.
+   * Updates the style of `element`.
    */
   protected updateElementStyle(): void {
     this.element.classList.toggle('maximized', this.bodyElement.offsetWidth === this.element.offsetWidth)
@@ -737,9 +735,9 @@ export class Scroller {
   }
 
   /**
-   * Updates the innerHTML of {@link headElement}.
+   * Updates the innerHTML of `headElement`.
    *
-   * Renders the cells of all {@link headRows} and adds them to {@link headElement}.
+   * Renders the cells of all `headRows` and adds them to `headElement`.
    */
   protected updateHeadElementInnerHtml(): void {
     if (this.headElement !== undefined) {
@@ -760,7 +758,7 @@ export class Scroller {
   }
 
   /**
-   * Updates the style of {@link headElement}.
+   * Updates the style of `headElement`.
    */
   protected updateHeadElementStyle(): void {
     this.headElement?.style.setProperty('grid-template-columns', this.gridTemplateColumns)

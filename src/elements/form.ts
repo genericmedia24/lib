@@ -6,14 +6,23 @@ import { State } from '../state/state.js'
 /**
  * A custom form element.
  *
- * Delegates one event to  {@link commander}.
+ * Delegates one event to  `commander`.
  *
  * * `submit`
  *
  * @example
- * See [a live example](../../examples/elements.html#form) of the code below.
- *
- * {@includeCode ../../docs/examples/elements/form.html}
+ * ```html
+ * <form
+ *   data-onsubmit="form-submit"
+ *   data-onerror="element-set-text-content@output?text-content=error"
+ *   data-onresponse="element-set-text-content@output?text-content=done"
+ *   is="gm-form"
+ * >
+ *   <button formaction="/">submit /</button>
+ *   <button formaction="/wrong-path">submit /wrong-path</button>
+ *   <output id="output"></output>
+ * </form>
+ * ```
  */
 export class FormElement<StateValues = Record<string, unknown>> extends HTMLFormElement implements CommandableElement, StatefulElement<StateValues> {
   /**
@@ -35,9 +44,9 @@ export class FormElement<StateValues = Record<string, unknown>> extends HTMLForm
   }
 
   /**
-   * Sets up {@link state} and starts {@link commander}.
+   * Sets up `state` and starts `commander`.
    *
-   * Registers itself with {@link state} and executes a `connected` command.
+   * Registers itself with `state` and executes a `connected` command.
    */
   public connectedCallback(): void {
     this.state ??= State.setup(this)
@@ -47,9 +56,9 @@ export class FormElement<StateValues = Record<string, unknown>> extends HTMLForm
   }
 
   /**
-   * Unregisters itself from {@link state}.
+   * Unregisters itself from `state`.
    *
-   * Executes a `disconnected` commands and stops {@link commander}.
+   * Executes a `disconnected` commands and stops `commander`.
    */
   public disconnectedCallback(): void {
     this.state?.unregister(this)
@@ -58,7 +67,7 @@ export class FormElement<StateValues = Record<string, unknown>> extends HTMLForm
   }
 
   /**
-   * Calls {@link Commander.executeState}.
+   * Calls `commander.executeState`.
    *
    * @param newValues the new values
    * @param oldValues the old values

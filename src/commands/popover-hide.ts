@@ -3,12 +3,31 @@ import { Command } from '../commander/command.js'
 /**
  * Hides a popover.
  *
- * Calls {@link targetElement}.[hidePopover](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/hidePopover).
+ * Calls `targetElement.hidePopover`.
  *
  * @example
- * See [a live example](../../examples/commands.html#popover-hide) of the code below.
- *
- * {@includeCode ../../docs/examples/commands/popover-hide.html}
+ * ```html
+ * <button
+ *   data-onclick="popover-show@popover"
+ *   type="button"
+ *   is="gm-button"
+ * >
+ *   show
+ * </button>
+ * <div
+ *   id="popover"
+ *   popover="manual"
+ * >
+ *   <span>popover</span>
+ *   <button
+ *     data-onclick="popover-hide@popover"
+ *     type="button"
+ *     is="gm-button"
+ *   >
+ *     hide
+ *   </button>
+ * </div>
+ * ```
  */
 export class PopoverHideCommand extends Command<HTMLElement> {
   public execute(): void {

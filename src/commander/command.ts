@@ -1,8 +1,6 @@
 /**
  * A unit of behaviour.
  *
- * See [the guide](../../docs/guides/commander.md) for more information.
- *
  * @example
  * ```javascript
  * class ElementSetBackgroundCommand extends Command {

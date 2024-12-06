@@ -3,12 +3,19 @@ import { Command } from '../commander/command.js'
 /**
  * Removes an element.
  *
- * Calls {@link targetElement}.[remove](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/remove).
+ * Calls `targetElement.remove`.
  *
  * @example
- * See [a live example](../../examples/commands.html#element-remove) of the code below.
- *
- * {@includeCode ../../docs/examples/commands/element-remove.html}
+ * ```html
+ * <button
+ *   data-onclick="element-remove@div"
+ *   type="button"
+ *   is="gm-button"
+ * >
+ *   remove
+ * </button>
+ * <div id="div">text</div>
+ * ```
  */
 export class ElementRemoveCommand extends Command<HTMLElement> {
   public execute(): void {

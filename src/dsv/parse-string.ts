@@ -5,8 +5,6 @@ import { parseDsv } from './parse.js'
 /**
  * Parses a string.
  *
- * See [the guide](../../docs/guides/dsv.md) for more information.
- *
  * @example
  * ```javascript
  * const string = `a,b,c\n1,2,3\n`

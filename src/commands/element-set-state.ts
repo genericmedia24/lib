@@ -16,14 +16,33 @@ export interface ElementSetStateCommandOptions {
 /**
  * Sets the state of an element.
  *
- * If options{@link ElementSetStateCommandOptions['state-value']} is not defined the state value will be deleted.
+ * If `options['state-value']` is not defined the state value will be deleted.
  *
  * Multiple keys and values can be provided. They are paired in the order of their specification.
  *
  * @example
- * See [a live example](../../examples/commands.html#element-set-state) of the code below.
- *
- * {@includeCode ../../docs/examples/commands/element-set-state.html}
+ * ```html
+ * <button
+ *   data-state="example"
+ *   data-state-storage="none"
+ *   data-onclick="element-set-state?state-key=key-1&state-value=value-1&state-key=key-2&state-value=value-2"
+ *   is="gm-button"
+ * >
+ *   set
+ * </button>
+ * <div
+ *   data-state="example"
+ *   data-state-storage="none"
+ *   data-onstatechanged="element-set-text-content?state-key=key-1"
+ *   is="gm-div"
+ * ></div>
+ * <div
+ *   data-state="example"
+ *   data-state-storage="none"
+ *   data-onstatechanged="element-set-text-content?state-key=key-2"
+ *   is="gm-div"
+ * ></div>
+ * ```
  */
 export class ElementSetStateCommand extends Command<StatefulElement, ElementSetStateCommandOptions> {
   public execute(): void {

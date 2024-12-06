@@ -7,8 +7,6 @@ import { formatDsvRow } from './format-row.js'
  *
  * The rows will be joined with '\n'.
  *
- * See [the guide](../../docs/guides/dsv.md) for more information.
- *
  * @example
  * ```javascript
  * const string = formatDsvRows([

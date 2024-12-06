@@ -2,10 +2,22 @@ import type { RequestableElement } from '../requester/requestable-element.js'
 import { Command } from '../commander/command.js'
 
 /**
- * Calls {@link RequestableElement.requester}.abortController.[abort](https://developer.mozilla.org/en-US/docs/Web/API/AbortController/abort).
+ * Calls `targetElement.requester.abortController.abort`.
  *
  * @example
- * {@includeCode ../../docs/examples/commands/element-abort-request.html}
+ * ```html
+ * <form
+ *   id="form"
+ *   is="gm-form"
+ * ></form>
+ * <button
+ *   data-onclick="element-abort-request@form"
+ *   type="button"
+ *   is="gm-button"
+ * >
+ *   abort
+ * </button>
+ * ```
  */
 export class ElementAbortRequestCommand extends Command<RequestableElement> {
   public execute(): void {

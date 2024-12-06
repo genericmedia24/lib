@@ -10,16 +10,23 @@ export interface DialogToggleCommandOptions {
 /**
  * Shows a `<dialog>`.
  *
- * Calls {@link targetElement}.[close](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement/close) if {@link targetElement}.[open](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement/open) is `true`.
+ * Calls `targetElement.close` if `targetElement.open` is `true`.
  *
- * Calls {@link targetElement}.[showModal](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement/showModal) if {@link DialogToggleCommandOptions.modal | options.modal} is defined.
+ * Calls `targetElement.showModal` if `options.modal` is defined.
  *
- * Otherwise calls {@link targetElement}.[show](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement/show).
+ * Otherwise calls `targetElement.show`.
 
  * @example
- * See [a live example](../../examples/commands.html#dialog-toggle) of the code below.
- *
- * {@includeCode ../../docs/examples/commands/dialog-toggle.html}
+ * ```html
+ * <button
+ *   data-onclick="dialog-toggle@dialog"
+ *   type="button"
+ *   is="gm-button"
+ * >
+ *   toggle
+ * </button>
+ * <dialog id="dialog">dialog</dialog>
+ * ```
  */
 export class DialogToggleCommand extends Command<HTMLDialogElement, DialogToggleCommandOptions> {
   public execute(): void {

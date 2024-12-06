@@ -3,14 +3,36 @@ import { Command } from '../commander/command.js'
 /**
  * Shows and hides elements based on a `<select>` value.
  *
- * Toggles the `hidden` attribute on elements with an `[data-select-toggle]` attribute containing the ID of {@link targetElement}.
+ * Toggles the `hidden` attribute on elements with an `[data-select-toggle]` attribute containing the ID of `targetElement`.
  *
- * The `hidden` attribute will be set to `true` if `[data-select-toggle-value]` does not include the value of {@link targetElement} and to `true` if it does.
+ * The `hidden` attribute will be set to `true` if `[data-select-toggle-value]` does not include the value of `targetElement` and to `true` if it does.
  *
  * @example
- * See [a live example](../../examples/commands.html#select-toggle) of the code below.
- *
- * {@includeCode ../../docs/examples/commands/select-toggle.html}
+ * ```html
+ * <select
+ *   id="key-1"
+ *   data-onconnected="select-toggle"
+ *   data-onchange="select-toggle"
+ *   is="gm-select"
+ * >
+ *   <option>value-1</option>
+ *   <option>value-2</option>
+ * </select>
+ * <div
+ *   data-select-toggle="key-1"
+ *   data-select-toggle-value="value-1"
+ *   hidden
+ * >
+ *   value-1
+ * </div>
+ * <div
+ *   data-select-toggle="key-1"
+ *   data-select-toggle-value="value-2"
+ *   hidden
+ * >
+ *   value-2
+ * </div>
+ * ```
  */
 export class SelectToggleCommand extends Command<HTMLSelectElement> {
   public execute(): void {

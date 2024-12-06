@@ -11,10 +11,17 @@ export interface FormRespondCommandData {
 }
 
 /**
- * Executes commands provided in the body of {@link FormRespondCommandData.response | data.response}.
+ * Executes commands provided in the body of `data.response`.
  *
  * @example
- * {@includeCode ../../docs/examples/commands/form-respond.html}
+ * ```html
+ * <form
+ *   data-onresponse="form-respond"
+ *   data-onok="element-set-text-content@output"
+ * >
+ *   <output id="output"></output>
+ * </form>
+ * ```
  *
  * The response body should contain the following JSON:
  *

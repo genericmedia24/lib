@@ -11,14 +11,27 @@ export interface ElementToggleAttributeCommandOptions {
 /**
  * Toggles the attribute of an element.
  *
- * Iterates over options{@link ElementToggleAttributeCommandOptions['state-key']} and checks if the corresponding value of the state matches options{@link ElementToggleAttributeCommandOptions['state-value']}. The matching pattern is interpreted as a glob (see [picomatch](https://github.com/micromatch/picomatch)). If there is a match there corresponding attribute is set.
+ * Iterates over `options['state-key']` and checks if the corresponding value of the state matches `options['state-value']`. The matching pattern is interpreted as a glob. If there is a match there corresponding attribute is set.
  *
  * Multiple attributes, keys and values can be provided. They are paired in the order of their specification.
  *
  * @example
- * See [a live example](../../examples/commands.html#element-toggle-attribute) of the code below.
- *
- * {@includeCode ../../docs/examples/commands/element-toggle-attribute.html}
+ * ```html
+ * <input
+ *   data-state="example"
+ *   data-state-storage="none"
+ *   data-oninput="input-set-state?state-key=key-1"
+ *   is="gm-input"
+ * >
+ * <div
+ *   data-state="example"
+ *   data-state-storage="none"
+ *   data-onstatechanged="element-toggle-attribute?state-key=key-1&state-value=abc&attribute-name=hidden"
+ *   is="gm-div"
+ * >
+ *   disappears when input contains "abc"
+ * </div>
+ * ```
  */
 export class ElementToggleAttributeCommand extends Command<Element, ElementToggleAttributeCommandOptions> {
   public async execute(): Promise<void> {

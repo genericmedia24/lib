@@ -7,7 +7,7 @@ import { State } from '../state/state.js'
 /**
  * A custom input element.
  *
- * Delegates five events to {@link commander}.
+ * Delegates five events to `commander`.
  *
  * * `blur`
  * * `focus`
@@ -16,9 +16,22 @@ import { State } from '../state/state.js'
  * * `paste`
  *
  * @example
- * See [a live example](../../examples/elements.html#input) of the code below.
- *
- * {@includeCode ../../docs/examples/elements/input.html}
+ * ```html
+ * <input
+ *   name="key-1"
+ *   data-state="example"
+ *   data-state-storage="none"
+ *   data-oninput="input-set-state"
+ *   is="gm-input"
+ *   placeholder="Type something"
+ * >
+ * <div
+ *   data-state="example"
+ *   data-state-storage="none"
+ *   data-onstatechanged="element-set-text-content?state-key=key-1"
+ *   is="gm-div"
+ * ></div>
+ * ```
  */
 export class InputElement<StateValues = Record<string, unknown>> extends HTMLInputElement implements CommandableElement, StatefulElement<StateValues> {
   /**
@@ -44,9 +57,9 @@ export class InputElement<StateValues = Record<string, unknown>> extends HTMLInp
   }
 
   /**
-   * Sets up {@link state} and starts {@link commander}.
+   * Sets up `state` and starts `commander`.
    *
-   * Registers itself with {@link state} and executes a `connected` command.
+   * Registers itself with `state` and executes a `connected` command.
    */
   public connectedCallback(): void {
     this.state ??= State.setup(this)
@@ -56,9 +69,9 @@ export class InputElement<StateValues = Record<string, unknown>> extends HTMLInp
   }
 
   /**
-   * Unregisters itself from {@link state}.
+   * Unregisters itself from `state`.
    *
-   * Executes a `disconnected` commands and stops {@link commander}.
+   * Executes a `disconnected` commands and stops `commander`.
    */
   public disconnectedCallback(): void {
     this.state?.unregister(this)
@@ -67,7 +80,7 @@ export class InputElement<StateValues = Record<string, unknown>> extends HTMLInp
   }
 
   /**
-   * Calls {@link Commander.executeState}.
+   * Calls `commander.executeState`.
    *
    * @param newValues the new values
    * @param oldValues the old values

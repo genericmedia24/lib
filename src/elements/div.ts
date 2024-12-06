@@ -8,9 +8,22 @@ import { KeyBinding } from '../util/key-binding.js'
  * A custom div element.
  *
  * @example
- * See [a live example](../../examples/elements.html#div) of the code below.
- *
- * {@includeCode ../../docs/examples/elements/div.html}
+ * ```html
+ * <button
+ *   data-state="example"
+ *   data-state-storage="none"
+ *   data-onclick="element-set-state?state-key=key-1&state-value=value-1"
+ *   is="gm-button"
+ * >
+ *   set
+ * </button>
+ * <div
+ *   data-state="example"
+ *   data-state-storage="none"
+ *   data-onstatechanged="element-set-text-content?state-key=key-1"
+ *   is="gm-div"
+ * ></div>
+ * ```
  */
 export class DivElement<StateValues = Record<string, unknown>> extends HTMLDivElement implements CommandableElement, StatefulElement<StateValues> {
   /**
@@ -31,14 +44,14 @@ export class DivElement<StateValues = Record<string, unknown>> extends HTMLDivEl
   public state?: State<StateValues>
 
   /**
-   * A bound {@link hidePopover}.
+   * A bound `hidePopover`.
    */
   protected hidePopoverBound = this.hidePopover.bind(this)
 
   /**
-   * Sets up {@link state} and starts {@link commander}.
+   * Sets up `state` and starts `commander`.
    *
-   * Registers itself with {@link state} and {@link escapeBinding}.
+   * Registers itself with `state` and `escapeBinding`.
    *
    * Executes a `connected` command.
    */
@@ -50,9 +63,9 @@ export class DivElement<StateValues = Record<string, unknown>> extends HTMLDivEl
   }
 
   /**
-   * Unregisters itself from {@link state} and {@link escapeBinding}.
+   * Unregisters itself from `state` and `escapeBinding`.
    *
-   * Executes a `disconnected` commands and stops {@link commander}.
+   * Executes a `disconnected` commands and stops `commander`.
    */
   public disconnectedCallback(): void {
     this.state?.unregister(this)
@@ -62,7 +75,7 @@ export class DivElement<StateValues = Record<string, unknown>> extends HTMLDivEl
   }
 
   /**
-   * Hides the popover and unregisters itself from {@link escapeBinding}.
+   * Hides the popover and unregisters itself from `escapeBinding`.
    */
   public override hidePopover(): void {
     super.hidePopover()
@@ -70,7 +83,7 @@ export class DivElement<StateValues = Record<string, unknown>> extends HTMLDivEl
   }
 
   /**
-   * Shows the popover and registers itself with {@link escapeBinding}.
+   * Shows the popover and registers itself with `escapeBinding`.
    */
   public override showPopover(): void {
     super.showPopover()
@@ -78,7 +91,7 @@ export class DivElement<StateValues = Record<string, unknown>> extends HTMLDivEl
   }
 
   /**
-   * Calls {@link Commander.executeState}.
+   * Calls `commander.executeState`.
    *
    * @param newValues the new values
    * @param oldValues the old values

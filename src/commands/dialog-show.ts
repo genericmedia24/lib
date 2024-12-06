@@ -10,14 +10,30 @@ export interface DialogShowCommandOptions {
 /**
  * Shows a `<dialog>`.
  *
- * Calls {@link targetElement}.[showModal](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement/showModal) if {@link DialogShowCommandOptions.modal | options.modal} is defined.
+ * Calls `targetElement.showModal` if `options.modal` is defined.
  *
- * Otherwise calls {@link targetElement}.[show](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement/show).
+ * Otherwise calls `targetElement.show`.
  *
  * @example
- * See [a live example](../../examples/commands.html#dialog-show) of the code below.
- *
- * {@includeCode ../../docs/examples/commands/dialog-show.html}
+ * ```html
+ * <button
+ *   data-onclick="dialog-show@dialog?modal=true"
+ *   type="button"
+ *   is="gm-button"
+ * >
+ *   show
+ * </button>
+ * <dialog id="dialog">
+ *   <span>dialog</span>
+ *   <button
+ *     data-onclick="dialog-close@dialog"
+ *     type="button"
+ *     is="gm-button"
+ *   >
+ *     close
+ *   </button>
+ * </dialog>
+ * ```
  */
 export class DialogShowCommand extends Command<HTMLDialogElement, DialogShowCommandOptions> {
   public execute(): void {

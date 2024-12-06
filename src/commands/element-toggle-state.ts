@@ -10,18 +10,37 @@ export interface ElementToggleStateCommandOptions {
 /**
  * Toggles the state of an element.
  *
- * Iterates over options{@link ElementToggleStateCommandOptions['state-key']}.
+ * Iterates over `options['state-key']`.
  *
- * If the current corresponding state value does not match ElementToggleStateCommandOptions['state-on'] the state value will be set to ElementToggleStateCommandOptions['state-on'].
+ * If the current corresponding state value does not match `options['state-on']` the state value will be set to `options['state-on']`.
  *
- * Otherwise the state value is set to ElementToggleStateCommandOptions['state-off']. If ElementToggleStateCommandOptions['state-off'] is not defined, the state value will be deleted.
+ * Otherwise the state value is set to `options['state-off']`. If `options['state-off']` is not defined, the state value will be deleted.
  *
  * Multiple keys, on and off values can be provided. They are paired in the order of their specification.
  *
  * @example
- * See [a live example](../../examples/commands.html#element-toggle-state) of the code below.
- *
- * {@includeCode ../../docs/examples/commands/element-toggle-state.html}
+ * ```html
+ * <button
+ *   data-state="example"
+ *   data-state-storage="none"
+ *   data-onclick="element-toggle-state?state-key=key-1&state-on=on-1&state-off=off-1&state-key=key-2&state-on=on-2"
+ *   is="gm-button"
+ * >
+ *   toggle
+ * </button>
+ * <div
+ *   data-state="example"
+ *   data-state-storage="none"
+ *   data-onstatechanged="element-set-text-content?state-key=key-1"
+ *   is="gm-div"
+ * ></div>
+ * <div
+ *   data-state="example"
+ *   data-state-storage="none"
+ *   data-onstatechanged="element-set-text-content?state-key=key-2"
+ *   is="gm-div"
+ * ></div>
+ * ```
  */
 export class ElementToggleStateCommand extends Command<StatefulElement, ElementToggleStateCommandOptions> {
   public async execute(): Promise<void> {

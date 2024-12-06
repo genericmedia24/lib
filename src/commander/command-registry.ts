@@ -4,8 +4,6 @@ import type { Command } from './command.js'
 /**
  * A registry to define and create custom commands.
  *
- * See [the guide](../../docs/guides/commander.md) for more information.
- *
  * @example
  * ```javascript
  * class ElementSetBackgroundCommand extends Command {
@@ -43,7 +41,7 @@ export class CommandRegistry {
   public commands: Record<string, Constructor<Command>> = {}
 
   /**
-   * Creates a new command. Used by {@link Commander} to instantiate commands.
+   * Creates a new command. Used by a commander to instantiate commands.
    *
    * @example
    * ```javascript
