@@ -7,8 +7,6 @@ import { formatDsvValue } from './format-value.js'
  *
  * The values will be joined with the separator passed in the options (defaults to ',').
  *
- * See [the guide](../../docs/guides/dsv.md) for more information.
- *
  * @example
  * ```javascript
  * const string = formatDsvRow(['a', 'b', 'c'])

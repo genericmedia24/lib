@@ -5,9 +5,7 @@ import { isNil } from '../util/is-nil.js'
 /**
  * Fetches a resource.
  *
- * When an element is passed to the constructur, feedback about the request will be given on the element. See {@link fetch} from more information.
- *
- * See [a live example](../../docs/examples/requester.html) of the code below.
+ * When an element is passed to the constructur, feedback about the request will be given on the element.
  *
  * @example
  * ```html
@@ -48,7 +46,7 @@ import { isNil } from '../util/is-nil.js'
  */
 export class Requester {
   /**
-   * Used to transform the textual representation of an error in the response body into a {@link CustomError}
+   * Used to transform the textual representation of an error in the response body into a `CustomError`
    *
    * The message of the error should be returned by the regular expression as a capturing group with name `error`.
    */
@@ -95,18 +93,18 @@ export class Requester {
    *
    * Throws an error if a request is already being made.
    *
-   * Adds the signal of {@link abortController} to the request.
+   * Adds the signal of `abortController` to the request.
    *
-   * Also adds a timeout signal to the request. The duration of the timeout can be changed with the `data-fetch-timeout` attribute on {@link element} (defaults to {@link fetchTimeout}). If set to -1 no timeout signal is added. If the requester is instantiated without {@link element} the signal from {@link init} is used, if set.
+   * Also adds a timeout signal to the request. The duration of the timeout can be changed with the `data-fetch-timeout` attribute on `element` (defaults to `fetchTimeout`). If set to -1 no timeout signal is added. If the requester is instantiated without `element` the signal from `init` is used, if set.
    *
    * Adds a `csrf-token` header to a POST request if a cookie with the same name exists.
    *
-   * Toggles a `data-loading` attribute on {@link element}. Also dispatches a custom event named `command`, which can be handled by a {@link commander!Commander | Commander}. Does so after a timeout. The duration of the timeout can be changed with the `data-loading-timeout` attribute on {@link element} (defaults to 1000 ms). No-op if the requester is instantiated without {@link element}.
+   * Toggles a `data-loading` attribute on `Commander}. Does so after a timeout. The duration of the timeout can be changed with the `data-loading-timeout` attribute on `element` (defaults to 1000 ms). No-op if the requester is instantiated without `element`.
    *
-   * Returns the response if its status < 400. Otherwise tries to parse the response body into a {@link CustomError}. Two cases are handled:
+   * Returns the response if its status < 400. Otherwise tries to parse the response body into a `CustomError`. Two cases are handled:
    *
-   * 1. If the content-type of the response is `application/json` it is assumed that it contains a symmetric specification of a {@link CustomError}.
-   * 2. Otherwise the text of the response is parsed using {@link errorMatchers}. The {@link CustomError.code} is set to `error_${response.status}` and the {@link CustomError.status} to `response.status`.
+   * 1. If the content-type of the response is `application/json` it is assumed that it contains a symmetric specification of a `CustomError`.
+   * 2. Otherwise the text of the response is parsed using `errorMatchers`. The `CustomError.code` is set to `error_${response.status}` and the `CustomError.status` to `response.status`.
    *
    * @param input the input
    * @param init the init

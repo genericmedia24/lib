@@ -3,8 +3,6 @@
  *
  * The new callback function will handle the first row as a header and transform all subsequent rows into an object with properties names provided by the header.
  *
- * See [the guide](../../docs/guides/dsv.md) for more information.
- *
  * @example
  * ```javascript
  * const string = `a,b,c\n1,2,3\n`

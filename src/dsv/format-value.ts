@@ -13,8 +13,6 @@ const decoder = new TextDecoder()
  * 3. A `Uin8Array` is formatted as base64 if it is a `Buffer` or decoded with a `TextDecoder` otherwise.
  * 4. Every other value is formatted with `String()`, possibly enclosed when the value contains '\n', '\r', the delimiter string or the enclosing string.
  *
- * See [the guide](../../docs/guides/dsv.md) for more information.
- *
  * @example
  * ```javascript
  * console.log(formatDsvValue(null) === 'NULL') // true

@@ -13,16 +13,46 @@ export interface ElementToggleHeightCommandOptions {
  *
  * Ensures that the transition is performed correctly so that the element will not flash when the document is loaded.
  *
- * If {@link ElementToggleMarginCommandOptions.immediate | options.immediate} is defined no transition will be performed.
+ * If `options.immediate` is defined no transition will be performed.
  *
  * Uses the `hidden` attribute to determine whether the element should be hidden or shown.
  *
  * Executes a `hidden` command after the element is hidden and a `visible` command before it is shown.
  *
  * @example
- * See [a live example](../../examples/commands.html#element-toggle-height) of the code below.
+ * ```html
+ * <style>
+ *   [hidden] {
+ *     display: block;
+ *   }
  *
- * {@includeCode ../../docs/examples/commands/element-toggle-height.html}
+ *   div[data-state="example"] {
+ *     background-color: royalblue;
+ *     color: white;
+ *     overflow: hidden;
+ *     transition-duration: 250ms;
+ *     width: 100px;
+ *   }
+ * </style>
+ * <button
+ *   data-state="example"
+ *   data-state-storage="none"
+ *   data-onclick="element-toggle-state?state-key=open&state-on=true"
+ *   is="gm-button"
+ * >
+ *   toggle
+ * </button>
+ * <div
+ *   data-state="example"
+ *   data-state-storage="none"
+ *   data-state-values="open=true"
+ *   data-onconnected="element-toggle-attribute?attribute-name=hidden&state-key=open&state-value=!true element-toggle-height?immediate=true"
+ *   data-onhidden="element-clear-html"
+ *   data-onopenchanged="element-toggle-attribute?attribute-name=hidden&state-key=open&state-value=!true element-toggle-height"
+ *   data-onvisible="element-set-text-content?text-content=height"
+ *   is="gm-div"
+ * ></div>
+ * ```
  */
 export class ElementToggleHeightCommand extends Command<Element, ElementToggleHeightCommandOptions> {
   public async execute(): Promise<void> {

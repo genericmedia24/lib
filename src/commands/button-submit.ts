@@ -3,16 +3,30 @@ import { Command } from '../commander/command.js'
 /**
  * Submits a `<form>` associated with a `<button>`.
  *
- * Sets {@link targetElement}.[type](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/type) to `submit`.
+ * Sets `targetElement.type` to `"submit"`.
  *
- * Then calls {@link targetElement}.[form](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement).[requestSubmit](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/requestSubmit) on the associated `<form>`.
+ * Then calls `targetElement.form.requestSubmit`.
  *
- * Finally, resets {@link targetElement}.[type](https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement/type) to `button`.
+ * Finally, resets `targetElement.type` to `"button"`.
  *
  * @example
- * See [a live example](../../examples/commands.html#button-submit) of the code below.
- *
- * {@includeCode ../../docs/examples/commands/button-submit.html}
+ * ```html
+ * <form
+ *   data-onsubmit="form-submit"
+ *   data-onresponse="element-set-text-content@output?text-content=done"
+ *   action="/"
+ *   is="gm-form"
+ * >
+ *   <button
+ *     data-onclick="button-submit"
+ *     type="button"
+ *     is="gm-button"
+ *   >
+ *     submit
+ *   </button>
+ *   <output id="output"></output>
+ * </form>
+ * ```
  */
 export class ButtonSubmitCommand extends Command<HTMLButtonElement> {
   public execute(): void {

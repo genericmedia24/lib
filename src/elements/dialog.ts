@@ -11,12 +11,47 @@ import { KeyBinding } from '../util/key-binding.js'
  *
  * Sets an appropriate CSS `z-index` property.
  *
- * Moves output elements to the correct stacking context to ensure that the output elements remain on top of the last opened dialog element. See {@link OutputElement} for more information.
+ * Moves output elements to the correct stacking context to ensure that the output elements remain on top of the last opened dialog element.
  *
  * @example
- * See [a live example](../../examples/elements.html#dialog) of the code below.
- *
- * {@includeCode ../../docs/examples/elements/dialog.html}
+ * ```html
+ * <button
+ *   data-onclick="popover-show@popover"
+ *   is="gm-button"
+ * >
+ *   1. show popover (bottom right)
+ * </button>
+ * <button
+ *   data-onclick="popover-hide@popover"
+ *   is="gm-button"
+ * >
+ *   4. hide popover
+ * </button>
+ * <output
+ *   id="popover"
+ *   is="gm-output"
+ *   popover="manual"
+ *   style="margin: 0; inset: auto 0 0 auto"
+ * >
+ *   <button
+ *     data-onclick="dialog-show@dialog?modal=true"
+ *     is="gm-button"
+ *   >
+ *     2. open dialog
+ *   </button>
+ * </output>
+ * <dialog
+ *   id="dialog"
+ *   is="gm-dialog"
+ * >
+ *   <button
+ *     data-onclick="dialog-close@dialog"
+ *     is="gm-button"
+ *   >
+ *     3. close dialog
+ *   </button>
+ * </dialog>
+ * ```
  */
 export class DialogElement<StateValues = Record<string, unknown>> extends HTMLDialogElement implements CommandableElement, StatefulElement<StateValues> {
   /**
@@ -37,7 +72,7 @@ export class DialogElement<StateValues = Record<string, unknown>> extends HTMLDi
   public state?: State<StateValues>
 
   /**
-   * A bound {@link close}.
+   * A bound `close`.
    */
   protected closeBound = this.close.bind(this)
 
@@ -56,9 +91,9 @@ export class DialogElement<StateValues = Record<string, unknown>> extends HTMLDi
   /**
    * Removes the `data-disconnected` attribute from the element.
    *
-   * Sets up {@link DialogElement.state | state} and starts {@link DialogElement.commander | commander}.
+   * Sets up `commander`.
    *
-   * Registers itself with {@link DialogElement.state | state} and {@link escapeBinding}.
+   * Registers itself with `state` and `escapeBinding`.
    *
    * Executes a `connected` command.
    */
@@ -73,9 +108,9 @@ export class DialogElement<StateValues = Record<string, unknown>> extends HTMLDi
   /**
    * Adds a `data-disconnected` attribute to the element.
    *
-   * Unregisters itself from {@link DialogElement.state | state} and {@link escapeBinding}.
+   * Unregisters itself from `state` and `escapeBinding`.
    *
-   * Executes a `disconnected` commands and stops {@link DialogElement.commander | commander}.
+   * Executes a `disconnected` commands and stops `commander`.
    */
   public disconnectedCallback(): void {
     this.toggleAttribute('data-disconnected', true)
@@ -92,7 +127,7 @@ export class DialogElement<StateValues = Record<string, unknown>> extends HTMLDi
    *
    * Resets the output elements in the document.
    *
-   * Registers itself with {@link escapeBinding} and executes a `show` command.
+   * Registers itself with `escapeBinding` and executes a `show` command.
    */
   public override show(): void {
     super.show()
@@ -107,7 +142,7 @@ export class DialogElement<StateValues = Record<string, unknown>> extends HTMLDi
    *
    * Resets the output elements in the document.
    *
-   * Registers itself with {@link escapeBinding} and executes a `show` command.
+   * Registers itself with `escapeBinding` and executes a `show` command.
    */
   public override showModal(): void {
     super.showModal()
@@ -117,7 +152,7 @@ export class DialogElement<StateValues = Record<string, unknown>> extends HTMLDi
   }
 
   /**
-   * Calls {@link Commander.executeState}.
+   * Calls `commander.executeState`.
    *
    * @param newValues the new values
    * @param oldValues the old values
@@ -178,7 +213,7 @@ export class DialogElement<StateValues = Record<string, unknown>> extends HTMLDi
    *
    * Resets the output elements in the document.
    *
-   * Unregisters itself from {@link escapeBinding}.
+   * Unregisters itself from `escapeBinding`.
    */
   protected handleClose(): void {
     if (window.getComputedStyle(this).display === 'none') {
@@ -193,7 +228,7 @@ export class DialogElement<StateValues = Record<string, unknown>> extends HTMLDi
   /**
    * Updates the CSS `z-index` property of the dialog element.
    *
-   * Reregisters itself with {@link escapeBinding}.
+   * Reregisters itself with `escapeBinding`.
    */
   protected handleFocus(): void {
     this.escapeBinding.unregister(this.closeBound)
@@ -216,9 +251,9 @@ export class DialogElement<StateValues = Record<string, unknown>> extends HTMLDi
   }
 
   /**
-   * Iterates over all output elements in the document and appends them to the appropriate {@link findParentElement | parent element}.
+   * Iterates over all output elements in the document and appends them to the appropriate `parent element`.
    *
-   * Adds a class `immediate`, calls [hidePopover](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/hidePopover) and removes the class afterwards.
+   * Adds a class `immediate`, calls `hidePopover` and removes the class afterwards.
    */
   protected resetOutputs(): void {
     const parentElement = this.findParentElement()
@@ -237,7 +272,7 @@ export class DialogElement<StateValues = Record<string, unknown>> extends HTMLDi
   }
 
   /**
-   * Sets the CSS `z-index` property to {@link findMaxZIndex | maximum z-index} + 1 if the dialog element is open.
+   * Sets the CSS `z-index` property to `maximum z-index` + 1 if the dialog element is open.
    *
    * Otherwise removes the CSS `z-index` property.
    */

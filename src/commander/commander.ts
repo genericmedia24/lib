@@ -25,8 +25,6 @@ export interface CommandExecution {
 /**
  * Executes commands on behalf of an element.
  *
- * See [the guide](../../docs/guides/commander.md) for more information.
- *
  * @example
  * ```javascript
  * class ButtonElement extends HTMLButtonElement {

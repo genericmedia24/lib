@@ -25,16 +25,38 @@ export interface InputSetValueCommandOptions {
 /**
  * Sets the value of an `<input>`.
  *
- * If {@link InputSetValueCommandData.value | data.value} is defined it will be used.
+ * If `data.value` is defined it will be used.
  *
- * Otherwise, if {@link InputSetValueCommandOptions.value | options.value} is defined it will be used.
+ * Otherwise, if `options.value` is defined it will be used.
  *
- * Otherwise, if options{@link InputSetValueCommandOptions['state-key']} is defined the state value of that key will be used.
+ * Otherwise, if `options['state-key']` is defined the state value of that key will be used.
  *
  * @example
- * See [a live example](../../examples/commands.html#input-set-value) of the code below.
- *
- * {@includeCode ../../docs/examples/commands/input-set-value.html}
+ * ```html
+ * <button
+ *   data-state="example"
+ *   data-state-storage="none"
+ *   data-onclick="element-set-state?state-key=key-1&state-value=value-1&state-key=key-2&state-value=value-2"
+ *   is="gm-button"
+ * >
+ *   set
+ * </button>
+ * <input
+ *   name="key-1"
+ *   data-state="example"
+ *   data-state-storage="none"
+ *   data-onstatechanged="input-set-value?state-key=key-1"
+ *   data-onconnected="input-set-value?value=abc"
+ *   is="gm-input"
+ * >
+ * <input
+ *   name="key-2"
+ *   data-state="example"
+ *   data-state-storage="none"
+ *   data-onstatechanged="input-set-value?state-key=key-2"
+ *   is="gm-input"
+ * >
+ * ```
  */
 export class InputSetValueCommand extends Command<InputElement, InputSetValueCommandOptions> {
   public execute(data?: InputSetValueCommandData): void {

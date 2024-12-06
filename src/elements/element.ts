@@ -18,9 +18,9 @@ export class Element<StateValues = Record<string, unknown>> extends HTMLElement 
   public state?: State<StateValues>
 
   /**
-   * Sets up {@link state} and starts {@link commander}.
+   * Sets up `state` and starts `commander`.
    *
-   * Registers itself with {@link state} and executes a `connected` command.
+   * Registers itself with `state` and executes a `connected` command.
    */
   public connectedCallback(): void {
     this.state ??= State.setup(this)
@@ -30,9 +30,9 @@ export class Element<StateValues = Record<string, unknown>> extends HTMLElement 
   }
 
   /**
-   * Unregisters itself from {@link state}.
+   * Unregisters itself from `state`.
    *
-   * Executes a `disconnected` commands and stops {@link commander}.
+   * Executes a `disconnected` commands and stops `commander`.
    */
   public disconnectedCallback(): void {
     this.state?.unregister(this)
@@ -41,7 +41,7 @@ export class Element<StateValues = Record<string, unknown>> extends HTMLElement 
   }
 
   /**
-   * Calls {@link Commander.executeState}.
+   * Calls `commander.executeState`.
    *
    * @param newValues the new values
    * @param oldValues the old values

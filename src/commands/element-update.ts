@@ -9,18 +9,37 @@ export interface ElementUpdateCommandOptions extends Record<string, unknown> {
 /**
  * Updates an element.
  *
- * Calls `update` on the element with one argument: the merged object of {@link options} and the data passed to {@link execute}.
+ * Calls `targetElement.update` with one argument: the merged object of `options` and the data passed to `execute`.
  *
- * If options{@link ElementUpdateCommandOptions['when-visible']} is defined the element will only be updated if {@link targetElement}.[checkVisibility](https://developer.mozilla.org/en-US/docs/Web/API/Element/checkVisibility) returns `true`.
+ * If `options['when-visible']` is defined `targetElement` will only be updated if `targetElement.checkVisibility` returns `true`.
  *
- * If {@link ElementUpdateCommandOptions.immediate | options.immediate} is defined the element is updated immediately.
+ * If `options.immediate` is defined `targetElement` is updated immediately.
  *
- * Otherwise the update is wrapped in a [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame).
+ * Otherwise the update is wrapped in a `requestAnimationFrame`.
  *
  * @example
- * See [a live example](../../examples/commands.html#element-update) of the code below.
- *
- * {@includeCode ../../docs/examples/commands/element-update.html}
+ * ```html
+ * <script>
+ *   // prettier-ignore
+ *   window.customElements.define('gm-updatable', class extends HTMLDivElement {
+ *     update() {
+ *       this.textContent = 'text'
+ *     }
+ *   }, {
+ *     extends: 'div',
+ *   })
+ * </script>
+ * <button
+ *   data-onclick="element-update@updatable"
+ *   is="gm-button"
+ * >
+ *   update
+ * </button>
+ * <div
+ *   id="updatable"
+ *   is="gm-updatable"
+ * ></div>
+ * ```
  */
 export class ElementUpdateCommand extends Command<UpdatableElement, ElementUpdateCommandOptions> {
   public async execute(data?: Record<string, unknown>): Promise<void> {

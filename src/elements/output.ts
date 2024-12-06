@@ -24,9 +24,28 @@ declare global {
  * Gaps between the elements can be set with the CSS `--output-gap` variable in pixels.
  *
  * @example
- * See [a live example](../../examples/elements.html#output) of the code below.
+ * ```html
+ * <script>
+ *   let output = document.createElement("div")
  *
- * {@includeCode ../../docs/examples/elements/output.html}
+ *   output.innerHTML = '<output data-timeout="5000" is="gm-output" popover="manual">message 1</output>'
+ *   document.body.appendChild(output.firstElementChild).showPopover()
+ *
+ *   setTimeout(() => {
+ *     output.innerHTML = '<output data-timeout="5000" is="gm-output" popover="manual">message 2</output>'
+ *     document.body.appendChild(output.firstElementChild).showPopover()
+ *   }, 2500)
+ * </script>
+ * <style>
+ *   output {
+ *     margin: 0;
+ *     position: absolute;
+ *     inset: auto 1rem 1rem auto;
+ *     --output-bottom: 0;
+ *     --output-gap: 16px;
+ *   }
+ * </style>
+ * ```
  */
 export class OutputElement<StateValues = Record<string, unknown>> extends HTMLOutputElement implements CommandableElement, StatefulElement<StateValues> {
   /**
@@ -47,7 +66,7 @@ export class OutputElement<StateValues = Record<string, unknown>> extends HTMLOu
   public state?: State<StateValues>
 
   /**
-   * A bound {@link hidePopover}.
+   * A bound `hidePopover`.
    */
   protected hidePopoverBound = this.hidePopover.bind(this)
 
@@ -62,13 +81,13 @@ export class OutputElement<StateValues = Record<string, unknown>> extends HTMLOu
   }
 
   /**
-   * Sets up {@link state} and starts {@link commander}.
+   * Sets up `state` and starts `commander`.
    *
-   * Registers itself with {@link state} and {@link escapeBinding}.
+   * Registers itself with `state` and `escapeBinding`.
    *
    * Executes a `connected` command.
    *
-   * Calls {@link hidePopover} after a timeout set with the `data-timeout` attribute. If the attribute is not defined or set to -1 the call is not made.
+   * Calls `hidePopover` after a timeout set with the `data-timeout` attribute. If the attribute is not defined or set to -1 the call is not made.
    *
    */
   public connectedCallback(): void {
@@ -92,9 +111,9 @@ export class OutputElement<StateValues = Record<string, unknown>> extends HTMLOu
   }
 
   /**
-   * Unregisters itself from {@link state} and {@link escapeBinding}.
+   * Unregisters itself from `state` and `escapeBinding`.
    *
-   * Executes a `disconnected` commands and stops {@link commander}.
+   * Executes a `disconnected` commands and stops `commander`.
    */
   public disconnectedCallback(): void {
     this.state?.unregister(this)
@@ -104,7 +123,7 @@ export class OutputElement<StateValues = Record<string, unknown>> extends HTMLOu
   }
 
   /**
-   * Hides the popover element and unregisters itself from {@link escapeBinding}.
+   * Hides the popover element and unregisters itself from `escapeBinding`.
    */
   public override hidePopover(): void {
     super.hidePopover()
@@ -112,7 +131,7 @@ export class OutputElement<StateValues = Record<string, unknown>> extends HTMLOu
   }
 
   /**
-   * Shows the popover element and registers itself with {@link escapeBinding}.
+   * Shows the popover element and registers itself with `escapeBinding`.
    */
   public override showPopover(): void {
     super.showPopover()
@@ -120,7 +139,7 @@ export class OutputElement<StateValues = Record<string, unknown>> extends HTMLOu
   }
 
   /**
-   * Calls {@link Commander.executeState}.
+   * Calls `commander.executeState`.
    *
    * @param newValues the new values
    * @param oldValues the old values

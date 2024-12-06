@@ -13,16 +13,58 @@ export interface ElementToggleFlexCommandOptions {
  *
  * Ensures that the transition is performed correctly so that the element will not flash when the document is loaded.
  *
- * If {@link ElementToggleMarginCommandOptions.immediate | options.immediate} is defined no transition will be performed.
+ * If `options.immediate` is defined no transition will be performed.
  *
  * Uses the `hidden` attribute to determine whether the element should be hidden or shown.
  *
  * Executes a `hidden` command after the element is hidden and a `visible` command before it is shown.
  *
  * @example
- * See [a live example](../../examples/commands.html#element-toggle-flex) of the code below.
+ * ```html
+ * <style>
+ *   [hidden] {
+ *     display: block;
+ *   }
  *
- * {@includeCode ../../docs/examples/commands/element-toggle-flex.html}
+ *   div.container {
+ *     border: 1px solid;
+ *     display: flex;
+ *     flex-direction: column;
+ *     height: 100px;
+ *     width: 100px;
+ *   }
+ *
+ *   div[data-state="example"] {
+ *     background-color: royalblue;
+ *     color: white;
+ *     flex: 1;
+ *     overflow: hidden;
+ *     transition-duration: 250ms;
+ *     width: 100px;
+ *   }
+ * </style>
+ * <div class="container">
+ *   <button
+ *     data-state="example"
+ *     data-state-storage="none"
+ *     data-onclick="element-toggle-state?state-key=open&state-on=true"
+ *     is="gm-button"
+ *   >
+ *     toggle
+ *   </button>
+ *   <div
+ *     data-state="example"
+ *     data-state-storage="none"
+ *     data-onconnected="element-toggle-attribute?attribute-name=hidden&state-key=open&state-value=!true element-toggle-flex?immediate=true"
+ *     data-onhidden="element-clear-html"
+ *     data-onopenchanged="element-toggle-attribute?attribute-name=hidden&state-key=open&state-value=!true element-toggle-flex"
+ *     data-onvisible="element-set-text-content?text-content=flex"
+ *     is="gm-div"
+ *     style="display: none"
+ *     hidden
+ *   ></div>
+ * </div>
+ * ```
  */
 export class ElementToggleFlexCommand extends Command<Element, ElementToggleFlexCommandOptions> {
   public async execute(): Promise<void> {

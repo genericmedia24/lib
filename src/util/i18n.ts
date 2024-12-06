@@ -109,7 +109,7 @@ export class I18n {
    * ```
    *
    * @param value the date
-   * @param options the options as [Intl.DateTimeFormatOptions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/resolvedOptions)
+   * @param options the options
    */
   public formatDate(value: Date | number, options?: Intl.DateTimeFormatOptions): string {
     return new Date(value).toLocaleString(this.locale, options)
@@ -128,7 +128,7 @@ export class I18n {
    * ```
    *
    * @param value the number
-   * @param options the options as [Intl.NumberFormatOptions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/resolvedOptions)
+   * @param options the options
    */
   public formatNumber(value: number, options?: Intl.NumberFormatOptions): string {
     return value.toLocaleString(this.locale, options)
@@ -139,7 +139,7 @@ export class I18n {
    *
    * Looks up the value in the locale, using the value as a code. If the code is not found, the value is used as-is.
    *
-   * Uses [sprintf](https://www.npmjs.com/package/sprintf-js#named-arguments) to interpolate parameters defined in the string.
+   * Uses `sprintf` to interpolate parameters defined in the string.
    *
    * @example
    * ```javascript

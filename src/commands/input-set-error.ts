@@ -5,12 +5,29 @@ import { Command } from '../commander/command.js'
  *
  * Looks for an element `[data-error]` inside a `<label>` associated with the `<input>`.
  *
- * Sets [Node.textContent](https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent) of that element with the value of {@link targetElement}.[validationMessage](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/validationMessage).
+ * Sets `textContent` of that element with the value of `targetElement.validationMessage`.
  *
  * @example
- * See [a live example](../../examples/commands.html#input-set-error) of the code below.
- *
- * {@includeCode ../../docs/examples/commands/input-set-error.html}
+ * ```html
+ * <style>
+ *   [data-error] {
+ *     color: red;
+ *   }
+ * </style>
+ * <label for="input">
+ *   Input
+ *   <span data-error></span>
+ * </label>
+ * <br>
+ * <input
+ *   id="input"
+ *   data-onblur="input-set-error"
+ *   is="gm-input"
+ *   required
+ * >
+ * <br>
+ * First focus, then blur the input.
+ * ```
  */
 export class InputSetErrorCommand extends Command<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement> {
   public execute(): void {

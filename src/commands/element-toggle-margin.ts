@@ -16,20 +16,60 @@ export interface ElementToggleMarginCommandOptions {
 /**
  * Toggles the CSS `margin-inline` property of an element.
 *
- * The position of the element is determined by {@link ElementToggleMarginCommandOptions.position | options.position}.
+ * The position of the element is determined by `options.position`.
  *
  * Ensures that the transition is performed correctly so that the element will not flash when the document is loaded.
  *
- * If {@link ElementToggleMarginCommandOptions.immediate | options.immediate} is defined no transition will be performed.
+ * If `options.immediate` is defined no transition will be performed.
  *
  * Uses the `hidden` attribute to determine whether the element should be hidden or shown.
  *
  * Executes a `hidden` command after the element is hidden and a `visible` command before it is shown.
  *
  * @example
- * See [a live example](../../examples/commands.html#element-toggle-margin) of the code below.
+ * ```html
+ * <style>
+ *   [hidden] {
+ *     display: block;
+ *   }
  *
- * {@includeCode ../../docs/examples/commands/element-toggle-margin.html}
+ *   div.container {
+ *     border: 1px solid;
+ *     height: 100px;
+ *     overflow: hidden;
+ *     width: 250px;
+ *   }
+ *
+ *   div[data-state="example"] {
+ *     background-color: royalblue;
+ *     color: white;
+ *     height: 100%;
+ *     transition-duration: 250ms;
+ *     width: 75px;
+ *   }
+ * </style>
+ * <button
+ *   data-state="example"
+ *   data-state-storage="none"
+ *   data-onclick="element-toggle-state?state-key=open&state-on=true"
+ *   is="gm-button"
+ * >
+ *   toggle
+ * </button>
+ * <div class="container">
+ *   <div
+ *     data-state="example"
+ *     data-state-storage="none"
+ *     data-onconnected="element-toggle-attribute?attribute-name=hidden&state-key=open&state-value=!true element-toggle-margin?immediate=true"
+ *     data-onhidden="element-clear-html"
+ *     data-onopenchanged="element-toggle-attribute?attribute-name=hidden&state-key=open&state-value=!true element-toggle-margin"
+ *     data-onvisible="element-set-text-content?text-content=margin"
+ *     is="gm-div"
+ *     style="display: none"
+ *     hidden
+ *   ></div>
+ * </div>
+ * ```
  */
 export class ElementToggleMarginCommand extends Command<Element, ElementToggleMarginCommandOptions> {
   public async execute(): Promise<void> {

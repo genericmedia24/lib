@@ -14,15 +14,13 @@ export interface StateOptions {
   storage?: State['storage']
 
   /**
-   * The initial values of the state. These values will be overridden when {@link State.load} is called.
+   * The initial values of the state. These values will be overridden when `state.load` is called.
    */
   values?: Record<string, unknown>
 }
 
 /**
  * State.
- *
- * See [the guide](../../docs/guides/state.md) for more information.
  *
  * @example
  * ```javascript
@@ -46,7 +44,7 @@ export class State<StateValues = Record<string, unknown>> {
   /**
    * Creates a singleton state. For every name there is one state.
    *
-   * Calls {@link load} once, after creating the state.
+   * Calls `load` once, after creating the state.
    *
    * @param options the options
    */
@@ -166,7 +164,7 @@ export class State<StateValues = Record<string, unknown>> {
   /**
    * Deletes the value of the given key.
    *
-   * Calls {@link StatefulElement.stateChangedCallback} of all the registered elements. Saves the values to the storage provider.
+   * Calls `stateChangedCallback` of all the registered elements. Saves the values to the storage provider.
    *
    * The newValues object passed to the callback contains the key of the deleted value with the value set to `undefined`. The oldValues contains the same key, but with the value before it was deleted.
    *
@@ -208,7 +206,7 @@ export class State<StateValues = Record<string, unknown>> {
   /**
    * Deletes the values of the given keys.
    *
-   * Calls {@link StatefulElement.stateChangedCallback} of all the registered elements. Saves the values to the storage provider.
+   * Calls `stateChangedCallback` of all the registered elements. Saves the values to the storage provider.
    *
    * The newValues object passed to the callback contains the keys of the deleted values with the values set to `undefined`. The oldValues object contains the same keys, but with the values before they were deleted.
    *
@@ -304,7 +302,7 @@ export class State<StateValues = Record<string, unknown>> {
   /**
    * Loads the values from the storage provider.
    *
-   * If the storage provider is set to `idb`, {@link loaded} will be resolved after the values have been loaded.
+   * If the storage provider is set to `idb`, `loaded` will be resolved after the values have been loaded.
    */
   public load(): this {
     if (this.loaded === undefined) {
@@ -364,7 +362,7 @@ export class State<StateValues = Record<string, unknown>> {
   /**
    * Set the value for the given key.
    *
-   * Calls {@link StatefulElement.stateChangedCallback} of all the registered elements. Saves the values to the storage provider.
+   * Calls `stateChangedCallback` of all the registered elements. Saves the values to the storage provider.
    *
    * The newValues object passed to the callback contains the key and the new value. The oldValues object contains the same key, but with the value before it was set.
    *
@@ -407,7 +405,7 @@ export class State<StateValues = Record<string, unknown>> {
   /**
    * Set the value for the given key.
    *
-   * Calls {@link StatefulElement.stateChangedCallback} of all the registered elements. Saves the values to the storage provider.
+   * Calls `stateChangedCallback` of all the registered elements. Saves the values to the storage provider.
    *
    * The newValues object passed to the callback contains the keys and the new values. The oldValues object contains the same keys, but with the values before they were set.
    *

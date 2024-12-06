@@ -12,16 +12,25 @@ export interface FormSubmitCommandData {
 /**
  * Submits a `<form>`.
  *
- * Uses {@link Requester} to fetch the resource.
+ * Uses `Requester` to fetch the resource.
  *
- * Reads the attributes of {@link FormSubmitCommandData.event | data.event}.[submitter](https://developer.mozilla.org/en-US/docs/Web/API/SubmitEvent/submitter) if available as a `<button>`.
+ * Reads the attributes of `FormSubmitCommandData.event | data.event.submitter` if available as a `<button>`.
  *
  * Executes a `response` command if a response is received.
  *
  * @example
- * See [a live example](../../examples/commands.html#form-submit) of the code below.
- *
- * {@includeCode ../../docs/examples/commands/form-submit.html}
+ * ```html
+ * <form
+ *   data-onsubmit="form-submit"
+ *   data-onerror="element-set-text-content@output?text-content=error"
+ *   data-onresponse="element-set-text-content@output?text-content=done"
+ *   is="gm-form"
+ * >
+ *   <button formaction="/">submit /</button>
+ *   <button formaction="/wrong-path">submit /wrong-path</button>
+ *   <output id="output"></output>
+ * </form>
+ * ```
  */
 export class FormSubmitCommand extends Command<FormElement> {
   public requester = new Requester(this.targetElement)

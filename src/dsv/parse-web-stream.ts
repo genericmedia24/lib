@@ -7,8 +7,6 @@ const decoder = new TextDecoder()
 /**
  * Parses a web stream.
  *
- * See [the guide](../../docs/guides/dsv.md) for more information.
- *
  * @example
  * ```javascript
  * const response = fetch('some-file.csv')

@@ -12,10 +12,26 @@ export interface FormSetErrorsCommandData {
 /**
  * Sets visual errors messages for the `<input>`, `<select>` and `<textarea>` elements in a form.
  *
- * Iterates over {@link CustomError.data} in {@link FormSetErrorsCommandData.error | data.error} with the keys as the IDs of the elements for which a message should be set and the values as the messages.
+ * Iterates over `data.error` with the keys as the IDs of the elements for which a message should be set and the values as the messages.
  *
  * @example
- * {@includeCode ../../docs/examples/commands/form-set-errors.html}
+ * ```html
+ * <form
+ *   data-oninputerror="form-set-errors"
+ *   method="post"
+ * >
+ *   <label for="email">
+ *     Email address
+ *     <span data-error></span>
+ *   </label>
+ *   <br>
+ *   <input
+ *     id="email"
+ *     name="email"
+ *     type="email"
+ *   >
+ * </form>
+ * ```
  *
  * The response body should contain the JSON representation of a CustomError:
  *

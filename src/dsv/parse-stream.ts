@@ -8,8 +8,6 @@ const decoder = new TextDecoder()
 /**
  * Parses a stream.
  *
- * See [the guide](../../docs/guides/dsv.md) for more information.
- *
  * @example
  * ```javascript
  * const stream = fs.createReadStream('some-file.csv')
