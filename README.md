@@ -1,6 +1,6 @@
 # @genericmedia/lib
 
-[![test](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgenericmedia24.github.io%2Flib%2Ftest-coverage.json&query=%24.percent&suffix=%25&color=%234c1&label=test)](https://genericmedia24.github.io/lib)
+[![test](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgenericmedia24.github.io%2Flib%2Ftest-coverage.json&query=%24.summary.totals.coveredLinePercent&suffix=%25&color=%234c1&label=test)](https://genericmedia24.github.io/lib)
 [![docs](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fgenericmedia24.github.io%2Flib%2Fdocs-coverage.json&query=%24.percent&suffix=%25&color=%234c1&label=docs)](https://genericmedia24.github.io/lib)
 [![release](https://img.shields.io/github/actions/workflow/status/genericmedia24/lib/release.yaml?color=%234c1&label=release)](https://github.com/genericmedia24/lib/actions/workflows/release.yaml)
 [![npm](https://img.shields.io/npm/v/%40genericmedia%2Flib?color=%234c1&label=npm)](https://www.npmjs.com/genericmedia24/lib)
