@@ -1,20 +1,23 @@
 import type { StatefulElement } from '../state/stateful-element.js'
 import { Command } from '../commander/command.js'
 
+/**
+ * Command options.
+ */
 export interface ElementSetStateCommandOptions {
   /**
-   * The key(s) of the state.
+   * The state key.
    */
   'state-key': string | string[]
 
   /**
-   * The value(s) of the state.
+   * The state value.
    */
   'state-value'?: string | string[]
 }
 
 /**
- * Sets the state of an element.
+ * A command to set the state of an element.
  *
  * If `options['state-value']` is not defined the state value will be deleted.
  *
@@ -45,6 +48,9 @@ export interface ElementSetStateCommandOptions {
  * ```
  */
 export class ElementSetStateCommand extends Command<StatefulElement, ElementSetStateCommandOptions> {
+  /**
+   * Executes the command.
+   */
   public execute(): void {
     const stateKeys = Array.isArray(this.options['state-key'])
       ? this.options['state-key']

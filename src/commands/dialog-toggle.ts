@@ -1,5 +1,8 @@
 import { Command } from '../commander/command.js'
 
+/**
+ * Command options.
+ */
 export interface DialogToggleCommandOptions {
   /**
    * Whether to show the `<dialog>` as a modal.
@@ -8,7 +11,7 @@ export interface DialogToggleCommandOptions {
 }
 
 /**
- * Shows a `<dialog>`.
+ * A command to toggle a dialog.
  *
  * Calls `targetElement.close` if `targetElement.open` is `true`.
  *
@@ -29,6 +32,9 @@ export interface DialogToggleCommandOptions {
  * ```
  */
 export class DialogToggleCommand extends Command<HTMLDialogElement, DialogToggleCommandOptions> {
+  /**
+   * Executes the command.
+   */
   public execute(): void {
     if (this.targetElement.open) {
       this.targetElement.close()

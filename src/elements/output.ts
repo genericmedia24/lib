@@ -66,7 +66,7 @@ export class OutputElement<StateValues = Record<string, unknown>> extends HTMLOu
   public state?: State<StateValues>
 
   /**
-   * A bound `hidePopover`.
+   * A bound `hidePopover` method.
    */
   protected hidePopoverBound = this.hidePopover.bind(this)
 

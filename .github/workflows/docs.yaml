@@ -1,4 +1,4 @@
-name: Docs
+name: docs
 on:
   push:
     branches:
@@ -21,6 +21,7 @@ jobs:
           version: 9
       - run: pnpm install --prod=false
       - run: npx typedoc
+      - run: pnpm test:coverage:json
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

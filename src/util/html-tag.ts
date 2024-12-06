@@ -3,6 +3,9 @@ import { isNil } from './is-nil.js'
 import { isObject } from './is-object.js'
 import { isPrimitive } from './is-primitive.js'
 
+/**
+ * A special object to render raw html.
+ */
 export interface RawHtml {
   /**
    * The HTML string that should be rendered as-is.

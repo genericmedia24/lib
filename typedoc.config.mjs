@@ -1,4 +1,6 @@
 export default {
+  coverageOutputPath: './docs/site/docs-coverage.json',
+  coverageOutputType: 'json',
   customCss: [
     './docs/theme/styles.css',
   ],
@@ -24,6 +26,10 @@ export default {
     GitHub: 'https://github.com/genericmedia24/lib',
   },
   out: './docs/site',
+  plugin: [
+    'typedoc-plugin-coverage',
+    'typedoc-github-theme',
+  ],
   projectDocuments: [
     './docs/guides/commander.md',
     './docs/guides/dsv.md',
@@ -31,4 +37,5 @@ export default {
     './docs/guides/state.md',
   ],
   searchInDocuments: true,
+  theme: 'typedoc-github-theme',
 }

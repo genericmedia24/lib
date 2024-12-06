@@ -1,3 +1,6 @@
+/**
+ * Parse options.
+ */
 export interface ParseDsvOptions {
   /**
    * The delimiter between values, default `','`.

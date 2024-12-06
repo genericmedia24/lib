@@ -1,5 +1,8 @@
 import { sprintf } from 'sprintf-js'
 
+/**
+ * I18n options.
+ */
 export interface I18nOptions {
   /**
    * The locale, for example `'nl-NL'`.

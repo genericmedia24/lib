@@ -1,13 +1,23 @@
 import type { UpdatableElement } from '../commander/updatable-element.js'
 import { Command } from '../commander/command.js'
 
+/**
+ * Command options.
+ */
 export interface ElementUpdateCommandOptions extends Record<string, unknown> {
+  /**
+   * Whether to update the element immediately.
+   */
   'immediate'?: string
+
+  /**
+   * Whether to update the element only when it is visible.
+   */
   'when-visible'?: string
 }
 
 /**
- * Updates an element.
+ * A command to update an element.
  *
  * Calls `targetElement.update` with one argument: the merged object of `options` and the data passed to `execute`.
  *
@@ -42,6 +52,9 @@ export interface ElementUpdateCommandOptions extends Record<string, unknown> {
  * ```
  */
 export class ElementUpdateCommand extends Command<UpdatableElement, ElementUpdateCommandOptions> {
+  /**
+   * Executes the command.
+   */
   public async execute(data?: Record<string, unknown>): Promise<void> {
     if (
       this.options['when-visible'] !== undefined &&

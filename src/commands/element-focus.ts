@@ -1,7 +1,7 @@
 import { Command } from '../commander/command.js'
 
 /**
- * Focuses an element.
+ * A command to focus an element.
  *
  * Calls `targetElement.focus`.
  *
@@ -18,6 +18,9 @@ import { Command } from '../commander/command.js'
  * ```
  */
 export class ElementFocusCommand extends Command<HTMLElement> {
+  /**
+   * Executes the command.
+   */
   public execute(): void {
     this.targetElement.focus()
   }

@@ -1,3 +1,6 @@
+/**
+ * Parse state.
+ */
 export interface ParseDsvState {
   /**
    * The index of the current column.

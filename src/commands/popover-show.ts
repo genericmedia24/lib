@@ -1,7 +1,7 @@
 import { Command } from '../commander/command.js'
 
 /**
- * Shows a popover.
+ * A command to show a popover.
  *
  * Calls `targetElement.showPopover`.
  *
@@ -32,10 +32,19 @@ import { Command } from '../commander/command.js'
  * ```
  */
 export class PopoverShowCommand extends Command<HTMLElement> {
+  /**
+   * A bound `handleToggle` method.
+   */
   protected handleToggleBound = this.handleToggle.bind(this)
 
+  /**
+   * A bound `handleWindowClick` method.
+   */
   protected handleWindowClickBound = this.handleWindowClick.bind(this)
 
+  /**
+   * Executes the command.
+   */
   public execute(): void {
     this.targetElement.showPopover()
 
@@ -45,11 +54,19 @@ export class PopoverShowCommand extends Command<HTMLElement> {
     })
   }
 
+  /**
+   * Handles a `toggle` event.
+   */
   protected handleToggle(): void {
     window.removeEventListener('click', this.handleWindowClickBound)
     this.targetElement.removeEventListener('toggle', this.handleToggleBound)
   }
 
+  /**
+   * Handles a `click` event on `window`.
+   *
+   * @param event the event
+   */
   protected handleWindowClick(event: MouseEvent): void {
     if (event.target instanceof HTMLElement) {
       if (event.target.closest('[popover]') === null) {

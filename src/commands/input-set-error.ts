@@ -1,6 +1,8 @@
 import { Command } from '../commander/command.js'
 
 /**
+ * A command to set the error of an input.
+ *
  * Sets a visual error message for an `<input>`, `<select>` or `<textarea>`.
  *
  * Looks for an element `[data-error]` inside a `<label>` associated with the `<input>`.
@@ -30,6 +32,9 @@ import { Command } from '../commander/command.js'
  * ```
  */
 export class InputSetErrorCommand extends Command<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement> {
+  /**
+   * Executes the command.
+   */
   public execute(): void {
     const errorElement = document.querySelector(`label[for="${this.targetElement.id}"] [data-error]`)
 

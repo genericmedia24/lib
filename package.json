@@ -15,6 +15,7 @@
   "devDependencies": {
     "@awmottaz/prettier-plugin-void-html": "^1.7.0",
     "@eslint/js": "^9.16.0",
+    "@mafalda-sfu/test-reporter-json": "^0.0.7",
     "@rollup/plugin-commonjs": "^28.0.1",
     "@rollup/plugin-node-resolve": "^15.3.0",
     "@rollup/plugin-typescript": "^12.1.1",
@@ -48,6 +49,8 @@
     "tsx": "^4.19.2",
     "type-fest": "^4.30.0",
     "typedoc": "^0.27.3",
+    "typedoc-github-theme": "^0.2.0",
+    "typedoc-plugin-coverage": "^3.4.0",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.17.0",
     "udsv": "^0.6.0",
@@ -148,6 +151,7 @@
     "lint": "tsc && eslint ./{benchmark,src,test}/**/*.ts ./*.{mjs,ts}",
     "test": "node --import tsx --test --test-reporter=dot ./test/**/*.ts",
     "test:coverage": "node --import tsx --test --experimental-test-coverage --test-coverage-exclude=src/**/index.ts --test-reporter=spec --test-reporter-destination=stdout --test-reporter=lcov --test-reporter-destination=lcov.info ./test/**/*.ts",
+    "test:coverage:json": "node --import tsx --test --experimental-test-coverage --test-coverage-exclude=src/**/index.ts --test-reporter=./node.test-coverage.mjs --test-reporter-destination=docs/site/test-coverage.json ./test/**/*.ts",
     "test:only": "node --import tsx --test --test-only ./test/**/*.ts"
   },
   "version": "1.6.0-beta.3"

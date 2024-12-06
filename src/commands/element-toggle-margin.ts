@@ -1,6 +1,9 @@
 import type { Element } from '../elements/element.js'
 import { Command } from '../commander/command.js'
 
+/**
+ * Command options.
+ */
 export interface ElementToggleMarginCommandOptions {
   /**
    * Whether to toggle the margin immediately.
@@ -14,7 +17,7 @@ export interface ElementToggleMarginCommandOptions {
 }
 
 /**
- * Toggles the CSS `margin-inline` property of an element.
+ * A command to toggle the CSS `margin-inline` property of an element.
 *
  * The position of the element is determined by `options.position`.
  *
@@ -72,6 +75,9 @@ export interface ElementToggleMarginCommandOptions {
  * ```
  */
 export class ElementToggleMarginCommand extends Command<Element, ElementToggleMarginCommandOptions> {
+  /**
+   * Executes the command.
+   */
   public async execute(): Promise<void> {
     if (this.targetElement.state?.storage === 'idb') {
       await this.targetElement.state.loaded

@@ -2,6 +2,8 @@ import type { RequestableElement } from '../requester/requestable-element.js'
 import { Command } from '../commander/command.js'
 
 /**
+ * A command to abort the request of an element.
+ *
  * Calls `targetElement.requester.abortController.abort`.
  *
  * @example
@@ -20,6 +22,9 @@ import { Command } from '../commander/command.js'
  * ```
  */
 export class ElementAbortRequestCommand extends Command<RequestableElement> {
+  /**
+   * Executes the command.
+   */
   public execute(): void {
     this.targetElement.requester.abortController?.abort()
   }

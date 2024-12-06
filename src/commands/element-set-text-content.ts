@@ -3,6 +3,9 @@ import { Command } from '../commander/command.js'
 import { isNil } from '../util/is-nil.js'
 import { isPrimitive } from '../util/is-primitive.js'
 
+/**
+ * Command data.
+ */
 export interface ElementSetTextContentCommandData {
   /**
    * The text content.
@@ -10,6 +13,9 @@ export interface ElementSetTextContentCommandData {
   'text-content'?: string
 }
 
+/**
+ * Command options.
+ */
 export interface ElementSetTextContentCommandOptions {
   /**
    * The state key.
@@ -23,7 +29,7 @@ export interface ElementSetTextContentCommandOptions {
 }
 
 /**
- * Sets the text content of an element.
+ * A command to set the text content of an element.
  *
  * If `options['text-content']` is defined it will be used.
  *
@@ -49,6 +55,11 @@ export interface ElementSetTextContentCommandOptions {
  * ```
  */
 export class ElementSetTextContentCommand extends Command<Element, ElementSetTextContentCommandOptions> {
+  /**
+   * Executes the command.
+   *
+   * @param data the data
+   */
   public execute(data?: ElementSetTextContentCommandData): void {
     if (data?.['text-content'] !== undefined) {
       this.targetElement.textContent = data['text-content']

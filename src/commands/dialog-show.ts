@@ -1,5 +1,8 @@
 import { Command } from '../commander/command.js'
 
+/**
+ * Command options.
+ */
 export interface DialogShowCommandOptions {
   /**
    * Whether to show the `<dialog>` as a modal.
@@ -8,7 +11,7 @@ export interface DialogShowCommandOptions {
 }
 
 /**
- * Shows a `<dialog>`.
+ * A command to show a dialog.
  *
  * Calls `targetElement.showModal` if `options.modal` is defined.
  *
@@ -36,6 +39,9 @@ export interface DialogShowCommandOptions {
  * ```
  */
 export class DialogShowCommand extends Command<HTMLDialogElement, DialogShowCommandOptions> {
+  /**
+   * Executes the command.
+   */
   public execute(): void {
     if (this.options.modal === undefined) {
       this.targetElement.show()

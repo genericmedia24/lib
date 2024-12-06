@@ -1,14 +1,28 @@
 import type { StatefulElement } from '../state/stateful-element.js'
 import { Command } from '../commander/command.js'
 
+/**
+ * Command options.
+ */
 export interface ElementToggleStateCommandOptions {
+  /**
+   * The state key.
+   */
   'state-key': string | string[]
+
+  /**
+   * The state value when toggling off.
+   */
   'state-off'?: string | string[]
+
+  /**
+   * The state value when toggling on.
+   */
   'state-on': string | string[]
 }
 
 /**
- * Toggles the state of an element.
+ * A command to toggle the state of an element.
  *
  * Iterates over `options['state-key']`.
  *
@@ -43,6 +57,9 @@ export interface ElementToggleStateCommandOptions {
  * ```
  */
 export class ElementToggleStateCommand extends Command<StatefulElement, ElementToggleStateCommandOptions> {
+  /**
+   * Executes the command.
+   */
   public async execute(): Promise<void> {
     if (this.targetElement.state?.storage === 'idb') {
       await this.targetElement.state.loaded

@@ -10,6 +10,9 @@ declare global {
   }
 }
 
+/**
+ * A command execution specification.
+ */
 export interface CommandExecution {
   /**
    * The data that should be passed to the commands.
@@ -59,6 +62,9 @@ export class Commander {
    */
   public started = false
 
+  /**
+   * A bound `handleCommand` method.
+   */
   protected handleCommandBound = this.handleCommand.bind(this)
 
   /**

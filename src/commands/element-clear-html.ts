@@ -1,7 +1,7 @@
 import { Command } from '../commander/command.js'
 
 /**
- * Clears the HTML of an element.
+ * A command to clear the HTML of an element.
  *
  * Sets `targetElement.innerHTML` to `''`.
  *
@@ -18,6 +18,9 @@ import { Command } from '../commander/command.js'
  * ```
  */
 export class ElementClearHtmlCommand extends Command<HTMLElement> {
+  /**
+   * Executes the command.
+   */
   public execute(): void {
     this.targetElement.innerHTML = ''
   }

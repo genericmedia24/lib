@@ -1,6 +1,9 @@
 import { isNil } from './is-nil.js'
 import { isPrimitive } from './is-primitive.js'
 
+/**
+ * CustomError options.
+ */
 export interface CustomErrorOptions extends ErrorOptions {
   /**
    * A machine-readable error code, e.g. err_operation_failed.

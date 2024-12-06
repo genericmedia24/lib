@@ -272,4 +272,13 @@ export default tslint.config(
     ],
     ...tslint.configs.disableTypeChecked,
   },
+  {
+    files: [
+      '*.mjs',
+    ],
+    rules: {
+      '@typescript-eslint/explicit-function-return-type': 'off',
+      '@typescript-eslint/explicit-module-boundary-types': 'off',
+    },
+  },
 )

@@ -1,7 +1,7 @@
 import { Command } from '../commander/command.js'
 
 /**
- * Removes an element.
+ * A command to remove an element.
  *
  * Calls `targetElement.remove`.
  *
@@ -18,6 +18,9 @@ import { Command } from '../commander/command.js'
  * ```
  */
 export class ElementRemoveCommand extends Command<HTMLElement> {
+  /**
+   * Executes the command.
+   */
   public execute(): void {
     this.targetElement.remove()
   }

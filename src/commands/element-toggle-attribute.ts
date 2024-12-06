@@ -2,14 +2,28 @@ import { makeRe } from 'picomatch'
 import type { Element } from '../elements/element.js'
 import { Command } from '../commander/command.js'
 
+/**
+ * Command options.
+ */
 export interface ElementToggleAttributeCommandOptions {
+  /**
+   * The attribute name.
+   */
   'attribute-name': string | string[]
+
+  /**
+   * The state key.
+   */
   'state-key': string | string[]
+
+  /**
+   * The state value.
+   */
   'state-value': string | string[]
 }
 
 /**
- * Toggles the attribute of an element.
+ * A command to toggle an attribute of an element.
  *
  * Iterates over `options['state-key']` and checks if the corresponding value of the state matches `options['state-value']`. The matching pattern is interpreted as a glob. If there is a match there corresponding attribute is set.
  *
@@ -34,6 +48,9 @@ export interface ElementToggleAttributeCommandOptions {
  * ```
  */
 export class ElementToggleAttributeCommand extends Command<Element, ElementToggleAttributeCommandOptions> {
+  /**
+   * Executes the command.
+   */
   public async execute(): Promise<void> {
     if (this.targetElement.state?.storage === 'idb') {
       await this.targetElement.state.loaded
