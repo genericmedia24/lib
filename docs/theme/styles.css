@@ -25,6 +25,14 @@ body pre code {
   white-space: pre;
 }
 
+body .page-menu {
+  padding: 1rem 0;
+}
+
+body .site-menu {
+  margin: 0;
+}
+
 body .tsd-accordion h2 {
   align-items: center;
   display: flex;
@@ -57,16 +65,20 @@ body .tsd-accordion-summary svg {
   transition: none;
 }
 
-body .tsd-filter-visibility .settings-label {
-  margin-block: 0 0.5rem;
-}
-
 body .tsd-breadcrumb {
   display: none;
 }
 
+body .tsd-filter-visibility .settings-label {
+  margin-block: 0 0.5rem;
+}
+
 body .tsd-member .tsd-anchor+h3 {
   margin-block-end: 0.5rem;
+}
+
+body .tsd-navigation.settings {
+  margin: 0;
 }
 
 body .tsd-panel>h1,
