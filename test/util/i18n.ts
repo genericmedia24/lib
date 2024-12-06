@@ -3,12 +3,12 @@ import { I18n } from '../../src/util/i18n.js'
 
 describe('I18n', () => {
   const options = {
-    dictionary: {
+    locale: 'nl-NL',
+    locales: {
       'nl-NL': {
         message: 'Hallo %(name)s',
       },
     },
-    locale: 'nl-NL',
     timeZone: 'Europe/Amsterdam',
   }
 
@@ -22,7 +22,7 @@ describe('I18n', () => {
   it('should instantiate with default options', (test) => {
     const i18n = new I18n()
 
-    test.assert.equal(JSON.stringify(i18n.dictionary), '{}')
+    test.assert.equal(JSON.stringify(i18n.locales), '{}')
     test.assert.equal(i18n.locale, 'nl-NL')
     test.assert.equal(i18n.timeZone, 'Europe/Amsterdam')
   })
@@ -47,7 +47,7 @@ describe('I18n', () => {
     test.assert.equal(string, '8.080,80')
   })
 
-  it('should format string from dictionary', (test) => {
+  it('should format string from locale', (test) => {
     const i18n = new I18n(options)
 
     const string = i18n.formatString('message', {
