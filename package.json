@@ -154,5 +154,5 @@
     "test:coverage:json": "node --import tsx --test --experimental-test-coverage --test-coverage-exclude=src/**/index.ts --test-reporter=./node.test-coverage.mjs --test-reporter-destination=docs/site/test-coverage.json ./test/**/*.ts",
     "test:only": "node --import tsx --test --test-only ./test/**/*.ts"
   },
-  "version": "1.6.0-beta.3"
+  "version": "1.6.0-beta.4"
 }

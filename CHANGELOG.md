@@ -1,3 +1,17 @@
+# [1.6.0-beta.4](https://github.com/genericmedia24/lib/compare/v1.6.0-beta.3...v1.6.0-beta.4) (2024-12-06)
+
+
+### Bug Fixes
+
+* rename dictionary to locales ([66fa9ad](https://github.com/genericmedia24/lib/commit/66fa9adaad344613aa852af38a172d297a6a2f94))
+
+
+### Features
+
+* add tests ([c4a008c](https://github.com/genericmedia24/lib/commit/c4a008c088ac26585b67bc9b37df1c3136a6eac3))
+* add tests ([09abf38](https://github.com/genericmedia24/lib/commit/09abf385a8ed5d368fd653fb8f6be335f58973ea))
+* add tests ([0e5f82e](https://github.com/genericmedia24/lib/commit/0e5f82e5efa8c532757a846f0f02605a95f32f92))
+
 # [1.6.0-beta.3](https://github.com/genericmedia24/lib/compare/v1.6.0-beta.2...v1.6.0-beta.3) (2024-11-28)
 
 
