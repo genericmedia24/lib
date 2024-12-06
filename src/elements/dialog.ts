@@ -72,7 +72,7 @@ export class DialogElement<StateValues = Record<string, unknown>> extends HTMLDi
   public state?: State<StateValues>
 
   /**
-   * A bound `close`.
+   * A bound `close` method.
    */
   protected closeBound = this.close.bind(this)
 

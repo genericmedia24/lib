@@ -3,6 +3,9 @@ import type { FormElement } from '../elements/form.js'
 import { Command } from '../commander/command.js'
 import { isArray } from '../util/is-array.js'
 
+/**
+ * Command data.
+ */
 export interface FormRespondCommandData {
   /**
    * The response
@@ -11,6 +14,8 @@ export interface FormRespondCommandData {
 }
 
 /**
+ * A command to handle the response of a form.
+ *
  * Executes commands provided in the body of `data.response`.
  *
  * @example
@@ -37,6 +42,11 @@ export interface FormRespondCommandData {
  * ```
  */
 export class FormRespondCommand extends Command<FormElement> {
+  /**
+   * Executes the command.
+   *
+   * @param data the data
+   */
   public async execute(data?: FormRespondCommandData): Promise<void> {
     const contentType = data?.response.headers.get('content-type')
 

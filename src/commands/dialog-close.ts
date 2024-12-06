@@ -1,7 +1,7 @@
 import { Command } from '../commander/command.js'
 
 /**
- * Closes a `<dialog>`.
+ * A command to close a dialog.
  *
  * Calls `targetElement.close`.
  *
@@ -27,6 +27,9 @@ import { Command } from '../commander/command.js'
  * ```
  */
 export class DialogCloseCommand extends Command<HTMLDialogElement> {
+  /**
+   * Executes the command.
+   */
   public execute(): void {
     this.targetElement.close()
   }

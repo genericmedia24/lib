@@ -1,6 +1,9 @@
 import type { Element } from '../elements/element.js'
 import { Command } from '../commander/command.js'
 
+/**
+ * Command options.
+ */
 export interface ElementToggleHeightCommandOptions {
   /**
    * Whether to toggle the height immediately.
@@ -9,7 +12,7 @@ export interface ElementToggleHeightCommandOptions {
 }
 
 /**
- * Toggles the CSS `height` property of an element.
+ * A command to toggle the CSS `height` property of an element.
  *
  * Ensures that the transition is performed correctly so that the element will not flash when the document is loaded.
  *
@@ -55,6 +58,9 @@ export interface ElementToggleHeightCommandOptions {
  * ```
  */
 export class ElementToggleHeightCommand extends Command<Element, ElementToggleHeightCommandOptions> {
+  /**
+   * Executes the command.
+   */
   public async execute(): Promise<void> {
     if (this.targetElement.state?.storage === 'idb') {
       await this.targetElement.state.loaded

@@ -3,6 +3,9 @@ import { Command } from '../commander/command.js'
 import { isNil } from '../util/is-nil.js'
 import { isPrimitive } from '../util/is-primitive.js'
 
+/**
+ * Command data.
+ */
 export interface InputSetValueCommandData {
   /**
    * The value.
@@ -10,6 +13,9 @@ export interface InputSetValueCommandData {
   value?: string
 }
 
+/**
+ * Command options.
+ */
 export interface InputSetValueCommandOptions {
   /**
    * The state key.
@@ -23,7 +29,7 @@ export interface InputSetValueCommandOptions {
 }
 
 /**
- * Sets the value of an `<input>`.
+ * A command to set the value of an input.
  *
  * If `data.value` is defined it will be used.
  *
@@ -59,6 +65,11 @@ export interface InputSetValueCommandOptions {
  * ```
  */
 export class InputSetValueCommand extends Command<InputElement, InputSetValueCommandOptions> {
+  /**
+   * Executes the command.
+   *
+   * @param data the data
+   */
   public execute(data?: InputSetValueCommandData): void {
     if (data?.value !== undefined) {
       this.targetElement.value = data.value

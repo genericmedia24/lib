@@ -1,7 +1,7 @@
 import { Command } from '../commander/command.js'
 
 /**
- * Submits a `<form>` associated with a `<button>`.
+ * A command to submit a form through a button.
  *
  * Sets `targetElement.type` to `"submit"`.
  *
@@ -29,6 +29,9 @@ import { Command } from '../commander/command.js'
  * ```
  */
 export class ButtonSubmitCommand extends Command<HTMLButtonElement> {
+  /**
+   * Executes the command.
+   */
   public execute(): void {
     if (this.targetElement.form !== null) {
       this.targetElement.type = 'submit'

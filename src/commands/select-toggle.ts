@@ -1,7 +1,7 @@
 import { Command } from '../commander/command.js'
 
 /**
- * Shows and hides elements based on a `<select>` value.
+ * A command to toggle elements based on a select value.
  *
  * Toggles the `hidden` attribute on elements with an `[data-select-toggle]` attribute containing the ID of `targetElement`.
  *
@@ -35,6 +35,9 @@ import { Command } from '../commander/command.js'
  * ```
  */
 export class SelectToggleCommand extends Command<HTMLSelectElement> {
+  /**
+   * Executes the command.
+   */
   public execute(): void {
     document
       .querySelectorAll<HTMLElement>(`[data-select-toggle=${this.targetElement.id}]`)

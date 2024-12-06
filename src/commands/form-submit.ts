@@ -2,6 +2,9 @@ import type { FormElement } from '../elements/form.js'
 import { Command } from '../commander/command.js'
 import { Requester } from '../requester/requester.js'
 
+/**
+ * Command data.
+ */
 export interface FormSubmitCommandData {
   /**
    * The submit event.
@@ -10,7 +13,7 @@ export interface FormSubmitCommandData {
 }
 
 /**
- * Submits a `<form>`.
+ * A command to submit a form.
  *
  * Uses `Requester` to fetch the resource.
  *
@@ -33,8 +36,16 @@ export interface FormSubmitCommandData {
  * ```
  */
 export class FormSubmitCommand extends Command<FormElement> {
+  /**
+   * The requester.
+   */
   public requester = new Requester(this.targetElement)
 
+  /**
+   * Executes the command.
+   *
+   * @param data the data
+   */
   public override execute(data: FormSubmitCommandData): Promise<void> | void {
     const { event } = data
 

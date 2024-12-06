@@ -1,5 +1,8 @@
 import type { SetRequired } from 'type-fest'
 
+/**
+ * KeyBinding options.
+ */
 export interface KeyBindingOptions {
   /**
    * Whether the alt-key should be pressed.

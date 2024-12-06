@@ -1,7 +1,7 @@
 import { Command } from '../commander/command.js'
 
 /**
- * Hides a popover.
+ * A command to hide a popover.
  *
  * Calls `targetElement.hidePopover`.
  *
@@ -30,6 +30,9 @@ import { Command } from '../commander/command.js'
  * ```
  */
 export class PopoverHideCommand extends Command<HTMLElement> {
+  /**
+   * Executes the command.
+   */
   public execute(): void {
     this.targetElement.hidePopover()
   }

@@ -6,6 +6,9 @@
 
 import debounce from 'debounce'
 
+/**
+ * Scroller options.
+ */
 export interface ScrollerOptions {
   /**
    * The callback function to render a body cell.
@@ -40,6 +43,9 @@ export interface ScrollerOptions {
   renderHeadCell?: (value: string, rowIndex: number, columnIndex: number) => string
 }
 
+/**
+ * Scroller filter options.
+ */
 export interface ScrollerFilterOptions {
   /**
    * The search string.

@@ -4,6 +4,9 @@ import type { TextAreaElement } from '../elements/text-area.js'
 import type { StatefulElement } from '../state/stateful-element.js'
 import { Command } from '../commander/command.js'
 
+/**
+ * Command options.
+ */
 export interface InputSetStateCommandOptions {
   /**
    * Whether to check the validity of the `<input>`.
@@ -11,13 +14,13 @@ export interface InputSetStateCommandOptions {
   'check-validity'?: string
 
   /**
-   * The key(s) of the state.
+   * The state key.
    */
   'state-key'?: string | string[]
 }
 
 /**
- * Sets the state of an `<input>` based on its value.
+ * A command to set the state of an input.
  *
  * If `options['check-validity']` is defined the state will only be set if `originElement.checkValidity` returns `true`.
  *
@@ -46,6 +49,9 @@ export interface InputSetStateCommandOptions {
  * ```
  */
 export class InputSetStateCommand extends Command<StatefulElement, InputSetStateCommandOptions, InputElement | SelectElement | TextAreaElement> {
+  /**
+   * Executes the command.
+   */
   public execute(): void {
     if (
       this.options['check-validity'] === undefined ||

@@ -2,6 +2,9 @@ import type { CustomError } from '../util/custom-error.js'
 import { Command } from '../commander/command.js'
 import { isObject } from '../util/is-object.js'
 
+/**
+ * Command data.
+ */
 export interface FormSetErrorsCommandData {
   /**
    * The error.
@@ -10,6 +13,8 @@ export interface FormSetErrorsCommandData {
 }
 
 /**
+ * A command to set errors in a form.
+ *
  * Sets visual errors messages for the `<input>`, `<select>` and `<textarea>` elements in a form.
  *
  * Iterates over `data.error` with the keys as the IDs of the elements for which a message should be set and the values as the messages.
@@ -47,6 +52,11 @@ export interface FormSetErrorsCommandData {
  * ```
  */
 export class FormSetErrorsCommand extends Command<HTMLFormElement> {
+  /**
+   * Executes the command.
+   *
+   * @param data the data
+   */
   public execute(data?: FormSetErrorsCommandData): void {
     const errorData = data?.error.data
 

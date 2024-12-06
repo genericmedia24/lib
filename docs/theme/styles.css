@@ -10,6 +10,55 @@ body h6 {
 
 body pre {
   line-height: 1.75em;
+  padding: 0;
+}
+
+body pre button {
+  background-color: inherit;
+}
+
+body pre code {
+  display: block;
+  margin: 0;
+  overflow: auto;
+  padding: 0.5rem;
+  white-space: pre;
+}
+
+body .tsd-accordion h2 {
+  align-items: center;
+  display: flex;
+}
+
+body .tsd-accordion h3 {
+  align-items: center;
+  display: flex;
+  margin-block-end: 0.5rem;
+}
+
+body .tsd-accordion h3 svg {
+  margin: 0.25rem 0.25rem 0 0;
+  transition: none;
+}
+
+body .tsd-accordion-summary h2 {
+  align-items: center;
+  display: flex;
+}
+
+body .tsd-accordion-summary h3 {
+  align-items: center;
+  display: flex;
+  margin-block-end: 0.5rem;
+}
+
+body .tsd-accordion-summary svg {
+  margin: 0.125rem 0.125rem 0 0;
+  transition: none;
+}
+
+body .tsd-filter-visibility .settings-label {
+  margin-block: 0 0.5rem;
 }
 
 body .tsd-breadcrumb {
@@ -17,7 +66,7 @@ body .tsd-breadcrumb {
 }
 
 body .tsd-member .tsd-anchor+h3 {
-  margin-bottom: 0.5rem;
+  margin-block-end: 0.5rem;
 }
 
 body .tsd-panel>h1,
@@ -25,6 +74,12 @@ body .tsd-panel>h2,
 body .tsd-panel>h3 {
   margin: 1rem 0;
   padding: 0;
+}
+
+body .tsd-theme-toggle {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 body .tsd-typography {

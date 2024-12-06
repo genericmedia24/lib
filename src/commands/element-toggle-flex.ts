@@ -1,6 +1,9 @@
 import type { Element } from '../elements/element.js'
 import { Command } from '../commander/command.js'
 
+/**
+ * Command options.
+ */
 export interface ElementToggleFlexCommandOptions {
   /**
    * Whether to toggle the flex immediately.
@@ -9,7 +12,7 @@ export interface ElementToggleFlexCommandOptions {
 }
 
 /**
- * Toggles the CSS `flex` property of an element.
+ * A command to toggle the CSS `flex` property of an element.
  *
  * Ensures that the transition is performed correctly so that the element will not flash when the document is loaded.
  *
@@ -67,6 +70,9 @@ export interface ElementToggleFlexCommandOptions {
  * ```
  */
 export class ElementToggleFlexCommand extends Command<Element, ElementToggleFlexCommandOptions> {
+  /**
+   * Executes the command.
+   */
   public async execute(): Promise<void> {
     if (this.targetElement.state?.storage === 'idb') {
       await this.targetElement.state.loaded

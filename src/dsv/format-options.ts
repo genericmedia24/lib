@@ -1,3 +1,6 @@
+/**
+ * Format options.
+ */
 export interface FormatDsvOptions {
   /**
    * The delimiter between values, default `','`.

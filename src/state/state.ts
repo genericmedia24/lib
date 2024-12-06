@@ -2,6 +2,9 @@ import isEqual from 'fast-deep-equal'
 import * as idb from 'idb-keyval'
 import type { StatefulElement } from './stateful-element.js'
 
+/**
+ * State options.
+ */
 export interface StateOptions {
   /**
    * The name of the state.

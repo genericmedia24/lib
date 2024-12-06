@@ -44,7 +44,7 @@ export class DivElement<StateValues = Record<string, unknown>> extends HTMLDivEl
   public state?: State<StateValues>
 
   /**
-   * A bound `hidePopover`.
+   * A bound `hidePopover` method.
    */
   protected hidePopoverBound = this.hidePopover.bind(this)
 

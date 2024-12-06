@@ -1,3 +1,6 @@
+/**
+ * An element that can be updated.
+ */
 export interface UpdatableElement extends HTMLElement {
   /**
    * Updates the element.
