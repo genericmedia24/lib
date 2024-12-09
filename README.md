@@ -1,7 +1,7 @@
 # @genericmedia/lib
 
 [![release](https://img.shields.io/github/actions/workflow/status/genericmedia24/lib/release.yaml?color=%234c1&label=release)](https://github.com/genericmedia24/lib/actions/workflows/release.yaml)
-[![npm](https://img.shields.io/npm/v/%40genericmedia%2Flib?color=%234c1&label=npm)](https://www.npmjs.com/genericmedia24/lib)
+[![npm](https://img.shields.io/npm/v/%40genericmedia%2Flib?color=%234c1&label=npm)](https://www.npmjs.com/package/@genericmedia/lib)
 
 A library for building data-intensive web applications.
 
