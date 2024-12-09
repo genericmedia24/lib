@@ -19,11 +19,9 @@ Many scroller libraries are available that solve this problem, but most have too
 
 ## New solution
 
-This library contains a {@link scroller!Scroller | Scroller} that combines the strong points of both packages to achieve smooth & simple, native & vanilla scrolling.
+This library contains a scroller that combines the strong points of both packages to achieve smooth & simple, native & vanilla scrolling.
 
-### Basic Example
-
-See [a live example](../examples/scroller.html) of the code below.
+Detailed documentation can be found in the source code. See a [live version](https://genericmedia24.github.io/lib/scroller.html) of the code below.
 
 ```html
 <!doctype html>
@@ -32,9 +30,9 @@ See [a live example](../examples/scroller.html) of the code below.
     <meta charset="utf-8">
     <title>Scroller</title>
     <script type="module">
-      import { Scroller } from 'https://cdn.jsdelivr.net/npm/@genericmedia/lib/+esm'
+      import { Scroller } from "https://cdn.jsdelivr.net/npm/@genericmedia/lib/+esm"
 
-      const scroller = new Scroller(document.querySelector('.table'))
+      const scroller = new Scroller(document.querySelector(".table"))
 
       const numColumns = 100
       const numRows = 100000
@@ -43,14 +41,14 @@ See [a live example](../examples/scroller.html) of the code below.
       scroller.start()
 
       scroller.addHeadRow(
-        new Array(numColumns).fill('').map(() => {
+        new Array(numColumns).fill("").map(() => {
           return string.slice(0, Math.round(Math.random() * 32))
         }),
       )
 
       for (let i = 0; i < numRows; i += 1) {
         scroller.addBodyRow(
-          new Array(numColumns).fill('').map(() => {
+          new Array(numColumns).fill("").map(() => {
             return string.slice(0, Math.round(Math.random() * 32))
           }),
         )
@@ -166,17 +164,17 @@ See [a live example](../examples/scroller.html) of the code below.
 It is possible to filter the body rows by calling `filter`.
 
 ```javascript
-import { Scroller } from 'https://cdn.jsdelivr.net/npm/@genericmedia/lib/+esm'
+import { Scroller } from "https://cdn.jsdelivr.net/npm/@genericmedia/lib/+esm"
 
-const scroller = new Scroller(document.querySelector('.table'))
+const scroller = new Scroller(document.querySelector(".table"))
 
 scroller.start()
-scroller.addBodyRow(['sun'])
-scroller.addBodyRow(['moon'])
-scroller.addBodyRow(['stars'])
+scroller.addBodyRow(["sun"])
+scroller.addBodyRow(["moon"])
+scroller.addBodyRow(["stars"])
 
 scroller.filter({
-  input: 'moon',
+  input: "moon",
 })
 
 scroller.update()
@@ -189,12 +187,12 @@ console.log(scroller.bodyRows.length === 1) // true
 It is possible to resize a column by calling `resizeColumn`.
 
 ```javascript
-import { Scroller } from 'https://cdn.jsdelivr.net/npm/@genericmedia/lib/+esm'
+import { Scroller } from "https://cdn.jsdelivr.net/npm/@genericmedia/lib/+esm"
 
-const scroller = new Scroller(document.querySelector('.table'))
+const scroller = new Scroller(document.querySelector(".table"))
 
 scroller.start()
-scroller.addBodyRow(['sun', 'moon', 'stars'])
+scroller.addBodyRow(["sun", "moon", "stars"])
 scroller.update()
 scroller.resizeColumn(1, 300)
 ```

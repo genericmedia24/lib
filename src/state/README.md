@@ -1,8 +1,8 @@
 # State
 
-Large application benefit from centralised state management. All the custom elements defined in the library have a {@link state!State | State}.
+Large application benefit from centralised state management. All the custom elements defined in the library have a state.
 
-See [a live example](../examples/state.html) of the code below.
+Detailed documentation can be found in the source code. See a [live version](https://genericmedia24.github.io/lib/state.html) of the code below.
 
 ```html
 <!doctype html>
@@ -19,17 +19,17 @@ See [a live example](../examples/state.html) of the code below.
         defineElements,
         commands,
         elements
-      } from 'https://cdn.jsdelivr.net/npm/@genericmedia/lib/+esm'
+      } from "https://cdn.jsdelivr.net/npm/@genericmedia/lib/+esm"
 
       class DivSetGreetingCommand extends Command {
         execute() {
-          const username = this.originElement.state.get('username') ?? ''
+          const username = this.originElement.state.get("username") ?? ""
           this.originElement.textContent = `${this.options.prefix} ${username}`
         }
       }
 
       window.customCommands = CommandRegistry.create()
-      window.customCommands.define('div-set-greeting', DivSetGreetingCommand)
+      window.customCommands.define("div-set-greeting", DivSetGreetingCommand)
 
       defineCommands(commands)
       defineElements(elements)
@@ -117,7 +117,7 @@ class DivSetGreetingCommand extends Command {
   async execute() {
     await this.originElement.state.loaded
 
-    const username = this.originElement.state.get('username') ?? ''
+    const username = this.originElement.state.get("username") ?? ""
 
     this.originElement.textContent = `${this.options.prefix} ${username}`
   }

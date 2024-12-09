@@ -1,4 +1,4 @@
-# Custom Commands
+# Commander
 
 ## Problem description
 
@@ -42,9 +42,7 @@ It would be better to develop a solution that introduces (almost) no new syntax,
 
 Enter Custom Commands, the long-lost pal of Custom Elements.
 
-### Basic example
-
-See [a live example](../examples/commander.html) of the code below.
+Detailed documentation can be found in the source code. See a [live version](https://genericmedia24.github.io/lib/commander.html) of the code below. A [more comprehensive example](https://genericmedia24.github.io/lib/app/index.html) is available too.
 
 ```html
 <!doctype html>
@@ -59,7 +57,7 @@ See [a live example](../examples/commander.html) of the code below.
         CommandRegistry,
         defineElements,
         elements
-      } from 'https://cdn.jsdelivr.net/npm/@genericmedia/lib/+esm'
+      } from "https://cdn.jsdelivr.net/npm/@genericmedia/lib/+esm"
 
       class ElementSetBackgroundCommand extends Command {
         execute() {
@@ -68,7 +66,7 @@ See [a live example](../examples/commander.html) of the code below.
       }
 
       window.customCommands = CommandRegistry.create()
-      window.customCommands.define('element-set-background', ElementSetBackgroundCommand)
+      window.customCommands.define("element-set-background", ElementSetBackgroundCommand)
 
       defineElements(elements)
     </script>
@@ -99,7 +97,7 @@ The value of the attribute is an URI. The part before the @ is the name of the c
 The command is added to the registry with:
 
 ```javascript
-window.customCommands.define('element-set-background', ElementSetBackgroundCommand)
+window.customCommands.define("element-set-background", ElementSetBackgroundCommand)
 ```
 
 And the command is defined as a class with:
@@ -138,11 +136,11 @@ class ButtonElement extends HTMLButtonElement {
 
   constructor() {
     super()
-    this.addEventListener('click', this.handleClick.bind(this))
+    this.addEventListener("click", this.handleClick.bind(this))
   }
 
   handleClick(event) {
-    this.commander.execute('click', {
+    this.commander.execute("click", {
       event,
     })
   }
@@ -206,19 +204,19 @@ class ButtonElement extends HTMLButtonElement {
 
   constructor() {
     super()
-    this.addEventListener('click', this.handleClick.bind(this))
+    this.addEventListener("click", this.handleClick.bind(this))
   }
 
   connectedCallback() {
     this.state ??= State.setup(this)
     this.state?.register(this)
     this.commander.start()
-    this.commander.execute('connected')
+    this.commander.execute("connected")
   }
 
   disconnectedCallback() {
     this.state?.unregister(this)
-    this.commander.execute('disconnected')
+    this.commander.execute("disconnected")
     this.commander.stop()
   }
 
@@ -227,7 +225,7 @@ class ButtonElement extends HTMLButtonElement {
   }
 
   handleClick(event) {
-    this.commander.execute('click', {
+    this.commander.execute("click", {
       event,
     })
   }

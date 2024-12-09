@@ -1,0 +1,374 @@
+:root {
+  width: 100%;
+  height: 100%;
+}
+
+*,
+::after,
+::before,
+::backdrop {
+  padding: unset;
+  margin: unset;
+  font-family: unset;
+  font-size: unset;
+  font-weight: unset;
+  color: unset;
+  scrollbar-color: #ddd transparent;
+  background-color: unset;
+  border: unset;
+  outline: unset;
+  transition-timing-function: cubic-bezier(0.83, 0, 0.17, 1);
+  transition-duration: 250ms;
+  transition-property: none;
+  animation-duration: 250ms;
+  animation-timing-function: cubic-bezier(0.83, 0, 0.17, 1);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-family: system-ui;
+  font-size: 13px;
+  line-height: 1.5em;
+  color: #111;
+  cursor: default;
+  background-color: #fff;
+
+  & ::selection {
+    color: #eee;
+    background-color: royalblue;
+  }
+}
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  & > .body {
+    position: relative;
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    transition-property: flex;
+
+    & > .section {
+      min-width: 100%;
+      overflow: auto;
+      padding-inline: 0.5rem;
+    }
+  }
+
+  & > .header {
+    height: 2rem;
+    padding-inline: 0.5rem;
+    border-block-start: 1px solid #fff;
+
+    & > .buttons {
+      & > .button {
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 50%;
+      }
+    }
+
+    & > .title {
+      text-transform: uppercase;
+      background-color: inherit;
+    }
+  }
+}
+
+.activitybar {
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 3rem;
+  height: 100%;
+  background-color: #eee;
+  border-inline-end: 1px solid #fff;
+
+  & > .buttons {
+    display: flex;
+    flex-direction: column;
+
+    & > form {
+      display: none;
+    }
+
+    & > .button {
+      width: 3rem;
+      height: 3rem;
+      background-color: inherit;
+      border-inline: 2px solid transparent;
+
+      & > .symbol {
+        font-size: 1.5rem;
+        color: color-mix(in srgb, #111, #eee 50%);
+      }
+
+      &:hover {
+        & > .symbol {
+          color: unset;
+        }
+      }
+
+      &[data-pressed] {
+        border-inline-start: 2px solid royalblue;
+
+        & > .symbol {
+          color: unset;
+        }
+      }
+    }
+  }
+}
+
+.app {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  height: 100%;
+}
+
+.button {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  text-align: start;
+  cursor: pointer;
+
+  &[data-loading] {
+    position: relative;
+
+    &::after {
+      position: absolute;
+      width: 0.375rem;
+      height: 0.375rem;
+      content: "";
+      background-color: color-mix(in srgb, #111, #eee 35%);
+    }
+
+    & > .symbol {
+      font-size: 1.25rem;
+      animation-name: spin;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+
+      @keyframes spin {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    }
+  }
+
+  &[disabled] {
+    color: color-mix(in srgb, #111, #eee 50%);
+    pointer-events: none;
+  }
+
+  &:focus-visible {
+    color: #111;
+    background-color: #ddd;
+  }
+
+  &:hover {
+    color: #111;
+    background-color: #ddd;
+  }
+
+  &:active {
+    color: #111;
+    background-color: #ddd;
+  }
+
+  &:has(> .symbol) {
+    &:not(:has(> .text)) {
+      justify-content: center;
+    }
+  }
+
+  &:has(> .text) {
+    padding-inline: 0.5rem;
+
+    & > .text {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  &.toggle {
+    &:has(> .symbol:last-child:first-child) {
+      &:active,
+      &[data-active] {
+        color: var(--font-color-white);
+        background-color: royalblue;
+      }
+    }
+
+    &:has(> .symbol:last-child:not(:first-child)) {
+      & > .symbol {
+        &:last-child:not(:first-child) {
+          display: none;
+        }
+      }
+
+      &[data-active] {
+        & > .symbol {
+          &:first-child {
+            display: none;
+          }
+
+          &:last-child {
+            display: unset;
+          }
+        }
+      }
+    }
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+  align-items: center;
+
+  & .symbol {
+    width: 1rem;
+    height: 1rem;
+
+    &.arrow {
+      font-size: 1.5rem;
+      transition-property: transform;
+    }
+  }
+
+  & > .buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 0.25rem;
+
+    & > .button {
+      &[data-loading] {
+        display: none;
+      }
+    }
+  }
+
+  & > .title {
+    display: inline;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &:has(+ .body > [data-loading]) {
+    & > .buttons {
+      & > .button[data-loading] {
+        display: inline-flex;
+      }
+    }
+  }
+
+  &:has(+ .body[hidden]) {
+    & .symbol {
+      &.arrow {
+        transform: rotate(-90deg);
+
+        [dir="rtl"] & {
+          transform: rotate(90deg);
+        }
+      }
+    }
+  }
+}
+
+.panel {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+
+  & > .body {
+    flex: 1;
+    overflow: auto;
+  }
+}
+
+.sidebar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  width: 21rem;
+  height: 100%;
+  background-color: #eee;
+  border-inline-end: 1px solid #fff;
+  transition-property: margin-inline-start;
+
+  @media (width < 45rem) {
+    position: fixed;
+    inset-inline-start: calc(3rem + 1px);
+  }
+
+  @media (width < 24rem) {
+    width: calc(100% - 3rem - 1px);
+    border-inline-end: none;
+  }
+
+  & .menu {
+    top: anchor(bottom);
+    right: anchor(right);
+    margin-block-start: 0.25rem;
+    margin-inline: 0.325rem -0.325rem;
+    position-try:
+      flip-block,
+      flip-inline,
+      flip-block flip-inline;
+
+    &.top-end {
+      margin-block-start: -0.25rem;
+    }
+  }
+
+  & > .panel {
+    flex-direction: column;
+
+    & > .header {
+      height: 2rem;
+      padding-inline: 0.5rem;
+
+      & > .buttons {
+        & > .button {
+          width: 1.5rem;
+          height: 1.5rem;
+          border-radius: 50%;
+        }
+      }
+
+      & > .title {
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+
+.symbol {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Material Symbols Sharp", sans-serif;
+  font-size: 1rem;
+  font-weight: 350;
+  line-height: 1;
+  user-select: none;
+}

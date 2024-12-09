@@ -2,16 +2,18 @@
 
 There are quite a few [RFC 4180](https://www.rfc-editor.org/rfc/rfc4180) compliant libraries that can parse and/or format delimiter-separated (DSV) data. Some are fast and some are not, some can parse and others cannot, some can handle streams and some cannot, some are easy to call and others are not.
 
-This library contains {@link dsv | functions} to parse and format DSV strings and streams very easily and very fast.
+This library contains functions to parse and format DSV strings and streams very easily and very fast.
 
 There are no type parsers, because it is more efficient to parse a value JIT when it has to be used in a computation or when it has to be rendered, instead of parsing all values all the time. Besides, type guessing is hard.
+
+Detailed documentation can be found in the source code.
 
 ## Parse
 
 ### Parse string
 
 ```javascript
-import { parseDsvString } from '@genericmedia/lib'
+import { parseDsvString } from "@genericmedia/lib"
 
 const string = `a,b,c\n1,2,3\n`
 
@@ -23,10 +25,10 @@ parseDsvString(string, (row) => {
 ### Parse stream
 
 ```javascript
-import { parseDsvStream } from '@genericmedia/lib'
-import { createReadStream } from 'node:fs'
+import { parseDsvStream } from "@genericmedia/lib"
+import { createReadStream } from "node:fs"
 
-const stream = createReadStream('some-file.csv')
+const stream = createReadStream("some-file.csv")
 
 // prettier-ignore
 parseDsvStream(stream, (row) => {
@@ -39,9 +41,9 @@ parseDsvStream(stream, (row) => {
 ### Parse web stream
 
 ```javascript
-import { parseDsvWebStream } from '@genericmedia/lib'
+import { parseDsvWebStream } from "@genericmedia/lib"
 
-const response = fetch('some-file.csv')
+const response = fetch("some-file.csv")
 
 // prettier-ignore
 parseDsvWebStream(response.body, (row) => {
@@ -71,7 +73,7 @@ parseDsvString(string, parseDsvRowToObject((object) => {
 ### Parse with options
 
 ```javascript
-import { parseDsvString } from '@genericmedia/lib'
+import { parseDsvString } from "@genericmedia/lib"
 
 const string = `a\tb\tc\n1\t2\t3\n`
 
@@ -88,20 +90,20 @@ parseDsvString(string, (row) => {
 ### Format rows
 
 ```javascript
-import { formatDsvRows } from '@genericmedia/lib'
+import { formatDsvRows } from "@genericmedia/lib"
 
 const string = formatDsvRows([
-  ['a', 'b', 'c'],
+  ["a", "b", "c"],
   [1, 2, 3],
 ])
 
-console.log(string === 'a,b,c\n1,2,3\n') // true
+console.log(string === "a,b,c\n1,2,3\n") // true
 ```
 
 ### Format with options
 
 ```javascript
-import { formatDsvRows } from '@genericmedia/lib'
+import { formatDsvRows } from "@genericmedia/lib"
 
 // prettier-ignore
 const string = formatDsvRows([
@@ -111,7 +113,7 @@ const string = formatDsvRows([
   delimiter: '\t'
 })
 
-console.log(string === 'a\tb\tc\n1\t2\t3\n') // true
+console.log(string === "a\tb\tc\n1\t2\t3\n") // true
 ```
 
 ## Benchmarks

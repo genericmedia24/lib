@@ -3,7 +3,7 @@ import { CustomError } from '../util/custom-error.js'
 import { isNil } from '../util/is-nil.js'
 
 /**
- * Fetches a resource.
+ * A thin wrapper around `fetch`.
  *
  * When an element is passed to the constructur, feedback about the request will be given on the element.
  *

@@ -10,6 +10,7 @@ export default tslint.config(
   {
     files: [
       '{benchmark,src,test}/**/*.ts',
+      'examples/**/*.js',
       '*.{mjs,ts}',
     ],
     languageOptions: {
@@ -268,16 +269,19 @@ export default tslint.config(
   },
   {
     files: [
+      'examples/**/*.js',
       '*.mjs',
     ],
     ...tslint.configs.disableTypeChecked,
   },
   {
     files: [
+      'examples/**/*.js',
       '*.mjs',
     ],
     rules: {
       '@typescript-eslint/explicit-function-return-type': 'off',
+      '@typescript-eslint/explicit-member-accessibility': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
     },
   },

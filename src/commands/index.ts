@@ -51,132 +51,30 @@ import { PopoverHideCommand } from './popover-hide.js'
 import { PopoverShowCommand } from './popover-show.js'
 import { SelectToggleCommand } from './select-toggle.js'
 
-/**
- * Custom commands.
- */
 export const commands = {
-  /**
-   * A button submit command.
-   */
   ButtonSubmitCommand,
-
-  /**
-   * A command to submit a form with a button.
-   */
   DialogCloseCommand,
-
-  /**
-   * A command to show a dialog.
-   */
   DialogShowCommand,
-
-  /**
-   * A command to toggle a dialog.
-   */
   DialogToggleCommand,
-
-  /**
-   * A command to abort the request of an element.
-   */
   ElementAbortRequestCommand,
-
-  /**
-   * A command to clear the HTML of an element.
-   */
   ElementClearHtmlCommand,
-
-  /**
-   * A command to focus an element.
-   */
   ElementFocusCommand,
-
-  /**
-   * A command to remove an element.
-   */
   ElementRemoveCommand,
-
-  /**
-   * A command to set the state of an element.
-   */
   ElementSetStateCommand,
-
-  /**
-   * A command to set the text content of an element.
-   */
   ElementSetTextContentCommand,
-
-  /**
-   * A command to toggle an attribute of an element.
-   */
   ElementToggleAttributeCommand,
-
-  /**
-   * A command to toggle the CSS `flex` property of an element.
-   */
   ElementToggleFlexCommand,
-
-  /**
-   * A command to toggle the CSS `height` property of an element.
-   */
   ElementToggleHeightCommand,
-
-  /**
-   * A command to toggle the CSS `margin` property of an element.
-   */
   ElementToggleMarginCommand,
-
-  /**
-   * A command to toggle the state of an element.
-   */
   ElementToggleStateCommand,
-
-  /**
-   * A command to update an element.
-   */
   ElementUpdateCommand,
-
-  /**
-   * A command to handle the response of a form.
-   */
   FormRespondCommand,
-
-  /**
-   * A command to set errors in a form.
-   */
   FormSetErrorsCommand,
-
-  /**
-   * A command to submit a form.
-   */
   FormSubmitCommand,
-
-  /**
-   * A command to set the error of an input.
-   */
   InputSetErrorCommand,
-
-  /**
-   * A command to set the state of an input.
-   */
   InputSetStateCommand,
-
-  /**
-   * A command to set the value of an input.
-   */
   InputSetValueCommand,
-
-  /**
-   * A command to hide a popover.
-   */
   PopoverHideCommand,
-
-  /**
-   * A command to show a popover.
-   */
   PopoverShowCommand,
-
-  /**
-   * A command to toggle elements based on a select value.
-   */
   SelectToggleCommand,
 }
