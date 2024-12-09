@@ -190,7 +190,7 @@ State
   })
   .load()
   .setnx('open', 'true')
-  .setnx('part', 'gm-extensions')
+  .setnx('part', 'gm-extensions?state=extensions')
 
 State
   .create({
