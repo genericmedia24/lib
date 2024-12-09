@@ -19,10 +19,10 @@ Detailed documentation can be found in the source code. See a [live version](htt
       import {
         Requester,
         elements,
-        defineCustomElements
+        defineElements
       } from "https://cdn.jsdelivr.net/npm/@genericmedia/lib/dist/index.min.mjs"
 
-      defineCustomElements(elements)
+      defineElements(elements)
 
       const element = document.body.querySelector("div")
       const requester = new Requester(element)
