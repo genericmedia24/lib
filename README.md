@@ -54,7 +54,7 @@ It is also possible to use subpaths for commander, commands, dsv, elements, requ
 
 ```javascript
 // ESM local import
-import { parseDsvStream } from "@genericmedia/lib@1.6.1/dsv"
+import { parseDsvStream } from "@genericmedia/lib/dsv"
 ```
 
 ```html
