@@ -26,7 +26,7 @@ It is not obvious from reading the structural code which behaviour is involved i
 
 ### Hybrids
 
-The drawbacks of both approaches has led many people to design new syntaxes for coupling structure and behaviour.
+The drawbacks of both approaches have led many people to design new syntaxes for coupling structure and behaviour.
 
 React is a JavaScript-first approach with syntactic innovations in both JavaScript and HTML to ensure the coupling between both.
 
