@@ -1,3 +1,10 @@
+## [1.6.2](https://github.com/genericmedia24/lib/compare/v1.6.1...v1.6.2) (2024-12-09)
+
+
+### Bug Fixes
+
+* fix docs workflow ([754cb91](https://github.com/genericmedia24/lib/commit/754cb91dc086913824edb6be4376f264421c251f))
+
 ## [1.6.1](https://github.com/genericmedia24/lib/compare/v1.6.0...v1.6.1) (2024-12-09)
 
 
