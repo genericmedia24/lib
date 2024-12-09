@@ -47,7 +47,7 @@ const gm = require("@genericmedia/lib")
 
 ```html
 <!-- UMD remote script, "gm" is globally available -->
-<script src="https://cdn.jsdelivr.net/npm/@genericmedia/lib@1.6.1/dist/browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@genericmedia/lib/dist/browser.min.js"></script>
 ```
 
 It is also possible to use subpaths for commander, commands, dsv, elements, requester, scroller, state and util.
@@ -59,7 +59,7 @@ import { parseDsvStream } from "@genericmedia/lib@1.6.1/dsv"
 
 ```html
 <!-- UMD remote script, "gm" is globally available -->
-<script src="https://cdn.jsdelivr.net/npm/@genericmedia/lib@1.6.1/dist/dsv.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@genericmedia/lib/dist/dsv.min.js"></script>
 ```
 
 ## License
