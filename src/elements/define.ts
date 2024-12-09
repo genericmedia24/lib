@@ -33,12 +33,12 @@ export function defineElements(elements: Record<string, Constructor<HTMLElement>
     .forEach(([fullName, element]) => {
       const name = Object.hasOwn(window, `HTML${fullName}`)
         ? fullName
-          .replace('Element', '')
-          .toLowerCase()
+            .replace('Element', '')
+            .toLowerCase()
         : fullName
-          .replace('Element', '')
-          .replace(/(?<one>[a-z0–9])(?<two>[A-Z])/gu, '$1-$2')
-          .toLowerCase()
+            .replace('Element', '')
+            .replace(/(?<one>[a-z0–9])(?<two>[A-Z])/gu, '$1-$2')
+            .toLowerCase()
 
       window.customElements.define(`${prefix}${name}`, element, {
         extends: Object.hasOwn(window, `HTML${fullName}`)
