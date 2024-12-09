@@ -123,3 +123,49 @@ class DivSetGreetingCommand extends Command {
   }
 }
 ```
+
+## Custom Elements
+
+A state can be used alongside a [commander](../commander/README.md) in a custom element. The custom button element included in the library looks partly like this:
+
+```javascript
+class ButtonElement extends HTMLButtonElement {
+  commander = new Commander(this)
+
+  state
+
+  constructor() {
+    super()
+    this.addEventListener("click", this.handleClick.bind(this))
+  }
+
+  connectedCallback() {
+    this.state ??= State.setup(this)
+    this.state?.register(this)
+    this.commander.start()
+    this.commander.execute("connected")
+  }
+
+  disconnectedCallback() {
+    this.state?.unregister(this)
+    this.commander.execute("disconnected")
+    this.commander.stop()
+  }
+
+  stateChangedCallback(newValues, oldValues) {
+    this.commander.executeState(newValues, oldValues)
+  }
+
+  handleClick(event) {
+    this.commander.execute("click", {
+      event,
+    })
+  }
+}
+```
+
+In `connectedCallback` the element should set up the state once and register itself with it. It should also start the commander.
+
+In `disconnectedCallback` the element should unregister itself from the state and stop the commander.
+
+In general it is advised to move all behavioural code from custom elements to custom commands and use custom elements exclusively for structural purposes and event delegation.

@@ -84,7 +84,7 @@ Detailed documentation can be found in the source code. See a [live version](htt
 </html>
 ```
 
-#### Explanation
+### Explanation
 
 First, an event attribute is added to the button:
 
@@ -112,7 +112,7 @@ class ElementSetBackgroundCommand extends Command {
 
 A command should implement an `execute` method. The command has several properties, two of which are shown in the example: `targetElement` and `options`, which are defined by the URI in the attribute.
 
-The command is invoked by a {@link commander!Commander | Commander}. The commander is a property of all the custom elements defined in the library. For more information see the elaboration below.
+The command is invoked by a commander. The commander is a property of all the custom elements defined in the library. For more information see the elaboration below.
 
 The type of the custom element is defined by the `is` attribute of the button:
 
@@ -126,7 +126,7 @@ This custom button element is part of the library and defined by calling a helpe
 defineElements(elements)
 ```
 
-#### Elaboration
+### Elaboration
 
 The specification of the custom button element looks partly like this:
 
@@ -169,7 +169,7 @@ It is also possible to define multiple commands in one attribute. This is done b
 data-onclick="element-set-background@message?color=royalblue other-command@other-element"
 ```
 
-#### Inversion
+### Inversion
 
 It is possible to invert the relationship between the target and the origin element, effectively creating an observer/observable pattern:
 
@@ -194,7 +194,7 @@ Note the change of the name of the attribute: `data-ofclick` instead of `data-on
 
 ### Custom Elements
 
-When implementing a custom element the coupling with custom commmands and a state can be achieved by instantiating a {@link commander!Commander | Commander} and a {@link state!State | State}. The custom button element included in the library looks partly like this:
+A commander can be used alongside a [state](../state/README.md) in a custom element. The custom button element included in the library looks partly like this:
 
 ```javascript
 class ButtonElement extends HTMLButtonElement {
