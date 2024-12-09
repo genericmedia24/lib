@@ -8,19 +8,15 @@ permissions:
   pages: write
   id-token: write
 jobs:
-  build:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: examples
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{steps.deployment.outputs.page_url}}
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
+          path: './examples'
       - uses: actions/deploy-pages@v4

@@ -17,7 +17,7 @@ import { isNil } from '../util/is-nil.js'
  * ```javascript
  * const element = document.body.querySelector('div')
  * const requester = new Requester(element)
- * const result = await requester.fetchJson('https://cdn.jsdelivr.net/npm/@genericmedia/lib/package.json')
+ * const result = await requester.fetchJson('https://cdn.jsdelivr.net/npm/@genericmedia/lib@1.6.1/package.json')
  *
  * element.setHTMLUnsafe(result.version)
  * ```

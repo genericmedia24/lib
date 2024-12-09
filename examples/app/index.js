@@ -9,7 +9,7 @@ import {
   html,
   I18n,
   State,
-} from 'https://cdn.jsdelivr.net/npm/@genericmedia/lib/+esm'
+} from 'https://cdn.jsdelivr.net/npm/@genericmedia/lib@1.6.1/+esm'
 
 class ActivitybarElement extends Element {
   update() {
