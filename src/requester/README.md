@@ -20,7 +20,7 @@ Detailed documentation can be found in the source code. See a [live version](htt
         Requester,
         elements,
         defineCustomElements
-      } from "https://cdn.jsdelivr.net/npm/@genericmedia/lib@1.6.1/+esm"
+      } from "https://cdn.jsdelivr.net/npm/@genericmedia/lib/dist/index.min.mjs"
 
       defineCustomElements(elements)
 

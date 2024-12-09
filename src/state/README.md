@@ -19,7 +19,7 @@ Detailed documentation can be found in the source code. See a [live version](htt
         defineElements,
         commands,
         elements
-      } from "https://cdn.jsdelivr.net/npm/@genericmedia/lib@1.6.1/+esm"
+      } from "https://cdn.jsdelivr.net/npm/@genericmedia/lib/dist/index.min.mjs"
 
       class DivSetGreetingCommand extends Command {
         execute() {

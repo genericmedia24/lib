@@ -30,7 +30,7 @@ Detailed documentation can be found in the source code. See a [live version](htt
     <meta charset="utf-8">
     <title>Scroller</title>
     <script type="module">
-      import { Scroller } from "https://cdn.jsdelivr.net/npm/@genericmedia/lib@1.6.1/+esm"
+      import { Scroller } from "https://cdn.jsdelivr.net/npm/@genericmedia/lib/dist/index.min.mjs"
 
       const scroller = new Scroller(document.querySelector(".table"))
 
@@ -164,7 +164,7 @@ Detailed documentation can be found in the source code. See a [live version](htt
 It is possible to filter the body rows by calling `filter`.
 
 ```javascript
-import { Scroller } from "https://cdn.jsdelivr.net/npm/@genericmedia/lib@1.6.1/+esm"
+import { Scroller } from "https://cdn.jsdelivr.net/npm/@genericmedia/lib/dist/index.min.mjs"
 
 const scroller = new Scroller(document.querySelector(".table"))
 
@@ -187,7 +187,7 @@ console.log(scroller.bodyRows.length === 1) // true
 It is possible to resize a column by calling `resizeColumn`.
 
 ```javascript
-import { Scroller } from "https://cdn.jsdelivr.net/npm/@genericmedia/lib@1.6.1/+esm"
+import { Scroller } from "https://cdn.jsdelivr.net/npm/@genericmedia/lib/dist/index.min.mjs"
 
 const scroller = new Scroller(document.querySelector(".table"))
 

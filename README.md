@@ -37,7 +37,7 @@ import { parseDsvStream } from "@genericmedia/lib"
 
 ```javascript
 // ESM remote import
-import { parseDsvStream } from "https://cdn.jsdelivr.net/npm/@genericmedia/lib@1.6.1/+esm"
+import { parseDsvStream } from "https://cdn.jsdelivr.net/npm/@genericmedia/lib/dist/index.min.mjs"
 ```
 
 ```javascript
