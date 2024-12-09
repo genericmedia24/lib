@@ -1,6 +1,6 @@
 {
   "author": "Koen van den Boogaart <koen@genericmedia.nl>",
-  "browser": "./dist/browser.js",
+  "browser": "./dist/index.js",
   "bugs": "https://github.com/genericmedia24/lib/issues",
   "dependencies": {
     "debounce": "^2.2.0",
@@ -57,9 +57,9 @@
   "exports": {
     ".": {
       "browser": {
-        "import": "./dist/browser.mjs",
-        "require": "./dist/browser.js",
-        "types": "./dist/browser.d.ts"
+        "import": "./dist/index.mjs",
+        "require": "./dist/index.js",
+        "types": "./dist/index.d.ts"
       },
       "node": {
         "import": "./dist/node.mjs",

@@ -5,8 +5,8 @@ import typescript from '@rollup/plugin-typescript'
 
 const specs = [
   {
-    input: 'src/browser.ts',
-    output: 'dist/browser',
+    input: 'src/index.ts',
+    output: 'dist/index',
   },
   {
     input: 'src/node.ts',
