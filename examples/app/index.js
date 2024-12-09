@@ -1,4 +1,3 @@
-// prettier-ignore
 import {
   Command,
   commands,
@@ -23,9 +22,9 @@ class ActivitybarElement extends Element {
             <button
               class="button"
               data-onclick="${item.onclick}"
-              data-state="${item.state ?? 'sidebar'}"
-              data-onpartchanged="${item.onpartchanged ?? 'sidebar-button-set-pressed'}"
-              data-onconnected="${item.onpartchanged ?? 'sidebar-button-set-pressed'}"
+              data-state="sidebar"
+              data-onpartchanged="sidebar-button-set-pressed"
+              data-onconnected="sidebar-button-set-pressed"
               is="gm-button"
             >
               <span
@@ -172,7 +171,6 @@ class SidebarButtonSetPressedCommand extends Command {
   }
 }
 
-// prettier-ignore
 State
   .create({
     name: 'activitybar',
@@ -182,11 +180,10 @@ State
     {
       name: 'extensions',
       onclick: 'sidebar-button-set-state@sidebar?part=gm-extensions?state=extensions',
-      symbol: 'database',
+      symbol: 'grid_view',
     },
   ])
 
-// prettier-ignore
 State
   .create({
     name: 'sidebar',
@@ -195,7 +192,6 @@ State
   .setnx('open', 'true')
   .setnx('part', 'gm-extensions')
 
-// prettier-ignore
 State
   .create({
     name: 'extensions',
