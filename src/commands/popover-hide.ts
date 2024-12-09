@@ -29,7 +29,7 @@ import { Command } from '../commander/command.js'
  * </div>
  * ```
  */
-export class PopoverHideCommand extends Command<HTMLElement> {
+export class PopoverHideCommand extends Command {
   /**
    * Executes the command.
    */

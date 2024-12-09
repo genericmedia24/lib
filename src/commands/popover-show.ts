@@ -31,7 +31,7 @@ import { Command } from '../commander/command.js'
  * </div>
  * ```
  */
-export class PopoverShowCommand extends Command<HTMLElement> {
+export class PopoverShowCommand extends Command {
   /**
    * A bound `handleToggle` method.
    */

@@ -17,7 +17,7 @@ import { Command } from '../commander/command.js'
  * <input id="input">
  * ```
  */
-export class ElementFocusCommand extends Command<HTMLElement> {
+export class ElementFocusCommand extends Command {
   /**
    * Executes the command.
    */

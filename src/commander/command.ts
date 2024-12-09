@@ -13,7 +13,7 @@
  * window.customCommands.define('element-set-background', ElementSetBackgroundCommand)
  * ```
  */
-export abstract class Command<TargetElement = unknown, Options = unknown, OriginElement = unknown> {
+export abstract class Command<TargetElement = HTMLElement, Options = unknown, OriginElement = HTMLElement> {
   /**
    * The options that inform the behaviour of the command.
    */

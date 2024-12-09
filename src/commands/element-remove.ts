@@ -17,7 +17,7 @@ import { Command } from '../commander/command.js'
  * <div id="div">text</div>
  * ```
  */
-export class ElementRemoveCommand extends Command<HTMLElement> {
+export class ElementRemoveCommand extends Command {
   /**
    * Executes the command.
    */
