@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/genericmedia24/lib/compare/v1.6.0...v1.6.1) (2024-12-09)
+
+
+### Bug Fixes
+
+* publish examples with workflow ([03821aa](https://github.com/genericmedia24/lib/commit/03821aa6561d9d34f29f7cda07978f2c7e96c274))
+
 # [1.6.0](https://github.com/genericmedia24/lib/compare/v1.5.3...v1.6.0) (2024-12-09)
 
 
