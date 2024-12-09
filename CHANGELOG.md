@@ -1,3 +1,11 @@
+## [1.6.3](https://github.com/genericmedia24/lib/compare/v1.6.2...v1.6.3) (2024-12-09)
+
+
+### Bug Fixes
+
+* fix exports for jsdelivr (hopefully) ([3843f06](https://github.com/genericmedia24/lib/commit/3843f06fdc5bec9f32164b339883fe6b3181892b))
+* set default type parameters of Command to HTMLElement ([6dd30b8](https://github.com/genericmedia24/lib/commit/6dd30b8999a20236f9d9d2e110a743a624165b0e))
+
 ## [1.6.2](https://github.com/genericmedia24/lib/compare/v1.6.1...v1.6.2) (2024-12-09)
 
 
