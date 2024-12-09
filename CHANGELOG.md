@@ -1,3 +1,10 @@
+## [1.6.4](https://github.com/genericmedia24/lib/compare/v1.6.3...v1.6.4) (2024-12-09)
+
+
+### Bug Fixes
+
+* fix reference to package ([14823d6](https://github.com/genericmedia24/lib/commit/14823d611f15d07067ec0209b1c79d4181d10019))
+
 ## [1.6.3](https://github.com/genericmedia24/lib/compare/v1.6.2...v1.6.3) (2024-12-09)
 
 
