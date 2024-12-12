@@ -1,3 +1,5 @@
+import '@ungap/custom-elements'
+
 export * from './button.js'
 export * from './define.js'
 export * from './dialog.js'
