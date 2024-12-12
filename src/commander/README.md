@@ -57,7 +57,7 @@ Detailed documentation can be found in the source code. See a [live version](htt
         CommandRegistry,
         defineElements,
         elements
-      } from "https://cdn.jsdelivr.net/npm/@genericmedia/lib/dist/index.min.mjs"
+      } from "https://cdn.jsdelivr.net/npm/@genericmedia/lib/+esm"
 
       class ElementSetBackgroundCommand extends Command {
         execute() {

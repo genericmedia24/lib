@@ -20,7 +20,7 @@ Detailed documentation can be found in the source code. See a [live version](htt
         Requester,
         elements,
         defineElements
-      } from "https://cdn.jsdelivr.net/npm/@genericmedia/lib/dist/index.min.mjs"
+      } from "https://cdn.jsdelivr.net/npm/@genericmedia/lib/+esm"
 
       defineElements(elements)
 
