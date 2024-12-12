@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/genericmedia24/lib/compare/v1.6.4...v1.7.0) (2024-12-12)
+
+
+### Features
+
+* add custom elements polyfill ([ca8c1a6](https://github.com/genericmedia24/lib/commit/ca8c1a67a2f126ceb9ab29ea229c4c98a72108d0))
+
 ## [1.6.4](https://github.com/genericmedia24/lib/compare/v1.6.3...v1.6.4) (2024-12-09)
 
 
