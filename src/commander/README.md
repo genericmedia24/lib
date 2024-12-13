@@ -4,9 +4,21 @@
 
 User-facing applications generally consist of structure, styling and behaviour. In the world of web applications these architectural components are built with three different languages: HTML, CSS and JavaScript.
 
-Difficulties arise, as always, at the interface of the components. The main question is: how can structure and behaviour be coupled efficiently and securely?
+In order to work together as an application these languages need to coupled. Every language serves its own purpose and as such has its own strengths and weaknesses. HTML consists of tags and attributes. JavaScript consists of functions which transform arguments as inputs into outputs.
 
-Efficiency is defined in terms of how easy it is to read and write the syntax that is necessary to establish the coupling. The less syntax the better.
+The problem is that tags and attributes in the structural realm are naturally non-referential to the functions and arguments in the behaviour realm. Therefore a new artifact has to be designed to interpret attributes as references to functions.
+
+An intermediary role is played by the DOM. Tags and attributes are translated into an object model, which serves as the basis for the functions to have access to the structure of the application.
+
+An additional problem is that HTML is deliberately limited both in syntax and semantics: only a specified set of tags and attributes is actually considered meaningful and translated into the object model. On the other hand JavaScript functions and arguments provide for an infinite design space, only limited by the imagination of the programmer.
+
+The main question is: how can structure and behaviour be coupled expressively, efficiently and securely?
+
+Expressively means that the invocation from the structural realm should ideally map to the entire design space in the behavioural realm. A limited set of attributes should be able to invoke every specified function with any amount of arguments.
+
+Efficiently means that ideally very little syntax should be introduced in order to make the interpretative artifact do its work and consequently that the amount of overhead in the structural code that needs to written to invoke behavioural code should be kept to a minimum.
+
+Securely means that the artifact that is responsible for interpreting attributes as functions should only be allowed to invoke behaviour that is specified by the application. (That means expressive freedom but interpretative strictness.)
 
 ## Existing solutions
 
