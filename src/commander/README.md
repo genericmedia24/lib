@@ -24,7 +24,7 @@ Securely means that the artifact that is responsible for interpreting attributes
 
 ### HTML
 
-HTML has the possibility to embed CSS and JavaScript through attributes, for example
+HTML has the possibility to embed CSS and JavaScript through attributes, for example:
 
 ```html
 <button onclick="doSomething()">click</button>
