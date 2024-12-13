@@ -24,15 +24,29 @@ Securely means that the artifact that is responsible for interpreting attributes
 
 ### HTML
 
-HTML has the possibility to embed CSS and JavaScript through attributes. Because meaning depends on context, this may be benificial in cases where the amount of CSS and JavaScript is limited.
+HTML has the possibility to embed CSS and JavaScript through attributes, for example
+
+```html
+<button onclick="doSomething()">click</button>
+```
+
+Because meaning depends on context, this may be benificial in cases where the amount of CSS and JavaScript is limited.
 
 But because every language has its own syntax and semantics the combination of languages in one document is detrimental to readability when the amount of CSS and JavaScript needed for styling and behaviour increases.
 
-(Embedded JavaScript has also been the source of many security problems. Meta-syntax like CSP has been designed to solve these problems. It would be better to take away the source of the problems, consequently reducing the amount of meta-syntax.)
+Embedded JavaScript has also been the source of many security problems because event handler attributes allow for any JavaScript to be executed instead of only a predefined set of functions. Meta-syntax like CSP has been designed to solve these problems. It would be better to take away the source of the problems, consequently reducing the amount of meta-syntax.
 
 ### JavaScript
 
-In JavaScript it is possible to listen for events triggered by elements in the application. In the case of a few links between structure and behaviour (i.e. elements and event handlers) this may suffice. But in larger applications this way of coupling it too loose.
+In JavaScript it is possible to listen for events triggered by elements in the application, for example:
+
+```javascript
+document.querySelector("button")?.addEventListener("click", () => {
+  doSomething()
+})
+```
+
+In the case of a few links between structure and behaviour (i.e. elements and event handlers) this may suffice. But in larger applications this way of coupling it too loose.
 
 It is not obvious from reading the structural code which behaviour is involved in the functioning of the application. And from reading the behavioural code is not obvious in which structural context events are handled.
 
