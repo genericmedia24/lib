@@ -4,7 +4,7 @@
 
 User-facing applications generally consist of structure, styling and behaviour. In the world of web applications these architectural components are built with three different languages: HTML, CSS and JavaScript.
 
-In order to work together as an application these languages need to coupled. Every language serves its own purpose and as such has its own strengths and weaknesses. HTML consists of tags and attributes. JavaScript consists of functions which transform arguments as inputs into outputs.
+In order to work together as an application these languages need to be coupled. Every language serves its own purpose and as such has its own strengths and weaknesses. HTML consists of tags and attributes. JavaScript consists of functions which transform arguments as inputs into outputs.
 
 The problem is that tags and attributes in the structural realm are naturally non-referential to the functions and arguments in the behaviour realm. Therefore a new artifact has to be designed to interpret attributes as references to functions.
 
