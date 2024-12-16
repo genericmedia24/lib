@@ -727,7 +727,7 @@ export class Scroller {
     }
 
     for (blockIndex = 0; blockIndex < blocks.length; blockIndex += 1) {
-      (this.bodyBlocks[blockIndex]).innerHTML = blocks[blockIndex]
+      this.bodyBlocks[blockIndex].innerHTML = blocks[blockIndex]
     }
   }
 
