@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/genericmedia24/lib/compare/v1.7.0...v1.8.0) (2025-02-05)
+
+
+### Features
+
+* update dependencies ([e9f966a](https://github.com/genericmedia24/lib/commit/e9f966a83e640700e1a0e8a518d9015407796311))
+
 # [1.7.0](https://github.com/genericmedia24/lib/compare/v1.6.4...v1.7.0) (2024-12-12)
 
 

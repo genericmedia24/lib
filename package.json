@@ -152,5 +152,5 @@
     "test:coverage": "node --import tsx --test --experimental-test-coverage --test-coverage-exclude=src/**/index.ts --test-reporter=spec --test-reporter-destination=stdout --test-reporter=lcov --test-reporter-destination=lcov.info ./test/**/*.ts",
     "test:only": "node --import tsx --test --test-only ./test/**/*.ts"
   },
-  "version": "1.7.0"
+  "version": "1.8.0"
 }
