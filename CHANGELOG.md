@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/genericmedia24/lib/compare/v1.8.0...v1.8.1) (2025-02-05)
+
+
+### Bug Fixes
+
+* add default export ([40410f7](https://github.com/genericmedia24/lib/commit/40410f7283cef88f4bb4bcb3765270604fc52f2c))
+
 # [1.8.0](https://github.com/genericmedia24/lib/compare/v1.7.0...v1.8.0) (2025-02-05)
 
 
