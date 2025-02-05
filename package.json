@@ -62,6 +62,11 @@
         "require": "./dist/index.js",
         "types": "./dist/index.d.ts"
       },
+      "default": {
+        "import": "./dist/index.mjs",
+        "require": "./dist/index.js",
+        "types": "./dist/index.d.ts"
+      },
       "node": {
         "import": "./dist/node.mjs",
         "require": "./dist/node.js",
