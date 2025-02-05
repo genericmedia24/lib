@@ -156,6 +156,7 @@ export default tslint.config(
         allowStaticOnly: true,
       }],
       '@typescript-eslint/no-magic-numbers': 'off',
+      '@typescript-eslint/no-misused-spread': 'off',
       '@typescript-eslint/no-unnecessary-condition': ['error', {
         allowConstantLoopConditions: true,
       }],
