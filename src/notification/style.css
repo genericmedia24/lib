@@ -1,0 +1,27 @@
+:host {
+  & [part~="popover"] {
+    position: absolute;
+    inset: auto 1em 1em;
+    z-index: 1;
+    display: flex;
+    width: auto;
+
+    @media (width > 30em) {
+      inset-inline-start: auto;
+      width: 32em;
+    }
+
+    & [part~="section"] {
+      &[part~="message"] {
+        display: flex;
+        flex: 1;
+
+        &::slotted(*) {
+          display: flex;
+          flex: 1;
+          flex-flow: row wrap;
+        }
+      }
+    }
+  }
+}

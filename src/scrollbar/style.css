@@ -1,0 +1,48 @@
+:host {
+  position: absolute;
+
+  & [part="thumb"] {
+    position: absolute;
+    user-select: none;
+    background-color: lightgrey;
+
+    &:hover {
+      background-color: darkgrey;
+    }
+  }
+}
+
+:host([axis="x"]),
+:host([data-axis="x"]) {
+  inset-block-end: 0;
+  inset-inline: 0;
+  height: 0.5em;
+
+  & [part="thumb"] {
+    height: 100%;
+  }
+}
+
+:host(:not([data-axis]):not([axis])),
+:host([axis="y"]),
+:host([data-axis="y"]) {
+  inset-block: 0;
+  inset-inline-end: 0;
+  width: 0.5em;
+
+  & [part="thumb"] {
+    width: 100%;
+  }
+}
+
+:host([active]),
+:host([data-active]) {
+  & div {
+    background-color: darkgrey;
+  }
+}
+
+:host([no-overflow]),
+:host([data-no-overflow]) {
+  display: none;
+}

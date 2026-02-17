@@ -1,0 +1,265 @@
+:host {
+  display: inline-block;
+
+  & [part~="control"] {
+    & input {
+      display: none;
+    }
+
+    &::slotted(*) {
+      position: absolute !important;
+      inset-block-start: anchor(end) !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      position-anchor: --datetime-content;
+      overflow: hidden !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+      clip-path: inset(50%) !important;
+    }
+  }
+
+  & [part~="content"] {
+    & button,
+    &::slotted(*) {
+      anchor-name: --datetime-content;
+    }
+  }
+
+  & [part~="dialog"] {
+    position: fixed;
+    inset: anchor(end) auto auto anchor(start);
+    z-index: 1;
+    flex-direction: column;
+    gap: 0.5em;
+    padding: 0.5em;
+    position-anchor: --datetime-content;
+    position-try: flip-block, flip-inline, flip-block flip-inline;
+
+    &[open] {
+      display: flex;
+    }
+
+    & [part~="section"] {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5em;
+
+      & [part~="controls"] {
+        display: flex;
+        gap: 0.5em;
+
+        & [part~="buttons"] {
+          display: flex;
+          flex: 1;
+          gap: 0.25em;
+
+          & [part~="button"] {
+            flex: 1;
+          }
+        }
+
+        & [part~="inputs"] {
+          display: flex;
+          flex: 1;
+          gap: 0.25em;
+        }
+      }
+    }
+
+    & [part~="date"],
+    & [part~="time"] {
+      & [part~="controls"] {
+        & [part~="buttons"] {
+          flex: unset;
+
+          & [part~="button"] {
+            position: relative;
+            box-sizing: border-box;
+            width: 2em;
+            font-size: inherit;
+
+            &:dir(rtl) {
+              transform: scaleX(-1);
+            }
+
+            &[part~="back"]::after,
+            &[part~="forward"]::after {
+              position: absolute;
+              inset: 0;
+              content: "";
+              background-color: ButtonText;
+              mask-repeat: no-repeat;
+              mask-position: center;
+              mask-size: 150%;
+            }
+
+            &[part~="back"]::after {
+              mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'><polyline points='15.5,11 12.5,14 15.5,17' stroke='currentcolor' fill='none'/></svg>");
+            }
+
+            &[part~="forward"]::after {
+              mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'><polyline points='12.5,11 15.5,14 12.5,17' stroke='currentcolor' fill='none'/></svg>");
+            }
+          }
+        }
+      }
+    }
+
+    & [part~="date"] {
+      & [part~="controls"] {
+        & [part~="inputs"] {
+          & [part~="month"] {
+            flex: 1;
+          }
+
+          & [part~="year"] {
+            width: 4ch;
+            text-align: center;
+            appearance: textfield;
+
+            &::-webkit-outer-spin-button,
+            &::-webkit-inner-spin-button {
+              margin: 0;
+              appearance: none;
+            }
+          }
+        }
+      }
+
+      & [part~="table"] {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25em;
+        width: calc(2em * 7 + 0.25em * 6);
+
+        &:has([part~="week-number"]) {
+          width: calc(2em * 8 + 0.25em * 7);
+        }
+
+        & > * {
+          & [part~="row"] {
+            & [part~="cell"] {
+              & [part~="value"] {
+                &[part~="full"] {
+                  position: absolute;
+                  width: 1px;
+                  height: 1px;
+                  padding: 0;
+                  margin: -1px;
+                  overflow: hidden;
+                  white-space: nowrap;
+                  border: 0;
+                  clip-path: inset(50%);
+                }
+              }
+            }
+          }
+        }
+
+        & [part~="thead"] {
+          display: flex;
+          gap: 0.25em;
+
+          & [part~="row"] {
+            display: flex;
+            gap: 0.25em;
+
+            & [part~="cell"] {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 2em;
+              padding: 0;
+              font-weight: bold;
+              text-transform: uppercase;
+              cursor: default;
+            }
+          }
+        }
+
+        & [part~="tbody"] {
+          display: flex;
+          flex-flow: row wrap;
+          gap: 0.25em;
+
+          & [part~="row"] {
+            display: flex;
+            gap: 0.25em;
+
+            & [part~="cell"] {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 2em;
+              padding: 0;
+              cursor: default;
+
+              &[part~="week-number"] {
+                font-weight: bold;
+              }
+
+              &[part~="day-number"] {
+                @media (pointer: fine) {
+                  &:hover {
+                    background-color: ButtonFace;
+                  }
+                }
+
+                &[part~="disabled"] {
+                  color: GrayText;
+                  pointer-events: none;
+                }
+
+                &[part~="other-month"] {
+                  color: GrayText;
+                }
+
+                &[part~="today"] {
+                  outline: 1px solid ButtonText;
+                  outline-offset: -1px;
+                }
+
+                &[tabindex="0"] {
+                  outline: 2px solid ButtonText;
+                  outline-offset: -2px;
+                }
+
+                &[part~="selected"] {
+                  color: HighlightText;
+                  background-color: Highlight;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+:host([data-type="date"]),
+:host([type="date"]) {
+  & [part~="section"][part~="time"],
+  & [part~="now"] {
+    display: none;
+  }
+}
+
+:host(:not([data-type]):not([type])),
+:host([data-type="datetime"]),
+:host([type="datetime"]) {
+  & [part~="today"] {
+    display: none;
+  }
+}
+
+:host([data-type="time"]),
+:host([type="time"]) {
+  & [part~="section"][part~="date"],
+  & [part~="today"] {
+    display: none;
+  }
+}

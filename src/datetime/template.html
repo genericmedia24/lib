@@ -1,0 +1,47 @@
+<slot name="control" part="control">
+  <input type="text">
+</slot>
+<slot name="content" part="content">
+  <button type="button"></button>
+</slot>
+<dialog part="dialog">
+  <div part="section date">
+    <div part="controls">
+      <div part="inputs">
+        <select part="input month"></select>
+        <input type="number" part="input year">
+      </div>
+      <div part="buttons">
+        <button part="button date back"></button>
+        <button part="button date forward"></button>
+      </div>
+    </div>
+    <table part="table" role="grid">
+      <thead part="thead"></thead>
+      <tbody part="tbody"></tbody>
+    </table>
+  </div>
+  <div part="section time">
+    <div part="controls">
+      <div part="inputs">
+        <select part="input hour"></select>
+        <select part="input minute"></select>
+        <select part="input day-part"></select>
+      </div>
+      <div part="buttons">
+        <button part="button time back"></button>
+        <button part="button time forward"></button>
+      </div>
+    </div>
+  </div>
+  <div part="section actions">
+    <div part="controls">
+      <div part="buttons">
+        <button part="button clear"></button>
+        <button part="button today"></button>
+        <button part="button now"></button>
+        <button part="button ok"></button>
+      </div>
+    </div>
+  </div>
+</dialog>

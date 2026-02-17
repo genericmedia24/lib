@@ -1,0 +1,86 @@
+:host {
+  & [part~="toggle"] {
+    &::slotted(*) {
+      width: 100%;
+      anchor-name: --toggle;
+    }
+  }
+
+  & [part~="popover"] {
+    padding: 0;
+    position-anchor: --toggle;
+
+    &[role="menu"] {
+      flex-direction: column;
+    }
+  
+    &[role="menubar"] {
+      flex-direction: row;
+    }
+
+    &:popover-open {
+      display: flex;
+    }
+  }
+
+  & [part~="toggle"],
+  & [part~="items"] {
+    &::slotted([role="menuitem"]) {
+      background-color: transparent;
+      border: 0;
+    }
+
+    &::slotted([role="menuitem"]:focus) {
+      color: HighlightText;
+      background-color: Highlight;
+    }
+
+    &::slotted([role="menuitem"][aria-expanded="true"]) {
+      color: HighlightText;
+      background-color: Highlight;
+    }
+
+    &::slotted([role="menuitem"]:hover) {
+      color: HighlightText;
+      background-color: Highlight;
+    }
+
+    &::slotted([role="menuitem"][disabled]) {
+      color: GrayText;
+      pointer-events: none;
+    }
+  }
+}
+
+:host(:not([data-placement]):not([placement])),
+:host([data-placement="block-end"]),
+:host([placement="block-end"]) {
+  & [part~="popover"] {
+    inset: anchor(end) auto auto anchor(start);
+    position-try: flip-block, flip-inline, flip-block flip-inline;
+  }
+}
+
+:host([data-placement="block-start"]),
+:host([placement="block-start"]) {
+  & [part~="popover"] {
+    inset: auto auto anchor(start) anchor(start);
+    position-try: flip-block, flip-inline, flip-block flip-inline;
+  }
+}
+
+:host([data-placement="inline-end"]),
+:host([placement="inline-end"]) {
+  & [part~="popover"] {
+    inset: anchor(start) auto auto anchor(end);
+    position-try: flip-inline, flip-block, flip-inline flip-block;
+  }
+}
+
+:host([data-placement="inline-start"]),
+:host([placement="inline-start"]) {
+  & [part~="popover"] {
+    inset: anchor(start) anchor(start) auto auto;
+    position-try: flip-inline, flip-block, flip-inline flip-block;
+  }
+}

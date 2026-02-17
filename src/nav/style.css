@@ -1,0 +1,8 @@
+:host {
+  & [part~="nav"] {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    height: 100%;
+  }
+}

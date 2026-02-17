@@ -1,0 +1,43 @@
+:host {
+  display: flex;
+  flex-direction: column;
+
+  & ::slotted(legend) {
+    display: flex;
+    align-items: center;
+    height: 1.75em;
+    padding: 0.25em 0.5em;
+    font-weight: bold;
+  }
+
+  & ::slotted([role="option"]) {
+    display: flex;
+    align-items: center;
+    height: 2em;
+    padding: 0.25em 0.5em 0.25em 1em;
+    white-space: nowrap;
+  }
+
+  & ::slotted([role="option"][disabled]) {
+    color: GrayText;
+    pointer-events: none;
+  }
+
+  & ::slotted([role="option"]:hover) {
+    background-color: ButtonFace;
+  }
+
+  & ::slotted([role="option"][data-active]),
+  & ::slotted([role="option"][data-selected]),
+  & ::slotted([role="option"][active]),
+  & ::slotted([role="option"][selected]) {
+    background-color: ButtonFace;
+  }
+}
+
+:host([disabled]) {
+  & ::slotted([role="option"]) {
+    color: GrayText;
+    pointer-events: none;
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "en": {
+    "clearLabel": "Clear selection",
+    "clearText": "Clear",
+    "contentLabelDate": "Open picker",
+    "contentLabelDateTime": "Open picker",
+    "contentLabelTime": "Open picker",
+    "contentPlaceholderDate": "dd/mm/yyyy",
+    "contentPlaceholderDateTime": "dd/mm/yyyy, hh:mm",
+    "contentPlaceholderTime": "hh:mm",
+    "dateBackLabel": "Move date back",
+    "dateForwardLabel": "Move date forward",
+    "dayPartLabel": "AM/PM",
+    "errorRangeOverflow": "Please select a value that is no later than {max}",
+    "errorRangeUnderflow": "Please select a value that is no earlier than {min}",
+    "errorValueMissing": "Please fill in this field",
+    "hourLabel": "Hour",
+    "minuteLabel": "Minute",
+    "monthLabel": "Month",
+    "nowLabel": "Select now",
+    "nowText": "Now",
+    "okLabel": "Confirm selection",
+    "okText": "OK",
+    "timeBackLabel": "Move time back",
+    "timeForwardLabel": "Move time forward",
+    "todayLabel": "Select today",
+    "todayText": "Today",
+    "yearLabel": "Year",
+    "week": "Week"
+  }
+}

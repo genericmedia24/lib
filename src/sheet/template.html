@@ -1,0 +1,16 @@
+<aside hidden part="aside">
+  <slot name="header" part="section header">
+    <slot name="header-before" part="button header before"></slot>
+    <slot name="toggle" part="toggle"></slot>
+    <slot name="header-after" part="button header after">
+      <slot name="header-dismiss" part="button header dismiss"></slot>
+    </slot>
+  </slot>
+  <slot part="section body"></slot>
+  <slot name="footer" part="section footer">
+    <slot name="footer-before" part="button footer before">
+      <slot name="footer-dismiss" part="button footer dismiss"></slot>
+    </slot>
+    <slot name="footer-after" part="button footer after"></slot>
+  </slot>
+</aside>

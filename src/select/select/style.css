@@ -1,0 +1,113 @@
+:host {
+  display: inline-block;
+
+  & [part~="control"] {
+    & input {
+      display: none;
+    }
+
+    &::slotted(*) {
+      position: absolute !important;
+      inset-block-start: anchor(end) !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      position-anchor: --select-content;
+      overflow: hidden !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+      clip-path: inset(50%) !important;
+    }
+  }
+
+  & [part~="content"] {
+    display: inline-flex;
+
+    & button,
+    &::slotted(*) {
+      padding-inline-end: 1.5em;
+      anchor-name: --select-content;
+    }
+
+    &::after {
+      display: block;
+      width: 1.5em;
+      margin-inline-start: -1.5em;
+      pointer-events: none;
+      content: "";
+      background-color: ButtonText;
+      mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'><polyline points='11,12.5 14,15.5 17,12.5' stroke='currentcolor' fill='none'/></svg>");
+      mask-repeat: no-repeat;
+      mask-position: center;
+      mask-size: 150%;
+    }
+  }
+
+  & [part~="popover"] {
+    inset: anchor(end) auto auto anchor(start);
+    z-index: 1;
+    box-sizing: border-box;
+    flex-direction: column;
+    gap: 0.25em;
+    min-width: anchor-size(width);
+    padding: 0.25em;
+    position-anchor: --select-content;
+    position-try: flip-block, flip-inline, flip-block flip-inline;
+
+    &:popover-open {
+      display: flex;
+    }
+
+    & [part~="search"] {
+      &::slotted(*) {
+        box-sizing: border-box;
+        width: 0 !important;
+        min-width: 100% !important;
+        padding: 0.25em;
+      }
+    }
+
+    & [part~="options"] {
+      display: block;
+      max-height: calc(10 * (1rlh + 0.5em));
+      overflow: auto;
+      cursor: default;
+      scrollbar-width: thin;
+
+      &::slotted([role="option"]) {
+        display: flex;
+        align-items: center;
+        padding: 0.25em 0.5em;
+        white-space: nowrap;
+      }
+
+      &::slotted([role="option"][disabled]) {
+        color: GrayText;
+        pointer-events: none;
+      }
+
+      &::slotted([role="option"]:hover) {
+        color: HighlightText;
+        background-color: Highlight;
+      }
+
+      &::slotted([role="option"][data-active]),
+      &::slotted([role="option"][data-selected]),
+      &::slotted([role="option"][active]),
+      &::slotted([role="option"][selected]) {
+        color: HighlightText;
+        background-color: Highlight;
+      }
+    }
+  }
+}
+
+:host([empty]),
+:host([data-empty]) {
+  & [part~="popover"] {
+    & [part~="options"] {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+#!/bin/sh
+
+current_branch=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
+
+if [ "$current_branch" = "main" ]; then
+  read -p "You are about to push to MAIN. Are you sure? (y/n) " -n 1 -r < /dev/tty
+  echo
+  if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    echo "Push to main aborted."
+    exit 1
+  fi
+fi
+
+exit 0

@@ -1,0 +1,116 @@
+:host {
+  & [part~="dialog"] {
+    inset: 0;
+    z-index: 1;
+    box-sizing: border-box;
+    grid-template-rows: auto 1fr auto;
+    width: calc(100% - 2em);
+    max-width: calc(24em - 2em);
+    height: fit-content;
+    max-height: calc(24em - 2em);
+    padding: 0;
+    margin-inline: 0.5em;
+
+    &[open] {
+      display: grid;
+    }
+
+    & [part~="section"] {
+      &[part~="header"] {
+        display: flex;
+        grid-row: 1;
+
+        & [part~="confirm"]::slotted(button),
+        & [part~="dismiss"]::slotted(button) {
+          display: none;
+        }
+
+        & [part~="title"]::slotted(*) {
+          flex: 1;
+          width: 0;
+          margin: 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+
+      &[part~="body"] {
+        grid-row: 2;
+      }
+
+      &[part~="footer"] {
+        display: flex;
+        grid-row: 3;
+        justify-content: end;
+      }
+    }
+  }
+}
+
+:host([fullscreen]) {
+  & [part~="dialog"] {
+    grid-template-rows: auto 1fr;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    max-height: none;
+    margin: 0;
+    border-width: 0;
+
+    & [part~="section"] {
+      &[part~="header"] {
+        & [part~="confirm"]::slotted(button),
+        & [part~="dismiss"]::slotted(button) {
+          display: flex;
+        }
+      }
+
+      &[part~="footer"] {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (width > 24em) {
+  :host {
+    & [part~="dialog"] {
+      margin-inline: auto;
+    }
+  }
+}
+
+@media (height > 24em) {
+  :host {
+    & [part~="dialog"] {
+      margin-block: auto;
+    }
+  }
+}
+
+@media (width > 34em) and (height > 34em) {
+  :host([fullscreen]) {
+    & [part~="dialog"] {
+      grid-template-rows: auto 1fr auto;
+      max-width: calc(34em - 2em);
+      height: fit-content;
+      max-height: calc(34em - 2em);
+      margin: auto;
+      border-width: unset;
+
+      & [part~="section"] {
+        &[part~="header"] {
+          & [part~="confirm"]::slotted(button),
+          & [part~="dismiss"]::slotted(button) {
+            display: none;
+          }
+        }
+
+        &[part~="footer"] {
+          display: flex;
+        }
+      }
+    }
+  }
+}
